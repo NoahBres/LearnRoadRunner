@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/NoahBres/LearnRoadRunner/issues"
   },
-  "homepage": "https://github.com/NoahBres/LearnRoadRunner#readme"
+  "homepage": "https://github.com/NoahBres/LearnRoadRunner#readme",
+  "devDependencies": {
+    "vuepress": "^1.3.1"
+  }
 }
