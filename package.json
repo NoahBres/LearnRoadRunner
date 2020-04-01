@@ -21,7 +21,8 @@
     "url": "https://github.com/NoahBres/LearnRoadRunner/issues"
   },
   "homepage": "https://github.com/NoahBres/LearnRoadRunner#readme",
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
     "vuepress": "^1.4.0"
   }
 }
