@@ -3,7 +3,7 @@
 Road Runner is a motion planning library, written for the [FTC robotics competition](https://www.firstinspires.org/robotics/ftc). Designed primarily for autonomous robotic movement, it allows for complex path following and generation while maintaining control of velocity and acceleration. This enables bots to have more accurate and advanced path following capabilities.
 
 <figure align="center">
-    <img src="./assets/8393-worlds.gif">
+    <img src="./assets/home/8393-worlds.gif">
     <figcaption style="marginTop: 1em;">Team 8393 performs an advanced spline path in their autonomous mode</figcaption>
 </figure>
 
@@ -24,7 +24,7 @@ While often compared with each other, pure pursuit is very different from Road R
 Although in the FTC community dead wheels and odometry are often used synonymously, they are very different things. Odometry refers to the use of sensors to determine a robot's position. Dead wheels (sometimes referred to as odometry wheels or odometry pods) are unpowered wheels not connected to any motor. These wheels have rotary encoders to track distance traveled.
 
 <figure align="center">
-    <img src="./assets/dead-wheel-small.jpg">
+    <img src="./assets/home/dead-wheel-small.jpg">
     <figcaption style="marginTop: 1em;">An example of dead wheels</figcaption>
 </figure>
 
