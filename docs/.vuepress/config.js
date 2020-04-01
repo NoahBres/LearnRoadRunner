@@ -3,6 +3,14 @@ module.exports = {
   description: "Learn the ins-and-outs of the Road Runner Library",
   themeConfig: {
     sidebar: [["/", "Introduction"], "/before-you-start", "/installing"],
-    displayAllHeaders: true
+    displayAllHeaders: true,
+    smoothScroll: true,
+    lastUpdated: "Last Updated",
+    searchPlaceholder: "Search...",
+
+    repo: "NoahBres/LearnRoadRunner",
+    repoLabel: "GitHub",
+    editLinks: true,
+    editLinkText: "Edit this page on Github!"
   }
 };
