@@ -11,6 +11,16 @@ module.exports = {
     repo: "NoahBres/LearnRoadRunner",
     repoLabel: "GitHub",
     editLinks: true,
-    editLinkText: "Edit this page on Github!"
-  }
+    editLinkText: "Edit this page on Github!",
+  },
+  plugins: [
+    [
+      "vuepress-plugin-container",
+      {
+        type: "vue",
+        before: '<pre class="vue-container"><code>',
+        after: "</code></pre>",
+      },
+    ],
+  ],
 };
