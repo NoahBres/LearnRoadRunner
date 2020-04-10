@@ -1,6 +1,6 @@
 <template>
   <div class="video-display flex justify-center">
-    <video width="100%" controls loop>
+    <video width="100%" controls>
       <source :src="src" type="video/mp4" />
       Your browser does not support the video tag 😢.
     </video>
@@ -10,7 +10,7 @@
 export default {
   props: ["src"],
   computed: {},
-  mounted: function() {}
+  mounted: function () {},
 };
 </script>
 <style scoped>
