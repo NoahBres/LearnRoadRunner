@@ -1,6 +1,6 @@
 # Installing
 
-There are two methods to installing the Road Runner library. [Method #1](#method-1-downloading-the-quickstart), the simpler option, is to simply download [the quickstart repo](https://github.com/acmerobotics/road-runner-quickstart). The quickstart repo is an empty FTC season repo. It includes everything you'll need to get Road Runner up and running. However, this obviously does not work if you already have an existing codebase. [Method #2](#method-2-installing-rr-on-your-project) simply has you copy over everything from the quickstart repo into your existing team project.
+There are two methods to installing the Road Runner library. [Method #1](#method-1-downloading-the-quickstart), the simpler option, is to simply download [the quickstart repo](https://github.com/acmerobotics/road-runner-quickstart). The quickstart repo is an empty FTC season repo. It includes everything you'll need to get Road Runner up and running. However, this does not work if you already have an existing codebase. [Method #2](#method-2-installing-rr-on-your-project) will go through installing Road Runner via gralde and copying over the necessary files from the quickstart repo into your existing team project.
 
 ## Method 1: Downloading the Quickstart
 
@@ -9,6 +9,85 @@ There are two methods to installing the Road Runner library. [Method #1](#method
 
 <VideoDisplay src="./assets/installing/github-download-btn.mp4"/>
 
+3. Unzip/extract the folder into your directory of choice
+4. Open up the folder in Android studio.
+5. Voila! You now have everything you need to get Road Runner up and going.
+
 ## Method 2: Installing RR on Your Project
 
-1. Test
+1. We are are going to assume you have the same file structure as the standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/SkyStone).
+2. Look for the `TeamCode/build.release.gradle` file. Specifically the one in the `TeamCode` folder.
+
+<!-- prettier-ignore -->
+::: vue
+<span class="folder">ftc_app</span>
+├── <span class="folder">.github</span>
+├── <span class="folder">FtcRobotController</span>
+├── <span class="folder">TeamCode</span>
+│  ├── <span class="folder">src/main</span>
+│  ├── <span class="file">build.gradle</span>
+│  └── <span class="file">`build.release.gradle` _(**This one**)_</span>
+├── <span class="folder">doc</span>
+├── <span class="folder">gradle/wrapper</span>
+├── <span class="folder">libs</span>
+├── <span class="file">.gitignore</span>
+├── <span class="file">README.md</span>
+├── <span class="file">build.common.gradle</span>
+├── <span class="file">build.gradle</span>
+├── <span class="file">gradelw</span>
+├── <span class="file">gradlew.bat</span>
+└── <span class="file">settings.gradle</span>
+:::
+
+3. In `TeamCode/build.release.gradle`, add the following two dependencies: `implementation 'com.acmerobotics.roadrunner:core:0.5.0'` and `implementation 'com.acmerobotics.dashboard:dashboard:0.3.8'`
+
+```groovy{10,11}
+dependencies {
+    implementation project(':FtcRobotController')
+    implementation (name: 'RobotCore-release', ext: 'aar')
+    implementation (name: 'Hardware-release', ext: 'aar')
+    implementation (name: 'FtcCommon-release', ext: 'aar')
+    implementation (name: 'WirelessP2p-release', ext: 'aar')
+    implementation (name: 'tfod-release', ext: 'aar')
+    implementation (name: 'tensorflow-lite-0.0.0-nightly', ext: 'aar')
+
+    implementation 'com.acmerobotics.roadrunner:core:0.5.0'
+    implementation 'com.acmerobotics.dashboard:dashboard:0.3.8'
+}
+```
+
+4. Then, locate the `build.common.gradle` file in the root folder.
+
+<!-- prettier-ignore -->
+::: vue
+<span class="folder">ftc_app</span>
+├── <span class="folder">.github</span>
+├── <span class="folder">FtcRobotController</span>
+├── <span class="folder">TeamCode</span>
+├── <span class="folder">doc</span>
+├── <span class="folder">gradle/wrapper</span>
+├── <span class="folder">libs</span>
+├── <span class="file">.gitignore</span>
+├── <span class="file">README.md</span>
+├── <span class="file">`build.common.gradle` _(**This one**)_</span>
+├── <span class="file">build.gradle</span>
+├── <span class="file">gradelw</span>
+├── <span class="file">gradlew.bat</span>
+└── <span class="file">settings.gradle</span>
+:::
+
+5. In the file, locate the line containing `minSdkVersion`. This should be around line `42`. If the number is lower than 23, replace it with 23. Like so:
+
+```groovy{4}
+defaultConfig {
+  signingConfig signingConfigs.debug
+  applicationId 'com.qualcomm.ftcrobotcontroller'
+  minSdkVersion 23
+  targetSdkVersion 28
+  ...
+}
+```
+
+This is to enable multidexxing. With the inclusion of all these libraries, the app may exceed the 64k method limit. Android versions above level 21 have multidexxing on my default. As the ZTE speeds are no longer legal in FTC, we can increase the sdk minimum version. You can read more about the multidexxing issue [here](https://developer.android.com/studio/build/multidex).
+
+That's it! You're set! The installation process is done. Now go on ahead and start tuning.
