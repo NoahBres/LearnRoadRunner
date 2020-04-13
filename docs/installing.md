@@ -2,6 +2,8 @@
 
 There are two methods to installing the Road Runner library. [Method #1](#method-1-downloading-the-quickstart), the simpler option, is to simply download [the quickstart repo](https://github.com/acmerobotics/road-runner-quickstart). The quickstart repo is an empty FTC season repo. It includes everything you'll need to get Road Runner up and running. However, this does not work if you already have an existing codebase. [Method #2](#method-2-installing-rr-on-your-project) will go through installing Road Runner via gralde and copying over the necessary files from the quickstart repo into your existing team project.
 
+Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Control Hub Firmware. Directions can be found [below](#upgrading-firmware).
+
 ## Method 1: Downloading the Quickstart
 
 1. Navigate to [https://github.com/acmerobotics/road-runner-quickstart](https://github.com/acmerobotics/road-runner-quickstart)
@@ -90,4 +92,12 @@ defaultConfig {
 
 This is to enable multidexxing. With the inclusion of all these libraries, the app may exceed the 64k method limit. Android versions above level 21 have multidexxing on my default. As the ZTE speeds are no longer legal in FTC, we can increase the sdk minimum version. You can read more about the multidexxing issue [here](https://developer.android.com/studio/build/multidex).
 
-That's it! You're set! The installation process is done. Now go on ahead and start tuning.
+## Upgrading Firmware
+
+It is highly recommended that you upgrade the firmware on your Control Hub or Expansion Hub to the latest version. Firmware version 1.8.2 brings a number of improvements including: DC motor output linearity, improved close-loop controls, improved I2C speeds, and USB recovery for ESD faults. Road Runner's performance directly benefits from these improvements.
+
+Explicit directions to upgrade the Control Hub firmware can be found [here](https://github.com/FIRST-Tech-Challenge/SKYSTONE/wiki/Managing-a-Control-Hub#Updating-the-Expansion-Hub-Firmware).
+
+Directions to upgrade the Expansion Hub firmware can be found [here](http://www.revrobotics.com/software/#ExpansionHubFirmware).
+
+**That's it!** You're set! The installation process is done. Now go on ahead and start tuning.
