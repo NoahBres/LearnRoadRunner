@@ -19,6 +19,10 @@ Please make sure to take note of the following before continuing!
 **3.** This tutorial attempts to cover installation, usage, and tips and tricks. It does not go into the hardcore inner workings of Road Runner. However, a deep understanding of how PID's and motion profiles will make the learning process much faster. I highly recommend you check Road Runner's [original quickstart documentation](https://acme-robotics.gitbook.io/road-runner/quickstart/introduction) as it explains the inner workings.
 :::
 
+::: warning
+It is highly recommended to have ample room during the tuning process. This will allow for more accuracy. I personally recommend of having a clear stretch of up to 90 inches for your robot to drive on. You should have a minimum of an entire field width (72 inches) to tune on.
+:::
+
 <div class="flex justify-center">
 That's all! Navigate to the next page and we'll get started!
 </div>
