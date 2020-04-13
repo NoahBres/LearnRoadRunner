@@ -8,13 +8,10 @@
 </template>
 <script>
 export default {
-  props: ["src"],
-  computed: {},
-  mounted: function () {},
+  props: ["src"]
 };
 </script>
-<style scoped>
-.video-display {
-  padding: 1em 0;
-}
+<style lang="stylus" scoped>
+.video-display
+  padding 1em 0
 </style>
