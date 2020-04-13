@@ -2,7 +2,13 @@ module.exports = {
   title: "Learn Road Runner",
   description: "Learn the ins-and-outs of the Road Runner Library",
   themeConfig: {
-    sidebar: [["/", "Introduction"], "/before-you-start", "/installing"],
+    sidebar: [
+      ["/", "Introduction"],
+      "/before-you-start",
+      "/installing",
+      "/quickstart-overview",
+      "/drive-constants",
+    ],
     displayAllHeaders: true,
     smoothScroll: true,
     lastUpdated: "Last Updated",
