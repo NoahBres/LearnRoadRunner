@@ -1,0 +1,136 @@
+<template>
+  <div class="flex justify-center column">
+    <h3 class="text-center">Are you using drive encoders?</h3>
+    <div class="flex justify-center align-center row">
+      <p class="indicator-text nope" :class="{ active: !checked }">Nope</p>
+      <input type="checkbox" :id="uid" v-model="checked" />
+      <label class="switch" :for="uid" />
+      <p class="indicator-text yep" :class="{ active: checked }">Yep</p>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      checked: true
+    };
+  },
+  computed: {
+    uid: function() {
+      return `ayude-switch-${(
+        [1e7] +
+        -1e3 +
+        -4e3 +
+        -8e3 +
+        -1e11
+      ).replace(/[018]/g, c =>
+        (
+          c ^
+          (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+        ).toString(16)
+      )}`;
+    }
+  },
+  mounted() {
+    if (localStorage.isUsingDriveEncoders) {
+      this.checked = localStorage.isUsingDriveEncoders === "true";
+    }
+  },
+  watch: {
+    checked(newCheckedVal) {
+      localStorage.isUsingDriveEncoders = newCheckedVal;
+
+      let event = new CustomEvent("isUsingDriveEncodersChanged", {
+        detail: newCheckedVal
+      });
+      document.dispatchEvent(event);
+    }
+  }
+};
+</script>
+<style lang="stylus" scoped>
+.indicator-text
+  font-weight bold
+  font-size 1.3em
+
+  transition color, background-color 300ms ease-in-out
+  color #CBD5E0
+
+  background-color transparent
+  padding 0.1em 0.6em
+  border-radius 0.3em
+
+  &.active
+    color $textColor
+
+  &.active.yep
+    background-color: $green400
+
+  &.active.nope
+    background-color: $yellow400
+
+input
+  position absolute
+  left: -9999px
+
+.switch
+  position relative
+  display block
+
+  width 5.5em
+  height 3em
+
+  margin 0 2em
+
+  cursor pointer
+  border-radius 1.5em
+  transition 350ms
+
+  background linear-gradient(rgba(#000,0.07), rgba(#fff, 0)), #ddd
+  box-shadow 0 0.07em 0.1em -0.1em rgba(#000, .4) inset,
+    0 0.05em 0.08em -0.01em rgba(#fff, .7)
+
+  &::after
+    content: ''
+    position absolute
+
+    top 0.5em
+    left 0.5em
+
+    width 2em
+    height 2em
+
+    border-radius 50%
+    transition 250ms ease-in-out
+
+    background linear-gradient(#f5f5f5 10%, #eee)
+    box-shadow 0 0.1em 0.15em -0.05em rgba(#fff, .9) inset,
+      0 0.2em 0.2em -0.12em rgba(#000, .5)
+
+  &::before
+    content: ''
+    position absolute
+
+    width 4em
+    height 1.5em
+
+    top 0.75em
+    left 0.7em
+
+    border-radius 0.75em
+    transition 250ms ease-in-out
+
+    background linear-gradient(rgba(#000, 0.07),rgba(#fff, 0.1)), #d0d0d0
+    box-shadow 0 0.08em 0.15em -0.1em rgba(#000,.5) inset,
+      0 0.05em 0.08em -0.01em rgba(#fff,.7),
+      0 0 0 0 $green500 inset
+
+input:checked + .switch::before
+  box-shadow: 0 0.08em 0.15em -0.1em rgba(#000,.5) inset,
+    0 0.05em 0.08em -0.01em rgba(#fff,.7),
+    3em 0 0 0 $green500 inset
+
+input:checked + .switch::after
+  left 3em
+</style>
