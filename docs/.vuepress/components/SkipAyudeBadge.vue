@@ -43,7 +43,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .skipme {
-  display inline
+  display inline-block
   background $yellow500
 
   font-size 0.6em
