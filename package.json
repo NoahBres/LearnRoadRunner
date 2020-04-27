@@ -23,6 +23,8 @@
   "homepage": "https://github.com/NoahBres/LearnRoadRunner#readme",
   "devDependencies": {},
   "dependencies": {
-    "vuepress": "^1.4.0"
+    "typescript": "^3.8.3",
+    "vuepress": "^1.4.0",
+    "vuepress-plugin-typescript": "^0.2.0"
   }
 }
