@@ -21,13 +21,29 @@ While often compared with each other, pure pursuit is very different from Road R
 
 ### What are dead wheels/odometry?
 
-Although in the FTC community dead wheels and odometry are often used synonymously, they are very different things. Odometry refers to the use of sensors to determine a robot's position. Dead wheels (sometimes referred to as odometry wheels or odometry pods) are unpowered wheels not connected to any motor. These wheels have rotary encoders to track distance traveled.
+Although in the FTC community dead wheels and odometry are often used synonymously, they are very different things. Odometry refers to the use of sensors to determine a robot's position. Dead wheels (sometimes referred to as odometry wheels or odometry pods) are unpowered omni wheels not connected to any motor. These wheels have rotary encoders to track distance traveled. This data is fed through a kinematic equation and integrated to calculate the relative position of the robot on the field. The advantage of using dead wheels over drive wheel odometry is that dead wheels experience very little slip compared to mecanum wheels. This improves the accuracy signifcantly when using a mecanum drive, especially in instances of high acceleration. Dead wheels are not necessary for a tank drive.
+
+**TL;DR** Dead wheels allow accurate positional tracking of mecanum drives at high speeds and accelerations.
 
 <figure align="center">
-    <img src="./assets/home/dead-wheel-small.jpg">
+    <img src="./assets/home/dead-wheel-example-small.jpg">
     <figcaption style="marginTop: 1em;">An example of dead wheels</figcaption>
 </figure>
 
+### What is the difference between two and three wheel odometry?
+
+As explained above, the standard dead wheel configuration involves the use of multiple, unpowered omni wheels connected to encoders. However, you can choose to either use two or three omni wheels. The two-wheel configuration uses two dead wheels, perpendicular to each other. One wheel is used to track displacement in the x (forward) direction and one in the y (strafe) direction. Heading is measured through a gryoscope, whether it be in the Rev Expansion/Control Hub IMU or an external sensor. The three-wheel configuration uses two parallel wheels and one perpendicular wheel. The two parallel wheels track both x (forward) movement and heading. Heading is calculated through the offset of the two parallel wheels. The perpendicular wheel tracks movement in the y (strafe) direction.
+
+So you ask yourself, **why would I choose the three wheel configuration?** "That's another module that I have to make and increases cost by ~30%!" At the time of writing, the three-wheel configuration is the most accurate option. This is because the Rev Expansion Hub utilizes a slow I2C implementation which results in 7ms per I2C call. The BNO055 IMU onboard the Rev Expansion Hub communicates via I2C. This will contribute a signficant amount of delay to your loop times which reduces integration accuracy (the 7ms is in addition to the 3ms call for all three dead wheels assuming bulk reads, so 10ms). Thus to calculate the heading with a two wheel configuration, it must call on this slow IMU. A three wheel configuration calculates heading via the two parallel wheels which can be bulk read. Thus, all three of your dead wheels can be read in 3ms (assuming bulk reads and that all your encoders are on one Rev Expansion/Control Hub). This has been seen to improve accuracy and reduce drift significantly. The upcoming Control Hubs, which half the I/O latency, may reduce this difference.
+
+_Note: Some teams, such as 8802 Negative Resistance, have utilized the two-wheel configuration with great sucess._
+
+**TL;DR** Three wheel configuration reduces loop times resulting in less drift and higher accuracy.
+
+### How do I make dead wheel?
+
+Hit up the [FTC Discord](https://discord.gg/first-tech-challenge) for further details. There are many intricacies and options into building dead wheel modules. There is no consolidated resource to creating dead wheels module at the time of writing. You can expect each module to cost $30+. Thus, you can expect a three-wheel configuration to cost upwards of $100.
+
 ### What are spline paths?
 
-Spline paths are trajectories generated using [spline curves](<https://www.wikiwand.com/en/Spline_(mathematics)>). Spline curves are piecewise polynomials that connect multiple points in a smooth fashion. These benefit autonomous trajectories because it allows an object to follow a path while changing heading without making a point turn. Spline curves are ideal for non-holonomic drive trains. However, for holonomic drive trains (mecanum, etc), straight lines are optimal as holonomic drive trains can strafe and turn simultaneously.
+Spline paths are trajectories generated using [spline curves](<https://www.wikiwand.com/en/Spline_(mathematics)>). Spline curves are piecewise polynomials that connect multiple points in a smooth fashion. These benefit autonomous trajectories because it allows an object to follow a path while changing heading without making a point turn. Spline curves are ideal for non-holonomic drive trains. For Road Runner you will find that spline paths will be utilized frequently as it allows for continuous paths (connecting straight lines will break path continuity, we'll worry about that later 😉).
