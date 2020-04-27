@@ -1,7 +1,9 @@
 {
-  "include": ["**/*", "docs/.vuepress/**/*"],
-  "exclude": ["node_modules", "docs/.vuepress/dist"],
+  "allowSyntheticDefaultImports": true,
   "compilerOptions": {
-    "target": "ES6"
-  }
+    "target": "ES6",
+    "moduleResolution": "node"
+  },
+  "include": ["**/*", "docs/.vuepress/**/*"],
+  "exclude": ["node_modules", "docs/.vuepress/dist"]
 }
