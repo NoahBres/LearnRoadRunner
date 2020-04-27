@@ -28,5 +28,15 @@ module.exports = {
         after: "</code></pre>",
       },
     ],
+    [
+      "vuepress-plugin-typescript",
+      {
+        tsLoaderOptions: {
+          compilerOptions: {
+            target: "es6",
+          },
+        },
+      },
+    ],
   ],
 };

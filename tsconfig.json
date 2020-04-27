@@ -1,0 +1,7 @@
+{
+  "include": ["**/*", "docs/.vuepress/**/*"],
+  "exclude": ["node_modules", "docs/.vuepress/dist"],
+  "compilerOptions": {
+    "target": "ES6"
+  }
+}
