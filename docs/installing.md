@@ -90,7 +90,9 @@ defaultConfig {
 }
 ```
 
-This is to enable multidexxing. With the inclusion of all these libraries, the app may exceed the 64k method limit. Android versions above level 21 have multidexxing on my default. As the ZTE speeds are no longer legal in FTC, we can increase the sdk minimum version. You can read more about the multidexxing issue [here](https://developer.android.com/studio/build/multidex).
+This is to enable multidexing. With the inclusion of all these libraries, the app may exceed the 64k method limit. Android versions above level 21 have multidexing on my default. As the ZTE speeds are no longer legal in FTC, we can increase the sdk minimum version. You can read more about the multidexing issue [here](https://developer.android.com/studio/build/multidex).
+
+6. Copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive` and `util` folder. These classes include all the files and utilities required for tuning and dashboard logging.
 
 ## Upgrading Firmware
 
