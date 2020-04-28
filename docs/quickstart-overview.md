@@ -11,7 +11,7 @@ This page roughly mirrors the tuning guide on Road Runner's official quickstart.
 Road Runner handles all the fancy math to get everything up and running. However, you must tune everything so it handles as smooth as possible for your specific bot. Different bots with varying motors, weights, etc, all contribute to discrepancies in drive train behavior. Thus, one must follow the tuning guide to ensure that your drivetrain behavior is properly characterized.
 
 ::: warning
-Significant changes to your bot (addition of a heavy mechanism, etc.) will necesitate a retuning. Although the tuning process should be much faster, this is recommended to ensures consistent behavior.
+Significant changes to your bot (addition of a heavy mechanism, etc.) will necesitate a retuning. Although the tuning process should be much faster, this is recommended to ensure consistent behavior.
 :::
 
 <figure align="center">
@@ -23,7 +23,7 @@ Significant changes to your bot (addition of a heavy mechanism, etc.) will neces
 
 ## Are You Using Drive Encoders?
 
-Before you begin tuning, it is important to understand the difference between feedforward vs. PID velocity control and which one you are using. The goal of both of the systems is to reach and mantain a target velocity. The feedforward velocity control is an open loop system that will attempt to create a function translating voltage into velocity using specified drive characteristics. In contrast, the velocity PID is a closed loop system. It allows for live feedback and adjustment of the velocity using the readouts from an encoder. In general, a closed loop system will be most optimal. Thus, if you are able to, turn on `RUN_USING_ENCODERS` on each of your drive train motors to achieve the smoothest behavior. However, if you are using drive encoders with a three-wheel odometry setup (assuming 4x motors on the drive train), this will take up 7 out of your 8 available encoder slots leaving you with a single usable encoder slot for other robot mechanisms. This is not always possible and sacrificing your drive train encoders frees up 4 encoder slots. In this scenario, you would use the feedforward velocity control.
+Before you begin tuning, it is important to understand feedforward vs. PID velocity control and which one you are using. The goal of both of the systems is to reach and mantain a target velocity. The feedforward velocity control is an open loop system that will attempt to create a function translating voltage into velocity using specified drive characteristics. In contrast, the velocity PID is a closed loop system. It allows for live feedback and adjustment of the velocity using the readouts from an encoder. In general, a closed loop system will be most optimal. Thus, if you are able to, turn on `RUN_USING_ENCODERS` on each of your drive train motors to achieve the smoothest behavior. However, if you are using drive encoders with a three-wheel odometry setup (assuming 4x motors on the drive train), this will take up 7 out of your 8 available encoder slots leaving you with a single usable encoder slot for other robot mechanisms. This is not always possible and sacrificing your drive train encoders frees up 4 encoder slots. In this scenario, you would use the feedforward velocity control.
 You should not be depending on feedforward velocity control without dead-wheels.
 
 The tuning process will differ depending on which form of control you use.
@@ -32,7 +32,7 @@ The tuning process will differ depending on which form of control you use.
 
 ## Drive Constants
 
-The drive constants file will include everything regarding the physical characteristics of the bot. This includes motors RPM, wheel radius, etc. Most errors in the drive manifest themselves in this stage. For example, if your robot is traveling half the distance specified, this is most likely a problem in your drive constants. Please check the [drive constants page](/drive-constants) page for further details.
+The drive constants file will include everything regarding the physical characteristics of the bot. This includes motor's max RPM, wheel radius, etc. Most errors in the process manifest themselves in this stage. For example, if your robot is traveling half the distance specified, this is most likely a problem in your drive constants. Please check the [drive constants page](/drive-constants) page for further details.
 
 ## Dead Wheels
 
@@ -43,7 +43,7 @@ Your configuration will depend on whether you have two or three dead-wheels. Don
 
 ## Localization Test
 
-Running localization test and driving the robot around the field will allow you to see any discrepancies with your bot's localization. Drive encoder localization or dead-wheel localization should both be tuned here. Accuracy of the path following will be dramatically affected by the localization accuracy.
+Running the localization test and driving the robot around the field will allow you to see any discrepancies with your bot's localization. Drive encoder localization or dead-wheel localization should both be tuned here. Accuracy of the path following will be dramatically affected by the localization accuracy.
 
 ## DriveVelocityPIDTuner <SkipAyudeBadge :skipIfDriveEncoders="false" />
 
@@ -75,7 +75,7 @@ If your `StraightTest` distance if consistent but off, scale the drive wheel rad
 
 ## TrackWidthTuner
 
-Track width is the distance from one wheel to the parallel wheel. Although this is a physical measurement, the effective track width will different from real world measurements due to a number of possible effects. To account for this discrepancy, run the `TrackWidthTuner` opmode to compute the empirical track width.
+Track width is the distance from one wheel to the parallel wheel. Although this is a physical measurement, the effective track width will differ from real world measurements due to a number of possibilities. To account for this discrepancy, run the `TrackWidthTuner` opmode to compute the empirical track width.
 
 You will find that `TrackWidthTuner` will only get within an inch or so of your desired empirical track width. You will most likely need to hand-tune the track width by running the `TurnTest` opmode and editing the track width in the drive constants.
 
@@ -85,8 +85,8 @@ Run the turn test to confirm your track width is correct.
 
 ## FollowerPIDTuner
 
-You will tune two PIDs in this step, the heading PID and the translational (x/y) PID. This enables closed-loop feedback control to ensure accurate path following. The `FollowerPIDTuner` opmode will have your bot follow a square path, allowing you to simultaneously tune the heading and translational PID. However, I personally recommend tuning the heading and translational PID while running the bot back and forth in a straight line. This alleviates the frustration of having to reset your bot after it drifts off the square path ands hits a wall. After it works well enough in this case, then run `FollowerPIDTuner` for additional fine tuning.
+You will tune two PIDs in this step, the heading PID and the translational (x/y) PID. This enables closed-loop feedback control to ensure accurate path following. The `FollowerPIDTuner` opmode will have your bot follow a square path, allowing you to simultaneously tune the heading and translational PID. However, I personally recommend tuning the heading and translational PID while running the bot back and forth in a straight line. This alleviates the frustration of having to reset your bot after it drifts off the square path and hits a wall. After it works well enough in this case, then run `FollowerPIDTuner` for additional fine tuning.
 
-## SplineTest
+## Spline Test
 
 After everything is tuned, your bot should follow spline paths accurately. If spline test goes wrong, identify the problem and go back to the respective step and retune. Don't be afraid to ask the [FTC Discord](https://discord.gg/first-tech-challenge) if you're stuck!
