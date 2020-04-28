@@ -1,6 +1,6 @@
 # Installing
 
-There are two methods to installing the Road Runner library. [Method #1](#method-1-downloading-the-quickstart), the simpler option, is to simply download [the quickstart repo](https://github.com/acmerobotics/road-runner-quickstart). The quickstart repo is an empty FTC season repo. It includes everything you'll need to get Road Runner up and running. However, this does not work if you already have an existing codebase. [Method #2](#method-2-installing-rr-on-your-project) will go through installing Road Runner via gralde and copying over the necessary files from the quickstart repo into your existing team project.
+There are two methods to installing the Road Runner library. [Method #1](#method-1-downloading-the-quickstart), the simpler option, is to simply download [the quickstart repo](https://github.com/acmerobotics/road-runner-quickstart). The quickstart repo is an empty FTC season repo. It includes everything you'll need to get Road Runner up and running. However, this does not work if you already have an existing codebase. [Method #2](#method-2-installing-rr-on-your-project) will go through installing Road Runner via gradle and copying over the necessary files from the quickstart repo into your existing team project.
 
 Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Control Hub Firmware. Directions can be found [below](#upgrading-firmware).
 
@@ -90,15 +90,17 @@ defaultConfig {
 }
 ```
 
-This is to enable multidexing. With the inclusion of all these libraries, the app may exceed the 64k method limit. Android versions above level 21 have multidexing on my default. As the ZTE speeds are no longer legal in FTC, we can increase the sdk minimum version. You can read more about the multidexing issue [here](https://developer.android.com/studio/build/multidex).
+This is to enable multidexing. With the inclusion of all these libraries, the app may exceed the 64k method limit. Android versions above API level 21 have multidexing on by default. As the ZTE speeds(which require an API level lower than 21) are no longer legal in FTC, we can increase the sdk minimum version. You can read more about the multidexing issue [here](https://developer.android.com/studio/build/multidex).
 
-6. Copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive` and `util` folder. These classes include all the files and utilities required for tuning and dashboard logging.
+6. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive` and `util` folder into a location in your project. These classes include all the files and utilities required for tuning and dashboard logging.
+
+7. Once all the files are copied into your project, it is likely that most of the files will have a lot of errors relating to imports. This is because most of the classes are expecting to find certain classes at certain locations when they import them. However, they are now in a different location and the previous class paths are no longer valid. Unfortunately, you must manually go over each file and resolve the imports yourself by providing the correct package name/ import path for each incorrect one.
 
 ## Upgrading Firmware
 
 It is highly recommended that you upgrade the firmware on your Control Hub or Expansion Hub to the latest version. Firmware version 1.8.2 brings a number of improvements including: DC motor output linearity, improved close-loop controls, improved I2C speeds, and USB recovery for ESD faults. Road Runner's performance directly benefits from these improvements.
 
-Explicit directions to upgrade the Control Hub firmware can be found [here](https://github.com/FIRST-Tech-Challenge/SKYSTONE/wiki/Managing-a-Control-Hub#Updating-the-Expansion-Hub-Firmware).
+Explicit directions to upgrade the Expansion/Control Hub firmware can be found [here](https://github.com/FIRST-Tech-Challenge/SKYSTONE/wiki/Managing-a-Control-Hub#Updating-the-Expansion-Hub-Firmware).
 
 Directions to upgrade the Expansion Hub firmware can be found [here](http://www.revrobotics.com/software/#ExpansionHubFirmware).
 
