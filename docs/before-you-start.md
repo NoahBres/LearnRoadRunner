@@ -16,7 +16,7 @@ Please make sure to take note of the following before continuing!
 
 ::: tip
 
-**3.** This tutorial attempts to cover installation, usage, and tips and tricks. It does not go into the hardcore inner workings of Road Runner. However, a deep understanding of how PID's and motion profiles will make the learning process much faster. I highly recommend you check Road Runner's [original quickstart documentation](https://acme-robotics.gitbook.io/road-runner/quickstart/introduction) as it explains the inner workings.
+**3.** This tutorial attempts to cover installation, usage, and tips and tricks. It does not go into the hardcore inner workings of Road Runner. However, a deep understanding of how PID control and motion profiles work will make the learning process much faster. I highly recommend you check Road Runner's [original quickstart documentation](https://acme-robotics.gitbook.io/road-runner/quickstart/introduction) as it explains the inner workings.
 :::
 
 ::: warning
