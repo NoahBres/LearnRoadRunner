@@ -3,7 +3,7 @@
     <transition name="fade">
       <div
         v-if="isOpen"
-        class="z-30 bg-gray-900 opacity-75"
+        class="z-30 bg-gray-900 fixed top-0 bottom-0 left-0 right-0 bg-opacity-75"
         @click="closeModal"
       ></div>
     </transition>
