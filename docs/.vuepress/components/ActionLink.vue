@@ -1,5 +1,5 @@
 <template>
-  <div class="action-link flex justify-center align-center" :style="style">
+  <div class="action-link flex justify-center items-center" :style="style">
     <a v-bind:href="url" class="border-red-500 bg-gray-300">
       <slot />
     </a>

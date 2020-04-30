@@ -9,7 +9,7 @@
     </transition>
     <div
       v-if="isOpen"
-      class="z-40 pointer-events-none flex justify-center align-center fixed top-0 right-0 bottom-0 left-0"
+      class="z-40 pointer-events-none flex justify-center items-center fixed top-0 right-0 bottom-0 left-0"
     >
       <div class="bg-white pointer-events-auto"></div>
     </div>

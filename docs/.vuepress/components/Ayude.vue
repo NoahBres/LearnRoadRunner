@@ -1,7 +1,7 @@
 <template>
-  <div class="flex justify-center column">
+  <div class="flex justify-center flex-col">
     <h3 class="text-center">Are you using drive encoders?</h3>
-    <div class="flex justify-center align-center row">
+    <div class="flex justify-center items-center flex-row">
       <p class="indicator-text nope" :class="{ active: !checked }">Nope</p>
       <input type="checkbox" :id="uid" v-model="checked" />
       <label class="switch" :for="uid" />
