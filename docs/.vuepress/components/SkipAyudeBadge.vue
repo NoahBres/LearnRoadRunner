@@ -1,5 +1,5 @@
 <template>
-  <div class="skipme" :class="{ hidden: hidden }">
+  <div class="skipme" v-if="hidden">
     skip me
   </div>
 </template>
@@ -24,7 +24,7 @@ export default Vue.extend({
 });
 </script>
 <style lang="stylus" scoped>
-.skipme {
+.skipme
   display inline-block
   background $yellow500
 
@@ -34,5 +34,4 @@ export default Vue.extend({
   padding 0.1em 0.5em
 
   border-radius 0.3em
-}
 </style>
