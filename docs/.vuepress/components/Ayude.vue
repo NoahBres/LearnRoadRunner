@@ -63,10 +63,10 @@ export default Vue.extend({
     color $textColor
 
   &.active.yep
-    background-color: $green400
+    background-color $green400
 
   &.active.nope
-    background-color: $yellow400
+    background-color $yellow400
 
 input
   position absolute
