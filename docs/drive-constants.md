@@ -15,6 +15,8 @@ Try out the configurator to have your constants class auto configured!
     <button class="action-button block m-auto" @click="buttonSlotProps.openModal">Configure Me!</button>
   </template>
   <template v-slot:modal="modalSlotProps">
-    <Modal :isOpen="modalSlotProps.isOpen" :closeModal="modalSlotProps.closeModal"></Modal>
+    <Modal :isOpen="modalSlotProps.isOpen" :closeModal="modalSlotProps.closeModal">
+      <DriveConstants-ConfigurationModal />
+    </Modal>
   </template>
 </ModalWrapper>
