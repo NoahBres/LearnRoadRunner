@@ -9,7 +9,7 @@
   color #fff
   font-size 1.2em
 
-  transition background-color 0.1s ease
+  transition background-color 100ms ease, transform 100ms ease
 
 .action-button:hover, .action-link a:hover
   background-color lighten($accentColor, 10%)
@@ -19,6 +19,7 @@
 
 .action-button:focus, .action-link a:focus
   border-bottom 0.1em solid transparent
+  transform: translateY(0.1em)
   
 pre.vue-container
   border-left-width .5rem
