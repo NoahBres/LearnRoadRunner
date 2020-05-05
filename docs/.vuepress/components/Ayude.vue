@@ -3,8 +3,8 @@
     <h3 class="text-center">Are you using drive encoders?</h3>
     <div class="flex justify-center items-center flex-row">
       <p class="indicator-text nope" :class="{ active: !checked }">Nope</p>
-      <input type="checkbox" :id="uid" v-model="checked" />
-      <label class="switch" :for="uid" />
+      <input type="checkbox" :id="uuid" v-model="checked" />
+      <label class="switch" :for="uuid" />
       <p class="indicator-text yep" :class="{ active: checked }">Yep</p>
     </div>
   </div>
@@ -20,10 +20,8 @@ export default Vue.extend({
   },
   computed: {
     // https://stackoverflow.com/a/2117523/3360147
-    uid() {
-      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
-        c
-      ) {
+    uuid(): string {
+      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
         let r = (Math.random() * 16) | 0,
           v = c == "x" ? r : (r & 0x3) | 0x8;
         return v.toString(16);
