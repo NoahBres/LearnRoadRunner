@@ -12,7 +12,7 @@
         v-if="isOpen"
         class="z-40 pointer-events-none flex justify-center items-center fixed top-0 right-0 bottom-0 left-0"
       >
-        <div class="bg-white pointer-events-auto p-0 rounded">
+        <div class="bg-white pointer-events-auto p-0 rounded overflow-hidden">
           <slot />
         </div>
       </div>
@@ -37,16 +37,20 @@ export default Vue.extend({
 });
 </script>
 <style lang="stylus" scoped>
-.fade-enter-active, .fade-leave-active
+.fade-enter-active
+.fade-leave-active
   transition opacity 150ms ease-in-out
 
-.fade-enter, .fade-leave-to
+.fade-enter
+.fade-leave-to
   opacity 0
 
-.modal-in-enter-active, .modal-in-leave-active
+.modal-in-enter-active
+.modal-in-leave-active
   transition transform 150ms ease-in-out, opacity 150ms ease-in-out
 
-.modal-in-enter, .modal-in-leave-to
+.modal-in-enter
+.modal-in-leave-to
   transform scale(0.7)
   opacity 0.5
 </style>
