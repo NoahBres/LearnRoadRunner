@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex flex-col justify-center px-8 py-6 pb-0">
+    <div class="flex flex-col justify-center px-8 py-4 pb-0">
       <h2 class="border-none">Are you using an off-the-shelf drive train?</h2>
       <div class="flex flex-row justify-center">
         <input
@@ -9,6 +9,7 @@
           name="chassis"
           value="strafer"
           class="hidden"
+          v-model="chassisChoice"
         />
         <label
           class="strafer-chassis cots-choice-btn mr-3"
@@ -29,6 +30,7 @@
           name="chassis"
           value="custom"
           class="hidden"
+          v-model="chassisChoice"
         />
         <label
           class="custom-dt cots-choice-btn ml-3"
@@ -51,8 +53,13 @@
         </label>
       </div>
     </div>
-    <div class="flex justify-center">
-      <button>Next</button>
+    <div class="flex justify-end mt-12 px-8 py-4 bg-gray-200">
+      <button
+        class="next-button"
+        :class="{ 'translate-x-40': !bottomButtonShowing }"
+      >
+        Next
+      </button>
     </div>
   </div>
 </template>
@@ -62,45 +69,62 @@ import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
-      bottomButtonShowing: false,
+      chassisChoice: "",
     };
+  },
+  computed: {
+    bottomButtonShowing(): boolean {
+      return this.chassisChoice;
+    },
   },
 });
 </script>
-<style scoped>
-.cots-choice-btn {
-  font-family: inherit;
-  width: 22em;
-  transition: box-shadow, border-color 200ms ease;
+<style lang="stylus" scoped>
+.cots-choice-btn
+  font-family inherit
+  width 22em
+  transition-property box-shadow, border-color
 
-  @apply border border-solid border-gray-400 rounded-md;
-  @apply overflow-hidden;
-  @apply flex flex-col items-center;
-  @apply px-3 py-2;
-  @apply bg-white cursor-pointer;
-}
+  @apply duration-200
+  @apply border border-solid border-gray-400 rounded-md
+  @apply overflow-hidden
+  @apply flex flex-col items-center
+  @apply px-3 py-2
+  @apply bg-white cursor-pointer
 
-.cots-choice-btn:hover {
-  @apply shadow-lg;
-}
+.cots-choice-btn:hover
+  @apply shadow-lg
 
 /* Need to declare this rather than inline because specificity*/
 /* Of the part right above is too high */
-.strafer-chassis:hover {
-  @apply border-yellow-500;
-}
+.strafer-chassis:hover
+  @apply border-yellow-500
 
-#choice-chassis-strafer[type="radio"]:checked + label {
-  outline-color: theme("colors.yellow.500");
-  outline-style: auto;
-}
+#choice-chassis-strafer[type="radio"]:checked + label
+  outline-color theme("colors.yellow.500")
+  outline-style auto
 
-.custom-dt:hover {
-  @apply border-green-700;
-}
+.custom-dt:hover
+  @apply border-green-700
 
-#choice-chassis-custom[type="radio"]:checked + label {
-  outline-color: theme("colors.green.700");
-  outline-style: auto;
-}
+#choice-chassis-custom[type="radio"]:checked + label
+  outline-color theme("colors.green.700")
+  outline-style auto
+
+.next-button
+  @apply text-white text-base
+  @apply bg-red-600
+  @apply border-none
+  @apply px-8 py-3 rounded
+  @apply cursor-pointer
+  @apply transition-colors transition-transform ease-out duration-150 transform
+
+  transition transform 150ms cubic-bezier(.64, 1.47, .74, 1.03)
+
+  // Required because the class doesn't have enough specificity on its own
+  &.translate-x-40
+    @apply translate-x-40
+
+.next-button:hover
+  @apply bg-red-700
 </style>
