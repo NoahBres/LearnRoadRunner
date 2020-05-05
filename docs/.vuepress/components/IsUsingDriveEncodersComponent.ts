@@ -38,8 +38,6 @@ export default Vue.extend({
     onIsUsingDriveEncoderChanged(e: CustomEvent) {
       if (this.skipIfDriveEncoders) this.hidden = e.detail;
       else this.hidden = !e.detail;
-
-      console.log({ hidden: this.hidden, detail: e.detail });
     },
   },
 });
