@@ -1,5 +1,10 @@
 module.exports = {
-  purge: ["./docs/*.md", "./docs/**/*.md", "./docs/vuepress/**/*.vue"],
+  purge: [
+    "./docs/*.md",
+    "./docs/**/*.md",
+    "./docs/.vuepress/**/*.vue",
+    "./docs/.vuepress/**/**/*.vue",
+  ],
   theme: {
     extend: {
       opacity: {
