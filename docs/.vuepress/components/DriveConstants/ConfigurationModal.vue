@@ -72,6 +72,7 @@ import { configurationModalMachine } from "./ConfigurationModalMachine";
 import DriveConstantStorage, {
   StraferV1Constants,
 } from "./DriveConstantStorage";
+import { ChassisEnum } from "./ChassisEnum";
 
 export default Vue.extend({
   data() {
@@ -95,15 +96,19 @@ export default Vue.extend({
       })
       .start();
 
-    this.chassisChoice = this.context.chassisSelected;
+    // this.chassisChoice = this.context.chassisSelected;
   },
   methods: {
     handleNextClick() {
       if (this.currentState.matches("chassisSelection")) {
-        console.log("yo");
+        if (this.chassisChoice === "strafer-v1") {
+          this.configurationModalService.send("SELECTED_CHASSIS", {
+            value: ChassisEnum.STRAFER_V1_CHASSIS,
+          });
+        } else if (this.chassisChoice === "custom") {
+          this.configurationModalService.send("SELECTED_CUSTOM_CHASSIS");
+        }
       }
-      if (this.chassisChoice === "strafer-v1")
-        DriveConstantStorage.loadTemplate(StraferV1Constants);
     },
   },
 });
