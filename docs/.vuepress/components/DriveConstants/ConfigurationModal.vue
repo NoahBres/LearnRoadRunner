@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="configuration-modal">
     <DriveConstants-ConfigurationModal-ChassisSelection
       v-if="this.currentState.matches('chassisSelection')"
       v-model="chassisChoice"
@@ -16,7 +16,7 @@
     <div class="flex justify-end mt-12 px-8 py-4 bg-gray-200">
       <button
         class="next-button"
-        :class="{ 'translate-x-40': !bottomButtonShowing }"
+        :class="{ 'translate-x-40': !nextButtonShowing }"
         @click="handleNextClick"
       >
         Next
@@ -44,8 +44,14 @@ export default Vue.extend({
     };
   },
   computed: {
-    bottomButtonShowing(): boolean {
-      return this.chassisChoice;
+    nextButtonShowing(): boolean {
+      if (this.currentState.matches("chassisSelection")) {
+        return this.chassisChoice;
+      } else if (this.currentState.matches("motorSelection")) {
+        return true;
+      }
+
+      return false;
     },
   },
   created() {
@@ -90,4 +96,61 @@ export default Vue.extend({
 
 .next-button:hover
   @apply bg-red-700
+
+.configuration-modal >>> .outline-btn
+  font-family inherit
+  transition-property box-shadow, border-color
+
+  @apply duration-200
+  @apply border border-solid border-gray-400 rounded-md
+  @apply overflow-hidden
+  @apply flex flex-col items-center
+  @apply px-3 py-2
+  @apply bg-white cursor-pointer
+
+.configuration-modal >>> .outline-btn:hover
+  @apply shadow-lg
+
+.configuration-modal >>> .outline-btn.outline-orange:hover
+  @apply border-orange-500
+
+.configuration-modal >>> .outline-orange[type="radio"]:checked + label
+  outline-color theme("colors.orange.500")
+  outline-style auto
+
+.configuration-modal >>> .outline-btn.outline-red:hover
+  @apply border-red-500
+
+.configuration-modal >>> .outline-red[type="radio"]:checked + label
+  outline-color theme("colors.red.500")
+  outline-style auto
+
+.configuration-modal >>> .outline-btn.outline-blue:hover
+  @apply border-blue-500
+
+.configuration-modal >>> .outline-blue[type="radio"]:checked + label
+  outline-color theme("colors.blue.500")
+  outline-style auto
+
+.configuration-modal >>> .outline-btn.outline-yellow:hover
+  @apply border-yellow-500
+
+.configuration-modal >>> .outline-yellow[type="radio"]:checked + label
+  outline-color theme("colors.yellow.500")
+  outline-style auto
+
+.configuration-modal >>> .outline-btn.outline-green:hover
+  @apply border-green-700
+
+.configuration-modal >>> .outline-green[type="radio"]:checked + label
+  outline-color theme("colors.green.700")
+  outline-style auto
+
+
+.configuration-modal >>> .outline-btn.outline-pink:hover
+  @apply border-pink-600
+
+.configuration-modal >>> .outline-pink[type="radio"]:checked + label
+  outline-color theme("colors.pink.600")
+  outline-style auto
 </style>

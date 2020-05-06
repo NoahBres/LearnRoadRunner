@@ -12,7 +12,7 @@
         @input="$emit('input', $event.target.value)"
       />
       <label
-        class="strafer-v1-chassis cots-choice-btn mr-3"
+        class="strafer-v1-chassis outline-btn mr-3 outline-yellow"
         for="choice-chassis-strafer-v1"
       >
         <img
@@ -33,7 +33,10 @@
         :chassisChoice="chassisChoice"
         @input="$emit('input', $event.target.value)"
       />
-      <label class="custom-dt cots-choice-btn ml-3" for="choice-chassis-custom">
+      <label
+        class="custom-dt outline-btn ml-3 outline-green"
+        for="choice-chassis-custom"
+      >
         <div class="w-32 h-32 flex justify-center items-center">
           <svg
             fill="currentColor"
@@ -60,23 +63,11 @@ export default Vue.extend({
 });
 </script>
 <style lang="stylus" scoped>
-.cots-choice-btn
-  font-family inherit
+.outline-btn
   width 22em
-  transition-property box-shadow, border-color
-
-  @apply duration-200
-  @apply border border-solid border-gray-400 rounded-md
-  @apply overflow-hidden
-  @apply flex flex-col items-center
-  @apply px-3 py-2
-  @apply bg-white cursor-pointer
-
-.cots-choice-btn:hover
-  @apply shadow-lg
 
 /* Need to declare this rather than inline because specificity*/
-/* Of the part right above is too high */
+/* The parent element (in ConfigurationModal.vue) specificty is too high */
 .strafer-v1-chassis:hover
   @apply border-yellow-500
 
