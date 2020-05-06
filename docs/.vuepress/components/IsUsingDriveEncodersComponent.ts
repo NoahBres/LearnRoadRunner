@@ -35,9 +35,9 @@ export default Vue.extend({
     );
   },
   methods: {
-    onIsUsingDriveEncoderChanged(e: CustomEvent) {
-      if (this.skipIfDriveEncoders) this.hidden = e.detail;
-      else this.hidden = !e.detail;
+    onIsUsingDriveEncoderChanged({ detail }: CustomEvent) {
+      if (this.skipIfDriveEncoders) this.hidden = detail;
+      else this.hidden = !detail;
     },
   },
 });
