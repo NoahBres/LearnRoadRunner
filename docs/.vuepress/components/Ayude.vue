@@ -11,6 +11,7 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
+import DriveConstantStorage from "./DriveConstants/DriveConstantStorage";
 
 export default Vue.extend({
   data() {
@@ -36,6 +37,10 @@ export default Vue.extend({
   watch: {
     checked(newCheckedVal) {
       localStorage.isUsingDriveEncoders = newCheckedVal;
+      DriveConstantStorage.setData(
+        DriveConstantStorage.RUN_USING_ENCODER,
+        newCheckedVal
+      );
 
       let event = new CustomEvent("isUsingDriveEncodersChanged", {
         detail: newCheckedVal,
