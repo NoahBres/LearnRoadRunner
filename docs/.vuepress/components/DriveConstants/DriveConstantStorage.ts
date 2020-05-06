@@ -12,6 +12,21 @@ interface DriveConstantFormat {
   maxAccel: number;
 }
 
+const BlankConstants: DriveConstantFormat = {
+  ticksPerRev: 1,
+  maxRPM: 1,
+
+  runUsingEncoder: false,
+
+  wheelRadius: 1,
+  gearRatio: 1,
+
+  trackWidth: 1,
+
+  maxVel: 1,
+  maxAccel: 1,
+};
+
 const StraferV1Constants: DriveConstantFormat = {
   ticksPerRev: 386.3,
   maxRPM: 435,
@@ -120,4 +135,4 @@ class DriveConstantStorage {
   }
 }
 
-export { DriveConstantStorage as default, StraferV1Constants };
+export { DriveConstantStorage as default, StraferV1Constants, BlankConstants };
