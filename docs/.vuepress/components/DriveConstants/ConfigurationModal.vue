@@ -5,16 +5,13 @@
       v-model="chassisChoice"
     />
 
-    <div
+    <DriveConstants-ConfigurationModal-MotorSelection
       v-if="this.currentState.matches('motorSelection')"
-      class="flex flex-col justify-center px-8 py-4 pb-0"
-    >
-      <h2 class="border-none">What type of motors are you using?</h2>
-    </div>
+    />
 
-    <div v-if="this.currentState.matches('done')">
-      <h2>Done</h2>
-    </div>
+    <DriveConstants-ConfigurationModal-DonePage
+      v-if="this.currentState.matches('done')"
+    />
 
     <div class="flex justify-end mt-12 px-8 py-4 bg-gray-200">
       <button
