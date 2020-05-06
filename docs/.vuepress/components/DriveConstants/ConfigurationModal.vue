@@ -5,15 +5,15 @@
       <div class="flex flex-row justify-center">
         <input
           type="radio"
-          id="choice-chassis-strafer"
+          id="choice-chassis-strafer-v1"
           name="chassis"
-          value="strafer"
+          value="strafer-v1"
           class="hidden"
           v-model="chassisChoice"
         />
         <label
-          class="strafer-chassis cots-choice-btn mr-3"
-          for="choice-chassis-strafer"
+          class="strafer-v1-chassis cots-choice-btn mr-3"
+          for="choice-chassis-strafer-v1"
         >
           <img
             :src="
@@ -57,6 +57,7 @@
       <button
         class="next-button"
         :class="{ 'translate-x-40': !bottomButtonShowing }"
+        @click="handleNextClick"
       >
         Next
       </button>
@@ -65,16 +66,44 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
+import { interpret } from "xstate";
+import { configurationModalMachine } from "./ConfigurationModalMachine";
+
+import DriveConstantStorage, {
+  StraferV1Constants,
+} from "./DriveConstantStorage";
 
 export default Vue.extend({
   data() {
     return {
       chassisChoice: "",
+      configurationModalService: interpret(configurationModalMachine),
+      currentState: configurationModalMachine.initialState,
+      context: configurationModalMachine.context,
     };
   },
   computed: {
     bottomButtonShowing(): boolean {
       return this.chassisChoice;
+    },
+  },
+  created() {
+    this.configurationModalService
+      .onTransition((state) => {
+        this.currentState = state;
+        this.context = state.context;
+      })
+      .start();
+
+    this.chassisChoice = this.context.chassisSelected;
+  },
+  methods: {
+    handleNextClick() {
+      if (this.currentState.matches("chassisSelection")) {
+        console.log("yo");
+      }
+      if (this.chassisChoice === "strafer-v1")
+        DriveConstantStorage.loadTemplate(StraferV1Constants);
     },
   },
 });
@@ -97,10 +126,10 @@ export default Vue.extend({
 
 /* Need to declare this rather than inline because specificity*/
 /* Of the part right above is too high */
-.strafer-chassis:hover
+.strafer-v1-chassis:hover
   @apply border-yellow-500
 
-#choice-chassis-strafer[type="radio"]:checked + label
+#choice-chassis-strafer-v1[type="radio"]:checked + label
   outline-color theme("colors.yellow.500")
   outline-style auto
 
