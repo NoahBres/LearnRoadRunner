@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center px-8 py-4 pb-0">
-    <h2 class="border-none">What type of motors are you using?</h2>
+    <h2 class="border-none text-center">What type of motors are you using?</h2>
     <div class="grid grid-cols-3 gap-4">
       <div v-for="motorGroup in motorGroupList" :key="motorGroup.name">
         <input
@@ -10,6 +10,9 @@
           name="motor-group"
           :value="`motor-group-${motorGroup.key}`"
           :class="`outline-${motorGroup.color}`"
+          :motorChoice="motorChoice"
+          @input="$emit('input', $event.target.value)"
+          @change="changeMotorGroup"
         />
         <label
           class="outline-btn"
@@ -18,7 +21,7 @@
         >
           <img
             :src="$withBase(motorGroup.src)"
-            class="w-32 h-32 object-cover"
+            class="w-24 h-24 object-cover"
           />
           <h4>{{ motorGroup.name }}</h4>
         </label>
@@ -30,9 +33,11 @@
           id="motor-group-custom"
           name="motor-group"
           value="motor-group-custom"
+          :motorChoice="motorChoice"
+          @input="$emit('input', $event.target.value)"
         />
         <label class="outline-btn outline-pink" for="motor-group-custom">
-          <div class="w-32 h-32 flex justify-center items-center">
+          <div class="w-24 h-24 flex justify-center items-center">
             <svg
               fill="currentColor"
               viewBox="0 0 20 20"
@@ -56,10 +61,20 @@ import Vue from "vue";
 import { MotorGroup } from "../MotorData";
 
 export default Vue.extend({
+  props: ["motorChoice"],
+  mounted() {
+    this.$emit("request-width", "635px");
+    this.$emit("request-height", "778px");
+  },
   data() {
     return {
       motorGroupList: MotorGroup,
     };
+  },
+  methods: {
+    changeMotorGroup(e) {
+      console.log(e.target.value.subtr("motor-group-".length));
+    },
   },
 });
 </script>
