@@ -1,6 +1,8 @@
 <template>
-  <div class="flex flex-col justify-center px-8 py-4 pb-0">
-    <h2 class="border-none">Are you using an off-the-shelf drive train?</h2>
+  <div class="flex flex-col justify-center px-8 py-4 pb-0 h-full">
+    <h2 class="border-none mt-0 mb-10 text-center">
+      Are you using an off-the-shelf drive train?
+    </h2>
     <div class="flex flex-row justify-center">
       <input
         type="radio"
@@ -10,6 +12,7 @@
         class="hidden"
         :chassisChoice="chassisChoice"
         @input="$emit('input', $event.target.value)"
+        :checked="chassisChoice == 'strafer-v1'"
       />
       <label
         class="strafer-v1-chassis outline-btn mr-3 outline-yellow"
@@ -32,6 +35,7 @@
         class="hidden"
         :chassisChoice="chassisChoice"
         @input="$emit('input', $event.target.value)"
+        :checked="chassisChoice == 'custom'"
       />
       <label
         class="custom-dt outline-btn ml-3 outline-green"
@@ -60,6 +64,10 @@ import Vue from "vue";
 
 export default Vue.extend({
   props: ["chassisChoice"],
+  mounted() {
+    this.$emit("request-width", "844px");
+    this.$emit("request-height", "500px");
+  },
 });
 </script>
 <style lang="stylus" scoped>
