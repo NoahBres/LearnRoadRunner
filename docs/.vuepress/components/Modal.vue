@@ -47,7 +47,7 @@ export default Vue.extend({
 
 .modal-in-enter-active
 .modal-in-leave-active
-  transition transform 150ms ease-in-out, opacity 150ms ease-in-out
+  transition transform 150ms ease-in, opacity 150ms ease-in
 
 .modal-in-enter
 .modal-in-leave-to
