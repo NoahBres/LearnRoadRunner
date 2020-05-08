@@ -4,12 +4,15 @@ import DriveConstantStorage, {
   BlankConstants,
 } from "./DriveConstantStorage";
 import { ChassisEnum } from "./ChassisEnum";
+import { Motor } from "./MotorData";
 
 interface ModalStateSchema {
   states: {
     chassisSelection: {};
     motorSelection: {};
+    manualMotorSelection: {};
     wheelSelection: {};
+    manualWheelSelection: {};
     driveEncoders: {};
     botDimensions: {};
     done: {};
@@ -18,7 +21,10 @@ interface ModalStateSchema {
 
 type ModalEvent =
   | { type: "SELECTED_CHASSIS"; value: ChassisEnum }
-  | { type: "SELECTED_CUSTOM_CHASSIS"; value: null };
+  | { type: "SELECTED_CUSTOM_CHASSIS"; value: null }
+  | { type: "SELECTED_MOTOR"; value: null }
+  | { type: "SELECTED_CUSTOM_MOTOR"; value: null }
+  | { type: "BACK"; value: null };
 
 interface ModalContext {
   chassisSelected: ChassisEnum;
@@ -43,8 +49,14 @@ export const configurationModalMachine = Machine<
         },
         exit: ["setChassis", "loadTemplate"],
       },
-      motorSelection: {},
+      motorSelection: {
+        on: {
+          BACK: "chassisSelection",
+        },
+      },
+      manualMotorSelection: {},
       wheelSelection: {},
+      manualWheelSelection: {},
       driveEncoders: {},
       botDimensions: {},
       done: {},
@@ -52,7 +64,7 @@ export const configurationModalMachine = Machine<
   },
   {
     actions: {
-      setChassis: assign({
+      setChassis: assign<ModalContext, ModalEvent>({
         chassisSelected: (context, event) => event.value,
       }),
       loadTemplate: (context, event) => {
