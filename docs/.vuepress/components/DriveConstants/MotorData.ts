@@ -71,9 +71,9 @@ const MotorList: MotorListInterface = {
   [MotorModel.REV_HD_HEX_PLANETARY_20]: {
     name: "HD Hex Motor 20:1 Planetary Gearbox",
 
-    maxRPM: 300,
-    ticksPerRev: 560,
-    speccedGearRatio: 20,
+    maxRPM: 312.5,
+    ticksPerRev: 537.6,
+    speccedGearRatio: 19.2,
   },
   [MotorModel.AM_NEVEREST_BARE]: {
     name: "NeveRest Bare",
