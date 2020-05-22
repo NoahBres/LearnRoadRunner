@@ -14,7 +14,6 @@
     <DriveConstants-ConfigurationModal-MotorSelection
       v-if="this.currentState.matches('motorSelection')"
       v-model="motorChoice"
-      :motorChoice="motorChoice"
       @request-width="requestWidth"
       @request-height="requestHeight"
     />
