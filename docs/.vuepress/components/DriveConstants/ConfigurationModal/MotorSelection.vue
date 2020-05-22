@@ -110,6 +110,7 @@
                 name="motor"
                 :value="`motor-${motor.key}`"
                 @change="pickedMotor"
+                v-model="radioVModel"
               />
               <label
                 class="cursor-pointer flex px-4 py-2 text-lg"
@@ -151,6 +152,7 @@ export default Vue.extend({
       selectedMotorGroup: null,
       currentSelectedMotorGroup: null,
       selectedMotor: "",
+      radioVModel: "",
 
       gridWidth: "572px",
       gridWidthPadding: "636px",
