@@ -18,6 +18,20 @@
       @request-height="requestHeight"
     />
 
+    <DriveConstants-ConfigurationModal-ManualMotorSelection
+      v-if="this.currentState.matches('manualMotorSelection')"
+      v-model="motorChoice"
+      @request-width="requestWidth"
+      @request-height="requestHeight"
+    />
+
+    <DriveConstants-ConfigurationModal-WheelSelection
+      v-if="this.currentState.matches('wheelSelection')"
+      v-model="motorChoice"
+      @request-width="requestWidth"
+      @request-height="requestHeight"
+    />
+
     <DriveConstants-ConfigurationModal-DonePage
       v-if="this.currentState.matches('done')"
       @request-width="requestWidth"
@@ -86,6 +100,9 @@ export default Vue.extend({
     backButtonShowing(): boolean {
       if (this.currentState.matches("chassisSelection")) return false;
       else if (this.currentState.matches("motorSelection")) return true;
+      else if (this.currentState.matches("manualMotorSelection")) return true;
+      else if (this.currentState.matches("wheelSelection")) return true;
+      else if (this.currentState.matches("driveEncoders")) return true;
       else if (this.currentState.matches("done")) return true;
       return false;
     },
@@ -110,11 +127,16 @@ export default Vue.extend({
         } else if (this.chassisChoice === "custom") {
           this.configurationModalService.send("SELECTED_CUSTOM_CHASSIS");
         }
+      } else if (this.currentState.matches("motorSelection")) {
+        if (this.motorChoice == "CUSTOM") {
+          this.configurationModalService.send("SELECTED_CUSTOM_MOTOR");
+        } else if (this.motorChoice != "") {
+          this.configurationModalService.send("SELECTED_MOTOR");
+        }
       }
     },
     handleBackClick() {
-      if (this.currentState.matches("motorSelection"))
-        this.configurationModalService.send("BACK");
+      this.configurationModalService.send("BACK");
     },
     requestWidth(value) {
       this.width = value;
@@ -194,7 +216,7 @@ export default Vue.extend({
   @apply border-0 border-solid border-transparent border-b-2
   @apply transition-colors transition-transform duration-150 ease-out transform
 
-  transition transform 150ms cubic-bezier(0.41, 1.3, 0.71, 1.03)
+  transition transform 150ms cubic-bezier(0.41, 1.3, 0.71, 1.03), border-color 100ms ease-out
 
   &.translate-y-16
     @apply translate-y-16
