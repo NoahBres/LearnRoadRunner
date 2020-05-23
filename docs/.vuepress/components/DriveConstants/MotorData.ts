@@ -318,9 +318,9 @@ const MotorGroup: MotorGroupItem[] = [
     src: "./assets/drive-constants/rev-hd-quarter.jpg",
     color: "orange",
     derivatives: [
-      MotorList[MotorModel.REV_HD_HEX_SPUR_40],
-      MotorList[MotorModel.REV_HD_HEX_SPUR_20],
       MotorList[MotorModel.REV_HD_HEX_PLANETARY_20],
+      MotorList[MotorModel.REV_HD_HEX_SPUR_20],
+      MotorList[MotorModel.REV_HD_HEX_SPUR_40],
     ],
   },
   {
@@ -336,8 +336,8 @@ const MotorGroup: MotorGroupItem[] = [
     src: "./assets/drive-constants/neverest-classic-half.jpg",
     color: "red",
     derivatives: [
-      MotorList[MotorModel.AM_NEVEREST_CLASSIC_60],
       MotorList[MotorModel.AM_NEVEREST_CLASSIC_40],
+      MotorList[MotorModel.AM_NEVEREST_CLASSIC_60],
     ],
   },
   {
@@ -346,8 +346,8 @@ const MotorGroup: MotorGroupItem[] = [
     src: "./assets/drive-constants/neverest-orbital-half.jpg",
     color: "red",
     derivatives: [
-      MotorList[MotorModel.AM_NEVEREST_ORBITAL_20],
       MotorList[MotorModel.AM_NEVEREST_ORBITAL_3_7],
+      MotorList[MotorModel.AM_NEVEREST_ORBITAL_20],
     ],
   },
   // {
@@ -363,9 +363,9 @@ const MotorGroup: MotorGroupItem[] = [
     src: "./assets/drive-constants/torquenado-quarter.jpg",
     color: "blue",
     derivatives: [
-      MotorList[MotorModel.TETRIX_TORQUENADO_60],
-      MotorList[MotorModel.TETRIX_TORQUENADO_40],
       MotorList[MotorModel.TETRIX_TORQUENADO_20],
+      MotorList[MotorModel.TETRIX_TORQUENADO_40],
+      MotorList[MotorModel.TETRIX_TORQUENADO_60],
     ],
   },
   {
@@ -374,8 +374,8 @@ const MotorGroup: MotorGroupItem[] = [
     src: "./assets/drive-constants/gobilda-5201-quarter.jpg",
     color: "yellow",
     derivatives: [
-      MotorList[MotorModel.GOBILDA_5201_53],
       MotorList[MotorModel.GOBILDA_5201_26],
+      MotorList[MotorModel.GOBILDA_5201_53],
     ],
   },
   {
@@ -384,16 +384,16 @@ const MotorGroup: MotorGroupItem[] = [
     src: "./assets/drive-constants/gobilda-5202-quarter.jpg",
     color: "yellow",
     derivatives: [
-      MotorList[MotorModel.GOBILDA_5202_188],
-      MotorList[MotorModel.GOBILDA_5202_139],
-      MotorList[MotorModel.GOBILDA_5202_99_5],
-      MotorList[MotorModel.GOBILDA_5202_71_2],
-      MotorList[MotorModel.GOBILDA_5202_50_9],
-      MotorList[MotorModel.GOBILDA_5202_26_9],
-      MotorList[MotorModel.GOBILDA_5202_19_2],
-      MotorList[MotorModel.GOBILDA_5202_13_7],
-      MotorList[MotorModel.GOBILDA_5202_5_2],
       MotorList[MotorModel.GOBILDA_5202_3_7],
+      MotorList[MotorModel.GOBILDA_5202_5_2],
+      MotorList[MotorModel.GOBILDA_5202_13_7],
+      MotorList[MotorModel.GOBILDA_5202_19_2],
+      MotorList[MotorModel.GOBILDA_5202_26_9],
+      MotorList[MotorModel.GOBILDA_5202_50_9],
+      MotorList[MotorModel.GOBILDA_5202_71_2],
+      MotorList[MotorModel.GOBILDA_5202_99_5],
+      MotorList[MotorModel.GOBILDA_5202_139],
+      MotorList[MotorModel.GOBILDA_5202_188],
     ],
   },
 ];
