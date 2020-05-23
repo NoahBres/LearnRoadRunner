@@ -4,7 +4,6 @@ import DriveConstantStorage, {
   BlankConstants,
 } from "./DriveConstantStorage";
 import { ChassisEnum } from "./ChassisEnum";
-import { Motor } from "./MotorData";
 
 interface ModalStateSchema {
   states: {
@@ -51,11 +50,21 @@ export const configurationModalMachine = Machine<
       },
       motorSelection: {
         on: {
+          SELECTED_MOTOR: "wheelSelection",
+          SELECTED_CUSTOM_MOTOR: "manualMotorSelection",
           BACK: "chassisSelection",
         },
       },
-      manualMotorSelection: {},
-      wheelSelection: {},
+      manualMotorSelection: {
+        on: {
+          BACK: "motorSelection",
+        },
+      },
+      wheelSelection: {
+        on: {
+          BACK: "motorSelection",
+        },
+      },
       manualWheelSelection: {},
       driveEncoders: {},
       botDimensions: {},
