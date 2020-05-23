@@ -21,7 +21,6 @@
             name="motor-group"
             :value="`motor-group-${motorGroup.key}`"
             :class="`outline-${motorGroup.color}`"
-            @input="$emit('input', $event.target.value)"
             @change="changeMotorGroup"
           />
           <label
@@ -49,8 +48,6 @@
             id="motor-group-custom"
             name="motor-group"
             value="motor-group-custom"
-            :motorChoice="motorChoice"
-            @input="$emit('input', $event.target.value)"
             @change="changeMotorGroup"
           />
           <label class="outline-btn outline-pink" for="motor-group-custom">
@@ -145,7 +142,6 @@ import Vue from "vue";
 import { MotorGroup, MotorList, Motor, MotorModel } from "../MotorData";
 
 export default Vue.extend({
-  props: ["motorChoice"],
   data() {
     return {
       motorGroupList: MotorGroup,
@@ -164,6 +160,9 @@ export default Vue.extend({
   mounted() {
     this.$emit("request-width", this.normalWidth);
     this.$emit("request-height", "778px");
+
+    // Temporary until it can sync states
+    this.$emit("input", "");
   },
   computed: {
     showDerivates() {
@@ -187,6 +186,7 @@ export default Vue.extend({
         this.currentSelectedMotorGroup = null;
         this.selectedMotor = "CUSTOM";
         this.$emit("request-width", this.normalWidth);
+        this.$emit("input", this.selectedMotor);
       } else {
         const selectedMotorGroup = MotorGroup.find(
           (motorGroup) => motorGroup.key == selectedId
@@ -208,6 +208,7 @@ export default Vue.extend({
       this.selectedMotor = key.substring("motor-".length);
       this.currentSelectedMotorGroup =
         MotorList[this.selectedMotor].belongsToGroupKey;
+      this.$emit("input", this.selectedMotor);
     },
     checkMotorKey(motor: Motor) {
       return this.selectedMotor !== "" && this.selectedMotor === motor.key;
@@ -219,28 +220,27 @@ export default Vue.extend({
 .selected-group
   content ''
 
-  position absolute
+  @apply absolute
   top 3%
   right 3%
 
   width 2.2em
   height 2.2em
-  border-radius 50%
+  @apply rounded-full
 
   background url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' stroke='white' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7'%3E%3C/path%3E%3C/svg%3E") theme('colors.green.500');
   background-size 85% auto
-  background-position center
+  @apply bg-center
 
-  box-shadow 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)
+  @apply border border-gray-900
 
-  border 1px solid #1a202c
-
-  pointer-events none
+  @apply shadow-md
+  @apply pointer-events-none
 
 .show-check-enter-active, .show-check-leave-active
-  transition transform 300ms ease, opacity 300ms ease
+  @apply transition duration-300 ease-out
 
 .show-check-enter, .show-check-leave-to
+  @apply opacity-0
   transform rotate(-360deg)
-  opacity 0
 </style>
