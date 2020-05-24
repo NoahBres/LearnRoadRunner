@@ -232,7 +232,7 @@ export default Vue.extend({
   background-size 85% auto
   @apply bg-center
 
-  @apply border border-gray-900
+  @apply border border-gray-900 border-solid
 
   @apply shadow-md
   @apply pointer-events-none
