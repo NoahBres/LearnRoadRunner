@@ -11,7 +11,6 @@ interface ModalStateSchema {
     motorSelection: {};
     manualMotorSelection: {};
     wheelSelection: {};
-    manualWheelSelection: {};
     driveEncoders: {};
     botDimensions: {};
     done: {};
@@ -23,6 +22,7 @@ type ModalEvent =
   | { type: "SELECTED_CUSTOM_CHASSIS"; value: null }
   | { type: "SELECTED_MOTOR"; value: null }
   | { type: "SELECTED_CUSTOM_MOTOR"; value: null }
+  | { type: "SELECTED_WHEEL_SIZE"; value: null }
   | { type: "BACK"; value: null };
 
 interface ModalContext {
@@ -62,12 +62,16 @@ export const configurationModalMachine = Machine<
       },
       wheelSelection: {
         on: {
+          SELECTED_WHEEL_SIZE: "botDimensions",
           BACK: "motorSelection",
         },
       },
-      manualWheelSelection: {},
+      botDimensions: {
+        on: {
+          BACK: "wheelSelection",
+        },
+      },
       driveEncoders: {},
-      botDimensions: {},
       done: {},
     },
   },
