@@ -20,14 +20,20 @@
 
     <DriveConstants-ConfigurationModal-ManualMotorSelection
       v-if="this.currentState.matches('manualMotorSelection')"
-      v-model="motorChoice"
       @request-width="requestWidth"
       @request-height="requestHeight"
     />
 
     <DriveConstants-ConfigurationModal-WheelSelection
       v-if="this.currentState.matches('wheelSelection')"
-      v-model="motorChoice"
+      v-model="wheelRadius"
+      @request-width="requestWidth"
+      @request-height="requestHeight"
+    />
+
+    <DriveConstants-ConfigurationModal-BotDimensionsSelection
+      v-if="this.currentState.matches('botDimensions')"
+      v-model="trackWidth"
       @request-width="requestWidth"
       @request-height="requestHeight"
     />
@@ -81,8 +87,12 @@ export default Vue.extend({
     return {
       height: "400px",
       width: "800px",
+
       chassisChoice: "",
       motorChoice: "",
+      wheelRadius: 2,
+      trackWidth: 18,
+
       configurationModalService: interpret(configurationModalMachine),
       currentState: configurationModalMachine.initialState,
       context: configurationModalMachine.context,
@@ -94,6 +104,10 @@ export default Vue.extend({
         return !!this.chassisChoice;
       else if (this.currentState.matches("motorSelection"))
         return !!this.motorChoice;
+      else if (this.currentState.matches("wheelSelection"))
+        return this.wheelRadius && this.wheelRadius > 0;
+      else if (this.currentState.matches("botDimensions"))
+        return this.trackWidth >= 0 && this.trackWidth <= 18;
 
       return false;
     },
@@ -103,6 +117,7 @@ export default Vue.extend({
       else if (this.currentState.matches("manualMotorSelection")) return true;
       else if (this.currentState.matches("wheelSelection")) return true;
       else if (this.currentState.matches("driveEncoders")) return true;
+      else if (this.currentState.matches("botDimensions")) return true;
       else if (this.currentState.matches("done")) return true;
       return false;
     },
@@ -133,6 +148,9 @@ export default Vue.extend({
         } else if (this.motorChoice != "") {
           this.configurationModalService.send("SELECTED_MOTOR");
         }
+      } else if (this.currentState.matches("wheelSelection")) {
+        if (this.wheelRadius && this.wheelRadius > 0)
+          this.configurationModalService.send("SELECTED_WHEEL_SIZE");
       }
     },
     handleBackClick() {
