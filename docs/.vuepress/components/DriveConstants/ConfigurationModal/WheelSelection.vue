@@ -2,7 +2,7 @@
   <div class="flex flex-col justify-center px-8 py-4 pb-0 h-full">
     <h2 class="border-none mt-0 mb-10 text-center">
       Wheel Radius
-      <h4 class="block text-gray-500 m-0">(inches)</h4>
+      <h4 class="block text-gray-500 m-0 text-2xl">(inches)</h4>
     </h2>
     <div class="flex flex-row justify-center items-center">
       <button
@@ -12,9 +12,10 @@
       />
       <input
         class="number-input"
-        v-model.numer="radius"
+        v-model.number="radius"
         type="number"
         min="0"
+        @change="$emit('input', radius)"
       />
       <button class="number-button plus-button ml-12" @click="increment" />
     </div>
@@ -23,7 +24,7 @@
         class="outline-btn mx-2"
         v-for="wheel in wheelList"
         :key="wheel.name"
-        @click="radius = wheel.radius"
+        @click="sampleClick(wheel.radius)"
       >
         <img :src="$withBase(wheel.img)" class="w-24 h-24 object-cover" />
         <h4>{{ wheel.name }}</h4>
@@ -67,8 +68,8 @@ const wheelTypes: Wheel[] = [
 export default Vue.extend({
   data() {
     return {
-      radius: 4,
       wheelList: wheelTypes,
+      radius: 2,
     };
   },
   mounted() {
@@ -77,10 +78,16 @@ export default Vue.extend({
   },
   methods: {
     decrement() {
-      if (this.radius > 0) this.radius -= 1;
+      if (this.radius > 0) this.radius--;
+      this.$emit("input", this.radius);
     },
     increment() {
       this.radius++;
+      this.$emit("input", this.radius);
+    },
+    sampleClick(val) {
+      this.radius = val;
+      this.$emit("input", this.radius);
     },
   },
 });
