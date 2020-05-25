@@ -107,7 +107,7 @@ export default Vue.extend({
       else if (this.currentState.matches("wheelSelection"))
         return this.wheelRadius && this.wheelRadius > 0;
       else if (this.currentState.matches("botDimensions"))
-        return this.trackWidth >= 0 && this.trackWidth <= 18;
+        return this.trackWidth > 0 && this.trackWidth <= 18;
 
       return false;
     },
