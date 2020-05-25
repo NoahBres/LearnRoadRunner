@@ -22,6 +22,13 @@
       v-if="this.currentState.matches('manualMotorSelection')"
       @request-width="requestWidth"
       @request-height="requestHeight"
+      v-model="manualMotorSpec"
+    />
+
+    <DriveConstants-ConfigurationModal-GearRatioSelection
+      v-if="this.currentState.matches('gearRatioSelection')"
+      @request-width="requestWidth"
+      @request-height="requestHeight"
     />
 
     <DriveConstants-ConfigurationModal-WheelSelection
@@ -90,6 +97,8 @@ export default Vue.extend({
 
       chassisChoice: "",
       motorChoice: "",
+      manualMotorSpec: [312, 300],
+      gearRatio: 1,
       wheelRadius: 2,
       trackWidth: 18,
 
@@ -104,6 +113,10 @@ export default Vue.extend({
         return !!this.chassisChoice;
       else if (this.currentState.matches("motorSelection"))
         return !!this.motorChoice;
+      else if (this.currentState.matches("manualMotorSelection"))
+        return this.manualMotorSpec[0] > 0 && this.manualMotorSpec[1] > 0;
+      else if (this.currentState.matches("gearRatioSelection"))
+        return this.gearRatio > 0;
       else if (this.currentState.matches("wheelSelection"))
         return this.wheelRadius && this.wheelRadius > 0;
       else if (this.currentState.matches("botDimensions"))
@@ -115,6 +128,7 @@ export default Vue.extend({
       if (this.currentState.matches("chassisSelection")) return false;
       else if (this.currentState.matches("motorSelection")) return true;
       else if (this.currentState.matches("manualMotorSelection")) return true;
+      else if (this.currentState.matches("gearRatioSelection")) return true;
       else if (this.currentState.matches("wheelSelection")) return true;
       else if (this.currentState.matches("driveEncoders")) return true;
       else if (this.currentState.matches("botDimensions")) return true;
@@ -143,11 +157,16 @@ export default Vue.extend({
           this.configurationModalService.send("SELECTED_CUSTOM_CHASSIS");
         }
       } else if (this.currentState.matches("motorSelection")) {
-        if (this.motorChoice == "CUSTOM") {
+        if (this.motorChoice == "CUSTOM")
           this.configurationModalService.send("SELECTED_CUSTOM_MOTOR");
-        } else if (this.motorChoice != "") {
+        else if (this.motorChoice != "")
           this.configurationModalService.send("SELECTED_MOTOR");
-        }
+      } else if (this.currentState.matches("manualMotorSelection")) {
+        if (this.manualMotorSpec[0] > 0 && this.manualMotorSpec[1] > 0)
+          this.configurationModalService.send("SET_MANUAL_MOTOR");
+      } else if (this.currentState.matches("gearRatioSelection")) {
+        if (this.gearRatio > 0)
+          this.configurationModalService.send("SET_GEAR_RATIO");
       } else if (this.currentState.matches("wheelSelection")) {
         if (this.wheelRadius && this.wheelRadius > 0)
           this.configurationModalService.send("SELECTED_WHEEL_SIZE");
