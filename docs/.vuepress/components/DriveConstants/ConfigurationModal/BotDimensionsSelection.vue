@@ -6,7 +6,7 @@
     </h2>
     <div class="bot-container flex justify-center items-center h-64">
       <div
-        class="bot bg-gray-300 relative rounded shadow-xl"
+        class="bot"
         :style="{ width: `${botWidthEm}em`, height: `${botWidthEm}em` }"
       >
         <div class="wheel top-left" />
@@ -119,6 +119,9 @@ indicator-thickness = 0.15rem
 .bot
   transition-property width, height
   @apply duration-300 ease-out
+  @apply border border-gray-400
+  @apply bg-gray-300
+  @apply relative rounded shadow-xl
 
 .wheel
   width wheel-width
@@ -214,7 +217,7 @@ input[type=number]
   @apply transition-colors duration-150
 
 .number-input:focus
-  @apply border-gray-500 outline-none ease-in
+  @apply border-red-500 outline-none ease-in
 
 .number-button
   @apply relative flex justify-center items-center
