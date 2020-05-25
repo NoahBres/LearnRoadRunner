@@ -113,7 +113,7 @@ input[type=number]
   @apply transition-colors duration-150
 
 .number-input:focus
-  @apply border-gray-500 outline-none ease-in
+  @apply border-red-500 outline-none ease-in
 
 .number-button
   @apply relative flex justify-center items-center
