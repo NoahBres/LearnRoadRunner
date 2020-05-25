@@ -7,7 +7,7 @@
     <div class="bot-container flex justify-center items-center h-64">
       <div
         class="bot bg-gray-300 relative rounded shadow-xl"
-        :style="{ width: `${botWidth}em`, height: `${botWidth}em` }"
+        :style="{ width: `${botWidthEm}em`, height: `${botWidthEm}em` }"
       >
         <div class="wheel top-left" />
         <div class="wheel top-right" />
@@ -15,7 +15,9 @@
         <div class="wheel bottom-left" />
         <div class="indicator">
           <div class="p-2 mb-2 bg-gray-300 relative">
-            <span class="text-xl font-semibold">{{ clippedWidth }}</span>
+            <span class="text-xl font-semibold">{{
+              clippedWidth.toFixed(2)
+            }}</span>
             <span class="unit">in</span>
           </div>
         </div>
@@ -55,8 +57,8 @@
     </div>
     <div class="mt-6">
       <p class="text-gray-800 max-w-3xl">
-        *Track width measures the distance from the center of one wheel to the
-        center of its parallel wheel
+        *Track width = distance from the center of one wheel to the center of
+        its parallel wheel
       </p>
       <p class="text-gray-800 max-w-3xl mt-2 mb-8">
         **Track width need only be an estimate. It will be empirically tuned
@@ -84,7 +86,7 @@ export default Vue.extend({
     clippedWidth() {
       return Math.max(0, Math.min(this.maxWidthIn, this.trackWidth));
     },
-    botWidth() {
+    botWidthEm() {
       const maxWidthEm = 15;
       const useWidth = Math.max(this.clippedWidth, this.clipVisualTrackWidth);
 
@@ -204,7 +206,7 @@ input[type=number]
 
 .number-input
   @apply text-center text-2xl
-  @apply py-4 w-16
+  @apply py-4 w-24
   @apply appearance-none
   @apply border border-transparent border-2
   @apply rounded-md
