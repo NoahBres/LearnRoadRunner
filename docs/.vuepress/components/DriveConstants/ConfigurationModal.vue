@@ -117,7 +117,7 @@ export default Vue.extend({
       else if (this.currentState.matches("manualMotorSelection"))
         return this.manualMotorSpec[0] > 0 && this.manualMotorSpec[1] > 0;
       else if (this.currentState.matches("gearRatioSelection"))
-        return this.gearRatio > 0;
+        return this.gearRatio > 0 && this.gearRatio != Infinity;
       else if (this.currentState.matches("wheelSelection"))
         return this.wheelRadius && this.wheelRadius > 0;
       else if (this.currentState.matches("botDimensions"))
