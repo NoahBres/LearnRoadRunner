@@ -12,8 +12,8 @@ interface ModalStateSchema {
     manualMotorSelection: {};
     gearRatioSelection: {};
     wheelSelection: {};
-    driveEncoders: {};
     botDimensions: {};
+    driveEncoders: {};
     done: {};
   };
 }
@@ -28,8 +28,14 @@ type ModalEvent =
   | { type: "SELECTED_WHEEL_SIZE"; value: null }
   | { type: "BACK"; value: null };
 
+enum MotorSelectionSlide {
+  TemplateSelect,
+  ManualSelect,
+}
+
 interface ModalContext {
   chassisSelected: ChassisEnum;
+  lastMotorSelectionPageSelection: MotorSelectionSlide;
 }
 
 export const configurationModalMachine = Machine<
@@ -42,6 +48,7 @@ export const configurationModalMachine = Machine<
     initial: "chassisSelection",
     context: {
       chassisSelected: ChassisEnum.CUSTOM,
+      lastMotorSelectionPageSelection: null,
     },
     states: {
       chassisSelection: {
@@ -52,6 +59,7 @@ export const configurationModalMachine = Machine<
         exit: ["setChassis", "loadTemplate"],
       },
       motorSelection: {
+        exit: ["setLastMotorSelectionTemplate"],
         on: {
           SELECTED_MOTOR: "gearRatioSelection",
           SELECTED_CUSTOM_MOTOR: "manualMotorSelection",
@@ -59,6 +67,7 @@ export const configurationModalMachine = Machine<
         },
       },
       manualMotorSelection: {
+        exit: ["setLastMotorSelectionManual"],
         on: {
           SET_MANUAL_MOTOR: "gearRatioSelection",
           BACK: "motorSelection",
@@ -70,13 +79,15 @@ export const configurationModalMachine = Machine<
           BACK: [
             {
               target: "motorSelection",
-              cond: (ctx, e, { state }) =>
-                state.history.matches("motorSelection"),
+              cond: (ctx, e) =>
+                ctx.lastMotorSelectionPageSelection ==
+                MotorSelectionSlide.TemplateSelect,
             },
             {
               target: "manualMotorSelection",
-              cond: (ctx, e, { state }) =>
-                state.history.matches("manualMotorSelection"),
+              cond: (ctx, e) =>
+                ctx.lastMotorSelectionPageSelection ==
+                MotorSelectionSlide.ManualSelect,
             },
           ],
         },
@@ -98,6 +109,14 @@ export const configurationModalMachine = Machine<
   },
   {
     actions: {
+      setLastMotorSelectionTemplate: (context, event) => {
+        context.lastMotorSelectionPageSelection =
+          MotorSelectionSlide.TemplateSelect;
+      },
+      setLastMotorSelectionManual: (context, event) => {
+        context.lastMotorSelectionPageSelection =
+          MotorSelectionSlide.ManualSelect;
+      },
       setChassis: assign<ModalContext, ModalEvent>({
         chassisSelected: (context, event) => event.value,
       }),
