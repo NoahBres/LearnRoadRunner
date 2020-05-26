@@ -27,6 +27,7 @@
 
     <DriveConstants-ConfigurationModal-GearRatioSelection
       v-if="this.currentState.matches('gearRatioSelection')"
+      v-model="gearRatio"
       @request-width="requestWidth"
       @request-height="requestHeight"
     />
