@@ -67,7 +67,7 @@
     </div>
   </div>
 </template>
-<script>
+<script lang="ts">
 import Vue from "vue";
 
 export default Vue.extend({
@@ -197,7 +197,7 @@ indicator-thickness = 0.15rem
   top 1rem
   left calc(50% - 1rem)
 
-  /* Chrome, Safari, Edge, Opera */
+/* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button
   -webkit-appearance none;
