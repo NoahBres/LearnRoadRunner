@@ -1,50 +1,42 @@
 <template>
-  <div class="flex flex-col justify-center px-8 py-4 pb-0 h-full">
+  <div class="flex flex-col justify-center items-center px-8 py-4 pb-0 h-full">
     <h2 class="border-none mt-0 mb-10 text-center">
       Gear Ratio
       <h4 class="block text-gray-500 m-0 text-2xl">(output : input)</h4>
     </h2>
     <div class="flex flex-row justify-center items-center h-64 relative">
-      <div class="wheel-container mr-10">
+      <div
+        class="wheel-container mr-10 transition-transform duration-200 ease-out"
+        :style="{ transform: `scale(${wheelScalar[0]})` }"
+      >
         <div
           class="wheel output"
-          :style="{
-            width: `${wheelWidths[0]}em`,
-            height: `${wheelWidths[0]}em`,
-          }"
+          :style="{ 'animation-duration': `${(input / output) * 2}s` }"
         >
-          <div
-            class="wheel-belt"
-            :style="{
-              width: `${wheelWidths[0] / 2}em`,
-              height: `${wheelWidths[0]}em`,
-            }"
-          ></div>
+          <div class="spoke"></div>
+          <div class="spoke"></div>
+          <div class="spoke"></div>
+          <div class="spoke"></div>
+          <div class="spoke"></div>
+          <div class="spoke"></div>
+          <div class="spoke"></div>
+          <div class="spoke"></div>
         </div>
       </div>
-      <div class="wheel-container ml-10">
-        <div
-          class="wheel input"
-          :style="{
-            width: `${wheelWidths[1]}em`,
-            height: `${wheelWidths[1]}em`,
-          }"
-        >
-          <div
-            class="wheel-belt"
-            :style="{
-              width: `${wheelWidths[1] / 2}em`,
-              height: `${wheelWidths[1]}em`,
-            }"
-          ></div>
+      <div
+        class="wheel-container ml-10 transition-transform duration-200 ease-out"
+        :style="{ transform: `scale(${wheelScalar[1]})` }"
+      >
+        <div class="wheel input" :style="{ 'animation-duration': `${2}s` }">
+          <div class="ring"></div>
+          <div class="hub"></div>
         </div>
       </div>
-      <div class="connecting-belt top"></div>
     </div>
     <div class="flex flex-row items-center justify-center">
       <input
         class="number-input"
-        v-model.number="input"
+        v-model.number="output"
         type="number"
         min="0"
         @change="$emit('input', ratio)"
@@ -52,7 +44,7 @@
       <span class="text-3xl px-4 mb-2 font-semibold ">:</span>
       <input
         class="number-input"
-        v-model.number="output"
+        v-model.number="input"
         type="number"
         min="0"
         @change="$emit('input', ratio)"
@@ -78,29 +70,22 @@ export default Vue.extend({
       output: 1,
     };
   },
+  mounted() {
+    this.$emit("request-width", "650px");
+    this.$emit("request-height", "660px");
+  },
   computed: {
     ratio() {
       return this.output / this.input;
     },
-    wheelWidths() {
-      const maxRem = 10;
-      const minRem = 1.5;
-
-      if (this.input == this.output) return [maxRem, maxRem];
-
-      const deltaRem = maxRem - minRem;
-
+    wheelScalar() {
       const maxValue = Math.max(this.input, this.output);
       const minValue = Math.min(this.input, this.output);
 
       const scalar = minValue / maxValue;
-      const smallerSize = scalar * deltaRem + minRem;
 
-      if (this.output > this.input) return [smallerSize, maxRem];
-      else return [maxRem, smallerSize];
-
-      // Output size rems, input size rems
-      return [0, 0];
+      if (this.output > this.input) return [scalar, 1];
+      else return [1, scalar];
     },
   },
 });
@@ -123,47 +108,101 @@ export default Vue.extend({
   @apply flex justify-center items-center
 
 .wheel
-  @apply bg-gray-500 rounded-full
+  @apply box-border relative
+  @apply border-8 border-gray-700
+  @apply transition-all duration-300 ease-out
+
   @apply w-40 h-40
-  @apply transition-all duration-300 ease-out
 
-.wheel-belt
-  @apply absolute
-  @apply w-20 h-40
-  @apply border-8 border-gray-800
-  @apply transition-all duration-300 ease-out
+  border-radius 50%
 
-  content ''
+  animation rotating 2s linear infinite
 
 .output
-  @apply bg-transparent relative
-  @apply border-4 border-gray-500
+  box-shadow inset 0 0 0 0.25rem theme("colors.gray.500")
 
-.output .wheel-belt
-  top -8px
-  left -8px
+.wheel .spoke
+  @apply absolute bg-gray-500
 
-  border-right 0
-  border-top-left-radius 10rem
-  border-bottom-left-radius 10rem
+  width 2px
+  height 100%
+
+  top 0
+  left calc(50% - 1px)
+
+@-webkit-keyframes rotating
+  from
+    -webkit-transform rotate(0deg)
+    -o-transform rotate(0deg)
+    transform rotate(0deg)
+
+  to
+    -webkit-transform rotate(360deg)
+    -o-transform rotate(360deg)
+    transform rotate(360deg)
+
+@keyframes rotating
+  from
+    -ms-transform rotate(0deg)
+    -moz-transform rotate(0deg)
+    -webkit-transform rotate(0deg)
+    -o-transform rotate(0deg)
+    transform rotate(0deg)
+
+  to
+    -ms-transform rotate(360deg)
+    -moz-transform rotate(360deg)
+    -webkit-transform rotate(360deg)
+    -o-transform rotate(360deg)
+    transform rotate(360deg)
+
+.spoke:nth-child(2)
+  -webkit-transform rotate(30deg)
+  transform rotate(30deg)
+
+.spoke:nth-child(3)
+  -webkit-transform rotate(60deg)
+  transform rotate(60deg)
+
+.spoke:nth-child(4)
+  -webkit-transform rotate(90deg)
+  transform rotate(90deg)
+
+.spoke:nth-child(5)
+  -webkit-transform rotate(120deg)
+  transform rotate(120deg)
+
+.spoke:nth-child(6)
+  -webkit-transform rotate(150deg)
+  transform rotate(150deg)
+
+.spoke:nth-child(7)
+  -webkit-transform rotate(180deg)
+  transform rotate(180deg)
+
+.spoke:nth-child(8)
+  -webkit-transform rotate(210deg)
+  transform rotate(210deg)
 
 .input
-  @apply bg-transparent relative
-  @apply border-4 border-gray-500
+  @apply border-4
 
-.input .wheel-belt
-  top -8px
-  left calc(50% - 4px)
+.input .hub
+  @apply absolute top-0 bottom-0 left-0 right-0 m-auto
+  @apply w-6 h-6
+  @apply bg-gray-800
 
-  border-left 0
-  border-top-right-radius 10rem
-  border-bottom-right-radius 10rem
+  border-radius 50%
 
-.connecting-belt
-  @apply absolute bg-gray-800
+.input .ring
+  @apply absolute top-0 bottom-0 left-0 right-0 m-auto
+  @apply w-20 h-20
+  @apply bg-gray-300
 
-  width 100px
-  height 2px
+  border-radius 50%
 
-  background red
+  border-left 0.2rem solid transparent
+  border-right 0.2rem solid transparent
+  border-top 0.2rem solid theme('colors.gray.500')
+  border-bottom 0.2rem solid theme('colors.gray.500')
 </style>
