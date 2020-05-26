@@ -1,6 +1,6 @@
 <template>
   <div
-    class="configuration-modal flex flex-col justify-between"
+    class="configuration-modal flex flex-col justify-between text-center"
     :style="{ width: width, height: height }"
   >
     <DriveConstants-ConfigurationModal-ChassisSelection
@@ -263,6 +263,7 @@ export default Vue.extend({
   border-bottom-color theme("colors.gray.600")
 
 .next-button
+  @apply inline-block
   @apply text-white text-base
   @apply bg-red-600
   @apply border-none
