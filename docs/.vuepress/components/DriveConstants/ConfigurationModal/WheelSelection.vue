@@ -8,7 +8,7 @@
       <button
         class="number-button minus-button mr-12"
         @click="decrement"
-        :class="{ 'dont-click': radius <= 0 }"
+        :class="{ 'dont-click': radius <= 0 && radius >= 9 }"
       />
       <input
         class="number-input"
@@ -143,7 +143,7 @@ input[type=number]
 
 .minus-button.dont-click
 .plus-button.dont-click
-  @apply cursor-default
+  @apply cursor-not-allowed
 
 .minus-button.dont-click:before
 .minus-button.dont-click:after
