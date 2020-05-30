@@ -3,7 +3,19 @@ import DriveConstantStorage, {
   StraferV1Constants,
   BlankConstants,
 } from "./DriveConstantStorage";
-import { ChassisEnum } from "./ChassisEnum";
+import { Motor } from "./MotorData";
+
+interface ConfigurationState {
+  motorType: Motor;
+  ticksPerRev: number;
+  maxRPM: number;
+
+  runUsingEncoder: boolean;
+
+  wheelRadius: number;
+  gearRatio: number;
+  trackWidth: number;
+}
 
 interface ModalStateSchema {
   states: {
@@ -13,7 +25,7 @@ interface ModalStateSchema {
     gearRatioSelection: {};
     wheelSelection: {};
     botDimensions: {};
-    driveEncoders: {};
+    ayudeSelection: {};
     done: {};
   };
 }
@@ -26,16 +38,23 @@ type ModalEvent =
   | { type: "SET_MANUAL_MOTOR"; value: null }
   | { type: "SET_GEAR_RATIO"; value: null }
   | { type: "SELECTED_WHEEL_SIZE"; value: null }
+  | { type: "SELECTED_DIMENSIONS"; value: null }
+  | { type: "SELECTED_AYUDE"; value: null }
   | { type: "BACK"; value: null };
 
-enum MotorSelectionSlide {
+enum PrecedingMotorSelectionSlide {
   TemplateSelect,
   ManualSelect,
 }
 
+enum PrecedingDoneSlide {
+  ChassisSelect,
+  AyudeSelect,
+}
+
 interface ModalContext {
-  chassisSelected: ChassisEnum;
-  lastMotorSelectionPageSelection: MotorSelectionSlide;
+  precedingMotorSelectionSlide: PrecedingMotorSelectionSlide;
+  precedingDoneSlide: PrecedingDoneSlide;
 }
 
 export const configurationModalMachine = Machine<
@@ -47,19 +66,31 @@ export const configurationModalMachine = Machine<
     id: "configurationModal",
     initial: "chassisSelection",
     context: {
-      chassisSelected: ChassisEnum.CUSTOM,
-      lastMotorSelectionPageSelection: null,
+      precedingMotorSelectionSlide: null,
+      precedingDoneSlide: null,
     },
     states: {
       chassisSelection: {
         on: {
-          SELECTED_CHASSIS: "done",
+          SELECTED_CHASSIS: {
+            target: "done",
+            actions: [
+              assign({
+                precedingDoneSlide: (context) =>
+                  PrecedingDoneSlide.ChassisSelect,
+              }),
+            ],
+          },
           SELECTED_CUSTOM_CHASSIS: "motorSelection",
         },
-        exit: ["setChassis", "loadTemplate"],
       },
       motorSelection: {
-        exit: ["setLastMotorSelectionTemplate"],
+        exit: [
+          assign({
+            precedingMotorSelectionSlide: (context) =>
+              PrecedingMotorSelectionSlide.TemplateSelect,
+          }),
+        ],
         on: {
           SELECTED_MOTOR: "gearRatioSelection",
           SELECTED_CUSTOM_MOTOR: "manualMotorSelection",
@@ -67,7 +98,12 @@ export const configurationModalMachine = Machine<
         },
       },
       manualMotorSelection: {
-        exit: ["setLastMotorSelectionManual"],
+        exit: [
+          assign({
+            precedingMotorSelectionSlide: (context) =>
+              PrecedingMotorSelectionSlide.ManualSelect,
+          }),
+        ],
         on: {
           SET_MANUAL_MOTOR: "gearRatioSelection",
           BACK: "motorSelection",
@@ -80,14 +116,14 @@ export const configurationModalMachine = Machine<
             {
               target: "motorSelection",
               cond: (ctx, e) =>
-                ctx.lastMotorSelectionPageSelection ==
-                MotorSelectionSlide.TemplateSelect,
+                ctx.precedingMotorSelectionSlide ==
+                PrecedingMotorSelectionSlide.TemplateSelect,
             },
             {
               target: "manualMotorSelection",
               cond: (ctx, e) =>
-                ctx.lastMotorSelectionPageSelection ==
-                MotorSelectionSlide.ManualSelect,
+                ctx.precedingMotorSelectionSlide ==
+                PrecedingMotorSelectionSlide.ManualSelect,
             },
           ],
         },
@@ -101,35 +137,41 @@ export const configurationModalMachine = Machine<
       botDimensions: {
         on: {
           BACK: "wheelSelection",
+          SELECTED_DIMENSIONS: "ayudeSelection",
         },
       },
-      driveEncoders: {},
-      done: {},
+      ayudeSelection: {
+        on: {
+          BACK: "botDimensions",
+          SELECTED_AYUDE: {
+            target: "done",
+            actions: [
+              assign({
+                precedingDoneSlide: (context) => PrecedingDoneSlide.AyudeSelect,
+              }),
+            ],
+          },
+        },
+      },
+      done: {
+        on: {
+          BACK: [
+            {
+              target: "chassisSelection",
+              cond: (ctx, e) =>
+                ctx.precedingDoneSlide == PrecedingDoneSlide.ChassisSelect,
+            },
+            {
+              target: "ayudeSelection",
+              cond: (ctx, e) =>
+                ctx.precedingDoneSlide == PrecedingDoneSlide.AyudeSelect,
+            },
+          ],
+        },
+      },
     },
   },
   {
-    actions: {
-      setLastMotorSelectionTemplate: (context, event) => {
-        context.lastMotorSelectionPageSelection =
-          MotorSelectionSlide.TemplateSelect;
-      },
-      setLastMotorSelectionManual: (context, event) => {
-        context.lastMotorSelectionPageSelection =
-          MotorSelectionSlide.ManualSelect;
-      },
-      setChassis: assign<ModalContext, ModalEvent>({
-        chassisSelected: (context, event) => event.value,
-      }),
-      loadTemplate: (context, event) => {
-        switch (event.value) {
-          case ChassisEnum.STRAFER_V1_CHASSIS:
-            DriveConstantStorage.loadTemplate(StraferV1Constants);
-            break;
-          case ChassisEnum.CUSTOM:
-            DriveConstantStorage.loadTemplate(BlankConstants);
-            break;
-        }
-      },
-    },
+    actions: {},
   }
 );
