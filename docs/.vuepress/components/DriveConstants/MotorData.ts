@@ -398,4 +398,4 @@ const MotorGroup: MotorGroupItem[] = [
   },
 ];
 
-export { MotorList, MotorGroup, Motor, MotorModel };
+export { MotorList, MotorGroup, Motor, MotorModel, MotorGroupItem };
