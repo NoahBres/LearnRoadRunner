@@ -46,6 +46,8 @@ export default Vue.extend({
         detail: newCheckedVal,
       });
       document.dispatchEvent(event);
+
+      this.$emit("input", newCheckedVal);
     },
   },
 });
