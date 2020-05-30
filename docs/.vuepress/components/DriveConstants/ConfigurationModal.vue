@@ -46,6 +46,13 @@
       @request-height="requestHeight"
     />
 
+    <DriveConstants-ConfigurationModal-AyudeSelection
+      v-if="this.currentState.matches('ayudeSelection')"
+      v-model="ayude"
+      @request-width="requestWidth"
+      @request-height="requestHeight"
+    />
+
     <DriveConstants-ConfigurationModal-DonePage
       v-if="this.currentState.matches('done')"
       @request-width="requestWidth"
@@ -102,6 +109,7 @@ export default Vue.extend({
       gearRatio: 1,
       wheelRadius: 2,
       trackWidth: 18,
+      ayude: true,
 
       configurationModalService: interpret(configurationModalMachine),
       currentState: configurationModalMachine.initialState,
@@ -122,6 +130,8 @@ export default Vue.extend({
         return this.wheelRadius && this.wheelRadius > 0;
       else if (this.currentState.matches("botDimensions"))
         return this.trackWidth > 0 && this.trackWidth <= 18;
+      else if (this.currentState.matches("ayudeSelection"))
+        return this.ayude !== null || this.ayude !== undefined;
 
       return false;
     },
@@ -133,6 +143,7 @@ export default Vue.extend({
       else if (this.currentState.matches("wheelSelection")) return true;
       else if (this.currentState.matches("driveEncoders")) return true;
       else if (this.currentState.matches("botDimensions")) return true;
+      else if (this.currentState.matches("ayudeSelection")) return true;
       else if (this.currentState.matches("done")) return true;
       return false;
     },
@@ -169,8 +180,14 @@ export default Vue.extend({
         if (this.gearRatio > 0)
           this.configurationModalService.send("SET_GEAR_RATIO");
       } else if (this.currentState.matches("wheelSelection")) {
-        if (this.wheelRadius && this.wheelRadius > 0)
+        if (this.wheelRadius && this.wheelRadius > 0 && this.wheelRadius <= 9)
           this.configurationModalService.send("SELECTED_WHEEL_SIZE");
+      } else if (this.currentState.matches("botDimensions")) {
+        if (this.trackWidth > 0 && this.trackWidth <= 18)
+          this.configurationModalService.send("SELECTED_DIMENSIONS");
+      } else if (this.currentState.matches("ayudeSelection")) {
+        if (this.ayude !== null || this.ayude !== undefined)
+          this.configurationModalService.send("SELECTED_AYUDE");
       }
     },
     handleBackClick() {
