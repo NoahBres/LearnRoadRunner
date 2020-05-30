@@ -1,21 +1,6 @@
 import { Machine, assign } from "xstate";
-import DriveConstantStorage, {
-  StraferV1Constants,
-  BlankConstants,
-} from "./DriveConstantStorage";
-import { Motor } from "./MotorData";
 
-interface ConfigurationState {
-  motorType: Motor;
-  ticksPerRev: number;
-  maxRPM: number;
-
-  runUsingEncoder: boolean;
-
-  wheelRadius: number;
-  gearRatio: number;
-  trackWidth: number;
-}
+import ConfigurationState from "./ConfigurationState";
 
 interface ModalStateSchema {
   states: {
@@ -31,16 +16,16 @@ interface ModalStateSchema {
 }
 
 type ModalEvent =
-  | { type: "SELECTED_CHASSIS"; value: ChassisEnum }
-  | { type: "SELECTED_CUSTOM_CHASSIS"; value: null }
-  | { type: "SELECTED_MOTOR"; value: null }
-  | { type: "SELECTED_CUSTOM_MOTOR"; value: null }
-  | { type: "SET_MANUAL_MOTOR"; value: null }
-  | { type: "SET_GEAR_RATIO"; value: null }
-  | { type: "SELECTED_WHEEL_SIZE"; value: null }
-  | { type: "SELECTED_DIMENSIONS"; value: null }
-  | { type: "SELECTED_AYUDE"; value: null }
-  | { type: "BACK"; value: null };
+  | { type: "SELECTED_CHASSIS"; value: ConfigurationState }
+  | { type: "SELECTED_CUSTOM_CHASSIS"; value: ConfigurationState }
+  | { type: "SELECTED_MOTOR"; value: ConfigurationState }
+  | { type: "SELECTED_CUSTOM_MOTOR"; value: ConfigurationState }
+  | { type: "SET_MANUAL_MOTOR"; value: ConfigurationState }
+  | { type: "SET_GEAR_RATIO"; value: ConfigurationState }
+  | { type: "SELECTED_WHEEL_SIZE"; value: ConfigurationState }
+  | { type: "SELECTED_DIMENSIONS"; value: ConfigurationState }
+  | { type: "SELECTED_AYUDE"; value: ConfigurationState }
+  | { type: "BACK"; value: ConfigurationState };
 
 enum PrecedingMotorSelectionSlide {
   TemplateSelect,
@@ -53,6 +38,8 @@ enum PrecedingDoneSlide {
 }
 
 interface ModalContext {
+  currentConfigurationState: ConfigurationState;
+
   precedingMotorSelectionSlide: PrecedingMotorSelectionSlide;
   precedingDoneSlide: PrecedingDoneSlide;
 }
@@ -66,6 +53,23 @@ export const configurationModalMachine = Machine<
     id: "configurationModal",
     initial: "chassisSelection",
     context: {
+      currentConfigurationState: {
+        chassisSelected: null,
+
+        customMotorSelected: false,
+        motorGroupSelected: null,
+        motorSelected: null,
+
+        ticksPerRev: null,
+        maxRPM: null,
+
+        gearRatio: null,
+        wheelRadius: null,
+        trackWidth: null,
+
+        runUsingEncoder: null,
+      },
+
       precedingMotorSelectionSlide: null,
       precedingDoneSlide: null,
     },
@@ -83,31 +87,34 @@ export const configurationModalMachine = Machine<
           },
           SELECTED_CUSTOM_CHASSIS: "motorSelection",
         },
+        exit: ["setCurrentConfigurationState"],
       },
       motorSelection: {
-        exit: [
-          assign({
-            precedingMotorSelectionSlide: (context) =>
-              PrecedingMotorSelectionSlide.TemplateSelect,
-          }),
-        ],
         on: {
           SELECTED_MOTOR: "gearRatioSelection",
           SELECTED_CUSTOM_MOTOR: "manualMotorSelection",
           BACK: "chassisSelection",
         },
+        exit: [
+          assign({
+            precedingMotorSelectionSlide: (context) =>
+              PrecedingMotorSelectionSlide.TemplateSelect,
+          }),
+          "setCurrentConfigurationState",
+        ],
       },
       manualMotorSelection: {
+        on: {
+          SET_MANUAL_MOTOR: "gearRatioSelection",
+          BACK: "motorSelection",
+        },
         exit: [
           assign({
             precedingMotorSelectionSlide: (context) =>
               PrecedingMotorSelectionSlide.ManualSelect,
           }),
+          "setCurrentConfigurationState",
         ],
-        on: {
-          SET_MANUAL_MOTOR: "gearRatioSelection",
-          BACK: "motorSelection",
-        },
       },
       gearRatioSelection: {
         on: {
@@ -127,18 +134,21 @@ export const configurationModalMachine = Machine<
             },
           ],
         },
+        exit: ["setCurrentConfigurationState"],
       },
       wheelSelection: {
         on: {
           SELECTED_WHEEL_SIZE: "botDimensions",
           BACK: "gearRatioSelection",
         },
+        exit: ["setCurrentConfigurationState"],
       },
       botDimensions: {
         on: {
           BACK: "wheelSelection",
           SELECTED_DIMENSIONS: "ayudeSelection",
         },
+        exit: ["setCurrentConfigurationState"],
       },
       ayudeSelection: {
         on: {
@@ -152,6 +162,7 @@ export const configurationModalMachine = Machine<
             ],
           },
         },
+        exit: ["setCurrentConfigurationState"],
       },
       done: {
         on: {
@@ -172,6 +183,11 @@ export const configurationModalMachine = Machine<
     },
   },
   {
-    actions: {},
+    actions: {
+      setCurrentConfigurationState: assign<ModalContext, ModalEvent>({
+        currentConfigurationState: (context, event) =>
+          event.value || context.currentConfigurationState,
+      }),
+    },
   }
 );
