@@ -55,6 +55,7 @@
 
     <DriveConstants-ConfigurationModal-DonePage
       v-if="this.currentState.matches('done')"
+      :configuration="this.context.currentConfigurationState"
       @request-width="requestWidth"
       @request-height="requestHeight"
     />
@@ -92,10 +93,8 @@ import Vue from "vue";
 import { interpret } from "xstate";
 import { configurationModalMachine } from "./ConfigurationModalMachine";
 
-import DriveConstantStorage, {
-  StraferV1Constants,
-} from "./DriveConstantStorage";
-import { ChassisEnum } from "./ChassisEnum";
+import { ChassisEnum } from "./ConfigurationState";
+import { MotorList } from "./MotorData";
 
 export default Vue.extend({
   data() {
@@ -155,39 +154,88 @@ export default Vue.extend({
         this.context = state.context;
       })
       .start();
-
-    // this.chassisChoice = this.context.chassisSelected;
   },
   methods: {
     handleNextClick() {
       if (this.currentState.matches("chassisSelection")) {
         if (this.chassisChoice === "strafer-v1") {
           this.configurationModalService.send("SELECTED_CHASSIS", {
-            value: ChassisEnum.STRAFER_V1_CHASSIS,
+            value: {
+              ...this.context.currentConfigurationState,
+              chassisSelected: ChassisEnum.STRAFER_V1_CHASSIS,
+            },
           });
         } else if (this.chassisChoice === "custom") {
-          this.configurationModalService.send("SELECTED_CUSTOM_CHASSIS");
+          this.configurationModalService.send("SELECTED_CUSTOM_CHASSIS", {
+            value: {
+              ...this.context.currentConfigurationState,
+              chassisSelected: ChassisEnum.CUSTOM,
+            },
+          });
         }
       } else if (this.currentState.matches("motorSelection")) {
-        if (this.motorChoice == "CUSTOM")
-          this.configurationModalService.send("SELECTED_CUSTOM_MOTOR");
-        else if (this.motorChoice != "")
-          this.configurationModalService.send("SELECTED_MOTOR");
+        if (this.motorChoice == "CUSTOM") {
+          this.configurationModalService.send("SELECTED_CUSTOM_MOTOR", {
+            value: {
+              ...this.context.currentConfigurationState,
+              customMotorSelected: true,
+            },
+          });
+        } else if (this.motorChoice != "") {
+          this.configurationModalService.send("SELECTED_MOTOR", {
+            value: {
+              ...this.context.currentConfigurationState,
+              motorSelected: MotorList[this.motorChoice],
+              customMotorSelected: false,
+            },
+          });
+        }
       } else if (this.currentState.matches("manualMotorSelection")) {
-        if (this.manualMotorSpec[0] > 0 && this.manualMotorSpec[1] > 0)
-          this.configurationModalService.send("SET_MANUAL_MOTOR");
+        if (this.manualMotorSpec[0] > 0 && this.manualMotorSpec[1] > 0) {
+          this.configurationModalService.send("SET_MANUAL_MOTOR", {
+            value: {
+              ...this.context.currentConfigurationState,
+              maxRPM: this.manualMotorSpec[0],
+              ticksPerRev: this.manualMotorSpec[1],
+            },
+          });
+        }
       } else if (this.currentState.matches("gearRatioSelection")) {
-        if (this.gearRatio > 0)
-          this.configurationModalService.send("SET_GEAR_RATIO");
+        if (this.gearRatio > 0) {
+          this.configurationModalService.send("SET_GEAR_RATIO", {
+            value: {
+              ...this.context.currentConfigurationState,
+              gearRatio: this.gearRatio,
+            },
+          });
+        }
       } else if (this.currentState.matches("wheelSelection")) {
-        if (this.wheelRadius && this.wheelRadius > 0 && this.wheelRadius <= 9)
-          this.configurationModalService.send("SELECTED_WHEEL_SIZE");
+        if (this.wheelRadius && this.wheelRadius > 0 && this.wheelRadius <= 9) {
+          this.configurationModalService.send("SELECTED_WHEEL_SIZE", {
+            value: {
+              ...this.context.currentConfigurationState,
+              wheelRadius: this.wheelRadius,
+            },
+          });
+        }
       } else if (this.currentState.matches("botDimensions")) {
-        if (this.trackWidth > 0 && this.trackWidth <= 18)
-          this.configurationModalService.send("SELECTED_DIMENSIONS");
+        if (this.trackWidth > 0 && this.trackWidth <= 18) {
+          this.configurationModalService.send("SELECTED_DIMENSIONS", {
+            value: {
+              ...this.context.currentConfigurationState,
+              trackWidth: this.trackWidth,
+            },
+          });
+        }
       } else if (this.currentState.matches("ayudeSelection")) {
-        if (this.ayude !== null || this.ayude !== undefined)
-          this.configurationModalService.send("SELECTED_AYUDE");
+        if (this.ayude !== null || this.ayude !== undefined) {
+          this.configurationModalService.send("SELECTED_AYUDE", {
+            value: {
+              ...this.context.currentConfigurationState,
+              runUsingEncoder: this.ayude,
+            },
+          });
+        }
       }
     },
     handleBackClick() {
