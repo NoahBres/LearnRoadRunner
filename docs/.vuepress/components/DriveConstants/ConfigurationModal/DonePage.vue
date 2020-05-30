@@ -26,9 +26,12 @@
 import Vue from "vue";
 import VueConfetti from "vue-confetti";
 
+import { generateFile } from "../ConstantsGenerator";
+
 Vue.use(VueConfetti);
 
 export default Vue.extend({
+  props: ["configuration"],
   data() {
     return {
       confettiStarted: false,
@@ -36,7 +39,7 @@ export default Vue.extend({
   },
   computed: {
     downloadUrl(): string {
-      const blob = new Blob(["test"], {
+      const blob = new Blob([generateFile(this.configuration)], {
         type: "application/java",
       });
 
