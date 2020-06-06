@@ -45,9 +45,9 @@ Your configuration will depend on whether you have two or three dead-wheels. Don
 
 Running the localization test and driving the robot around the field will allow you to see any discrepancies with your bot's localization. Drive encoder localization or dead-wheel localization should both be tuned here. Accuracy of the path following will be dramatically affected by the localization accuracy.
 
-## DriveVelocityPIDTuner <SkipAyudeBadge :skipIfDriveEncoders="false" />
+## DriveVelocityPIDTuner <SkipAyudeBadge :skipIfDriveEncoders="true" />
 
-<HideAyudeWrapper :skipIfDriveEncoders="false">
+<HideAyudeWrapper :skipIfDriveEncoders="true">
 ::: warning
 This section should be skipped because you have chosen the option not to use drive encoders.
 :::
@@ -55,9 +55,9 @@ This section should be skipped because you have chosen the option not to use dri
 
 The `DriveVelocityPIDTuner` opmode is used to tune the Rev Hub's built in motor velocity PIDs (the `RUN_USING_ENCODER` mode). It is imperative that you tune the coefficients of the PID. This will ensure optimal, consistent behavior. These PIDs should be tuned after any large modifications to the bot affecting weight. Run this opmode and adjust the PID gains. You can adjust the PID gains to get your desired behavior. The official Road Runner docs recommend that you should "prioritize eliminating phase lag even at the cost of some extra oscillations." However, I personally feel that it is better to try and minimize oscillations, especially towards the zero velocity. I found that eliminating phase lag, especially at high speeds, would cause very jittery motion. My personal advice would be to minimize oscillations and allow for the translational PID to fix any phase lag discrepancies.
 
-## DriveFeedforwardTuner <SkipAyudeBadge :skipIfDriveEncoders="true" />
+## DriveFeedforwardTuner <SkipAyudeBadge :skipIfDriveEncoders="false" />
 
-<HideAyudeWrapper :skipIfDriveEncoders="true">
+<HideAyudeWrapper :skipIfDriveEncoders="false">
 ::: warning
 This section should be skipped because you have chosen the option to use drive encoders.
 :::

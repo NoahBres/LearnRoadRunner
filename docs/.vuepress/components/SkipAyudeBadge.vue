@@ -1,5 +1,5 @@
 <template>
-  <div class="skipme" v-if="hidden">
+  <div class="skipme" v-if="!hidden">
     skip me
   </div>
 </template>

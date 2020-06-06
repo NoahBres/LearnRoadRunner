@@ -11,15 +11,13 @@ export default Vue.extend({
   },
   mounted() {
     if (localStorage.isUsingDriveEncoders) {
-      if (this.skipIfDriveEncoders)
+      if (this.skipIfDriveEncoders) {
+        this.hidden = localStorage.isUsingDriveEncoders === "true";
+      } else {
         this.hidden =
-          localStorage.isUsingDriveEncoders === "true" ||
-          localStorage.isUsingDriveEncoders;
-      else
-        this.hidden = !(
-          localStorage.isUsingDriveEncoders === "true" ||
-          localStorage.isUsingDriveEncoders
-        );
+          localStorage.isUsingDriveEncoders !== "true" ||
+          !localStorage.isUsingDriveEncoders;
+      }
     }
 
     document.addEventListener(

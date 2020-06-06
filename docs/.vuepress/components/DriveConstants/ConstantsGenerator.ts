@@ -177,7 +177,6 @@ export function generateFile(properties: ConfigurationState): string {
   };
 
   if (!properties.customMotorSelected) {
-    console.log(properties.motorSelected);
     buildConstants.ticksPerRev = properties.motorSelected.ticksPerRev;
     buildConstants.maxRPM = properties.motorSelected.maxRPM;
   } else {
