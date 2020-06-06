@@ -41,7 +41,7 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 └── <span class="file">settings.gradle</span>
 :::
 
-3. In `TeamCode/build.release.gradle`, add the following two dependencies: `implementation 'com.acmerobotics.roadrunner:core:0.5.0'` and `implementation 'com.acmerobotics.dashboard:dashboard:0.3.8'`
+3. In `TeamCode/build.release.gradle`, add the following two dependencies: `implementation 'com.acmerobotics.roadrunner:core:0.5.1'` and `implementation 'com.acmerobotics.dashboard:dashboard:0.3.8'`
 
 ```groovy{10,11}
 dependencies {
@@ -53,7 +53,7 @@ dependencies {
     implementation (name: 'tfod-release', ext: 'aar')
     implementation (name: 'tensorflow-lite-0.0.0-nightly', ext: 'aar')
 
-    implementation 'com.acmerobotics.roadrunner:core:0.5.0'
+    implementation 'com.acmerobotics.roadrunner:core:0.5.1'
     implementation 'com.acmerobotics.dashboard:dashboard:0.3.8'
 }
 ```
