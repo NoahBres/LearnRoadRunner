@@ -8,6 +8,7 @@ module.exports = {
       "/installing",
       "/quickstart-overview",
       "/drive-constants",
+      "/dead-wheels",
     ],
     displayAllHeaders: true,
     smoothScroll: true,
