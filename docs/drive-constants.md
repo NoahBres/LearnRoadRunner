@@ -1,3 +1,8 @@
+---
+meta:
+  - description: Configure your RoadRunner Drive Constants file
+---
+
 # Drive Constants
 
 ::: tip
@@ -22,6 +27,11 @@ Try out the configurator to have your constants class auto configured!
 </ModalWrapper>
 
 If you want to quickly get a constants file up and running, I recommend clicking the configurator button above to automatically generate your drive constants file. We will be going through what each constant means one by one below.
+
+<figure align="center">
+    <img src="./assets/drive-constants/YouAreHere-DriveConstants-quarter.png">
+    <figcaption style="marginTop: 1em;">You are here</figcaption>
+</figure>
 
 ## Ticks Per Rev & Max RPM
 
