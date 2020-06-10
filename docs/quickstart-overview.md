@@ -41,9 +41,11 @@ Tuning of the dead-wheels should be performed in the localization test. Proper t
 
 Your configuration will depend on whether you have two or three dead-wheels. Don't know the difference? Check [the FAQ](/#what-is-the-difference-between-two-and-three-wheel-odometry).
 
-## Localization Test
+## Localization Test\*
 
-Running the localization test and driving the robot around the field will allow you to see any discrepancies with your bot's localization. Drive encoder localization or dead-wheel localization should both be tuned here. Accuracy of the path following will be dramatically affected by the localization accuracy.
+Running the localization test and driving the robot around the field will allow you to find any discrepancies with your bot's localization. Dead-wheel localization should be tuned after configuring your dead wheels. Accuracy of the path following will be dramatically affected by the localization accuracy.
+
+If you are not using dead wheels, you will perform the localization test later.
 
 ## DriveVelocityPIDTuner <SkipAyudeBadge :skipIfDriveEncoders="true" />
 
@@ -82,6 +84,16 @@ You will find that `TrackWidthTuner` will only get within an inch or so of your 
 ## Turn Test
 
 Run the turn test to confirm your track width is correct.
+
+## Localization Test\*\*
+
+<HideAyudeWrapper :skipIfDriveEncoders="true">
+::: warning
+You should skip this localization step as you are not using drive encoders, thus cannot have drive encoder localization.
+:::
+</HideAyudeWrapper>
+
+Running the localization test and driving the robot around the field will allow you to find any discrepancies with your bot's localization. Drive encoder localization should be tuned after tuning everything else. Accuracy of the path following will be dramatically affected by the localization accuracy.
 
 ## FollowerPIDTuner
 
