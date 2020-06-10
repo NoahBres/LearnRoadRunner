@@ -119,5 +119,27 @@ public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
 );
 ```
 
-The parameters Drive Constraints take are `DriveConstraints(max velocity, max acceleration, max jerk, max angular velocity, max angular acceleration, max angular jerk)`.
-The defaults are set to be 30in/s and 30in/s^2. The drive constant configurator above will calculate the velocity for you. However, you can do so yourself by calculating the following: ((`MAX_RPM` / `60`) \* `GEAR_RATIO` \* `WHEEL_RADIUS` \* `2` \* `Math.PI`). It is recommended that your constraints not exceed 80% of the motors' max velocities. You may push your limits but your trajectories will not perform optimally if your bot cannot reach the given velocity.
+The parameters Drive Constraints take are:
+
+<code class="inline-block">DriveConstraints(<span class="bg-red-300 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">max velo</span>, <span class="bg-blue-300 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">max accel</span>, <span class="bg-green-300 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">max jerk</span>, <span class="bg-orange-300 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">max ang velo</span>, <span class="bg-purple-300 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">max ang accel</span>, <span class="bg-yellow-300 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">max ang jerk</span>)</code>
+
+<div class="w-5 h-10"></div>
+
+<span class="bg-red-300 text-gray-900 rounded" style="padding: 0.25rem 0.5rem;">max velo</span> defines the maximum velocity that the robot can go. This is the fastest speed that the robot can ramp up to. The default value is `30in/s`. You can calculate the maximum velocity for your bot using the following equation:
+
+<figure align="center" class="py-10">
+  <img src="./assets/drive-constants/max-vel-latex-half.png" />
+  <figcaption style="marginTop: 1em;">Max Velocity Equation</figcaption>
+</figure>
+
+It is recommended that you keep your maximum velocity constraint not exceed 80% of the motors' max velocity. Your bot will most likely not be able to follow at 100% of the theoretical velocity due to a number of reasons: voltage dropping as your battery dies, weight, etc. You may push this limit closer to 100% but your trajectory following will suffer if your bot is not able to reach the given velocity.
+
+<span class="bg-blue-300 text-gray-900 rounded" style="padding: 0.25rem 0.5rem;">max accel</span> defines the maximum acceleration that the robot will undergo. This is the speed at which the velocity ramps up. The default value is `30in/s^2`. The recommendation is to just initially keep this value the same number as your max velocity value, although this is quite arbitrary. The only way to find your max acceleration is through experimentation. Keep raising the max acceleration until your path following starts to suffer. Do this after tuning just to make things easier. You may need to retune your PID values if you change this.
+
+<span class="bg-green-300 text-gray-900 rounded" style="padding: 0.25rem 0.5rem;">max jerk</span> defines the maximum jerk that the robot can undergo. [Jerk](<https://www.wikiwand.com/en/Jerk_(physics)>) is the derivative of acceleration. Leave this at zero unless you know what you're doing.
+
+<span class="bg-orange-300 text-gray-900 rounded" style="padding: 0.25rem 0.5rem;">max ang velo</span> defines the maximum angular velocity that the robot can go. This is the fastest speed that the robot can turn. The default value is `180°/s`. You can calculate the maximum angular velocity by dividing the maximum tangential velocity (max velo) by your track width. However, you should probably just leave this as is.
+
+<span class="bg-purple-300 text-gray-900 rounded" style="padding: 0.25rem 0.5rem;">max ang accel</span> defines the maximum angular acceleration that the robot can undergo. This is the fastest that the robot's angular velocity can ramp up. The default value is `180°/s^2`. This can only be found through tuning. However, it is a bit difficult to empirically determine this so just leave this as is.
+
+<span class="bg-yellow-300 text-gray-900 rounded" style="padding: 0.25rem 0.5rem;">max ang jerk</span> defines the maximum angular jerk that the robot can undergo. [Jerk](<https://www.wikiwand.com/en/Jerk_(physics)>) is the derivative of acceleration. Leave this at zero unless you know what you're doing.
