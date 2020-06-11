@@ -153,3 +153,15 @@ It is recommended that you keep your maximum velocity constraint not exceed 80% 
 <span class="bg-purple-300 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">maxAngAccel</span> defines the maximum angular acceleration that the robot can undergo. This is the fastest that the robot's angular velocity can ramp up. The default value is `180°/s^2`. This can only be found through tuning. However, it is a bit difficult to empirically determine this so just leave this as is.
 
 <span class="bg-yellow-300 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">maxAngJerk</span> defines the maximum angular jerk that the robot can undergo. [Jerk](<https://www.wikiwand.com/en/Jerk_(physics)>) is the derivative of acceleration. Leave this at zero unless you know what you're doing.
+
+## SampleMecanumDrive
+
+```java
+/* Lines 117-120 in SampleMecanumDrive.java */
+leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
+leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
+rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
+rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+```
+
+Open your `SampleMecanumDrive.java` file. Ensure that these motor ID's match up with your Rev Hub config ID's.
