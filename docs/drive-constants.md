@@ -72,7 +72,7 @@ public static final boolean RUN_USING_ENCODER = true;
 public static final PIDCoefficients MOTOR_VELO_PID = null;
 ```
 
-**`RUN_USING_ENCODER`** indicates whether or not you want to utilize the `RUN_USING_ENCODER` [RunMode](https://ftc-tricks.com/dc-motors/) built into the FTC SDK. This makes use of the onboard velocity PID, allowing you to control the motor via velocity rather than "power" (voltage). Setting this value to true will automatically set all the motor to use this velocity controlled mode. `RUN_USING_ENCODER` can only be utilized if you are using drive train encoders. Set this value to `false` if you are not using drive encoders.
+**`RUN_USING_ENCODER`** indicates whether or not you want to utilize the `RUN_USING_ENCODER` [RunMode](https://ftc-tricks.com/dc-motors/) built into the FTC SDK. This makes use of the onboard velocity PID, allowing you to control the motor via velocity rather than "power" (voltage). Setting this value to true will automatically set all the motors to use this velocity controlled mode. `RUN_USING_ENCODER` can only be utilized if you are using drive train encoders. Set this value to `false` if you are not using drive encoders.
 
 **`MOTOR_VELO_PID`** will store the PID values you will use. The default PID values are tuned based on the motors free-spinning without any load. The default values will be too low for a drive train. Leave this at `null` for now. We will set these values later.
 
@@ -91,11 +91,11 @@ public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) spe
 public static double TRACK_WIDTH = 1; // in
 ```
 
-**`WHEEL_RADIUS`** is the radius of the wheel. Make sure this is the radius, not diameter.
+**`WHEEL_RADIUS`** is the radius of the wheels on your drive train. Make sure this is the radius, not diameter.
 
-**`GEAR_RATIO`** is the ratio of the output (wheel) speed to input (motor) speed. If you are using direct drive—no gears/belts—`GEAR_RATIO` should be `1`. A gear ratio more than 1 will indicate that your wheel spins faster than your motor. A gear ratio less than one will indicate that your wheel spins slower than your motor. For example, the goBILDA strafer kit includes a set of 1:2 bevel gears, reducing your output speed by half. So your gear ratio will be 1/2 or 0.5.
+**`GEAR_RATIO`** is the ratio of the output (wheel) speed to input (motor) speed. If you are using direct drive—no gears/belts—`GEAR_RATIO` should be `1`. A gear ratio more than 1 will indicate that your wheel spins faster than your motor. A gear ratio less than one will indicate that your wheel spins slower than your motor. For example, the goBILDA strafer kit includes a set of 1:2 bevel gears, reducing your output speed by half. So your gear ratio will be `1/2` or `0.5`.
 
-**`TRACK_WIDTH`** is the distance from one wheel to its parallel wheel. This number only need be an estimate. You will empirically tune this later.
+**`TRACK_WIDTH`** is the distance from the center of one wheel to the center of its parallel wheel. This number only need be an estimate. You will empirically tune this later.
 
 <figure align="center">
     <img src="./assets/drive-constants/wes-bot-edit-half.jpg">
@@ -111,13 +111,19 @@ public static double kA = 0;
 public static double kStatic = 0;
 ```
 
-These are your feedforward gains used to model your drive motors. These will be tuned later. Leave these variables as is.
+These are your feedforward gains used to model your drive motors. These will be tuned later if you opt for the feedforward method. Leave these variables as is.
 
 **`kV`** Volts \* Seconds / Meters. The theoretical value of `kV` is 12 volts divided by the theoretical free speed of your drive train motors. Leave this as is.
 
 **`kA`** Volts \* Seconds^2 / Meters.
 
 **`kStatic`** Volts.
+
+<HideAyudeWrapper :skipIfDriveEncoders="false">
+::: warning
+Earlier you indicated that you are using drive encoders. You will not be touching this section.
+:::
+</HideAyudeWrapper>
 
 ## Base Constraints
 
