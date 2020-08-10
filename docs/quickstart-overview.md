@@ -3,7 +3,7 @@
 Before we get started, it's important to understand what everything is doing.
 
 ::: tip
-This page roughly mirrors the tuning guide on Road Runner's official quickstart. Consider reading it for a more thorough overview.
+This page roughly mirrors the tuning guide on Road Runner's official quickstart, with the addition of my own personal tuning tips derived from my own experience. Consider reading the original for a more thorough overview.
 
 [https://acme-robotics.gitbook.io/road-runner/quickstart/tuning](https://acme-robotics.gitbook.io/road-runner/quickstart/tuning)
 :::
