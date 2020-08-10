@@ -160,7 +160,9 @@ It is recommended that you keep your maximum velocity constraint not exceed 80% 
 
 <span class="bg-yellow-300 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">maxAngJerk</span> defines the maximum angular jerk that the robot can undergo. [Jerk](<https://www.wikiwand.com/en/Jerk_(physics)>) is the derivative of acceleration. Leave this at zero unless you know what you're doing.
 
-## SampleMecanumDrive
+## SampleMecanumDrive - Hardware ID's
+
+Open your `SampleMecanumDrive.java` file.
 
 ```java
 /* Lines 117-120 in SampleMecanumDrive.java */
@@ -170,4 +172,17 @@ rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
 rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
 ```
 
-Open your `SampleMecanumDrive.java` file. Ensure that these motor ID's match up with your Rev Hub config ID's.
+Ensure that these motor ID's match up with your Rev Hub config ID's.
+
+## SampleMecanumDrive - Motor Direction
+
+Then, look at line 140. There should be a comment stating "`// TODO: reverse any motors using DcMotor.setDirection()`".
+Under that comment, you will reverse the directions of the motors on one side of your bot. If your bot spins in circles during straight test, come back here to fix it. If your bot turns the opposite way, come back here to fix this.
+
+```java
+/* About line 140-143 in SampleMecanumDrive.java */
+
+// TODO: reverse any motors using DcMotor.setDirection()
+leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
+```
