@@ -64,16 +64,24 @@ The `DriveVelocityPIDTuner` opmode is used to tune the Rev Hub's built in motor 
 This section should be skipped because you have chosen the option to use drive encoders.
 :::
 </HideAyudeWrapper>
-I can't really say it any better myself so I am just going to paste the official Road Runner quickstart guide for this section 😛:
+
+If you choose to opt for the feedforward method, the feedforward constants should be tuned.
+
+The official quickstart comes with an automatic tuner. However, some find that this tuner does not produce optimal results.
+The automatic tuning process is as follows (taken from the official docs):
 
 > To find `kV` and `kStatic`, the robot executes a quasi-static ramp test where the voltage is slowly ramped up to minimize acceleration (it's effectively zero). Throughout this procedure, the velocity and voltage are recorded. In the corresponding velocity vs. voltage graph, `kV` is the slope and `kStatic` is the y-intercept. Next, to find `kA`, the robot attempts to accelerate rapidly from rest. This time, the acceleration, velocity, and voltage are recorded. The velocity is used to determine the acceleration-only voltage. The acceleration is then graphed against this new voltage, and the resulting slope is `kA`.
 > This procedure is implemented in DriveFeedforwardTuner. The DS telemetry prompts will guide you through the process. If you want to do some analysis yourself, the tuner also saves the data to /sdcard/RoadRunner on the RC.
 
+Thus, I have created a manual tuning opmode located in [my custom quickstart fork](https://github.com/NoahBres/road-runner-quickstart/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/FeedForwardTuner.java). Further details on how to use this will be provided in the [feedforward tuning page](/feedforward-tuning).
+
 ## Straight Test
 
-Straight test is used to determine how effective your feedfoward/velocity PID tuning turned out. Run the `StraightTest` opmode a few times. If the bot consistently reaches the same measurement a few times within a few inches, these tunings were successful. It does not need to hit the exact spot each time as you will later enable closed loop feedback using localization.
+Straight test is used to determine how effective your feedfoward/velocity PID tuning turned out. Run the `StraightTest` opmode a few times. If the bot consistently reaches the same measurement a few times within a few inches, these tunings were successful. It does not need to hit the _exact_ spot each time as you will later enable closed loop feedback using localization.
 
 If your `StraightTest` distance if consistent but off, scale the drive wheel radius to reach this distance. Then, add a strafe into the `StraightTest` to tune the `lateralMultiplier`.
+
+Further details on how to use this will be provided in the [straight test tuning page](/straighttest-tuning).
 
 ## TrackWidthTuner
 
@@ -81,9 +89,13 @@ Track width is the distance from one wheel to the parallel wheel. Although this 
 
 You will find that `TrackWidthTuner` will only get within an inch or so of your desired empirical track width. You will most likely need to hand-tune the track width by running the `TurnTest` opmode and editing the track width in the drive constants.
 
+Further details on how to use this will be provided in the [track width tuning page](/trackwidth-tuning).
+
 ## Turn Test
 
 Run the turn test to confirm your track width is correct.
+
+Further details on how to use this will be provided in the [turn test tuning page](/turntest-tuning).
 
 ## Localization Test\*\*
 
