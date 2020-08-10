@@ -43,6 +43,12 @@ Your configuration will depend on whether you have two or three dead-wheels. Don
 
 ## Localization Test\*
 
+<HideAyudeWrapper :skipIfDriveEncoders="true">
+::: warning
+This first Localization Test should be used to test your dead wheel localization. You should skip this localization step as you have chosen not to use dead wheels.
+:::
+</HideAyudeWrapper>
+
 Running the localization test and driving the robot around the field will allow you to find any discrepancies with your bot's localization. Dead-wheel localization should be tuned after configuring your dead wheels. Accuracy of the path following will be dramatically affected by the localization accuracy.
 
 If you are not using dead wheels, you will perform the localization test later.
@@ -101,7 +107,7 @@ Further details on how to use this will be provided in the [turn test tuning pag
 
 <HideAyudeWrapper :skipIfDriveEncoders="true">
 ::: warning
-You should skip this localization step as you are not using drive encoders, thus cannot have drive encoder localization.
+This second Localization Test should be used to test your drive encoder localization. You should skip this localization step as you have chosen not to use drive encoders.
 :::
 </HideAyudeWrapper>
 
@@ -109,7 +115,7 @@ Running the localization test and driving the robot around the field will allow 
 
 ## FollowerPIDTuner
 
-You will tune two PIDs in this step, the heading PID and the translational (x/y) PID. This enables closed-loop feedback control to ensure accurate path following. The `FollowerPIDTuner` opmode will have your bot follow a square path, allowing you to simultaneously tune the heading and translational PID. However, I personally recommend tuning the heading and translational PID while running the bot back and forth in a straight line. This alleviates the frustration of having to reset your bot after it drifts off the square path and hits a wall. After it works well enough in this case, then run `FollowerPIDTuner` for additional fine tuning.
+You will tune two PIDs in this step, the heading PID and the translational (x/y) PID. This enables closed-loop feedback control to ensure accurate path following. The `FollowerPIDTuner` opmode will have your bot follow a square path, allowing you to simultaneously tune the heading and translational PID. However, I personally recommend tuning the heading and translational PID while running the bot back and forth in a straight line. This alleviates the frustration of having to reset your bot after it drifts off the square path and hits a wall. The back and forth tuning opmode can be found in [my custom quickstart fork](https://github.com/NoahBres/road-runner-quickstart/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/BackAndForth.java) After it works well enough in this case, then run `FollowerPIDTuner` for additional fine tuning.
 
 ## Spline Test
 
