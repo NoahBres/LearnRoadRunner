@@ -96,6 +96,8 @@ This is to enable multidexing. With the inclusion of all these libraries, the ap
 
 7. Once all the files are copied into your project, it is likely that most of the files will have a lot of errors relating to imports. This is because most of the classes are expecting to find certain classes at certain locations when they import them. However, they are now in a different location and the previous class paths are no longer valid. Unfortunately, you must manually go over each file and resolve the imports yourself by providing the correct package name/ import path for each incorrect one.
 
+8. THEN, you must edit your `FtcRobotControllerActivity.java` file to work with ftc-dashboard. Directions can be found [here](https://acmerobotics.github.io/ftc-dashboard/gettingstarted). Or just copy the `FtcRobotControllerActivity.java` file from the quickstart repo [here](https://github.com/acmerobotics/road-runner-quickstart/blob/master/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java) and paste it into your project.
+
 ## Upgrading Firmware
 
 It is highly recommended that you upgrade the firmware on your Control Hub or Expansion Hub to the latest version. Firmware version 1.8.2 brings a number of improvements including: DC motor output linearity, improved close-loop controls, improved I2C speeds, and USB recovery for ESD faults. Road Runner's performance directly benefits from these improvements.
