@@ -212,6 +212,8 @@ public List<Double> getWheelPositions() {
 
 ### Double Checking
 
+COME BACK TO THIS AFTER GETTING A REPLY FROM RYAN ON A POSSIBLE PR
+
 ## Tuning - Three-Wheel
 
 Tuning your dead wheels is one of the most important steps along the entire tuning process. This is not constrained to Road Runner. Any time you choose to use Dead Wheels, whether it be in Road Runner, FTCLib, or your own home brew path following, your localization should be as accurate as possible.
@@ -263,4 +265,18 @@ public List<Double> getWheelPositions() {
 
 12. Set `Y_MULTIPLIER` to the calculated strafe multiplier.
 
+### Tuning the lateral distance
+
+It is very important to tune lateral distance properly. This determines the heading in your localization and you will find that errors in your heading will quickly compound and absolutely destroy your localization.
+
+Unfortunately, at the time of writing, I cannot provide a simple, straightforward tuning opmode. I can provide [this opmode](https://github.com/ftc16626/Skystone-2019/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/tuning/DeadWheelTuner2.kt) which I used before a competition. This compares the imu heading with the localizer heading and prints them in dashboard. You divide the imu heading by the localizer heading (imu / localizer) and then multiply the lateral distance by that number you got. However, that opmode is half broken and works like 50% of the time. I do not have a bot available due to COVID so am currently unable to fix the opmode to provide a clean solution.
+
+The harder alternative would be to make a similar opmode yourself.
+
+The easy alternative would be to run the `LocalizerTest` opmode and spin the bot in circles exactly 10 times. I recommend sticking a tape on the bot and a piece of tape on the ground. These two pieces of tape should line up before you start spinning and then line up after you finish spinning. Adjust the lateral distance of the localizer until your heading looks correct.
+
+If you have questions, both me or anyone else in the `#programming-help` section of the [FTC Discord](https://discord.gg/first-tech-challenge).
+
 ### Double Checking
+
+COME BACK TO THIS AFTER GETTING A REPLY FROM RYAN ON A POSSIBLE PR
