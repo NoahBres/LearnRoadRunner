@@ -9,6 +9,7 @@ module.exports = {
       "/quickstart-overview",
       "/drive-constants",
       "/dead-wheels",
+      "/drive-velocity-pid-tuning",
       "/feedforward-tuning",
       "/straighttest-tuning",
       "/trackwidth-tuning",
