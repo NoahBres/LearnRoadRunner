@@ -28,13 +28,16 @@ export default Vue.extend({
         [90, 15], // motor velocity
       ],
       plot: null,
+      resizeObserver: null,
+      paddingX: -0,
+      paddingY: -40,
     };
   },
   mounted() {
     let opts: uPlot.Options = {
       title: "",
-      width: this.$refs.canvas.clientWidth,
-      height: this.$refs.canvas.clientHeight - 40,
+      width: this.$refs.canvas.clientWidth + this.paddingX,
+      height: this.$refs.canvas.clientHeight + this.paddingY,
       series: [
         {
           label: "time",
@@ -67,6 +70,22 @@ export default Vue.extend({
       JSON.parse(JSON.stringify(this.graphData)),
       this.$refs.canvas
     );
+
+    this.resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        if (entry.target == this.$refs.canvas) {
+          this.plot.setSize({
+            width: entry.contentRect.width + this.paddingX,
+            height: entry.contentRect.height + this.paddingY,
+          });
+        }
+      }
+    });
+
+    this.resizeObserver.observe(this.$refs.canvas);
+  },
+  beforeDestroy() {
+    this.resizeObserver.disconnect();
   },
 });
 </script>
