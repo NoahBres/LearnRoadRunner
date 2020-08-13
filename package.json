@@ -35,7 +35,7 @@
     "uplot": "^1.1.0",
     "vue": "^2.6.11",
     "vue-confetti": "^2.0.8",
-    "vuepress": "^1.5.0",
+    "vuepress": "^1.5.3",
     "vuepress-plugin-typescript": "^0.2.0",
     "xstate": "^4.10.0"
   }
