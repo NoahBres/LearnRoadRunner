@@ -28,6 +28,7 @@
     "watchpack": "^1.6.1"
   },
   "dependencies": {
+    "@types/resize-observer-browser": "^0.1.3",
     "autoprefixer": "^9.8.0",
     "tailwindcss": "^1.4.6",
     "typescript": "^3.9.3",
