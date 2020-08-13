@@ -1,12 +1,49 @@
 <template>
-  <div class="tuning-simulator">
+  <div
+    class="tuning-simulator border-gray-500 border rounded-lg overflow-hidden"
+  >
     <div
       ref="canvas"
       class="bg-gray-100"
-      style="box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 6px 2px inset"
+      style="box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 6px 2px inset"
       :style="{ height: graphHeight }"
     ></div>
-    <div class="bg-green-200 h-4"></div>
+    <div
+      class="bg-gray-200 rounded-b-lg px-4 py-3 border-t border-gray-400 grid grid-cols-4 gap-2"
+    >
+      <div class="flex flex-col items-center">
+        <label :for="`kp-input-${uuid}`" class="mb-1 ml-1">kP</label>
+        <input
+          :id="`kp-input-${uuid}`"
+          v-model.number="kP"
+          class="box-border text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+      <div class="flex flex-col items-center">
+        <label :for="`ki-input-${uuid}`" class="mb-1 ml-1">kI</label>
+        <input
+          :id="`ki-input-${uuid}`"
+          v-model.number="kI"
+          class="box-border text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+      <div class="flex flex-col items-center">
+        <label :for="`kd-input-${uuid}`" class="mb-1 ml-1">kD</label>
+        <input
+          :id="`kD-input-${uuid}`"
+          v-model.number="kD"
+          class="box-border text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+      <div class="flex flex-col items-center">
+        <label :for="`kv-input-${uuid}`" class="mb-1 ml-1">kV</label>
+        <input
+          :id="`kV-input-${uuid}`"
+          v-model.number="kV"
+          class="box-border text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -26,6 +63,18 @@ export default Vue.extend({
       default: "30rem",
     },
   },
+
+  computed: {
+    // https://stackoverflow.com/a/2117523/3360147
+    uuid(): string {
+      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+        let r = (Math.random() * 16) | 0,
+          v = c == "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      });
+    },
+  },
+
   data() {
     return {
       graphData: [
@@ -64,7 +113,8 @@ export default Vue.extend({
       kI: 0,
       kD: 0,
       kV: 0.0153,
-      kS: 0.002,
+
+      arbitraryScaling: 1 / 400,
 
       setVoltage: 2,
 
@@ -79,6 +129,7 @@ export default Vue.extend({
       animationFrameId: null,
     };
   },
+
   mounted() {
     let opts: uPlot.Options = {
       title: "",
@@ -157,12 +208,14 @@ export default Vue.extend({
 
     this.startTime = performance.now();
   },
+
   beforeDestroy() {
     this.resizeObserver.disconnect();
 
     window.cancelAnimationFrame(this.animationFrameId);
     this.animationFrameId = null;
   },
+
   methods: {
     loop() {
       const currentTime = performance.now();
@@ -231,8 +284,8 @@ export default Vue.extend({
 
       this.setVoltage =
         this.kV * this.targetVelocity +
-        this.kS +
-        (this.targetVelocity - this.currentVelocity) * this.kP;
+        (this.targetVelocity - this.currentVelocity) *
+          (this.kP * this.arbitraryScaling);
 
       this.graphData[2].push(this.currentVelocity);
 
@@ -248,7 +301,8 @@ export default Vue.extend({
 
       this.lastLoopTime = currentTime;
 
-      requestAnimationFrame(this.loop);
+      // requestAnimationFrame(this.loop);
+      setTimeout(this.loop, 1000 / 20);
     },
   },
 });
