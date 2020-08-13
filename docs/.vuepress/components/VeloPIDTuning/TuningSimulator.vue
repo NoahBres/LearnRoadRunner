@@ -13,6 +13,12 @@
 import Vue from "vue";
 import uPlot from "uplot";
 
+enum GraphState {
+  Accel,
+  Coast,
+  Decel,
+}
+
 export default Vue.extend({
   props: {
     graphHeight: {
@@ -23,14 +29,38 @@ export default Vue.extend({
   data() {
     return {
       graphData: [
-        [0, 1], // x-values (timestamps)
-        [35, 71], // target velocity
-        [90, 15], // motor velocity
+        [], // x-values (timestamps)
+        [], // target velocity
+        [], // motor velocity
       ],
+
       plot: null,
       resizeObserver: null,
+
+      // Graph padding
       paddingX: -0,
       paddingY: -40,
+
+      // Velocity stuff
+      maxDataLength: 200,
+
+      maxVel: 50,
+      maxAccel: 50,
+      coastingLength: 1000, // in ms
+
+      maxVelPadding: 5,
+
+      currentVelo: 0,
+
+      startTime: 0,
+      lastLoopTime: 0,
+
+      coastStart: 0,
+
+      lastState: GraphState.Accel as GraphState,
+      currentState: GraphState.Accel as GraphState,
+
+      animationFrameId: null,
     };
   },
   mounted() {
@@ -44,10 +74,13 @@ export default Vue.extend({
         },
         {
           label: "targetVelocity",
+          scale: "%",
+          width: 2,
           stroke: "green",
         },
         {
           label: "velocity0",
+          scale: "%",
           stroke: "red",
         },
       ],
@@ -55,7 +88,23 @@ export default Vue.extend({
         x: {
           time: false,
         },
+        "%": {
+          auto: false,
+          range: (min, max) => [
+            -this.maxVel - this.maxVelPadding,
+            this.maxVel + this.maxVelPadding,
+          ],
+        },
       },
+      axes: [
+        {},
+        {
+          scale: "%",
+        },
+        // {
+        //   scale: "%",
+        // },
+      ],
       cursor: {
         drag: {
           setScale: false,
@@ -65,12 +114,14 @@ export default Vue.extend({
       },
     };
 
+    // Setup plot
     this.plot = new uPlot(
       opts,
       JSON.parse(JSON.stringify(this.graphData)),
       this.$refs.canvas
     );
 
+    // Setup resizing of the plot
     this.resizeObserver = new ResizeObserver((entries) => {
       for (let entry of entries) {
         if (entry.target == this.$refs.canvas) {
@@ -83,9 +134,87 @@ export default Vue.extend({
     });
 
     this.resizeObserver.observe(this.$refs.canvas);
+
+    // Setup animation
+    this.animationFrameId = window.requestAnimationFrame(this.loop);
+
+    this.startTime = performance.now();
   },
   beforeDestroy() {
     this.resizeObserver.disconnect();
+
+    window.cancelAnimationFrame(this.animationFrameId);
+    this.animationFrameId = null;
+  },
+  methods: {
+    loop() {
+      const currentTime = performance.now();
+
+      this.graphData[0].push(currentTime - this.startTime);
+
+      const timeDelta = (currentTime - this.lastLoopTime) / 1000;
+
+      switch (this.currentState) {
+        case GraphState.Accel:
+          this.currentVelo = Math.min(
+            this.currentVelo + this.maxAccel * timeDelta,
+            this.maxVel
+          );
+
+          if (this.currentVelo >= this.maxVel) {
+            this.coastStart = currentTime;
+
+            this.lastState = GraphState.Accel;
+            this.currentState = GraphState.Coast;
+          }
+
+          this.graphData[1].push(this.currentVelo);
+          break;
+        case GraphState.Coast:
+          if (currentTime - this.coastStart >= this.coastingLength) {
+            if (this.lastState == GraphState.Accel)
+              this.currentState = GraphState.Decel;
+            else if (this.lastState == GraphState.Decel)
+              this.currentState = GraphState.Accel;
+
+            this.lastState = GraphState.Coast;
+          }
+
+          this.graphData[1].push(this.currentVelo);
+
+          break;
+        case GraphState.Decel:
+          this.currentVelo = Math.max(
+            this.currentVelo - this.maxAccel * timeDelta,
+            -this.maxVel
+          );
+
+          if (this.currentVelo <= -this.maxVel) {
+            this.coastStart = currentTime;
+
+            this.lastState = GraphState.Decel;
+            this.currentState = GraphState.Coast;
+          }
+
+          this.graphData[1].push(this.currentVelo);
+
+          break;
+      }
+
+      // Assume that all the graphData nested arrays are of equal size
+      // Limit window of the graph
+      if (this.graphData[0].length > this.maxDataLength) {
+        this.graphData[0].shift();
+        this.graphData[1].shift();
+        this.graphData[2].shift();
+      }
+
+      this.plot.setData(this.graphData);
+
+      this.lastLoopTime = currentTime;
+
+      requestAnimationFrame(this.loop);
+    },
   },
 });
 </script>
