@@ -78,7 +78,7 @@ If the graph doesn't show up, and instead shows a number of checkboxes, that's o
    2. Slowly increase `kP` to try and get the line to match the target.
    3. Increase `kD` to try and dampen the oscillations. Increasing `kD` too far will simply increase oscillations.
    4. Increase `kP` once again. Repeat the `kP` and `kD` increase until your graph starts to match the target velocity.
-   5. You should not touch `kI`. `kI` tends to cause many problems.
+   5. You should not touch `kI`. `kI` tends to cause many problems and its use is technically incorrect.
    6. The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it. Once the graph is overlapping for the majority
    7. Check the tuning simulator to see how each gain affects the behavior.
 
