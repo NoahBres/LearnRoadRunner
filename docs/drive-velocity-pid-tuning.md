@@ -87,6 +87,6 @@ If the graph doesn't show up, and instead shows a number of checkboxes, that's o
 1. One of the velocity lines are going the opposite way and not following `targetVelocity`.
    - The polarity to the motors are reversed. The encoder is not reading the same direction as the motor is actually turning. Switch the black and red cable on your motor. Or, multiply the encoder readings in your `SampleMecanumDrive` by -1.
 
-## Tuning simulator
+## PID Tuning simulator
 
 <VeloPIDTuning-TuningSimulator class="m-4" graphHeight="30rem" />
