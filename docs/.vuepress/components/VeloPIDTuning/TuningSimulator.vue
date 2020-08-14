@@ -16,6 +16,7 @@
         <input
           :id="`kp-input-${uuid}`"
           v-model.number="kP"
+          @change="setP"
           class="box-border text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
@@ -24,6 +25,7 @@
         <input
           :id="`ki-input-${uuid}`"
           v-model.number="kI"
+          @change="setI"
           class="box-border text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
@@ -32,6 +34,7 @@
         <input
           :id="`kD-input-${uuid}`"
           v-model.number="kD"
+          @change="setD"
           class="box-border text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
@@ -40,6 +43,7 @@
         <input
           :id="`kV-input-${uuid}`"
           v-model.number="kV"
+          @change="setV"
           class="box-border text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
@@ -49,6 +53,8 @@
 <script lang="ts">
 import Vue from "vue";
 import uPlot from "uplot";
+
+import PIDController from "./PIDController";
 
 enum GraphState {
   Accel,
@@ -112,11 +118,13 @@ export default Vue.extend({
       kP: 0,
       kI: 0,
       kD: 0,
-      kV: 0.0153,
+      kV: 0.01,
 
       arbitraryScaling: 1 / 400,
 
       setVoltage: 2,
+
+      controller: new PIDController(0, 0, 0),
 
       // fake motor model??
       modelKV: 0.0153,
@@ -283,9 +291,8 @@ export default Vue.extend({
       // Actual controller stuff
 
       this.setVoltage =
-        this.kV * this.targetVelocity +
-        (this.targetVelocity - this.currentVelocity) *
-          (this.kP * this.arbitraryScaling);
+        this.controller.update(this.targetVelocity - this.currentVelocity) +
+        this.kV * this.targetVelocity;
 
       this.graphData[2].push(this.currentVelocity);
 
@@ -302,7 +309,21 @@ export default Vue.extend({
       this.lastLoopTime = currentTime;
 
       // requestAnimationFrame(this.loop);
-      setTimeout(this.loop, 1000 / 20);
+      setTimeout(this.loop, 1000 / 24);
+    },
+
+    setP() {
+      this.controller.kP = this.kP * this.arbitraryScaling;
+    },
+    setI() {
+      this.controller.kI = this.kI * this.arbitraryScaling;
+      this.controller.reset();
+    },
+    setD() {
+      this.controller.kD = this.kD * this.arbitraryScaling;
+    },
+    setV() {
+      this.controller.kV = this.kV;
     },
   },
 });
