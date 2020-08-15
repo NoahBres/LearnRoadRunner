@@ -31,7 +31,6 @@ telemetry.update();
 2. Replace those lines with the following:
 
 ```java
-
 TelemetryPacket packet = new TelemetryPacket();
 
 // update telemetry
