@@ -101,3 +101,20 @@ If you feel the need to add `kI`, you should be increasing `kV`.
 ## PID Tuning simulator
 
 <VeloPIDTuning-TuningSimulator class="m-4" graphHeight="30rem" />
+
+Play around with the gains to see how each one affects the graph! This graph is very similar to what you will be doing while actually tuning the bot so having an understanding of how the process will go.
+
+Tip: Press enter in the text input for your new gain to take effect.
+
+::: tip
+Here are two good videos explaining what each gain in a PID controller does if you are interested. Highly recommend watching these as an intuitive understanding of each gain will make tuning much easier.
+
+[https://www.youtube.com/watch?v=6OH-wOsVVjg](https://www.youtube.com/watch?v=6OH-wOsVVjg)
+
+[https://www.youtube.com/watch?v=0vqWyramGy8](https://www.youtube.com/watch?v=0vqWyramGy8)
+
+:::
+
+# TODO
+
+make a video explaining the basics on this and embed
