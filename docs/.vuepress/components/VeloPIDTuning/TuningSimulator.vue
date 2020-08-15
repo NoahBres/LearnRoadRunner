@@ -173,9 +173,12 @@ export default Vue.extend({
         },
       },
       axes: [
-        {},
+        {
+          label: "time elapsed (seconds)",
+        },
         {
           scale: "%",
+          label: "velocity (inches per second)",
         },
         // {
         //   scale: "%",
@@ -228,7 +231,7 @@ export default Vue.extend({
     loop() {
       const currentTime = performance.now();
 
-      this.graphData[0].push(currentTime - this.startTime);
+      this.graphData[0].push((currentTime - this.startTime) / 1000);
 
       const timeDelta = (currentTime - this.lastLoopTime) / 1000;
 
