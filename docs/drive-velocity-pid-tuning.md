@@ -79,7 +79,7 @@ If the graph doesn't show up, and instead shows a number of checkboxes, that's o
    4. Increase `kD` to try and dampen the oscillations. Increasing `kD` too far will simply increase oscillations.
    5. Increase `kP` once again. Repeat the `kP` and `kD` increase until your graph starts to match the target velocity.
    6. You should not touch `kI`. `kI` tends to cause many problems and its use is technically incorrect.
-   7. The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it. Once the graph is overlapping for the majority
+   7. The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it.
    8. Check the tuning simulator to see how each gain affects the behavior.
 
 ::: tip
@@ -103,9 +103,9 @@ If you feel the need to add `kI`, you should be increasing `kV`.
   <VeloPIDTuning-TuningSimulator class="m-4" graphHeight="30rem" />
 </ClientOnly>
 
-Play around with the gains to see how each one affects the graph! This graph is very similar to what you will be doing while actually tuning the bot so having an understanding of how the process will go.
+Play around with the gains to see how each one affects the graph! Try and tune this simple example. This graph is very similar to what you will be doing while actually tuning the bot so having an understanding of how the process will go will be beneficial.
 
-Tip: Press enter in the text input for your new gain to take effect.
+Tip: Press enter in the text input for your new gain to take effect (just like FTC-Dashboard!).
 
 ::: tip
 Here are two good videos explaining what each gain in a PID controller does if you are interested. Highly recommend watching these as an intuitive understanding of each gain will make tuning much easier.
