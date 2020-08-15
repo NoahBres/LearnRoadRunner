@@ -309,7 +309,7 @@ export default Vue.extend({
       this.lastLoopTime = currentTime;
 
       // requestAnimationFrame(this.loop);
-      setTimeout(this.loop, 1000 / 24);
+      setTimeout(this.loop, 1000 / 24 + Math.random() * 50);
     },
 
     setP() {
