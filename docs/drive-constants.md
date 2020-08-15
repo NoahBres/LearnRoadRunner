@@ -119,6 +119,8 @@ These are your feedforward gains used to model your drive motors. These will be 
 
 **`kStatic`** Volts.
 
+Further details on the motor model can be found in [_Controls Engineering in FRC_ by Tyler Veness](https://file.tavsys.net/control/controls-engineering-in-frc.pdf). The effects of these constants will be explained later.
+
 <HideAyudeWrapper :skipIfDriveEncoders="false">
 ::: warning
 Earlier you indicated that you are using drive encoders. You will not be touching this section.
