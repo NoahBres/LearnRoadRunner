@@ -166,7 +166,9 @@ Tuning your dead wheels is one of the most important steps along the entire tuni
 
 ### Adjusting the wheel radius
 
+::: tip
 This isn't quite necessary for everyone. You may choose to skip over this section. However, I did find that this process would increase localization accuracy by an additional 1% or so. 1% may not sound like much but over 100 inches that is an entire inch. During the FTC Skystone (2019-2020) season, a 4-5 stone autonomous programmed traveled well over 100 inches and an entire inch of extra accuracy may have made a big difference.
+:::
 
 1. First, open up the `TwoWheelTrackingLocalizer.java`
 2. Declare two variables, `X_MULTIPLIER` and `Y_MULTIPLIER`, in your class:
@@ -220,7 +222,9 @@ Tuning your dead wheels is one of the most important steps along the entire tuni
 
 ### Adjusting the wheel radius
 
+::: tip
 This isn't quite necessary for everyone. You may choose to skip over this section. However, I did find that this process would increase localization accuracy by an additional 1% or so. 1% may not sound like much but over 100 inches that is an entire inch. During the FTC Skystone (2019-2020) season, a 4-5 stone autonomous programmed traveled well over 100 inches and an entire inch of extra accuracy may have made a big difference.
+:::
 
 1. First, open up the `TwoWheelTrackingLocalizer.java`
 2. Declare two variables, `X_MULTIPLIER` and `Y_MULTIPLIER`, in your class:
