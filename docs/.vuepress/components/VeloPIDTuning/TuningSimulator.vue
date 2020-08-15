@@ -47,6 +47,14 @@
           class="box-border text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
+      <div class="col-span-2 col-start-2 flex justify-center">
+        <button
+          @click="reset"
+          class="mt-3 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded outline-none focus:shadow-outline"
+        >
+          Reset
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -214,10 +222,11 @@ export default Vue.extend({
 
     this.resizeObserver.observe(this.$refs.canvas);
 
+    this.controller.setBounds(-1, 1);
+    this.startTime = performance.now();
+
     // Setup animation
     this.animationFrameId = window.requestAnimationFrame(this.loop);
-
-    this.startTime = performance.now();
   },
 
   beforeDestroy() {
@@ -327,6 +336,19 @@ export default Vue.extend({
     },
     setV() {
       this.controller.kV = this.kV;
+    },
+    reset() {
+      this.graphData[0] = [];
+      this.graphData[1] = [];
+      this.graphData[2] = [];
+
+      this.startTime = performance.now();
+
+      this.currentVelocity = 0;
+      this.targetVelocity = 0;
+      this.currentState = GraphState.Accel;
+
+      this.controller.reset();
     },
   },
 });
