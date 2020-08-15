@@ -74,13 +74,14 @@ If the graph doesn't show up, and instead shows a number of checkboxes, that's o
 6. You're going to tune these values. The goal of the tuning process is to match `velocity0` to the `targetVelocity` line. Edit the values in the text boxes and press enter. They will live update and you should see the effects take place on the bot.
 
 7. Recommended tuning process:
-   1. Set all the values, `kP`, `kD`, and `kI` to 0.
-   2. Slowly increase `kP` to try and get the line to match the target.
-   3. Increase `kD` to try and dampen the oscillations. Increasing `kD` too far will simply increase oscillations.
-   4. Increase `kP` once again. Repeat the `kP` and `kD` increase until your graph starts to match the target velocity.
-   5. You should not touch `kI`. `kI` tends to cause many problems and its use is technically incorrect.
-   6. The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it. Once the graph is overlapping for the majority
-   7. Check the tuning simulator to see how each gain affects the behavior.
+   1. Set all the values, `kP`, `kD`, and `kI` to 0. Keep `kV` as is.
+   2. Increase `kV` until you start to match the `targetVelocity`. Once the plateaus start touching you can stop increasing.
+   3. Slowly increase `kP` to try and get the line to match the target.
+   4. Increase `kD` to try and dampen the oscillations. Increasing `kD` too far will simply increase oscillations.
+   5. Increase `kP` once again. Repeat the `kP` and `kD` increase until your graph starts to match the target velocity.
+   6. You should not touch `kI`. `kI` tends to cause many problems and its use is technically incorrect.
+   7. The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it. Once the graph is overlapping for the majority
+   8. Check the tuning simulator to see how each gain affects the behavior.
 
 ## Common Errors
 
