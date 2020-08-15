@@ -83,6 +83,16 @@ If the graph doesn't show up, and instead shows a number of checkboxes, that's o
    7. The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it. Once the graph is overlapping for the majority
    8. Check the tuning simulator to see how each gain affects the behavior.
 
+::: tip
+_"Velocity PID Controllers typically don't need `kD`"_ (Veness, Tyler. _Control Engineering in FRC_. pg. 17). However, it seems to be beneficial for FTC bots due to some feed forward and motor controller weirdness.
+
+On a tangential note, you shouldn't need to use `kI`.
+
+> "Adding an integral gain to the controller is an incorrect way to eliminate steady-state error. A better approach would be to tune it with an integrator added to the plant, but this requires a model. Since we are doing output-based rather than model-based control, our only option is to add an integrator to the controller."
+
+If you feel the need to add `kI`, you should be increasing `kV`.
+:::
+
 ## Common Errors
 
 1. One of the velocity lines are going the opposite way and not following `targetVelocity`.
