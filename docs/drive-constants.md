@@ -179,7 +179,7 @@ Ensure that these motor ID's match up with your Rev Hub config ID's.
 ## SampleMecanumDrive - Motor Direction
 
 Then, look at line 140. There should be a comment stating "`// TODO: reverse any motors using DcMotor.setDirection()`".
-Under that comment, you will reverse the directions of the motors on one side of your bot. If your bot spins in circles during straight test, come back here to fix it. If your bot turns the opposite way, come back here to fix this.
+Under that comment, you will reverse the directions of the motors on one side of your bot. If your bot spins in circles during straight test, come back here to fix it. If your bot drives the opposite way, come back here to fix this.
 
 ```java
 /* About line 140-143 in SampleMecanumDrive.java */
