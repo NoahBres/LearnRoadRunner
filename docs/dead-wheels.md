@@ -216,7 +216,7 @@ Remember that the X multiplier is on the parallel encoder because x faces forwar
 
 ### Double Checking
 
-COME BACK TO THIS AFTER GETTING A REPLY FROM RYAN ON A POSSIBLE PR
+TODO: COME BACK TO THIS AFTER GETTING A REPLY FROM RYAN ON A POSSIBLE PR
 
 ## Tuning - Three-Wheel
 
