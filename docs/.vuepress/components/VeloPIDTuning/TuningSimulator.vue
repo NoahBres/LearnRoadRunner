@@ -128,9 +128,11 @@ export default Vue.extend({
       kD: 0,
       kV: 0.01,
 
-      arbitraryScaling: 1 / 400,
+      arbitraryScalingKp: 1 / 400,
+      arbitraryScalingKi: 1 / 1000,
+      arbitraryScalingKd: 1 / 1000000,
 
-      setVoltage: 2,
+      setVoltage: 0,
 
       controller: new PIDController(0, 0, 0),
 
@@ -325,14 +327,14 @@ export default Vue.extend({
     },
 
     setP() {
-      this.controller.kP = this.kP * this.arbitraryScaling;
+      this.controller.kP = this.kP * this.arbitraryScalingKp;
     },
     setI() {
-      this.controller.kI = this.kI * this.arbitraryScaling;
+      this.controller.kI = this.kI * this.arbitraryScalingKi;
       this.controller.reset();
     },
     setD() {
-      this.controller.kD = this.kD * this.arbitraryScaling;
+      this.controller.kD = this.kD * this.arbitraryScalingKd;
     },
     setV() {
       this.controller.kV = this.kV;
