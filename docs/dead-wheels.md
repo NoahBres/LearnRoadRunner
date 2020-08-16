@@ -82,7 +82,7 @@ parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
 imu.initialize(parameters);
 ```
 
-Ensure that the IMU is initialitzed in the `SampleMecanumDrive.java` class. You shouldn't need to change anything if you downloaded the quickstart.
+Ensure that the IMU is initialitzed in the `SampleMecanumDrive.java` class. You shouldn't need to change anything if you downloaded the quickstart and are using the Rev Hub IMU. This section should be changed if you are using your own external gyro.
 
 ### Set Localizer in SampleMecanumDrive
 
@@ -107,7 +107,7 @@ You have set the localizer!
 
 If you opt for the three wheel configuration, you will be using the two parallel wheels as the source for your heading.
 
-Open up the `StandardTrackingWHeelLocalizer.java` file.
+Open up the `StandardTrackingWheelLocalizer.java` file.
 
 ### Ticks Per Rev/Wheel Radius/Gear Ratio
 
@@ -194,6 +194,8 @@ public List<Double> getWheelPositions() {
 }
 ```
 
+Remember that the X multiplier is on the parallel encoder because x faces forward for a local coordinate frame (common for robotics/aviation/etc situations).
+
 4. You will begin the physical tuning process. Clear a straight line for your bot to travel in. I used a 90in stretch of field tiles.
 
 5. Set your bot at the beginning of this stretch, facing forward.
@@ -226,7 +228,7 @@ Tuning your dead wheels is one of the most important steps along the entire tuni
 This isn't quite necessary for everyone. You may choose to skip over this section. However, I did find that this process would increase localization accuracy by an additional 1% or so. 1% may not sound like much but over 100 inches that is an entire inch. During the FTC Skystone (2019-2020) season, a 4-5 stone autonomous programmed traveled well over 100 inches and an entire inch of extra accuracy may have made a big difference.
 :::
 
-1. First, open up the `TwoWheelTrackingLocalizer.java`
+1. First, open up the `StandardTrackingWheelLocalizer.java`
 2. Declare two variables, `X_MULTIPLIER` and `Y_MULTIPLIER`, in your class:
 
 ```java
@@ -250,6 +252,8 @@ public List<Double> getWheelPositions() {
     );
 }
 ```
+
+Remember that the X multiplier is on the left/right because x faces forward for a local coordinate frame (common for robotics/aviation/etc situations).
 
 4. You will begin the physical tuning process. Clear a straight line for your bot to travel in. I used a 90in stretch of field tiles.
 
