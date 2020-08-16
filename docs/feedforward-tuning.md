@@ -57,6 +57,24 @@ Your page should look something like this:
    5. **Any adjustments in dashboard need to be copied over to the `DriveConstants.java` file under the equivalent variable name. Dashboard adjustments are temporary and will reset once you restart the opmode.**
    6. Check the tuning simultor to see how each gain affects the behavior.
 
+Decently tuned feed forward controller courtesy of Deetz from Team 14320:
+
+<figure align="center">
+  <div class="relative">
+    <img src="./assets/feedforward-tuning/deetz-tuning-half.jpg">
+    <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
+    </div>
+  <figcaption style="marginTop: 1em;">Tuned Feed Forward Controller</figcaption>
 </figure>
 
 You may notice the asymmetry in the acceleration. Unfortunately, perfect velocity control is not yet achievable with a stock motor control model due to this asymmetry. Notice that the acceleration does not track well when decelerating. We suspect that this is due to weird Rev Hub's unique motor controller. For more details, or if you have a solution to this problem, please hit up the [FTC Discord](https://discord.gg/first-tech-challenge).
+
+## Feed Forward Tuning Simulator
+
+<ClientOnly>
+  <FeedForwardTuning-FFTuningSimulator class="m-4" graphHeight="30rem" />
+</ClientOnly>
+
+Play around with the gains to see how each one affects the graph! Try and tune this simple example. This graph is very similar to what you will be doing while actually tuning the bot so having an understanding of how the process will go will be beneficial.
+
+Tip: Press enter in the text input for your new gain to take effect (just like FTC-Dashboard!).
