@@ -1,2 +1,57 @@
 # Feedforward Tuning
 
+<HideAyudeWrapper :skipIfDriveEncoders="false">
+::: warning
+This section should be skipped because you have chosen the option to use drive encoders.
+:::
+</HideAyudeWrapper>
+
+Tuning the feed forward controller for accurate following is necessary for for accurate path following. Poor tuning of the feed forward controller will result in errors later along the line.
+
+## Tuning
+
+**TODO: come back and edit this if Ryan accepts my PR for the manual FF tuner**
+
+1. First, download the `ManualFeedForwardTuner.java` file from [my custom quickstart fork](https://github.com/NoahBres/road-runner-quickstart/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/ManualFeedForwardTuner.java).
+2. Stick in the opmode folder in your own quickstart project (or wherever you have all the other tuning opmodes).
+3. Run the `ManualFeedForwardTuner` opmode via the RC.
+4. Then, connect to the RC phone's wifi network. The password to the network is located in the `Program and Manage` menu.
+
+5. Navigate to `192.168.49.1:8080/dash` with a phone RC or `192.168.43.1:8080/dash` with a Control Hub.
+
+Your page should look something like this:
+
+<figure align="center">
+    <div class="relative">
+      <img src="./assets/feedforward-tuning/example-dashboard-half.jpg">
+      <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
+    </div>
+    <figcaption style="marginTop: 1em;">Example dashboard</figcaption>
+</figure>
+
+4. Run the oppmode. The graph will not show up until you have started it.
+
+5. Look for the `DriveConstants` in the right sidebar. Open the dropdown. Then look for `BASE_CONSTRAINTS`. Open that dropdown. You'll see the options specified in the `DriveConstants` file.
+
+6. Ensure that the `kV`, `kA`, and `kStatic` options are there. You will be tuning these variables.
+
+7. At this point, once you have run the opmode, the bot should be moving back and forth along the distance specified in the opmode file. The goal is for the `poseVelocity` line to match the `targetVelocity` line.
+
+8. **Recommended tuning process**:
+   1. `kV` should initially be set to `1 / max velocity`. The `poseVelocity` line should be touching the top of the `targetVelocity` plateau. If not, increase `kV`.
+   2. Increase `kA`to try and get the slope of the `poseVelocity` line to match `targetVelocity`.
+   3. Here is a reference to visualize what these gains should be doing.
+
+      <figure align="center">
+      <div class="relative">
+      <img src="./assets/feedforward-tuning/dawgma-tuning-guide.jpg">
+      <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
+      </div>
+      <figcaption style="marginTop: 1em;">Tuning Tips</figcaption>
+      </figure>
+
+      These tips come from FRC Team 1712's [Adaptive Pure Pursuit paper](https://www.chiefdelphi.com/t/paper-implementation-of-the-adaptive-pure-pursuit-controller/166552)
+
+   4. That should be it!
+   5. **Any adjustments in dashboard need to be copied over to the `DriveConstants.java` file under the equivalent variable name. Dashboard adjustments are temporary and will reset once you restart the opmode.**
+   6. Check the tuning simultor to see how each gain affects the behavior.
