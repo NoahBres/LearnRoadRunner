@@ -64,15 +64,17 @@ Your page should look something like this:
     <figcaption style="marginTop: 1em;">Example dashboard</figcaption>
 </figure>
 
+4. Run the opmode. The graph and its options will not show up until you have started it.
+
 If the graph doesn't show up, and instead shows a number of checkboxes, that's okay. Click the `targetVelocity` and `velocity0` checkbox. Ignore the others. This will make tuning easier.
 
-4. Look for the `DriveVelocityPIDTuner` in the right sidebar. Open the dropdown. You'll see the options: `DISTANCE`, `kD`, `kI`, and `kP`.
+5. Look for the `DriveVelocityPIDTuner` in the right sidebar. Open the dropdown. You'll see the options: `DISTANCE`, `kD`, `kI`, and `kP`.
 
-5. Ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`.
+6. Ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`.
 
-6. You're going to tune these values. The goal of the tuning process is to match `velocity0` to the `targetVelocity` line. Edit the values in the text boxes and press enter. They will live update and you should see the effects take place on the bot.
+7. You're going to tune these values. The goal of the tuning process is to match `velocity0` to the `targetVelocity` line. Edit the values in the text boxes and press enter. They will live update and you should see the effects take place on the bot.
 
-7. **Recommended tuning process**:
+8. **Recommended tuning process**:
    1. Set all the values, `kP`, `kD`, and `kI` to 0. Keep `kV` as is.
    2. Increase `kV` until you start to match the `targetVelocity`. Once the plateaus start touching you can stop increasing.
    3. Slowly increase `kP` to try and get the line to match the target.
