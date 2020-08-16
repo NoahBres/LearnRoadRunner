@@ -103,7 +103,7 @@ If you feel the need to add `kI`, you should be increasing `kV`.
 ## PID Tuning simulator
 
 <ClientOnly>
-  <VeloPIDTuning-TuningSimulator class="m-4" graphHeight="30rem" />
+  <VeloPIDTuning-PIDTuningSimulator class="m-4" graphHeight="30rem" />
 </ClientOnly>
 
 Play around with the gains to see how each one affects the graph! Try and tune this simple example. This graph is very similar to what you will be doing while actually tuning the bot so having an understanding of how the process will go will be beneficial.
