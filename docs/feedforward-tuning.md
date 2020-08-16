@@ -38,20 +38,25 @@ Your page should look something like this:
 7. At this point, once you have run the opmode, the bot should be moving back and forth along the distance specified in the opmode file. The goal is for the `poseVelocity` line to match the `targetVelocity` line.
 
 8. **Recommended tuning process**:
+
    1. `kV` should initially be set to `1 / max velocity`. The `poseVelocity` line should be touching the top of the `targetVelocity` plateau. If not, increase `kV`.
    2. Increase `kA`to try and get the slope of the `poseVelocity` line to match `targetVelocity`.
    3. Here is a reference to visualize what these gains should be doing.
 
       <figure align="center">
-      <div class="relative">
-      <img src="./assets/feedforward-tuning/dawgma-tuning-guide.jpg">
-      <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
-      </div>
-      <figcaption style="marginTop: 1em;">Tuning Tips</figcaption>
+        <div class="relative">
+          <img src="./assets/feedforward-tuning/dawgma-tuning-guide.jpg">
+          <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
+        </div>
+        <figcaption style="marginTop: 1em;">Tuning Tips</figcaption>
       </figure>
 
       These tips come from FRC Team 1712's [Adaptive Pure Pursuit paper](https://www.chiefdelphi.com/t/paper-implementation-of-the-adaptive-pure-pursuit-controller/166552)
 
-   4. That should be it!
+   4. That should be it! An example of a decently tuned feed forward controller can be found below.
    5. **Any adjustments in dashboard need to be copied over to the `DriveConstants.java` file under the equivalent variable name. Dashboard adjustments are temporary and will reset once you restart the opmode.**
    6. Check the tuning simultor to see how each gain affects the behavior.
+
+</figure>
+
+You may notice the asymmetry in the acceleration. Unfortunately, perfect velocity control is not yet achievable with a stock motor control model due to this asymmetry. Notice that the acceleration does not track well when decelerating. We suspect that this is due to weird Rev Hub's unique motor controller. For more details, or if you have a solution to this problem, please hit up the [FTC Discord](https://discord.gg/first-tech-challenge).
