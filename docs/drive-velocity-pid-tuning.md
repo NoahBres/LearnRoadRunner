@@ -68,7 +68,7 @@ Your page should look something like this:
 
 If the graph doesn't show up, and instead shows a number of checkboxes, that's okay. Click the `targetVelocity` and `velocity0` checkbox. Ignore the others. This will make tuning easier.
 
-5. Look for the `DriveVelocityPIDTuner` in the right sidebar. Open the dropdown. You'll see the options: `DISTANCE`, `kD`, `kI`, and `kP`.
+5. Look for the `DriveVelocityPIDTuner` in the right sidebar. Open the dropdown. Then look for `VELO_PID`. Open that dropdown. You'll see the options: `DISTANCE`, `kD`, `kI`, and `kP`.
 
 6. Ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`.
 
