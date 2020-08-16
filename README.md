@@ -11,3 +11,8 @@
 - details on each heading interpolator
 - explanation of continuity exceptions
 - check the come back sections (rn in the dead wheels tuning page)
+
+- Fix the default mobile breakpoints
+- make pr for PID ff control???
+
+- convert gif to mp4
