@@ -80,7 +80,8 @@ If the graph doesn't show up, and instead shows a number of checkboxes, that's o
    5. Increase `kP` once again. Repeat the `kP` and `kD` increase until your graph starts to match the target velocity.
    6. You should not touch `kI`. `kI` tends to cause many problems and its use is technically incorrect.
    7. The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it.
-   8. Check the tuning simulator to see how each gain affects the behavior.
+   8. **Any adjustments in dashboard need to be copied over to the `DriveConstants.java` file under the equivalent variable name. Dashboard adjustments are temporary and will reset once you restart the opmode.**
+   9. Check the tuning simulator to see how each gain affects the behavior.
 
 ::: tip
 _"Velocity PID Controllers typically don't need `kD`"_ (Veness, Tyler. _Control Engineering in FRC_. pg. 17). However, it seems to be beneficial for FTC bots due to some feed forward and motor controller weirdness.
