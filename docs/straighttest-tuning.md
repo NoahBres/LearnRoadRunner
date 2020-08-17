@@ -11,7 +11,7 @@ Once you've got your velocity controller tuned, you should run a quick straigh t
 4. Run the `StraightTest` opmode like 2 or 3 times to ensure that the distance traveled is consistent within an inch or two. If not, your velocity controller requires more tuning.
 5. If everything works great, move on to the next step!
 
-**Is your straight test consistent but it doesn't travel the specified distance?**
+### **Is your straight test consistent but it doesn't travel the specified distance?**
 
 Check your `DriveConstants.java` file. Something went wrong in here. One of these constants may be directly related to the problem:
 
