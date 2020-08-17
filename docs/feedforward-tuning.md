@@ -10,7 +10,7 @@ Tuning the feed forward controller for accurate following is necessary for for a
 
 ## Tuning
 
-**TODO: come back and edit this if Ryan accepts my PR for the manual FF tuner**
+**TODO: come back and edit this if Ryan accepts a PR for the manual FF tuner**
 
 1. First, download the `ManualFeedForwardTuner.java` file from [my custom quickstart fork](https://github.com/NoahBres/road-runner-quickstart/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/ManualFeedForwardTuner.java).
 2. Stick in the opmode folder in your own quickstart project (or wherever you have all the other tuning opmodes).
