@@ -1,6 +1,6 @@
 # Straight Test Tuning
 
-Once you've got your velocity controller tuned, you should run a quick straigh test just to make sure everything is working properly.
+Once you've got your velocity controller tuned, you should run a quick straight test just to make sure everything is working properly.
 
 1. Run the `StraightTest` opmode via the RC.
 2. Measure the distance the bot traveled.
