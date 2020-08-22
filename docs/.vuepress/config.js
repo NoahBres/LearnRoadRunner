@@ -14,6 +14,8 @@ module.exports = {
       "/straighttest-tuning",
       "/trackwidth-tuning",
       "/turntest-tuning",
+      "/localization-test-2",
+      "/follower-pid-tuning",
     ],
     displayAllHeaders: true,
     smoothScroll: true,
