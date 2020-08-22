@@ -85,7 +85,7 @@ Straight test is used to determine how effective your feedfoward/velocity PID tu
 
 If your `StraightTest` distance if consistent but off, scale the drive wheel radius to reach this distance. Then, add a strafe into the `StraightTest` to tune the `lateralMultiplier`.
 
-Further details on how to use this will be provided in the [straight test tuning page](/straighttest-tuning).
+Further details on how to use this will be provided in the [straight test tuning page](/straight-test).
 
 ## TrackWidthTuner
 
