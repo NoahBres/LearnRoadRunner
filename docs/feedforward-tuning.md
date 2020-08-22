@@ -6,7 +6,7 @@ This section should be skipped because you have chosen the option to use drive e
 :::
 </HideAyudeWrapper>
 
-Tuning the feed forward controller for accurate following is necessary for for accurate path following. Poor tuning of the feed forward controller will result in errors later along the line.
+Tuning the feedforward controller for accurate following is necessary for for accurate path following. Poor tuning of the feedforward controller will result in errors later along the line.
 
 ## Tuning
 
@@ -53,23 +53,23 @@ Your page should look something like this:
 
       These tips come from FRC Team 1712's [Adaptive Pure Pursuit paper](https://www.chiefdelphi.com/t/paper-implementation-of-the-adaptive-pure-pursuit-controller/166552)
 
-   4. That should be it! An example of a decently tuned feed forward controller can be found below.
+   4. That should be it! An example of a decently tuned feedforward controller can be found below.
    5. **Any adjustments in dashboard need to be copied over to the `DriveConstants.java` file under the equivalent variable name. Dashboard adjustments are temporary and will reset once you restart the opmode.**
    6. Check the tuning simultor to see how each gain affects the behavior.
 
-Decently tuned feed forward controller courtesy of Deetz from Team 14320:
+Decently tuned feedforward controller courtesy of Deetz from Team 14320:
 
 <figure align="center">
   <div class="relative">
     <img src="./assets/feedforward-tuning/deetz-tuning-half.jpg">
     <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
-  <figcaption style="marginTop: 1em;">Tuned Feed Forward Controller</figcaption>
+  <figcaption style="marginTop: 1em;">Tuned Feedforward Controller</figcaption>
 </figure>
 
 You may notice the asymmetry in the acceleration. Unfortunately, perfect velocity control is not yet achievable with a stock motor control model due to this asymmetry. Notice that the acceleration does not track well when decelerating. We suspect that this is due to weird Rev Hub's unique motor controller. For more details, or if you have a solution to this problem, please hit up the [FTC Discord](https://discord.gg/first-tech-challenge).
 
-## Feed Forward Tuning Simulator
+## Feedforward Tuning Simulator
 
 <ClientOnly>
   <FeedForwardTuning-FFTuningSimulator class="m-4" graphHeight="30rem" />

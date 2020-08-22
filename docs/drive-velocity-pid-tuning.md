@@ -86,7 +86,7 @@ If the graph doesn't show up, and instead shows a number of checkboxes, that's o
    9. Check the tuning simulator to see how each gain affects the behavior.
 
 ::: tip
-_"Velocity PID Controllers typically don't need `kD`"_ (Veness, Tyler. _Control Engineering in FRC_. pg. 17). However, it seems to be beneficial for FTC bots due to some feed forward and motor controller weirdness.
+_"Velocity PID Controllers typically don't need `kD`"_ (Veness, Tyler. _Control Engineering in FRC_. pg. 17). However, it seems to be beneficial for FTC bots due to some feedforward and motor controller weirdness.
 
 On a tangential note, you shouldn't need to use `kI`.
 

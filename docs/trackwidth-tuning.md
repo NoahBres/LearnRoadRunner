@@ -12,7 +12,7 @@ The track width in your `DriveConstants.java` refers to the track width of the d
 The track used in any context involving odometry is the center-to-center distance of the two parallel wheels. This only applies to three-wheel odometry. The track width for three-wheel odometry refers to the same thing as `lateralDistance`.
 Thus, any references to track width on this page will refer to the drive train track width.
 
-The track width for the **drive train** is used for the forward kinematics for feed forward following.
+The track width for the **drive train** is used for the forward kinematics for feedforward following.
 
 The track width for **three-wheel odometry** (aka `lateralDistance`) is used for localization.
 
