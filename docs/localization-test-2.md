@@ -10,7 +10,7 @@ This section should be skipped because you have chosen the option not to use dri
 If you're using dead wheels, ignore this page.
 :::
 
-### DIRECITONS ON THIS PAGE DONT APPLY UNTIL PR IS APPLIED
+In this step, we are simply checking if the drive encoder localization proves to be accurate. Any errors in this step is due to an error in the `DriveConstants` file.
 
 1. Run the `LocalizationTest` opmode via the RC.
 2. Navigate to `192.168.49.1:8080/dash` with a phone RC or `192.168.43.1:8080/dash` with a Control Hub.
