@@ -28,7 +28,7 @@ Although in the FTC community dead wheels and odometry are often used synonymous
 **TL;DR** Dead wheels allow accurate positional tracking of mecanum drives at high speeds and accelerations.
 
 <figure align="center">
-    <img src="./assets/home/dead-wheel-example-small.jpg">
+    <img src="./assets/home/dead-wheel-example-small.jpg" class="rounded-lg">
     <figcaption class="mt-2 text-sm text-gray-600">An example of dead wheels</figcaption>
 </figure>
 
@@ -44,9 +44,9 @@ _Note: Some teams, such as 8802 Negative Resistance, have utilized the two-wheel
 
 ### How do I make dead wheels?
 
-Hit up the [FTC Discord](https://discord.gg/first-tech-challenge) for further details. There are many intricacies and options into building dead wheel modules. There are very resources to creating dead wheels module at the time of writing. You can expect each module to cost $30+. Thus, you can expect a three-wheel configuration to cost upwards of $100.
+Hit up the [FTC Discord](https://discord.gg/first-tech-challenge) for further details. There are many intricacies and options into building dead wheel modules. There are very few resources to creating dead wheels module at the time of writing. You can expect each module to cost $30+. Thus, you can expect a three-wheel configuration to cost upwards of $100.
 
-Good open source design for a dead wheel design: [https://openodometry.weebly.com/](https://openodometry.weebly.com/).
+Good open source design for a dead wheel design: [https://openodometry.weebly.com/](https://openodometry.weebly.com/)
 
 ### What are spline paths?
 
