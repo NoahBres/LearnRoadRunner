@@ -74,7 +74,14 @@ public static final PIDCoefficients MOTOR_VELO_PID = null;
 
 **`RUN_USING_ENCODER`** indicates whether or not you want to utilize the `RUN_USING_ENCODER` [RunMode](https://ftc-tricks.com/dc-motors/) built into the FTC SDK. This makes use of the onboard velocity PID, allowing you to control the motor via velocity rather than "power" (voltage). Setting this value to true will automatically set all the motors to use this velocity controlled mode. `RUN_USING_ENCODER` can only be utilized if you are using drive train encoders. Set this value to `false` if you are not using drive encoders.
 
-**`MOTOR_VELO_PID`** will store the PID values you will use. The default PID values are tuned based on the motors free-spinning without any load. The default values will be too low for a drive train. Leave this at `null` for now. We will set these values later.
+**`MOTOR_VELO_PID`** will store the PID values you will use. The default PID values are tuned based on the motors free-spinning without any load. The default values will be too low for a drive train. Replace line 32 with the following:
+
+```java
+/* Lines 32 in DriveConstants.java */
+public static final PIDCoefficients MOTOR_VELO_PID = new PIDCoefficients(0, 0, 0);
+```
+
+We have set our PID gains to 0 for now. We'll properly tune them later.
 
 <HideAyudeWrapper :skipIfDriveEncoders="true">
 ::: warning
