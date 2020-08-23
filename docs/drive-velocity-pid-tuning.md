@@ -10,6 +10,8 @@ Tuning the Velocity PID can be one of the more frustrating parts of Road Runner.
 
 ## Telemetry Packet
 
+**TODO: COME BACK TO THIS AFTER PR IS REVIEWED**
+
 The first step will be to replace `telemetry` with `TelemetryPacket`. This enables us to update the graph faster for higher resolution.
 
 Either just copy the entire opmode from [my custom quickstart fork](https://github.com/NoahBres/road-runner-quickstart/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/DriveVelocityPIDTuner.java) and replace yours with it or do the following:
@@ -82,8 +84,9 @@ If the graph doesn't show up, and instead shows a number of checkboxes, that's o
    5. Increase `kP` once again. Repeat the `kP` and `kD` increase until your graph starts to match the target velocity.
    6. You should not touch `kI`. `kI` tends to cause many problems and its use is technically incorrect.
    7. The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it.
-   8. **Any adjustments in dashboard need to be copied over to the `DriveConstants.java` file under the equivalent variable name. Dashboard adjustments are temporary and will reset once you restart the opmode.**
-   9. Check the tuning simulator to see how each gain affects the behavior.
+   8. The official Road Runner docs recommend that you should "prioritize eliminating phase lag even at the cost of some extra oscillations." However, I personally feel that it is better to try and minimize oscillations, especially towards the zero velocity. I found that eliminating phase lag, especially at high speeds, would cause very jittery motion, most likely due to the Rev Hub's odd motor control. Hit us up in the [FTC Discord](https://discord.gg/first-tech-challenge) if you are interested in further technical details. My personal advice would be to minimize oscillations and allow for the translational PID to fix any phase lag discrepancies.
+   9. **Any adjustments in dashboard need to be copied over to the `DriveConstants.java` file under the equivalent variable name. Dashboard adjustments are temporary and will reset once you restart the opmode.**
+   10. Check the tuning simulator to see how each gain affects the behavior.
 
 ::: tip
 _"Velocity PID Controllers typically don't need `kD`"_ (Veness, Tyler. _Control Engineering in FRC_. pg. 17). However, it seems to be beneficial for FTC bots due to some feedforward and motor controller weirdness.
