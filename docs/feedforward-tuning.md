@@ -6,18 +6,15 @@ This section should be skipped because you have chosen the option to use drive e
 :::
 </HideAyudeWrapper>
 
-Tuning the feedforward controller for accurate following is necessary for for accurate path following. Poor tuning of the feedforward controller will result in errors later along the line.
+Tuning the feedforward controller for accurate following is necessary for for accurate path following. Poor tuning of the feedforward controller will result in errors later along the line. Although the Road Runner quickstart comes with both an automatic tuner and a manual tuner, many find that the automatic tuner does not provide optimal results. The automatic tuner isn't able to properly calculate `kA`. However, you are free to try and run it and use the gains it produces. However, I would recommend manually tuning those results afterwards.
 
 ## Tuning
 
-**TODO: come back and edit this if Ryan accepts a PR for the manual FF tuner**
+1. The first step is to run the `ManualFeedforwardTuner` opmode via the RC.
 
-1. First, download the `ManualFeedForwardTuner.java` file from [my custom quickstart fork](https://github.com/NoahBres/road-runner-quickstart/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/ManualFeedForwardTuner.java).
-2. Stick in the opmode folder in your own quickstart project (or wherever you have all the other tuning opmodes).
-3. Run the `ManualFeedForwardTuner` opmode via the RC.
-4. Then, connect to the RC phone's wifi network. The password to the network is located in the `Program and Manage` menu.
+2. Then, connect to the RC phone's wifi network. The password to the network is located in the `Program and Manage` menu.
 
-5. Navigate to `192.168.49.1:8080/dash` with a phone RC or `192.168.43.1:8080/dash` with a Control Hub.
+3. Navigate to `192.168.49.1:8080/dash` with a phone RC or `192.168.43.1:8080/dash` with a Control Hub.
 
 Your page should look something like this:
 
@@ -29,7 +26,7 @@ Your page should look something like this:
     <figcaption class="mt-2 text-sm text-gray-600">Example dashboard</figcaption>
 </figure>
 
-4. Run the oppmode. The graph will not show up until you have started it.
+4. Run the opmode. The graph will not show up until you have started it.
 
 5. Look for the `DriveConstants` in the right sidebar. Open the dropdown. Then look for `BASE_CONSTRAINTS`. Open that dropdown. You'll see the options specified in the `DriveConstants` file.
 
