@@ -4,7 +4,7 @@ Road Runner is a motion planning library, written for the [FTC robotics competit
 
 <div class="flex items-center justify-center flex-col">
     <VideoDisplay src="./assets/home/8393-half-compressed.mp4" width="360px" :controls="false"/>
-    <span class="text-center">Team 8393 performs an advanced spline path in their autonomous mode<br>(Ochoa Finals - 2018/19 Rover Ruckus)</span>
+    <span class="text-center text-gray-600">Team 8393 performs an advanced spline path in their autonomous mode<br>(Ochoa Finals - 2018/19 Rover Ruckus)</span>
 </div>
 
 <ActionLink url="/before-you-start" margin="2em">Get Started →</ActionLink>
