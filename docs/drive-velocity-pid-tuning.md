@@ -120,6 +120,10 @@ Here are two good videos explaining what each gain in a PID controller does if y
 
 [https://www.youtube.com/watch?v=0vqWyramGy8](https://www.youtube.com/watch?v=0vqWyramGy8)
 
+This article is also pretty neat:
+
+[https://blog.wesleyac.com/posts/intro-to-control-part-one-pid](https://blog.wesleyac.com/posts/intro-to-control-part-one-pid)
+
 :::
 
 # TODO
