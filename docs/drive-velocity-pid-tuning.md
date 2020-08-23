@@ -32,7 +32,7 @@ telemetry.update();
 
 2. Replace those lines with the following:
 
-```java
+```java{1,4,6,7,9}
 TelemetryPacket packet = new TelemetryPacket();
 
 // update telemetry

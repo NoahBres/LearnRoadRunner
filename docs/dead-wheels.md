@@ -92,7 +92,7 @@ Look at about line 143. You should find a comment stating "`// TODO: if desired,
 
 Under this comment, add the following line:
 
-```java
+```java{6}
 /* About line 143 in SampleMecanumDrive.java */
 
 // TODO: if desired, use setLocalizer() to change the localization method
@@ -149,7 +149,7 @@ Look at about line 143. You should find a comment stating "`// TODO: if desired,
 
 Under this comment, add the following line:
 
-```java
+```java{6}
 /* About line 143 in SampleMecanumDrive.java */
 
 // TODO: if desired, use setLocalizer() to change the localization method
@@ -183,7 +183,7 @@ A finished example of where these go may be found [here](https://gist.github.com
 
 3. Add these mulitpliers to the `getWheelPositions()` function like so:
 
-```java
+```java{5,6}
 /* Lines 71-76 in TwoWheelTrackingLocalizer.java */
 @Override
 public List<Double> getWheelPositions() {
@@ -249,7 +249,7 @@ A finished example of where these go may be found [here](https://gist.github.com
 
 3. Add these mulitpliers to the `getWheelPositions()` function like so:
 
-```java
+```java{5,6,7}
 /* Lines 58-65 in StandardTrackingWheelLocalizer.java */
 @Override
 public List<Double> getWheelPositions() {
@@ -337,7 +337,7 @@ imu.initialize(parameters);
 
 Just for safety reasons, replace the `getRawExternalHeading()` function return with zero:
 
-```java
+```java{4}
 /* Lines 348-351 in SampleMecanumDrive.java */
 @Override
 public double getRawExternalHeading() {
@@ -372,7 +372,7 @@ However, this also reverses the direction of the motor if one is attached to the
 
 2. Negate the motor position and velocity in your Localizer (`StandardTracking...` or `TwoWheel...`) like so
 
-   ```java
+   ```java{9,19}
    // Notice the * -1
 
    @NonNull
