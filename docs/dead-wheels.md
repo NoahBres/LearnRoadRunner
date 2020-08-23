@@ -13,7 +13,7 @@ If you are not using dead wheels, skip this section.
     <img src="./assets/dead-wheels/YouAreHere-dead-wheels-quarter.png">
 </figure>
 
-Your configuration will depend on whether you have two or three dead-wheels. Don't know the difference? Check [the FAQ](/#what-is-the-difference-between-two-and-three-wheel-odometry).
+Your configuration will depend on whether you have two or three dead wheels. Don't know the difference? Check [the FAQ](/#what-is-the-difference-between-two-and-three-wheel-odometry).
 
 If you're using a two-wheel setup, read only the [two-wheel odometry section](#two-wheel-odometry).
 
@@ -132,9 +132,9 @@ public static double LATERAL_DISTANCE = 10; // in; distance between the left and
 public static double FORWARD_OFFSET = 4; // in; offset of the lateral wheel
 ```
 
-`LATERAL_DISTANCE` is the distance from the left and right wheels.
+**`LATERAL_DISTANCE`** is the distance from the left and right wheels.
 
-`FORWARD_OFFSET` is the distance from the lateral wheel to the middle wheel. The `FORWARD_OFFSET` is positive when in front of the wheels and negative when behind the wheels (closer to the back).
+**`FORWARD_OFFSET`** is the distance from the lateral wheel to the middle wheel. The `FORWARD_OFFSET` is positive when in front of the wheels and negative when behind the wheels (closer to the back).
 
 <figure align="center">
     <img src="./assets/dead-wheels/andrew-bot-forward-offset-quarter.jpg">
@@ -196,7 +196,7 @@ public List<Double> getWheelPositions() {
 
 Remember that the X multiplier is on the parallel encoder because x faces forward for a local coordinate frame (common for robotics/aviation/etc situations).
 
-4. You will begin the physical tuning process. Clear a straight line for your bot to travel in. I used a 90in stretch of field tiles.
+4. You will begin the physical tuning process. Clear a straight line for your bot to travel in. I used a 90 inch stretch of field tiles.
 
 5. Set your bot at the beginning of this stretch, facing forward.
 
@@ -216,7 +216,15 @@ Remember that the X multiplier is on the parallel encoder because x faces forwar
 
 ### Double Checking
 
-TODO: COME BACK TO THIS AFTER GETTING A REPLY FROM RYAN ON A POSSIBLE PR
+We're going to double check that everything is hunky-dory with your localization.
+
+1. Run the `LocalizationTest` opmode.
+
+2. Navigate to `192.168.49.1:8080/dash` with a phone RC or `192.168.43.1:8080/dash` with a Control Hub.
+
+3. Drive the bot around with your controller. You should see the bot being drawn on the graph in Dashboard. Make sure the drawn bot matches the movements of the actual bot.
+
+4. Check the troubleshooting section below if you encounter any issues.
 
 ## Tuning - Three-Wheel
 
@@ -255,7 +263,7 @@ public List<Double> getWheelPositions() {
 
 Remember that the X multiplier is on the left/right because x faces forward for a local coordinate frame (common for robotics/aviation/etc situations).
 
-4. You will begin the physical tuning process. Clear a straight line for your bot to travel in. I used a 90in stretch of field tiles.
+4. You will begin the physical tuning process. Clear a straight line for your bot to travel in. I used a 90 inch stretch of field tiles.
 
 5. Set your bot at the beginning of this stretch, facing forward.
 
@@ -277,14 +285,113 @@ Remember that the X multiplier is on the left/right because x faces forward for 
 
 It is very important to tune lateral distance properly. This determines the heading in your localization and you will find that errors in your heading will quickly compound and absolutely destroy your localization.
 
-Unfortunately, at the time of writing, I cannot provide a simple, straightforward tuning opmode. I can provide [this opmode](https://github.com/ftc16626/Skystone-2019/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/tuning/DeadWheelTuner2.kt) which I used before a competition. This compares the imu heading with the localizer heading and prints them in dashboard. You divide the imu heading by the localizer heading (imu / localizer) and then multiply the lateral distance by that number you got. However, that opmode is half broken and works like 50% of the time. I do not have a bot available due to COVID so am currently unable to fix the opmode to provide a clean solution.
+Unfortunately, I can no longer recommend the automated tuning opmode. The original automated lateral distance tuner spun the bot around 10 times while measuring the angle from the IMU and localizer and calculating the effective lateral distance. However, multiple people have reported that the BNO055 IMU built into the Rev Hub does not provide accurate results and seems to be off by around 20 degrees by the end of these 10 turns. Therefore, I can no longer recommend using the IMU as a source of ground truth. We will have to manually tune the lateral distance.
 
-The harder alternative would be to make a similar opmode yourself.
+1. The first step is to run the `LocalizationTest` opmode via the RC.
 
-The easy alternative would be to run the `LocalizerTest` opmode and spin the bot in circles exactly 10 times. I recommend sticking a tape on the bot and a piece of tape on the ground. These two pieces of tape should line up before you start spinning and then line up after you finish spinning. Adjust the lateral distance of the localizer until your heading looks correct.
+2. Then, connect to the RC phone's wifi network. The password to the network is located in the `Program and Manage` menu.
 
-If you have questions, both me or anyone else in the `#programming-help` section of the [FTC Discord](https://discord.gg/first-tech-challenge).
+3. Navigate to `192.168.49.1:8080/dash` with a phone RC or `192.168.43.1:8080/dash` with a Control Hub.
+
+4. Ensure that the field drawing is showing. If not, switch to field in the dropdown on the top right.
+
+5. Stick a piece of tape or mark some spot with a sharpie on your both and on the ground directly below that spot. Line these two up.
+
+6. Spin your bot 10 times using the controller. Do not move the bot. Only spin it in place with the right joystick.
+
+7. Watch the bot on the field as you do this. Make sure the heading doesn't lag behind.
+
+8. On the last turn, slow down and make sure that the mark you made line up with each other to ensure that the turns is exactly 3600 degrees.
+
+9. If the heading on the drawn field lags behind, slowly increase the lateral distance.
+
+10. Unfortunately, this is quite cumbersome but heading accuracy is quite important and this problem is not confined to Road Runner.
 
 ### Double Checking
 
-COME BACK TO THIS AFTER GETTING A REPLY FROM RYAN ON A POSSIBLE PR
+We're going to double check that everything is hunky-dory with your localization.
+
+1. Run the `LocalizationTest` opmode.
+
+2. Navigate to `192.168.49.1:8080/dash` with a phone RC or `192.168.43.1:8080/dash` with a Control Hub.
+
+3. Drive the bot around with your controller. You should see the bot being drawn on the graph in Dashboard. Make sure the drawn bot matches the movements of the actual bot.
+
+4. Check the troubleshooting section below if you encounter any issues.
+
+### Deleting the IMU
+
+The IMU does not serve a purpose in three wheel odometry. Thus, it would be ideal to get rid of the default initialization in `SampleMecanumDrive`. IMU initialization can add 2-3 seconds to the opmode initialization and it's quite annoying.
+
+Open `SampleMecanumDrive.java` and delete this entire section:
+
+```java
+/* Lines 109-113 in SampleMecanumDrive.java */
+
+// TODO: adjust the names of the following hardware devices to match your configuration
+imu = hardwareMap.get(BNO055IMU.class, "imu");
+BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+imu.initialize(parameters);
+```
+
+Just for safety reasons, replace the `getRawExternalHeading()` function return with zero:
+
+```java
+/* Lines 348-351 in SampleMecanumDrive.java */
+@Override
+public double getRawExternalHeading() {
+    return 0;
+}
+```
+
+## Troubleshooting
+
+- Bot strafes the opposite direction
+
+  - Reverse the direction of the perpendicular encoder
+
+- Bot doesn't spin in place properly
+
+  - This is due to an offset center of rotation due to an incorrect perpendicular wheel placement. Tuning the position of your perpendicular wheel is a pain. It's fine to let this be a little inaccurate as an offset center of rotation will not affect the tracking accuracy. It will only introduce a little offset to your localization.
+
+- Bot on the graph spins while the actual bot is going straight
+  - One of your parallel encoders are reversed
+
+### Reversing an encoder
+
+Either:
+
+1.  Set the motor direction that the encoder is connected to, to `REVERSE`
+
+    ```java
+    parallelEncoder.setDirection(DcMotorSimple.Direction.REVERSE);
+    ```
+
+However, this also reverses the direction of the motor if one is attached to the same port.
+
+2. Negate the motor position and velocity in your Localizer (`StandardTracking...` or `TwoWheel...`) like so
+
+   ```java
+   // Notice the * -1
+
+   @NonNull
+   @Override
+   public List<Double> getWheelPositions() {
+       return Arrays.asList(
+               encoderTicksToInches(leftEncoder.getCurrentPosition()),
+               encoderTicksToInches(rightEncoder.getCurrentPosition()),
+               encoderTicksToInches(frontEncoder.getCurrentPosition()) * -1
+       );
+   }
+
+   @NonNull
+   @Override
+   public List<Double> getWheelVelocities() {
+       return Arrays.asList(
+               encoderTicksToInches(leftEncoder.getVelocity()),
+               encoderTicksToInches(rightEncoder.getVelocity()),
+               encoderTicksToInches(frontEncoder.getVelocity()) * -1
+       );
+   }
+   ```
