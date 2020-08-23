@@ -2,10 +2,10 @@
 
 Road Runner is a motion planning library, written for the [FTC robotics competition](https://www.firstinspires.org/robotics/ftc). Designed primarily for autonomous robotic movement, it allows for complex path following and generation while maintaining control of velocity and acceleration. This enables bots to have more accurate and advanced path following capabilities.
 
-<figure align="center">
-    <img src="./assets/home/8393-worlds.gif">
-    <figcaption style="marginTop: 1em;">Team 8393 performs an advanced spline path in their autonomous mode</figcaption>
-</figure>
+<div class="flex items-center justify-center flex-col">
+    <VideoDisplay src="./assets/home/8393-half-compressed.mp4" width="360px" :controls="false"/>
+    <span class="text-center">Team 8393 performs an advanced spline path in their autonomous mode<br>(Ochoa Finals - 2018/19 Rover Ruckus)</span>
+</div>
 
 <ActionLink url="/before-you-start" margin="2em">Get Started →</ActionLink>
 
@@ -20,7 +20,6 @@ Road Runner is a motion planning library, written for the [FTC robotics competit
 While often compared with each other, pure pursuit is very different from Road Runner and should not be contrasted. [Pure pursuit](https://www.mathworks.com/help/robotics/ug/pure-pursuit-controller.html) is a path tracking and following algorithm that allows non-holonomic drive trains to follow multi-dimensional paths through the use of a look-ahead point. On the other hand, Road Runner includes multiple path following algorithms from [Ramsete](https://github.com/wpilibsuite/allwpilib/blob/master/wpilibj/src/main/java/edu/wpi/first/wpilibj/controller/RamseteController.java) to guided vector fields. The default pure pursuit algorithm lacks motion profiling, meaning it has no velocity or acceleration constraints. Because pure pursuit has no acceleration control, installing dead wheel odometry on your bot is a must. Both tools can be used to follow complex paths.
 
 Tangentially related but the use of Pure Pursuit really isn't recommended for most FTC uses. The majority of FTC bots tend to be holonomic drive (mecanum). Pure Pursuit was designed for differential drive (tank). Even for differential drive, pure pursuit is inferior to a controller like Ramsete. Please check out the [FTC Discord](https://discord.gg/first-tech-challenge) for further information on this topic.
-
 
 ### What are dead wheels/odometry?
 
