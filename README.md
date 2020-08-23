@@ -2,6 +2,8 @@
 
 - `package.json` requires a downgrade to `watchpack` because later updates break live reloading.
   - https://github.com/vuejs/vuepress/issues/2392#issuecomment-638548192
+- `package.json` requires a set version for `vue`, `vue-template-compiler`, and `vue-server-renderer` because not setting all three of these to the same versions leaves them out of sync for some reason
+- `package.json` requires a set version for uplot because `uplot@1.1.1` has a bug that freezes the entire page on plot initialization
 
 ## TODO:
 
