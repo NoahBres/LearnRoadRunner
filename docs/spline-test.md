@@ -9,3 +9,17 @@
     <HoverConfetti>🎊🎉🎊🎉 Congrats you're done! 🎊🎉🎊🎉</HoverConfetti>
   </div>
 </ClientOnly>
+
+## Hiding the tuning opmodes
+
+The Road Runner quickstart comes with many tuning opmodes. They can clutter up the RC's opmode list quite a bit, especially when you start adding many of your own opmodes. If you are finished with your tuning process, you can hide these opmodes using the `@Disabled` annotation on your opmodes.
+
+Do so by inserting the following above any of the opmode class declarations:
+
+```java{2}
+@Config
+@Disabled
+@Autonomous(group = "drive")
+public class DriveVelocityPIDTuner extends LinearOpMode {
+    public static double DISTANCE = 72; // in
+```
