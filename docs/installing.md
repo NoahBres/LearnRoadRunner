@@ -9,7 +9,7 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 1. Navigate to [https://github.com/acmerobotics/road-runner-quickstart](https://github.com/acmerobotics/road-runner-quickstart)
 2. Click the big green download button
 
-<VideoDisplay src="./assets/installing/github-download-btn.mp4"/>
+<VideoDisplay src="./assets/installing/github-download-btn.mp4" width="100%"/>
 
 3. Unzip/extract the folder into your directory of choice
 4. Open up the folder in Android studio.
