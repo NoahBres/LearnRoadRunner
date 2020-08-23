@@ -16,7 +16,7 @@ Significant changes to your bot (addition of a heavy mechanism, etc.) will neces
 
 <figure align="center">
     <img src="./assets/quickstart-overview/TuningChart-quarter.png">
-    <figcaption style="marginTop: 1em;">These are the steps you will be following.</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600">These are the steps you will be following.</figcaption>
 </figure>
 
 **Please follow the guide _in order_, making sure that every step is completed before proceeding to the next.**

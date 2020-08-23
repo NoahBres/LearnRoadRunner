@@ -61,7 +61,7 @@ Your page should look something like this:
       <img src="./assets/drive-velocity-pid-tuning/example-dashboard-half.jpg">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
-    <figcaption style="marginTop: 1em;">Example dashboard</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600">Example dashboard</figcaption>
 </figure>
 
 4. Run the opmode. The graph and its options will not show up until you have started it.

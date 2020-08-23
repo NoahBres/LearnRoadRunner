@@ -30,7 +30,7 @@ If you want to quickly get a constants file up and running, I recommend clicking
 
 <figure align="center">
     <img src="./assets/drive-constants/YouAreHere-DriveConstants-quarter.png">
-    <figcaption style="marginTop: 1em;">You are here</figcaption>
+    <figcaption class="mt-2 text-gray-600">You are here</figcaption>
 </figure>
 
 ## Ticks Per Rev & Max RPM
@@ -99,7 +99,7 @@ public static double TRACK_WIDTH = 1; // in
 
 <figure align="center">
     <img src="./assets/drive-constants/wes-bot-edit-half.jpg">
-    <figcaption style="marginTop: 1em;">3658 Bosons's 2019/20 Skystone Bot</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600">3658 Bosons's 2019/20 Skystone Bot</figcaption>
 </figure>
 
 ## kV/kA/kStatic
@@ -147,7 +147,7 @@ The parameters Drive Constraints take are:
 
 <figure align="center" class="py-10">
   <img src="./assets/drive-constants/max-vel-latex-half.png" />
-  <figcaption style="marginTop: 1em;">Max Velocity Equation (per second)</figcaption>
+  <figcaption class="mt-4 text-sm text-gray-600">Max Velocity Equation (per second)</figcaption>
 </figure>
 
 It is recommended that you keep your maximum velocity constraint not exceed 80% of the motors' max velocity. Your bot will most likely not be able to follow at 100% of the theoretical velocity due to a number of reasons: voltage dropping as your battery dies, weight, etc. You may push this limit closer to 100% but your trajectory following will suffer if your bot is not able to reach the given velocity.

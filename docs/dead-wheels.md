@@ -59,7 +59,7 @@ Put in the X/Y coordinates of your perpendicular and parallel wheels. Remember t
 
 <figure align="center">
     <img src="./assets/dead-wheels/andrew-bot-wheel-location-quarter.jpg">
-    <figcaption style="marginTop: 1em;">17508 Rising Tau's 2019/20 Skystone Bot</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600">17508 Rising Tau's 2019/20 Skystone Bot</figcaption>
 </figure>
 
 ### Hardware ID's
@@ -138,7 +138,7 @@ public static double FORWARD_OFFSET = 4; // in; offset of the lateral wheel
 
 <figure align="center">
     <img src="./assets/dead-wheels/andrew-bot-forward-offset-quarter.jpg">
-    <figcaption style="marginTop: 1em;">17508 Rising Tau's 2019/20 Skystone Bot</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600">17508 Rising Tau's 2019/20 Skystone Bot</figcaption>
 </figure>
 
 ### Set Localizer in SampleMecanumDrive

@@ -33,5 +33,5 @@ You should have already tuned localization. Right now, you will be tuning the dr
 
 <figure align="center">
     <img src="./assets/drive-constants/wes-bot-edit-half.jpg">
-    <figcaption style="marginTop: 1em;">3658 Bosons's 2019/20 Skystone Bot</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600">3658 Bosons's 2019/20 Skystone Bot</figcaption>
 </figure>
