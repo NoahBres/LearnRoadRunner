@@ -19,3 +19,7 @@
 - make a resources section with the papers ryan linked in the original docs
 
 - add a tools section with like david's visualizer and stuff
+
+- add alt tags to images
+
+- improve lighthouse scores
