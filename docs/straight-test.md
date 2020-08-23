@@ -8,8 +8,14 @@ Once you've got your velocity controller tuned, you should run a quick straight 
    - You can change this distance in Dashboard or through the opmode directly
      - If you'd like to change it in Dashboard, look for the config sidebar and find the `StraightTest` dropdown. Change the `DISTANCE` value.
      - If you'd like to change it directly in the opmode, open the `StraightTest.java` file and change the `DISTANCE` variable on line 17.
-4. Run the `StraightTest` opmode like 2 or 3 times to ensure that the distance traveled is consistent within an inch or two. If not, your velocity controller requires more tuning.
+4. Run the `StraightTest` opmode like 2 or 3 times to ensure that the distance traveled is consistent within an inch or two. If not, your velocity controller requires more tuning. It does not need to hit the _exact_ spot each time as you will later enable closed loop feedback using localization.
 5. If everything works great, move on to the next step!
+
+**TODO: ADD LATERAL MULTIPLIER INFO IF PR IS MERGED**
+
+### Does your straight test go backwards or turn in a circle?
+
+Reverse your motor directions. Instructions on where to do this can be found [here](/drive-constants.html#samplemecanumdrive-motor-direction).
 
 ### **Is your straight test consistent but it doesn't travel the specified distance?**
 
