@@ -18,5 +18,3 @@
 - convert gif to mp4
 
 - go back and add the you are here images
-
-- add confetti effects to the congrats you're done section
