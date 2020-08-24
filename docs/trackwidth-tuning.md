@@ -1,5 +1,10 @@
 # Track Width Tuning
 
+<figure align="center">
+    <img src="./assets/you-are-here/YouAreHere-TrackWidthTuner-quarter.png">
+    <figcaption class="mt-2 text-gray-600">You are here</figcaption>
+</figure>
+
 ::: warning
 Your localizer's heading measurements should be accurate prior to tuning this. If you're using a 3-wheel localizer, this means tuning the lateral distance. Otherwise, the heading should come directly from the IMU.
 :::

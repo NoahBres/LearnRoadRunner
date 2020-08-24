@@ -1,5 +1,10 @@
 # Spline Test
 
+<figure align="center">
+    <img src="./assets/you-are-here/YouAreHere-SplineTest-quarter.png">
+    <figcaption class="mt-2 text-gray-600">You are here</figcaption>
+</figure>
+
 1. Once your `TRANSLATION` and `HEADING` PID's are tuned, you should run the spline test to make sure everything is in order.
 2. Open dashboard to make sure that it's following correctly. The bot should follow an S-shaped path and Dashboard should follow the path properly.
 3. If something goes wrong, try and go back to diagnose the problem. Hit up the [FTC Discord](https://discord.gg/first-tech-challenge) if you're stuck.

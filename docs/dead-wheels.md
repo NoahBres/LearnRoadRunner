@@ -10,7 +10,7 @@ If you are not using dead wheels, skip this section.
 :::
 
 <figure align="center">
-    <img src="./assets/dead-wheels/YouAreHere-dead-wheels-quarter.png">
+    <img src="./assets/you-are-here/YouAreHere-DeadWheels-quarter.png">
     <figcaption class="mt-2 text-gray-600">You are here</figcaption>
 </figure>
 

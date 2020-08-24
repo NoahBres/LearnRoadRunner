@@ -6,6 +6,11 @@ This section should be skipped because you have chosen the option to use drive e
 :::
 </HideAyudeWrapper>
 
+<figure align="center">
+    <img src="./assets/you-are-here/YouAreHere-FFTuning-quarter.png">
+    <figcaption class="mt-2 text-gray-600">You are here</figcaption>
+</figure>
+
 Tuning the feedforward controller for accurate following is necessary for for accurate path following. Poor tuning of the feedforward controller will result in errors later along the line. Although the Road Runner quickstart comes with both an automatic tuner and a manual tuner, many find that the automatic tuner does not provide optimal results. The automatic tuner isn't able to properly calculate `kA`. However, you are free to try and run it and use the gains it produces. However, I would recommend manually tuning those results afterwards.
 
 ## Tuning

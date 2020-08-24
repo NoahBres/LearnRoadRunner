@@ -1,5 +1,10 @@
 # Turn Test Tuning
 
+<figure align="center">
+    <img src="./assets/you-are-here/YouAreHere-TurnTest-quarter.png">
+    <figcaption class="mt-2 text-gray-600">You are here</figcaption>
+</figure>
+
 Turn test is just a check to ensure that your track width isn't waaay off.
 
 1. Run the `TurnTest` opmode via the RC.
