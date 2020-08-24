@@ -63,7 +63,7 @@ If you feel the need to add `kI`, you should be increasing `kV`.
 1. One of the velocity lines are going the opposite way and not following `targetVelocity`.
    - The polarity to the motors are reversed. The encoder is not reading the same direction as the motor is actually turning. Switch the black and red cable on your motor. Or, multiply the encoder readings in your `SampleMecanumDrive` by -1.
 
-## PID Tuning simulator
+## PID Tuning Simulator
 
 <ClientOnly>
   <VeloPIDTuning-PIDTuningSimulator class="m-4" graphHeight="30rem" />
