@@ -174,7 +174,7 @@ It is recommended that you keep your maximum velocity constraint not exceed 80% 
 Open your `SampleMecanumDrive.java` file.
 
 ```java
-/* Lines 117-120 in SampleMecanumDrive.java */
+/* Lines 120-123 in SampleMecanumDrive.java */
 leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
 leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
 rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
@@ -189,7 +189,7 @@ Then, look at line 140. There should be a comment stating "`// TODO: reverse any
 Under that comment, you will reverse the directions of the motors on one side of your bot. If your bot spins in circles during straight test, come back here to fix it. If your bot drives the opposite way, come back here to fix this.
 
 ```java
-/* About line 140-143 in SampleMecanumDrive.java */
+/* About line 143-145 in SampleMecanumDrive.java */
 
 // TODO: reverse any motors using DcMotor.setDirection()
 leftFront.setDirection(DcMotorSimple.Direction.REVERSE);

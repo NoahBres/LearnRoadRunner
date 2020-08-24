@@ -75,7 +75,7 @@ Ensure that these ID's match up with your Rev Hub config ID's.
 ### IMU
 
 ```java
-/* Lines 108-111 in SampleMecanumDrive.java */
+/* Lines 111-114 in SampleMecanumDrive.java */
 imu = hardwareMap.get(BNO055IMU.class, "imu");
 BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
@@ -88,12 +88,12 @@ Ensure that the IMU is initialitzed in the `SampleMecanumDrive.java` class. You 
 
 After you've configured your localizer, go back to the `SampleMecanumDrive.java` file.
 
-Look at about line 143. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
+Look at about line 145. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
 
 Under this comment, add the following line:
 
 ```java{6}
-/* About line 143 in SampleMecanumDrive.java */
+/* About line 145 in SampleMecanumDrive.java */
 
 // TODO: if desired, use setLocalizer() to change the localization method
 // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
@@ -145,12 +145,12 @@ public static double FORWARD_OFFSET = 4; // in; offset of the lateral wheel
 
 After you've configured your localizer, go back to the `SampleMecanumDrive.java` file.
 
-Look at about line 143. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
+Look at about line 145. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
 
 Under this comment, add the following line:
 
 ```java{6}
-/* About line 143 in SampleMecanumDrive.java */
+/* About line 145 in SampleMecanumDrive.java */
 
 // TODO: if desired, use setLocalizer() to change the localization method
 // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
@@ -326,7 +326,7 @@ The IMU does not serve a purpose in three wheel odometry. Thus, it would be idea
 Open `SampleMecanumDrive.java` and delete this entire section:
 
 ```java
-/* Lines 109-113 in SampleMecanumDrive.java */
+/* Lines 110-114 in SampleMecanumDrive.java */
 
 // TODO: adjust the names of the following hardware devices to match your configuration
 imu = hardwareMap.get(BNO055IMU.class, "imu");
@@ -338,7 +338,7 @@ imu.initialize(parameters);
 Just for safety reasons, replace the `getRawExternalHeading()` function return with zero:
 
 ```java{4}
-/* Lines 348-351 in SampleMecanumDrive.java */
+/* Lines 349-352 in SampleMecanumDrive.java */
 @Override
 public double getRawExternalHeading() {
     return 0;
