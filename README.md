@@ -23,3 +23,5 @@
 - add alt tags to images
 
 - improve lighthouse scores
+
+- support fancy image/video formats
