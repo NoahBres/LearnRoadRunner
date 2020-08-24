@@ -11,6 +11,7 @@ If you are not using dead wheels, skip this section.
 
 <figure align="center">
     <img src="./assets/dead-wheels/YouAreHere-dead-wheels-quarter.png">
+    <figcaption class="mt-2 text-gray-600">You are here</figcaption>
 </figure>
 
 Your configuration will depend on whether you have two or three dead wheels. Don't know the difference? Check [the FAQ](/#what-is-the-difference-between-two-and-three-wheel-odometry).
