@@ -25,3 +25,5 @@
 - improve lighthouse scores
 
 - support fancy image/video formats
+
+- yell at user if they use I or D in velo pid
