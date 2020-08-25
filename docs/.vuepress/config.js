@@ -18,7 +18,7 @@ module.exports = {
       "/follower-pid-tuning",
       "/spline-test",
       "/trajectories",
-      "/heading-interpolators",
+      "/trajectorybuilder-functions",
       "/markers",
       "tools",
       "/resources",
