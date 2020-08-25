@@ -27,3 +27,5 @@
 - support fancy image/video formats
 
 - yell at user if they use I or D in velo pid
+
+- insert gifs from MeepMeep as examples in trajectories
