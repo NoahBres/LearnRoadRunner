@@ -1,5 +1,5 @@
 <template>
-  <div class="py-4 flex justify-center" :width="width">
+  <div class="py-4 flex justify-center" :style="{ width: width }">
     <video
       width="100%"
       :controls="controls"
