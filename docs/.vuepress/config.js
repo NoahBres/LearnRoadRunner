@@ -1,6 +1,6 @@
 module.exports = {
   title: "Learn Road Runner",
-  description: "Learn the ins-and-outs of the Road Runner Library",
+  description: "Learn the ins-and-outs of the Road Runner library",
   themeConfig: {
     sidebar: [
       ["/", "Introduction"],
