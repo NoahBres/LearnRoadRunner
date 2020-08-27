@@ -29,3 +29,9 @@
 - yell at user if they use I or D in velo pid
 
 - insert gifs from MeepMeep as examples in trajectories
+
+- remove underline in the trajectories page
+
+- go back and fix everything in safari because safari sucks
+
+- fix firefox too
