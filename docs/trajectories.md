@@ -52,6 +52,7 @@ public class MyOpmode extends LinearOpMode {
 
     Trajectory myTrajectory = new drive.trajectoryBuilder(new Pose2d())
         .strafeRight(10)
+        .forward(5)
         .build();
 
     waitForStart();
@@ -109,7 +110,7 @@ Trajectory myTrajectory = new drive.trajectoryBuilder(new Pose2d())
 
 Next, notice the `.strafeRight(10)` and `.forward(5)` functions. We are telling the trajectory that we want to strafe right 10 inches, then go forward 5 inches.
 The `TrajectoryBuilder` object utilizes something called a [builder pattern](https://howtodoinjava.com/design-patterns/creational/builder-pattern-in-java/) that allows us to [method chain](https://www.geeksforgeeks.org/method-chaining-in-java-with-examples/).
-This means that we can keep chaining differents methods, infinitely, to keep building up our trajectory. Check out the [TrajectoryBuilder Function List](#trajectorybuilder-function-list) for more options.
+This means that we can keep chaining differents methods, infinitely, to keep building up our trajectory. Check out the [TrajectoryBuilder Function List](/trajectorybuilder-functions) for more options.
 
 <div class="h-5"></div>
 
@@ -133,7 +134,7 @@ if(isStopRequested()) return;
 drive.followTrajectory(myTrajectory);
 ```
 
-We're going to ignore the the first 3 lines are those are standard FTC Opmode procedures. Notice the `drive.followTrajectory(myTrajectory)` function. Essentially, we take our trajectory and tell our bot to follow it.
+We're going to ignore the the first 3 lines as those are standard FTC Opmode procedures. Notice the `drive.followTrajectory(myTrajectory)` function. Essentially, we take our trajectory and tell our bot to follow it.
 Pretty self explanatory. At that point, the bot will try to follow the entire trajectory.
 
 <div class="h-5"></div>
@@ -173,8 +174,8 @@ Motion profiling generates the exact path you need to take. Therefore, all the t
 </figure>
 
 When looking at the path above, your bot _physically cannot_ follow that exact path. Imagine the bot moving along that path in your head. It gets towards the edge the of pink line at full speed and it wants to suddenly strafe right.
-However, it still has momentum upwards so it'll make an arc instead of making that exact right turn. Instantly strafing right would require an instanteous change in velocity. Even if you had rocket boosters on your bot, it would still make a slight arc.
-To follow that path exactly, it needs to decelerate, or slow down, towards the end of the pink path and come to a full stop to shed any upwards momentum. Then, it is able to make that right strafe.
+However, it still has momentum upwards so it'll make an arc instead of making that exact right turn. Instantly strafing right would require an instanteous change in velocity. Even if you had rocket boosters on your bot, it would still make a _slight_ arc.
+To follow that path exactly, it needs to decelerate, or slow down, towards the end of the pink path and come to a full stop to shed any forward momentum. Then, it is able to make that right strafe.
 
 So what do we do? There are two options:
 
@@ -200,7 +201,7 @@ This takes longer as your bot will have to keep stopping and accelerating on eac
 
 This is the more optimal method of creating multi-part paths. Spline paths allow you to retain continuity and smoothly transition into other movements.
 The only quirk is that splines can make odd shapes if you don't understand how to use them correctly. It is highly recommended to run all your paths through a [path visualization tool](/tools).
-Check out the [TrajectoryBuilder Function List](#trajectorybuilder-function-list) to see all your options.
+Check out the [TrajectoryBuilder Function List](/trajectorybuilder-functions) to see all your options.
 
 ```java
 Trajectory traj = trajectoryBuilder(new Pose2d())
@@ -309,5 +310,3 @@ The Y axis extends through the origin and runs _perpendicular_ to the Red Allian
 Notice how the field is rotated 90 degrees relative to if we were looking at it from the audience's point of view. This is because the frame of reference is defined by the Red Alliance Station. Be mindful of this as Road Runner's official GUI and RRPathVisualizer both opt for the "proper" orientation of the field. Thus, in their maps, Y increase to the left and X increases up.
 
 Specifications for the official FTC coordinate system can be found [here](https://github.com/ftctechnh/ftc_app/files/989938/FTC_FieldCoordinateSystemDefinition.pdf)
-
-## TrajectoryBuilder Function List
