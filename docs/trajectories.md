@@ -266,26 +266,28 @@ drive.turn(Math.toRadians(-270));
 
 Say you want to drive your robot in reverse. `TrajectoryBuilder` actually makes this quite simple.
 
-```java
+```java{1}
 Trajectory trajectory = new TrajectoryBuilder(new Pose2d(), true)
-  .splineTo(...);
+  .splineTo(new Vector2d(36, 36), Math.toRadians(0))
+  .build();
 ```
 
 The `true` boolean in the second parameter indicates that you want the bot to follow the path in reverse.
 
-**TODO: insert gifs from MeepMeep as examples**
+<div class="flex items-center justify-center flex-col">
+    <VideoDisplay src="./assets/trajectory-overview/reversed-demo.mp4" width="400px" :controls="false"/>
+</div>
 
 This is actually just a shorthand for passing a heading of 180 degrees into the second parameter.
 The `TrajectoryBuilder` supports any arbitrary heading in the second parameter.
 
 ```java
 Trajectory trajectory = new TrajectoryBuilder(new Pose2d(), Math.toRadians(90))
-  .splineTo(...);
+  .splineTo(new Vector2d(36, 36), Math.toRadians(0))
+  .build();
 ```
 
 The code above will tell your bot to follow the entire path at a 90 degree angle.
-
-**TODO: insert gifs from MeepMeep as examples**
 
 ## Coordinate System
 
