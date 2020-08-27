@@ -14,6 +14,7 @@ Road Runner is a motion planning library, written for the [FTC robotics competit
 - [How is this different from Pure Pursuit?](#how-is-this-different-from-pure-pursuit)
 - [What are dead wheels/odometry?](#what-are-dead-wheels-odometry)
 - [What are spline paths?](#what-are-spline-paths)
+- [Can I change the default units?](#can-i-change-the-default-units)
 
 ### How is this different from Pure Pursuit?
 
@@ -51,3 +52,9 @@ Good open source design for a dead wheel design: [https://openodometry.weebly.co
 ### What are spline paths?
 
 Spline paths are trajectories generated using [spline curves](<https://www.wikiwand.com/en/Spline_(mathematics)>). Spline curves are piecewise polynomials that connect multiple points in a continuous (smooth) fashion. These benefit autonomous trajectories because it allows an object to follow a path while changing heading without making a point turn. Spline curves are ideal for non-holonomic drive trains. For Road Runner you will find that spline paths will be utilized frequently as it allows for continuous paths (connecting straight lines will break path continuity, we'll worry about that later 😉).
+
+### Can I change the default units?
+
+From the [official Road Runner FAQ](https://acme-robotics.gitbook.io/road-runner/quickstart/faq):
+
+> Inches are strongly recommended. If you really want to use other units, write your own adapters/wrappers for the Road Runner interfaces. Many important defaults are set with inches in mind, and it's difficult to change some from the high-level API.
