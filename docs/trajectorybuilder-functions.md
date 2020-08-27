@@ -6,7 +6,7 @@
     <VideoDisplay src="./assets/trajectorybuilder-functions/forward.mp4" width="400px" :controls="false"/>
 </div>
 
-```java
+```java{4}
 // Drives forward 40 inches
 
 new TrajectoryBuilder(new Pose2d())
@@ -22,7 +22,7 @@ new TrajectoryBuilder(new Pose2d())
     <VideoDisplay src="./assets/trajectorybuilder-functions/back.mp4" width="400px" :controls="false"/>
 </div>
 
-```java
+```java{4}
 // Drives backward 40 inches
 
 new TrajectoryBuilder(new Pose2d())
@@ -38,7 +38,7 @@ new TrajectoryBuilder(new Pose2d())
     <VideoDisplay src="./assets/trajectorybuilder-functions/strafe-left.mp4" width="400px" :controls="false"/>
 </div>
 
-```java
+```java{4}
 // Strafes left 40 inches
 
 new TrajectoryBuilder(new Pose2d())
@@ -54,7 +54,7 @@ new TrajectoryBuilder(new Pose2d())
     <VideoDisplay src="./assets/trajectorybuilder-functions/strafe-right.mp4" width="400px" :controls="false"/>
 </div>
 
-```java
+```java{4}
 // Strafes right 40 inches
 
 new TrajectoryBuilder(new Pose2d())
@@ -70,7 +70,7 @@ new TrajectoryBuilder(new Pose2d())
     <VideoDisplay src="./assets/trajectorybuilder-functions/line-to.mp4" width="400px" :controls="false"/>
 </div>
 
-```java
+```java{8}
 // Robot moves to the specified coordinates.
 // It keeps the same heading as when you start the move.
 // So, if you start at a 90 degree angle, it will keep that angle the entire path.
@@ -88,7 +88,7 @@ new TrajectoryBuilder(new Pose2d())
     <VideoDisplay src="./assets/trajectorybuilder-functions/line-to.mp4" width="400px" :controls="false"/>
 </div>
 
-```java
+```java{8}
 // Robot moves to the specified coordinates.
 // It keeps the same heading as when you start the move.
 // So, if you start at a 90 degree angle, it will keep that angle the entire path.
@@ -108,7 +108,7 @@ new TrajectoryBuilder(new Pose2d())
     <VideoDisplay src="./assets/trajectorybuilder-functions/line-to.mp4" width="400px" :controls="false"/>
 </div>
 
-```java
+```java{8}
 // Robot moves to the specified coordinates.
 // It keeps the same heading as when you start the move.
 // So, if you start at a 90 degree angle, it will keep that angle the entire path.
@@ -128,7 +128,7 @@ new TrajectoryBuilder(new Pose2d())
     <VideoDisplay src="./assets/trajectorybuilder-functions/line-to-linear-heading.mp4" width="400px" :controls="false"/>
 </div>
 
-```java
+```java{5}
 // Robot moves to the specified coordinates while linearly
 // interpolating between your current heading and a specified end heading.
 
@@ -145,7 +145,7 @@ new TrajectoryBuilder(new Pose2d())
     <VideoDisplay src="./assets/trajectorybuilder-functions/line-to-spline-heading.mp4" width="400px" :controls="false"/>
 </div>
 
-```java
+```java{5}
 // Robot moves to the specified coordinates while spline
 // interpolating between your current heading and a specified end heading.
 
@@ -162,7 +162,7 @@ new TrajectoryBuilder(new Pose2d())
     <VideoDisplay src="./assets/trajectorybuilder-functions/spline-to.mp4" width="400px" :controls="false"/>
 </div>
 
-```java
+```java{5}
 // Robot moves to the specified coordinates in a spline path
 // while following a tangent heading interpolator.
 
@@ -179,7 +179,7 @@ new TrajectoryBuilder(new Pose2d())
     <VideoDisplay src="./assets/trajectorybuilder-functions/spline-to-constant-heading.mp4" width="400px" :controls="false"/>
 </div>
 
-```java
+```java{7}
 // Robot moves to the specified coordinates in a spline path
 // while keeping the heading constant.
 // The heading is kept at the heading at the start of the movement.
@@ -198,7 +198,7 @@ new TrajectoryBuilder(new Pose2d())
     <VideoDisplay src="./assets/trajectorybuilder-functions/spline-to-linear-heading.mp4" width="400px" :controls="false"/>
 </div>
 
-```java
+```java{11}
 // Robot moves to the specified coordinates in a spline path
 // while separately linearly interpolating the heading
 //
@@ -221,7 +221,7 @@ new TrajectoryBuilder(new Pose2d())
     <VideoDisplay src="./assets/trajectorybuilder-functions/spline-to-spline-heading.mp4" width="400px" :controls="false"/>
 </div>
 
-```java
+```java{11}
 // Robot moves to the specified coordinates in a spline path
 // while separately spline interpolating the heading
 //
