@@ -324,7 +324,7 @@ const MotorGroup: MotorGroupItem[] = [
     ],
   },
   {
-    name: "NeveRest Bare",
+    name: "Bare Motor",
     key: "am-neverest-bare",
     src: "./assets/drive-constants/neverest-bare-half.jpg",
     color: "red",
