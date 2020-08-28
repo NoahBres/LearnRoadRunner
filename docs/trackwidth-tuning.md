@@ -1,7 +1,7 @@
 # Track Width Tuning
 
 <figure align="center">
-    <img src="./assets/you-are-here/YouAreHere-TrackWidthTuner-quarter.png">
+    <img src="./assets/you-are-here/YouAreHere-TrackWidthTuner-quarter.png" alt="You are on the track width tuning step">
     <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
 </figure>
 
@@ -37,6 +37,6 @@ You should have already tuned localization. Right now, you will be tuning the dr
 8. To tune the track width manually, simply keep raising the track width yourself until it turns 180 degrees. If it overshoots, lower the track width.
 
 <figure align="center">
-    <img class="rounded-lg" src="./assets/drive-constants/wes-bot-edit-half.jpg">
+    <img class="rounded-lg" src="./assets/drive-constants/wes-bot-edit-half.jpg" alt="Track width is the distance from the center of one wheel to the center of its parallel wheel">
     <figcaption class="mt-2 text-sm text-gray-600 text-center">3658 Bosons's 2019/20 Skystone Bot</figcaption>
 </figure>

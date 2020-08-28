@@ -21,7 +21,7 @@ If you do choose to use the official GUI, I would recommend using the trajectory
 4. You should see the following window:
 
 <figure align="center">
-    <img src="../assets/road-runner-gui/step-4-half-compressed.jpg">
+    <img src="../assets/road-runner-gui/step-4-half-compressed.jpg" alt="Screenshot of the main Road Runner GUI window">
     <figcaption class="mt-2 text-gray-600 text-center">Main Window</figcaption>
 </figure>
 
