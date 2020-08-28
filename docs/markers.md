@@ -139,8 +139,8 @@ new TrajectoryBuilder(new Pose2d())
 Spatial markers allow you to run an action based on a specified coordinate. This may be a bit unpredictable as Road Runner will project that coordinate you specified onto the path. This means that it will run at the point in the path closest to your specified coordinate. I personally don't recommend using spatial markers as they aren't very explicit.
 
 <figure align="center">
-    <img src="./assets/marker-overview/spatial-projection.jpg">
-    <figcaption class="mt-2 text-gray-600">Spatial marker being projected onto the path</figcaption>
+    <img class="rounded-lg" src="./assets/marker-overview/spatial-projection.jpg">
+    <figcaption class="mt-2 text-gray-600 text-center">Spatial marker being projected onto the path</figcaption>
 </figure>
 
 ## Things to Keep In Mind

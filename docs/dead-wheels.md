@@ -11,7 +11,7 @@ If you are not using dead wheels, skip this section.
 
 <figure align="center">
     <img src="./assets/you-are-here/YouAreHere-DeadWheels-quarter.png">
-    <figcaption class="mt-2 text-gray-600">You are here</figcaption>
+    <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
 </figure>
 
 Your configuration will depend on whether you have two or three dead wheels. Don't know the difference? Check [the FAQ](/#what-is-the-difference-between-two-and-three-wheel-odometry).
@@ -59,8 +59,8 @@ public static double PERPENDICULAR_Y = 0; // Y is the strafe direction
 Put in the X/Y coordinates of your perpendicular and parallel wheels. Remember that the X axis is the forward/back direction and the Y axis is the left/right direction. This is fairly standard for robotics/aviation/etc.
 
 <figure align="center">
-    <img src="./assets/dead-wheels/andrew-bot-wheel-location-quarter.jpg">
-    <figcaption class="mt-2 text-sm text-gray-600">17508 Rising Tau's 2019/20 Skystone Bot</figcaption>
+    <img class="rounded-lg" src="./assets/dead-wheels/andrew-bot-wheel-location-quarter.jpg">
+    <figcaption class="mt-2 text-sm text-gray-600 text-center">17508 Rising Tau's 2019/20 Skystone Bot</figcaption>
 </figure>
 
 ### Hardware ID's
@@ -138,8 +138,8 @@ public static double FORWARD_OFFSET = 4; // in; offset of the lateral wheel
 **`FORWARD_OFFSET`** is the distance from the lateral wheel to the middle wheel. The `FORWARD_OFFSET` is positive when in front of the wheels and negative when behind the wheels (closer to the back).
 
 <figure align="center">
-    <img src="./assets/dead-wheels/andrew-bot-forward-offset-quarter.jpg">
-    <figcaption class="mt-2 text-sm text-gray-600">17508 Rising Tau's 2019/20 Skystone Bot</figcaption>
+    <img class="rounded-lg" src="./assets/dead-wheels/andrew-bot-forward-offset-quarter.jpg">
+    <figcaption class="mt-2 text-sm text-gray-600 text-center">17508 Rising Tau's 2019/20 Skystone Bot</figcaption>
 </figure>
 
 ### Set Localizer in SampleMecanumDrive

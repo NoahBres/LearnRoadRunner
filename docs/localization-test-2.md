@@ -12,7 +12,7 @@ If you're using dead wheels, ignore this page.
 
 <figure align="center">
     <img src="./assets/you-are-here/YouAreHere-LocalizationTest-quarter.png">
-    <figcaption class="mt-2 text-gray-600">You are here</figcaption>
+    <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
 </figure>
 
 In this step, we are simply checking if the drive encoder localization proves to be accurate. Any errors in this step is due to an error in the `DriveConstants` file.

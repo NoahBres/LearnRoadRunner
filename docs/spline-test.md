@@ -2,7 +2,7 @@
 
 <figure align="center">
     <img src="./assets/you-are-here/YouAreHere-SplineTest-quarter.png">
-    <figcaption class="mt-2 text-gray-600">You are here</figcaption>
+    <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
 </figure>
 
 1. Once your `TRANSLATION` and `HEADING` PID's are tuned, you should run the spline test to make sure everything is in order.

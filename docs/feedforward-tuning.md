@@ -8,7 +8,7 @@ This section should be skipped because you have chosen the option to use drive e
 
 <figure align="center">
     <img src="./assets/you-are-here/YouAreHere-FFTuning-quarter.png">
-    <figcaption class="mt-2 text-gray-600">You are here</figcaption>
+    <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
 </figure>
 
 Tuning the feedforward controller for accurate following is necessary for for accurate path following. Poor tuning of the feedforward controller will result in errors later along the line. Although the Road Runner quickstart comes with both an automatic tuner and a manual tuner, many find that the automatic tuner does not provide optimal results. The automatic tuner isn't able to properly calculate `kA`. However, you are free to try and run it and use the gains it produces. However, I would recommend manually tuning those results afterwards.
@@ -28,7 +28,7 @@ Your page should look something like this:
       <img src="./assets/feedforward-tuning/example-dashboard-half.jpg">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
-    <figcaption class="mt-2 text-sm text-gray-600">Example dashboard</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600 text-center">Example dashboard</figcaption>
 </figure>
 
 4. Run the opmode. The graph will not show up until you have started it.
@@ -50,7 +50,7 @@ Your page should look something like this:
           <img src="./assets/feedforward-tuning/dawgma-tuning-guide.jpg">
           <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
         </div>
-        <figcaption class="mt-2 text-sm text-gray-600">Tuning Tips</figcaption>
+        <figcaption class="mt-2 text-sm text-gray-600 text-center">Tuning Tips</figcaption>
       </figure>
 
       These tips come from FRC Team 1712's [Adaptive Pure Pursuit paper](https://www.chiefdelphi.com/t/paper-implementation-of-the-adaptive-pure-pursuit-controller/166552)
@@ -66,7 +66,7 @@ Decently tuned feedforward controller courtesy of Deetz from Team 14320:
     <img src="./assets/feedforward-tuning/deetz-tuning-half.jpg">
     <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
-  <figcaption class="mt-2 text-sm text-gray-600">Tuned Feedforward Controller</figcaption>
+  <figcaption class="mt-2 text-sm text-gray-600 text-center">Tuned Feedforward Controller</figcaption>
 </figure>
 
 You may notice the asymmetry in the acceleration. Unfortunately, perfect velocity control is not yet achievable with a stock motor control model due to this asymmetry. Notice that the acceleration does not track well when decelerating. We suspect that this is due to weird Rev Hub's unique motor controller. For more details, or if you have a solution to this problem, please hit up the [FTC Discord](https://discord.gg/first-tech-challenge).

@@ -2,7 +2,7 @@
 
 <figure align="center">
     <img src="./assets/you-are-here/YouAreHere-FollowerPIDTuning-quarter.png">
-    <figcaption class="mt-2 text-gray-600">You are here</figcaption>
+    <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
 </figure>
 
 This is the last tuning step. Here, you will tune the closed loop feedback controller. This should improve your path following dramatically.
@@ -19,7 +19,7 @@ If you'd prefer to to use the simple `BackAndForth` opmode first, copy over [thi
 
 4. Ensure that you have the `Field` view selected in the top right.
 
-5. You should see two lines and two circles being drawn: <span style="background: #4CAF50;" class="px-2 py-1 pb-2 text-black rounded">green</span> for the target position and <span style="background: #3F51B5;" class="px-2 py-1 text-white rounded">blue</span> for your bot's actual position.
+5. You should see two lines and two circles being drawn: <span style="background: #4CAF50;" class="px-1 md:px-2 py-1 mb:pb-2 text-black rounded">green</span> for the target position and <span style="background: #3F51B5;" class="px-1 md:px-2 py-1 text-white rounded">blue</span> for your bot's actual position.
 
 6. Look for the `SampleMecanumDrive` in the right sidebar. Open that dropdown. You should be seeing two options: `HEADING_PID` and `TRANSLATION_PID`. Both options are located in the `SampleMecanumDrive` file.
 

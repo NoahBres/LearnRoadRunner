@@ -4,7 +4,7 @@
 
 <figure align="center">
     <img src="./assets/tools/rr-gui-half-compressed.jpg">
-    <figcaption class="mt-2 text-gray-600">Road Runner Official GUI</figcaption>
+    <figcaption class="mt-2 text-gray-600 text-center">Road Runner Official GUI</figcaption>
 </figure>
 
 Road Runner comes with an official GUI plugin for designing trajectories. It is able to export trajectories to a yaml file which can be read by the Road Runner library.
@@ -17,7 +17,7 @@ Check the [Road Runner GUI page](/tool/road-runner-gui) for further details on i
 
 <figure align="center">
     <img src="./assets/tools/rrpathviz-half-compressed.jpg">
-    <figcaption class="mt-2 text-gray-600">David's RRPathVisualizer</figcaption>
+    <figcaption class="mt-2 text-gray-600 text-center">David's RRPathVisualizer</figcaption>
 </figure>
 
 RRPathVisualizer was written by David, Recharged Green 7236's lead programmer. It is a path "visualizer" in that you write your trajectories as you would for your bot and you stick them in a custom Kotlin project. If you run the program it will display a window and animate the bot along your specified trajectories. I personally prefer this workflow as you can simply copy-paste the trajectories you made in RRPathVisualizer into your own FTC project.
@@ -30,7 +30,7 @@ Check the [RRPathVisualizer page](/tool/rrpathvisualizer) for further details on
 
 <figure align="center">
     <img src="./assets/tools/meepmeep-half-compressed.jpg">
-    <figcaption class="mt-2 text-gray-600">MeepMeep</figcaption>
+    <figcaption class="mt-2 text-gray-600 text-center">MeepMeep</figcaption>
 </figure>
 
 MeepMeep is currently in development but can be found [here](https://github.com/NoahBres/MeepMeep).

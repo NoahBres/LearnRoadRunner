@@ -22,7 +22,7 @@ If you do choose to use the official GUI, I would recommend using the trajectory
 
 <figure align="center">
     <img src="../assets/road-runner-gui/step-4-half-compressed.jpg">
-    <figcaption class="mt-2 text-gray-600">Main Window</figcaption>
+    <figcaption class="mt-2 text-gray-600 text-center">Main Window</figcaption>
 </figure>
 
 5. Click the add button (top left) and give your trajectory a name

@@ -21,7 +21,7 @@ Keep in mind that RRPathVisualizer is written in Kotlin. It should be easy to un
 
 <figure align="center">
     <img src="../assets/rrpathviz/step-2-half-compress.jpg">
-    <figcaption class="mt-2 text-gray-600">Peep the play button 👀</figcaption>
+    <figcaption class="mt-2 text-gray-600 text-center">Peep the play button 👀</figcaption>
 </figure>
 
 3. You may have to set the project SDK

@@ -30,7 +30,7 @@ Although in the FTC community dead wheels and odometry are often used synonymous
 
 <figure align="center">
     <img src="./assets/home/dead-wheel-example-small.jpg" class="rounded-lg">
-    <figcaption class="mt-2 text-sm text-gray-600">An example of dead wheels</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600 text-center">An example of dead wheels</figcaption>
 </figure>
 
 ### What is the difference between two and three wheel odometry?

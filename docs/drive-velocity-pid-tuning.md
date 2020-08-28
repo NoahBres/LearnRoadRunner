@@ -8,7 +8,7 @@ This section should be skipped because you have chosen the option not to use dri
 
 <figure align="center">
     <img src="./assets/you-are-here/YouAreHere-DriveVelocityPID-quarter.png">
-    <figcaption class="mt-2 text-gray-600">You are here</figcaption>
+    <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
 </figure>
 
 Tuning the Velocity PID can be one of the more frustrating parts of Road Runner. This is required for accurate path following. However, intuition on how a PID controller works and what to do will help alleviate that frustration and hopefully make this a smooth process.
@@ -28,7 +28,7 @@ Your page should look something like this:
       <img src="./assets/drive-velocity-pid-tuning/example-dashboard-half.jpg">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
-    <figcaption class="mt-2 text-sm text-gray-600">Example dashboard</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600 text-center">Example dashboard</figcaption>
 </figure>
 
 4. Run the opmode. The graph and its options will not show up until you have started it.

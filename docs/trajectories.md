@@ -157,11 +157,11 @@ Sadly, your program crashed and you run into a `PathContinuityException` error. 
 Well, you've run into a continuity error. What does this mean? If you harken back to the old days of pre-calculus or algebra 2, you may have covered [discontinuities](https://www.wikiwand.com/en/Classification_of_discontinuities). If you haven't taken either of those classes yet, you will eventually cover them.
 
 <figure align="center">
-    <div class="relative">
+    <div class="relative rounded-lg overflow-hidden">
       <img src="./assets/trajectory-overview/wikipedia-removable-discontinuity-quarter.png">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
-    <figcaption class="mt-2 text-sm text-gray-600">Removable Discontinuity</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600 text-center">Removable Discontinuity</figcaption>
 </figure>
 
 Road Runner wants a continuous path for motion profiling purposes. This isn't just a Road Runner quirk. Any motion profiling system (FTCLib/WPILib) will want to enforce continuity.
@@ -170,7 +170,7 @@ Motion profiling generates the exact path you need to take. Therefore, all the t
 
 <figure align="center">
     <img src="./assets/trajectory-overview/continuity-error-bot-quarter.jpg">
-    <figcaption class="mt-2 text-gray-600">PathContinuityException Example</figcaption>
+    <figcaption class="mt-2 text-gray-600 text-center">PathContinuityException Example</figcaption>
 </figure>
 
 When looking at the path above, your bot _physically cannot_ follow that exact path. Imagine the bot moving along that path in your head. It gets towards the edge the of pink line at full speed and it wants to suddenly strafe right.
@@ -212,7 +212,7 @@ Trajectory traj = trajectoryBuilder(new Pose2d())
 
 <figure align="center">
     <img src="./assets/trajectory-overview/continuity-error-fix-bot-quarter.jpg">
-    <figcaption class="mt-2 text-gray-600">Spline Goodness. CAD provided by Aman of 3916</figcaption>
+    <figcaption class="mt-2 text-gray-600 text-center">Spline Goodness. CAD provided by Aman of 3916</figcaption>
 </figure>
 
 ## Running Multiple Trajectories
@@ -302,11 +302,11 @@ The X axis extends through the origin and runs _parallel_ with the Red Alliance 
 The Y axis extends through the origin and runs _perpendicular_ to the Red Alliance Station. The axis value increases away from the Red Alliance Station.
 
 <figure align="center">
-    <div class="relative">
+    <div class="relative rounded-lg overflow-hidden">
       <img src="./assets/trajectory-overview/field-w-axes-half.jpg">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
-    <figcaption class="mt-2 text-sm text-gray-600">2019/20 Skystone Field</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600 text-center">2019/20 Skystone Field</figcaption>
 </figure>
 
 Notice how the field is rotated 90 degrees relative to if we were looking at it from the audience's point of view. This is because the frame of reference is defined by the Red Alliance Station. Be mindful of this as Road Runner's official GUI and RRPathVisualizer both opt for the "proper" orientation of the field. Thus, in their maps, Y increase to the left and X increases up.
