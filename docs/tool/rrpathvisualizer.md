@@ -28,7 +28,6 @@ Keep in mind that RRPathVisualizer is written in Kotlin. It should be easy to un
    - If so, go to the File > Project Structure
    - Find the "Project SDK" setting. Select the latest JDK version installed. Intellij should come bundled with JDK 14
 4. To make your paths, open the `TrajectoryGen.kt` file
-5. Keep in mind that this file is written
-6. Find `builder1`. That is the example `TrajectoryBuilder` provided
-7. Just use the builder as you would normally
-8. You can add more trajectories by calling `list.add(trajectory)`
+5. Find `builder1`. That is the example `TrajectoryBuilder` provided
+6. Just use the builder as you would normally
+7. You can add more trajectories by calling `list.add(trajectory)`
