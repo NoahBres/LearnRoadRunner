@@ -15,6 +15,8 @@ An opinionated guide and documentation for Road Runner
 
 - Finish gain scheduling section
 
+- write about interrupting live trajectories
+
 - support fancy image/video formats (webm, webp, etc)
 
 - yell at user if they use I or D in velo pid

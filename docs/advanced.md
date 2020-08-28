@@ -69,3 +69,7 @@ In addition to that, you cannot add delays with this method. If you'd like to do
 ## Gain Scheduling
 
 **TODO: Come back and write this**
+
+## Interrupting a Live Trajectory
+
+**TODO: Come back and write this**
