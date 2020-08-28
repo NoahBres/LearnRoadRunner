@@ -1,5 +1,9 @@
 # Official Road Runner GUI
 
+Road Runner comes with an official GUI plugin for designing trajectories. It is able to export trajectories to a yaml file which can be read by the Road Runner library.
+However, the GUI can only build spline paths. It does not utilize `lineTo` or the relative movements (`strafe()`, `forward()`, etc). Because it is exported to a yaml file, it does not support markers.
+If you do choose to use the official GUI, I would recommend using the trajectory builder and translating that to Java code yourself.
+
 ## Installation
 
 1. Navigate to the [Road Runner releases page on github](https://github.com/acmerobotics/road-runner/releases)
@@ -22,7 +26,7 @@
 </figure>
 
 5. Click the add button (top left) and give your trajectory a name
-6. Now, click the add button near the button right, this will add more waypoints
+6. Now, click the add button near the bottom right, this will add more waypoints
    - Edit the coordinates in your waypoints
 7. Play around!
 
