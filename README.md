@@ -11,28 +11,13 @@ An opinionated guide and documentation for Road Runner
 
 ## TODO:
 
-- details on async following
-- details on each heading interpolator
-- explanation of continuity exceptions
-- check the come back sections
+- Finish overloading constraints section
 
-- Fix the default mobile breakpoints
+- Finish gain scheduling section
 
-- go back and add the you are here images
-
-- make a resources section with the papers ryan linked in the original docs
-
-- add a tools section with like david's visualizer and stuff
-
-- add alt tags to images
-
-- improve lighthouse scores
-
-- support fancy image/video formats
+- support fancy image/video formats (webm, webp, etc)
 
 - yell at user if they use I or D in velo pid
-
-- insert gifs from MeepMeep as examples in trajectories
 
 - remove underline in the trajectories page
 
