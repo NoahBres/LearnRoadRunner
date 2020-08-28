@@ -1,6 +1,7 @@
 <template>
   <div class="py-4 box" :style="{ width: width }">
     <video
+      class="md:rounded"
       width="100%"
       :controls="controls"
       v-bind:autoplay="autoplay"
