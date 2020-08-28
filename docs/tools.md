@@ -22,6 +22,8 @@ Check the [Road Runner GUI page](/tool/road-runner-gui) for further details on i
 
 RRPathVisualizer was written by David, Recharged Green 7236's lead programmer. It is a path "visualizer" in that you write your trajectories as you would for your bot and you stick them in a custom Kotlin project. If you run the program it will display a window and animate the bot along your specified trajectories. I personally prefer this workflow as you can simply copy-paste the trajectories you made in RRPathVisualizer into your own FTC project.
 
+Keep in mind that RRPathVisualizer is written in Kotlin. It should be easy to understand Kotlin if you know Java.
+
 Check the [RRPathVisualizer page](/tool/rrpathvisualizer) for further details on installation and use.
 
 ## MeepMeep (in development)
