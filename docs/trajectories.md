@@ -158,7 +158,7 @@ Well, you've run into a continuity error. What does this mean? If you harken bac
 
 <figure align="center">
     <div class="relative rounded-lg overflow-hidden">
-      <img src="./assets/trajectory-overview/wikipedia-removable-discontinuity-quarter.png">
+      <img src="./assets/trajectory-overview/wikipedia-removable-discontinuity-quarter.png" alt="Image depicting a removable discontinuity">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
     <figcaption class="mt-2 text-sm text-gray-600 text-center">Removable Discontinuity</figcaption>
@@ -169,7 +169,7 @@ When Road Runner throws that `PathContinuityException`, your path is no longer c
 Motion profiling generates the exact path you need to take. Therefore, all the trajectories you create must follow the laws of physics and be continuous.
 
 <figure align="center">
-    <img src="./assets/trajectory-overview/continuity-error-bot-quarter.jpg">
+    <img src="./assets/trajectory-overview/continuity-error-bot-quarter.jpg" alt="Image depicting a continuity error on a path caused by two right angle paths">
     <figcaption class="mt-2 text-gray-600 text-center">PathContinuityException Example</figcaption>
 </figure>
 
@@ -211,7 +211,7 @@ Trajectory traj = trajectoryBuilder(new Pose2d())
 ```
 
 <figure align="center">
-    <img src="./assets/trajectory-overview/continuity-error-fix-bot-quarter.jpg">
+    <img src="./assets/trajectory-overview/continuity-error-fix-bot-quarter.jpg" alt="Image describing a path preserving continuity through a spline">
     <figcaption class="mt-2 text-gray-600 text-center">Spline Goodness. CAD provided by Aman of 3916</figcaption>
 </figure>
 
@@ -303,7 +303,7 @@ The Y axis extends through the origin and runs _perpendicular_ to the Red Allian
 
 <figure align="center">
     <div class="relative rounded-lg overflow-hidden">
-      <img src="./assets/trajectory-overview/field-w-axes-half.jpg">
+      <img src="./assets/trajectory-overview/field-w-axes-half.jpg" alt="Image of the skystone field">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
     <figcaption class="mt-2 text-sm text-gray-600 text-center">2019/20 Skystone Field</figcaption>

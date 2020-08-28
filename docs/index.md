@@ -29,7 +29,7 @@ Although in the FTC community dead wheels and odometry are often used synonymous
 **TL;DR** Dead wheels allow accurate positional tracking of mecanum drives at high speeds and accelerations.
 
 <figure align="center">
-    <img src="./assets/home/dead-wheel-example-small.jpg" class="rounded-lg">
+    <img src="./assets/home/dead-wheel-example-small.jpg" class="rounded-lg" alt="Underside of a bot with dead wheels highlighted">
     <figcaption class="mt-2 text-sm text-gray-600 text-center">An example of dead wheels</figcaption>
 </figure>
 

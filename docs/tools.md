@@ -3,7 +3,7 @@
 ## Road Runner GUI
 
 <figure align="center">
-    <img src="./assets/tools/rr-gui-half-compressed.jpg">
+    <img src="./assets/tools/rr-gui-half-compressed.jpg" alt="Screenshot depicting Road Runner's Path Building GUI">
     <figcaption class="mt-2 text-gray-600 text-center">Road Runner Official GUI</figcaption>
 </figure>
 
@@ -16,7 +16,7 @@ Check the [Road Runner GUI page](/tool/road-runner-gui) for further details on i
 ## David's RRPathVisualizer
 
 <figure align="center">
-    <img src="./assets/tools/rrpathviz-half-compressed.jpg">
+    <img src="./assets/tools/rrpathviz-half-compressed.jpg" alt="Screenshot depicting David's RRPathVisualizer">
     <figcaption class="mt-2 text-gray-600 text-center">David's RRPathVisualizer</figcaption>
 </figure>
 
@@ -29,7 +29,7 @@ Check the [RRPathVisualizer page](/tool/rrpathvisualizer) for further details on
 ## MeepMeep (in development)
 
 <figure align="center">
-    <img src="./assets/tools/meepmeep-half-compressed.jpg">
+    <img src="./assets/tools/meepmeep-half-compressed.jpg" alt="Screenshot depicting MeepMeep">
     <figcaption class="mt-2 text-gray-600 text-center">MeepMeep</figcaption>
 </figure>
 

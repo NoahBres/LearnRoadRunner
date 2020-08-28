@@ -29,7 +29,7 @@ Try out the configurator to have your constants class auto configured!
 If you want to quickly get a constants file up and running, I recommend clicking the configurator button above to automatically generate your drive constants file. We will be going through what each constant means one by one below.
 
 <figure align="center">
-    <img src="./assets/you-are-here/YouAreHere-DriveConstants-quarter.png">
+    <img src="./assets/you-are-here/YouAreHere-DriveConstants-quarter.png" alt="You are on the drive constants step">
     <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
 </figure>
 
@@ -105,7 +105,7 @@ public static double TRACK_WIDTH = 1; // in
 **`TRACK_WIDTH`** is the distance from the center of one wheel to the center of its parallel wheel. This number only need be an estimate. You will empirically tune this later.
 
 <figure align="center">
-    <img class="rounded-lg" src="./assets/drive-constants/wes-bot-edit-half.jpg">
+    <img class="rounded-lg" src="./assets/drive-constants/wes-bot-edit-half.jpg" alt="Track width is the distance from the center of one wheel to the center of the other">
     <figcaption class="mt-2 text-sm text-gray-600 text-center">3658 Bosons's 2019/20 Skystone Bot</figcaption>
 </figure>
 
@@ -153,7 +153,7 @@ The parameters Drive Constraints take are:
 <span class="bg-red-300 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">maxVelo</span> defines the maximum velocity that the robot can go. This is the fastest speed that the robot can ramp up to. The default value is `30in/s`. You can calculate the maximum velocity for your bot using the following equation:
 
 <figure align="center" class="py-10">
-  <img src="./assets/drive-constants/max-vel-latex-half.png" />
+  <img src="./assets/drive-constants/max-vel-latex-half.png" alt="max velocity = (max rpm / 60) * gear ratio * wheel radius * 2 * pi">
   <figcaption class="mt-4 text-sm text-gray-600 text-center">Max Velocity Equation (per second)</figcaption>
 </figure>
 

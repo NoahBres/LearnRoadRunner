@@ -1,7 +1,7 @@
 # Follower PID Tuning
 
 <figure align="center">
-    <img src="./assets/you-are-here/YouAreHere-FollowerPIDTuning-quarter.png">
+    <img src="./assets/you-are-here/YouAreHere-FollowerPIDTuning-quarter.png" alt="You are on the follower pid tuning step">
     <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
 </figure>
 

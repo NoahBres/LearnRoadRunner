@@ -7,7 +7,7 @@ This section should be skipped because you have chosen the option not to use dri
 </HideAyudeWrapper>
 
 <figure align="center">
-    <img src="./assets/you-are-here/YouAreHere-DriveVelocityPID-quarter.png">
+    <img src="./assets/you-are-here/YouAreHere-DriveVelocityPID-quarter.png" alt="You are on the drive velocity pid step">
     <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
 </figure>
 
@@ -25,7 +25,7 @@ Your page should look something like this:
 
 <figure align="center">
     <div class="relative">
-      <img src="./assets/drive-velocity-pid-tuning/example-dashboard-half.jpg">
+      <img src="./assets/drive-velocity-pid-tuning/example-dashboard-half.jpg" alt="Image depicting FTC Dashboard in the browser">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
     <figcaption class="mt-2 text-sm text-gray-600 text-center">Example dashboard</figcaption>

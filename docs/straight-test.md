@@ -1,7 +1,7 @@
 # Straight Test Tuning
 
 <figure align="center">
-    <img src="./assets/you-are-here/YouAreHere-StraightTest-quarter.png">
+    <img src="./assets/you-are-here/YouAreHere-StraightTest-quarter.png" alt="You are on the straight test step">
     <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
 </figure>
 

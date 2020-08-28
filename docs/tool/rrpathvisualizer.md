@@ -20,7 +20,7 @@ Keep in mind that RRPathVisualizer is written in Kotlin. It should be easy to un
 2. You should just be able to press the play button up top without any problems
 
 <figure align="center">
-    <img src="../assets/rrpathviz/step-2-half-compress.jpg">
+    <img src="../assets/rrpathviz/step-2-half-compress.jpg" alt="Screenshot of RRPathVisualizer open in Intellij">
     <figcaption class="mt-2 text-gray-600 text-center">Peep the play button 👀</figcaption>
 </figure>
 

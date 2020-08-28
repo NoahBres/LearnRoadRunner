@@ -11,7 +11,7 @@ If you're using dead wheels, ignore this page.
 :::
 
 <figure align="center">
-    <img src="./assets/you-are-here/YouAreHere-LocalizationTest-quarter.png">
+    <img src="./assets/you-are-here/YouAreHere-LocalizationTest-quarter.png" alt="You are on the localization test 2 step">
     <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
 </figure>
 

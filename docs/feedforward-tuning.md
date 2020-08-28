@@ -7,7 +7,7 @@ This section should be skipped because you have chosen the option to use drive e
 </HideAyudeWrapper>
 
 <figure align="center">
-    <img src="./assets/you-are-here/YouAreHere-FFTuning-quarter.png">
+    <img src="./assets/you-are-here/YouAreHere-FFTuning-quarter.png" alt="You are on the feedforward tuning step">
     <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
 </figure>
 
@@ -25,7 +25,7 @@ Your page should look something like this:
 
 <figure align="center">
     <div class="relative">
-      <img src="./assets/feedforward-tuning/example-dashboard-half.jpg">
+      <img src="./assets/feedforward-tuning/example-dashboard-half.jpg" alt="Image depicting FTC Dashboard in the browser">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
     <figcaption class="mt-2 text-sm text-gray-600 text-center">Example dashboard</figcaption>
@@ -47,7 +47,7 @@ Your page should look something like this:
 
       <figure align="center">
         <div class="relative">
-          <img src="./assets/feedforward-tuning/dawgma-tuning-guide.jpg">
+          <img src="./assets/feedforward-tuning/dawgma-tuning-guide.jpg" alt="Image depicting tips for feed forward tuning using various graphed examples">
           <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
         </div>
         <figcaption class="mt-2 text-sm text-gray-600 text-center">Tuning Tips</figcaption>
@@ -63,7 +63,7 @@ Decently tuned feedforward controller courtesy of Deetz from Team 14320:
 
 <figure align="center">
   <div class="relative">
-    <img src="./assets/feedforward-tuning/deetz-tuning-half.jpg">
+    <img src="./assets/feedforward-tuning/deetz-tuning-half.jpg" alt="Image depicting a decently tuned system with minimal phase lag">
     <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
   <figcaption class="mt-2 text-sm text-gray-600 text-center">Tuned Feedforward Controller</figcaption>
