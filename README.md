@@ -24,3 +24,5 @@ An opinionated guide and documentation for Road Runner
 - go back and fix everything in safari because safari sucks
 
 - fix firefox too
+
+- optimize for cumulative layout shift
