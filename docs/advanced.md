@@ -45,7 +45,7 @@ public void init() {
     .build()
 
   trajectory3 = drive.trajectoryBuilder(trajectory2.end())
-    .lineTo(new Vector2())
+    .lineTo(new Vector2d())
     .build()
 
   // Be sure to set the drive to follow the first trajectory in init
