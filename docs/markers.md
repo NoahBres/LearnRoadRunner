@@ -7,7 +7,7 @@ Road Runner as a handy little feature called markers. These allow you to run act
 Basic marker example:
 
 ```java{3-6}
-new TrajectoryBuilder(new Pose2d())
+drive.trajectoryBuilder(new Pose2d())
   .splineTo(new Vector2d(36, 36), Math.toRadians(0))
   .addDisplacementMarker(() -> {
     // Run your action in here!
@@ -30,7 +30,7 @@ There are 3 types of markers:
 ## Temporal Markers - Basics
 
 ```java{4-8}
-new TrajectoryBuilder(new Pose2d())
+drive.trajectoryBuilder(new Pose2d())
   .splineTo(new Vector2d(36, 36), Math.toRadians(0))
 
   .addTemporalMarker(2, () -> {
@@ -49,13 +49,13 @@ Temporal markers allow you to create an action based on the time elapsed. Keep i
 // Both of those trajectories run exactly the same,
 // even though the add marker call is in a different order.
 
-new TrajectoryBuilder(new Pose2d())
+drive.trajectoryBuilder(new Pose2d())
   .splineTo(new Vector2d(36, 36), Math.toRadians(0))
   .addTemporalMarker(2, () -> {})
   .splineTo(new Vector2d(72, 0), Math.toRadians(0))
   .build()
 
-new TrajectoryBuilder(new Pose2d())
+drive.trajectoryBuilder(new Pose2d())
   .splineTo(new Vector2d(36, 36), Math.toRadians(0))
   .splineTo(new Vector2d(72, 0), Math.toRadians(0))
   .addTemporalMarker(2, () -> {})
@@ -69,7 +69,7 @@ There are two basic ways to use displacement markers:
 ### Inline Displacement Markers
 
 ```java{4-8}
-new TrajectoryBuilder(new Pose2d())
+drive.trajectoryBuilder(new Pose2d())
   .splineTo(new Vector2d(36, 36), Math.toRadians(0))
 
   .addDisplacementMarker(() -> {
@@ -87,7 +87,7 @@ This marker will run after the first `splineTo()`. It is not evaluated "_globall
 ### Global Displacement Markers
 
 ```java{4-8}
-new TrajectoryBuilder(new Pose2d())
+drive.trajectoryBuilder(new Pose2d())
   .splineTo(new Vector2d(36, 36), Math.toRadians(0))
 
   .addDisplacementMarker(20, () -> {
@@ -106,13 +106,13 @@ This marker is based on _displacement_ (essentially distance traveled). This par
 // Both of those trajectories run exactly the same,
 // even though the add marker call is in a different order.
 
-new TrajectoryBuilder(new Pose2d())
+drive.trajectoryBuilder(new Pose2d())
   .splineTo(new Vector2d(36, 36), Math.toRadians(0))
   .addDisplacementMarker(20, () -> {})
   .splineTo(new Vector2d(72, 0), Math.toRadians(0))
   .build()
 
-new TrajectoryBuilder(new Pose2d())
+drive.trajectoryBuilder(new Pose2d())
   .splineTo(new Vector2d(36, 36), Math.toRadians(0))
   .splineTo(new Vector2d(72, 0), Math.toRadians(0))
   .addDisplacementMarker(20, () -> {})
@@ -122,7 +122,7 @@ new TrajectoryBuilder(new Pose2d())
 ## Spatial Markers - Basics
 
 ```java{4-8}
-new TrajectoryBuilder(new Pose2d())
+drive.trajectoryBuilder(new Pose2d())
   .splineTo(new Vector2d(36, 36), Math.toRadians(0))
 
   .addSpatialMarker(new Vector2d(20, 20), () -> {
@@ -157,7 +157,7 @@ You may have used `sleep()` in a basic Linear OpMode to wait between actions. Sa
 
 ```java
 // THIS IS AN EXAMPLE OF WHAT NOT TO DO
-new TrajectoryBuilder(new Pose2d())
+drive.trajectoryBuilder(new Pose2d())
   .splineTo(new Vector2d(36, 36), Math.toRadians(0))
   .splineTo(new Vector2d(72, 0), Math.toRadians(0))
   .addDisplacementMarker(10, () -> {
@@ -178,7 +178,7 @@ This is bad. The `sleep()` function will pause the entire thread. This means tha
 I would recommend simply chaining two temporal markers or fine tuning multiple displacement markers instead.
 
 ```java
-new TrajectoryBuilder(new Pose2d())
+drive.trajectoryBuilder(new Pose2d())
   .splineTo(new Vector2d(36, 36), Math.toRadians(0))
   .splineTo(new Vector2d(72, 0), Math.toRadians(0))
   .addTemporalMarker(1, () -> {
@@ -202,7 +202,7 @@ You can choose to make it fancier and abstract those times into a separate varia
 double setMotorTime = 1; // What time we set the motor power
 double setMotorWait = 1.5; // How long we wait until we turn off the motor
 
-new TrajectoryBuilder(new Pose2d())
+drive.trajectoryBuilder(new Pose2d())
   .splineTo(new Vector2d(36, 36), Math.toRadians(0))
   .splineTo(new Vector2d(72, 0), Math.toRadians(0))
   .addTemporalMarker(setMotorTime, () -> {

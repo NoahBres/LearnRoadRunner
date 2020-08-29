@@ -282,7 +282,7 @@ This is actually just a shorthand for passing a heading of 180 degrees into the 
 The `TrajectoryBuilder` supports any arbitrary heading in the second parameter.
 
 ```java
-Trajectory trajectory = new TrajectoryBuilder(new Pose2d(), Math.toRadians(90))
+Trajectory trajectory = drive.trajectoryBuilder(new Pose2d(), Math.toRadians(90))
   .splineTo(new Vector2d(36, 36), Math.toRadians(0))
   .build();
 ```
