@@ -50,7 +50,7 @@ public class MyOpmode extends LinearOpMode {
   public void runOpMode() {
     SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-    Trajectory myTrajectory = new drive.trajectoryBuilder(new Pose2d())
+    Trajectory myTrajectory = drive.trajectoryBuilder(new Pose2d())
         .strafeRight(10)
         .forward(5)
         .build();
@@ -77,7 +77,7 @@ There, we simply declare the `SampleMecanumDrive` object included in the quickst
 <div class="h-5"></div>
 
 ```java{1}
-Trajectory myTrajectory = new drive.trajectoryBuilder(new Pose2d())
+Trajectory myTrajectory = drive.trajectoryBuilder(new Pose2d())
   .strafeRight(10)
   .forward(5)
   .build();
@@ -94,7 +94,7 @@ If you want to set your starting position to something else, say x: 5, y: -4, at
 Notice the lack of semicolon at the end of the `drive.trajectoryBuilder()` line. That means that line doesn't actually end there. The entire line is actually the same as this:
 
 ```java
-Trajectory myTrajectory = new drive.trajectoryBuilder(new Pose2d()).strafeRight(10).forward(5).build();
+Trajectory myTrajectory = drive.trajectoryBuilder(new Pose2d()).strafeRight(10).forward(5).build();
 ```
 
 However, we prefer to enter a new line to keep everything clean.
@@ -102,7 +102,7 @@ However, we prefer to enter a new line to keep everything clean.
 <div class="h-5"></div>
 
 ```java{2,3}
-Trajectory myTrajectory = new drive.trajectoryBuilder(new Pose2d())
+Trajectory myTrajectory = drive.trajectoryBuilder(new Pose2d())
   .strafeRight(10)
   .forward(5)
   .build();
@@ -115,7 +115,7 @@ This means that we can keep chaining differents methods, infinitely, to keep bui
 <div class="h-5"></div>
 
 ```java{4}
-Trajectory myTrajectory = new drive.trajectoryBuilder(new Pose2d())
+Trajectory myTrajectory = drive.trajectoryBuilder(new Pose2d())
   .strafeRight(10)
   .forward(5)
   .build();
@@ -146,7 +146,7 @@ That's it right? Well, not quite. if you run that trajectory as-is, it's actuall
 So you go to run your cool new trajectory you just made.
 
 ```java
-trajectoryBuilder(new Pose2d())
+drive.trajectoryBuilder(new Pose2d())
   .strafeRight(10)
   .forward(5)
   .build();
@@ -182,11 +182,11 @@ So what do we do? There are two options:
 1. **Split your path into two separate trajectories**
 
 ```java
-Trajectory traj1 = trajectoryBuilder(new Pose2d())
+Trajectory traj1 = drive.trajectoryBuilder(new Pose2d())
   .strafeRight(10)
   .build();
 
-Trajectory traj2 = trajectoryBuilder(traj1.end())
+Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
   .forward(5)
   .build();
 
@@ -204,7 +204,7 @@ The only quirk is that splines can make odd shapes if you don't understand how t
 Check out the [TrajectoryBuilder Function List](/trajectorybuilder-functions) to see all your options.
 
 ```java
-Trajectory traj = trajectoryBuilder(new Pose2d())
+Trajectory traj = drive.trajectoryBuilder(new Pose2d())
   .splineTo(new Vector2d(x1, y1), heading)
   .splineTo(new Vector2d(x2, y2), heading)
   .build();
@@ -223,16 +223,16 @@ If your bot goes back and forth, each movement that the bot comes to halt or rev
 **How to run multiple trajectories**:
 
 ```java
-Trajectory traj1 = trajectoryBuilder(new Pose2d())
+Trajectory traj1 = drive.trajectoryBuilder(new Pose2d())
   .strafeRight(10)
   .build();
 
-Trajectory traj2 = trajectoryBuilder(traj1.end())
+Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
   .splineTo(new Vector2d(5, 6), 0)
   .splineTo(new Vector2d(9, -10), 0)
   .build();
 
-Trajectory traj3 = trajectoryBuilder(traj2.end())
+Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
   .splineTo(new Vector2d(5, 6), 0)
   .splineTo(new Vector2d(9, -10), 0)
   .build();
@@ -267,7 +267,7 @@ drive.turn(Math.toRadians(-270));
 Say you want to drive your robot in reverse. `TrajectoryBuilder` actually makes this quite simple.
 
 ```java{1}
-Trajectory trajectory = new TrajectoryBuilder(new Pose2d(), true)
+Trajectory trajectory = drive.trajectoryBuilder(new Pose2d(), true)
   .splineTo(new Vector2d(36, 36), Math.toRadians(0))
   .build();
 ```
