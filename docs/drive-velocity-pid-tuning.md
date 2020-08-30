@@ -35,11 +35,11 @@ Your page should look something like this:
 
 If the graph doesn't show up, and instead shows a number of checkboxes, that's okay. Click the `targetVelocity` and `velocity0` checkbox. Ignore the others. This will make tuning easier.
 
-5. Look for the `DriveVelocityPIDTuner` in the right sidebar. Open the dropdown. Then look for `VELO_PID`. Open that dropdown. You'll see the options: `DISTANCE`, `kD`, `kI`, and `kP`.
+5. Look for the `DriveVelocityPIDTuner` in the right sidebar. Open the dropdown. Then look for `VELO_PID`. Open that dropdown. You'll see the options: `DISTANCE`, `kD`, `kI`, and `kP`. You will be tuning these variables.
 
 6. Ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`.
 
-7. You're going to tune these values. The goal of the tuning process is to match `velocity0` to the `targetVelocity` line. Edit the values in the text boxes and press enter. They will live update and you should see the effects take place on the bot.
+7. At this point, once you have run the opmode, the bot should be moving back and forth along the distance specified in the opmode file. The goal of the tuning process is to match `velocity0` to the `targetVelocity` line. Edit the values in the text boxes and press enter. They will live update and you should see the effects take place on the bot.
 
 8. **Recommended tuning process**:
    1. Set all the values, `kP`, `kD`, and `kI` to 0. Keep `kV` as is.
@@ -48,7 +48,7 @@ If the graph doesn't show up, and instead shows a number of checkboxes, that's o
    4. Increase `kD` to try and dampen the oscillations. Increasing `kD` too far will simply increase oscillations.
    5. Increase `kP` once again. Repeat the `kP` and `kD` increase until your graph starts to match the target velocity.
    6. You should not touch `kI`. `kI` tends to cause many problems and its use is technically incorrect.
-   7. The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it.
+   7. **Note:** The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it. In addition to that, the FTC Motor Controller is a little odd and you will have a slight bump on deceleration that will be impossible to get rid of.
    8. The official Road Runner docs recommend that you should "prioritize eliminating phase lag even at the cost of some extra oscillations." However, I personally feel that it is better to try and minimize oscillations, especially towards the zero velocity. I found that eliminating phase lag, especially at high speeds, would cause very jittery motion, most likely due to the Rev Hub's odd motor control. Hit us up in the [FTC Discord](https://discord.gg/first-tech-challenge) if you are interested in further technical details. My personal advice would be to minimize oscillations and allow for the translational PID to fix any phase lag discrepancies.
    9. **Any adjustments in dashboard need to be copied over to the `DriveConstants.java` file under the equivalent variable name. Dashboard adjustments are temporary and will reset once you restart the opmode.**
    10. Check the tuning simulator to see how each gain affects the behavior.
