@@ -63,6 +63,55 @@ Put in the X/Y coordinates of your perpendicular and parallel wheels. Remember t
     <figcaption class="mt-2 text-sm text-gray-600 text-center">17508 Rising Tau's 2019/20 Skystone Bot</figcaption>
 </figure>
 
+### Encoder Directions
+
+Make sure to reverse the encoder directions when appropriate. There are two ways to do so.
+
+Either:
+
+1.  Set the motor direction that the encoder is connected to, to `REVERSE`
+
+    ```java
+    parallelEncoder.setDirection(DcMotorSimple.Direction.REVERSE);
+    ```
+
+However, this also reverses the direction of the motor if one is attached to the same port. So if you would prefer not to do that...
+
+2. Negate the motor position and velocity in your `TwoWheelTrackingLocalizer.java`
+
+```java{9,18}
+// Notice the * -1
+// Make sure it's applied to both getWheelVelocities() and getWheelPositions()
+
+@NonNull
+@Override
+public List<Double> getWheelPositions() {
+    return Arrays.asList(
+            encoderTicksToInches(parallelEncoder.getCurrentPosition()),
+            encoderTicksToInches(perpendicularEncoder.getCurrentPosition()) * -1,
+    );
+}
+
+@NonNull
+@Override
+public List<Double> getWheelVelocities() {
+    return Arrays.asList(
+            encoderTicksToInches(parallelEncoder.getVelocity()),
+            encoderTicksToInches(perpendicularEncoder.getVelocity()) * -1
+    );
+}
+```
+
+### Troubleshoot Encoder Directions
+
+- Bot on the graph spins while the actual bot is going straight
+
+  - Your perpendicular encoder is reversed
+
+- Bot on the graph strafes the opposite way
+
+  - Parallel encoder is reversed
+
 ### Hardware ID's
 
 ```java
@@ -141,6 +190,61 @@ public static double FORWARD_OFFSET = 4; // in; offset of the lateral wheel
     <img class="rounded-lg" src="./assets/dead-wheels/andrew-bot-forward-offset-quarter.jpg" alt="Bottom view of the bot. The Y direction increase left to right. The X directions increases up.">
     <figcaption class="mt-2 text-sm text-gray-600 text-center">17508 Rising Tau's 2019/20 Skystone Bot</figcaption>
 </figure>
+
+### Encoder Directions
+
+Make sure to reverse the encoder directions when appropriate. There are two ways to do so.
+
+Either:
+
+1.  Set the motor direction that the encoder is connected to, to `REVERSE`
+
+    ```java
+    parallelEncoder.setDirection(DcMotorSimple.Direction.REVERSE);
+    ```
+
+However, this also reverses the direction of the motor if one is attached to the same port. So if you would prefer not to do that...
+
+2. Negate the motor position and velocity in `StandardTrackingWheelLocalizer.java`
+
+   ```java{10,20}
+   // Notice the * -1
+   // Make sure it's applied to both getWheelVelocities() and getWheelPositions()
+
+   @NonNull
+   @Override
+   public List<Double> getWheelPositions() {
+       return Arrays.asList(
+               encoderTicksToInches(leftEncoder.getCurrentPosition()),
+               encoderTicksToInches(rightEncoder.getCurrentPosition()),
+               encoderTicksToInches(frontEncoder.getCurrentPosition()) * -1
+       );
+   }
+
+   @NonNull
+   @Override
+   public List<Double> getWheelVelocities() {
+       return Arrays.asList(
+               encoderTicksToInches(leftEncoder.getVelocity()),
+               encoderTicksToInches(rightEncoder.getVelocity()),
+               encoderTicksToInches(frontEncoder.getVelocity()) * -1
+       );
+   }
+   ```
+
+### Troubleshoot Encoder Directions
+
+- Bot on the graph spins while the actual bot is going straight
+
+  - One of your parallel encoders is reversed
+
+- Bot on the graph strafes the opposite way
+
+  - Your middle encoder is reversed
+
+- Your bot goes straight and strafes properly on the graph but turns the opposite way
+
+  - Your left and right encoders are swapped
 
 ### Set Localizer in SampleMecanumDrive
 
@@ -357,42 +461,8 @@ public double getRawExternalHeading() {
   - This is due to an offset center of rotation due to an incorrect perpendicular wheel placement. Tuning the position of your perpendicular wheel is a pain. It's fine to let this be a little inaccurate as an offset center of rotation will not affect the tracking accuracy. It will only introduce a little offset to your localization.
 
 - Bot on the graph spins while the actual bot is going straight
+
   - One of your parallel encoders are reversed
 
-### Reversing an encoder
-
-Either:
-
-1.  Set the motor direction that the encoder is connected to, to `REVERSE`
-
-    ```java
-    parallelEncoder.setDirection(DcMotorSimple.Direction.REVERSE);
-    ```
-
-However, this also reverses the direction of the motor if one is attached to the same port.
-
-2. Negate the motor position and velocity in your Localizer (`StandardTracking...` or `TwoWheel...`) like so
-
-   ```java{9,19}
-   // Notice the * -1
-
-   @NonNull
-   @Override
-   public List<Double> getWheelPositions() {
-       return Arrays.asList(
-               encoderTicksToInches(leftEncoder.getCurrentPosition()),
-               encoderTicksToInches(rightEncoder.getCurrentPosition()),
-               encoderTicksToInches(frontEncoder.getCurrentPosition()) * -1
-       );
-   }
-
-   @NonNull
-   @Override
-   public List<Double> getWheelVelocities() {
-       return Arrays.asList(
-               encoderTicksToInches(leftEncoder.getVelocity()),
-               encoderTicksToInches(rightEncoder.getVelocity()),
-               encoderTicksToInches(frontEncoder.getVelocity()) * -1
-       );
-   }
-   ```
+- Your bot goes straight and strafes properly on the graph but turns the opposite way
+  - Your left and right encoders are swapped
