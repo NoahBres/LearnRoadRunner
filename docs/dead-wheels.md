@@ -298,13 +298,13 @@ Unfortunately, I can no longer recommend the automated tuning opmode. The origin
 
 5. Stick a piece of tape or mark some spot with a sharpie on your both and on the ground directly below that spot. Line these two up.
 
-6. Spin your bot 10 times using the controller. Do not move the bot. Only spin it in place with the right joystick.
+6. Spin your bot 10 rotations using the controller. Do not move the bot. Only spin it in place with the right joystick.
 
-7. Watch the bot on the field as you do this. Make sure the heading doesn't lag behind.
+7. Watch the bot on the field as you do this. Make sure the heading doesn't lag behind or zoom ahead. The bot drawn in Dashboard and the real bot should be lined up. If the lateral distance is incorrect the bot in Dashboard will turn slower than your actual bot when lateral distance is too large or turn faster than your bot when lateral distance is too small.
 
 8. On the last turn, slow down and make sure that the mark you made line up with each other to ensure that the turns is exactly 3600 degrees.
 
-9. If the heading on the drawn field lags behind, slowly increase the lateral distance.
+9. If the heading on the drawn field lags behind, slowly decrease the lateral distance. Or vice-versa.
 
 10. Unfortunately, this is quite cumbersome but heading accuracy is quite important and this problem is not confined to Road Runner.
 
