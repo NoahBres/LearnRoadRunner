@@ -215,6 +215,42 @@ Trajectory traj = drive.trajectoryBuilder(new Pose2d())
     <figcaption class="mt-2 text-gray-600 text-center">Spline Goodness. CAD provided by Aman of 3916</figcaption>
 </figure>
 
+## Set Pose Estimate
+
+::: danger
+MAKE SURE TO DO THIS BEFORE RUNNING YOUR OWN OPMODES
+:::
+
+Before you follow your trajectory in your opmode, your localizer's position has to match up with your motion profile's location. By default, your localizer's position is set to x: 0, y: 0. However, if you define a custom start pose for your motion profile your localizer's location will be out of sync and you will notice weird behavior in your following. Your bot will probably start moving in some random line. This is because the translational/heading PID tries to compensate for this disparity. You won't notice this if you don't have translational/heading PID on.
+
+Be sure to add `drive.setPoseEstimate(new Pose2d())` to your opmode, before your first motion profiling matching its start pose.
+
+E.g.
+
+```java{7}
+public void runOpMode() {
+  SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+
+  // We want to start the bot at x: 10, y: -8, heading: 90 degrees
+  Pose2d startPose = new Pose2d(10, -8, Math.toRadians(90));
+
+  drive.setPoseEstimate(startPose);
+
+  TrajectoryBuilder traj1 = drive.trajectoryBuilder(startPose)
+      .splineTo(new Pose2d(20, 9, Math.toRadians(45)))
+      .build();
+
+  TrajectoryBuilder traj2 = drive.trajectoryBuilder(traj1.end())
+      .splineTo(new Pose2d(20, 9, Math.toRadians(45)))
+      .build();
+
+  drive.followTrajectory(traj1);
+  drive.followTrajectory(traj2);
+}
+```
+
+`drive.setPoseEstimate()` need only be called once before the first trajectory.
+
 ## Running Multiple Trajectories
 
 Even if you are running spline paths to ensure continuous paths, you will eventually need to run a second trajectory. A trajectory represents a continuous movement and should end when your bot comes to a halt.
