@@ -32,7 +32,7 @@
     "autoprefixer": "^9.8.6",
     "tailwindcss": "^1.7.3",
     "typescript": "^3.9.7",
-    "uplot": "1.1.0",
+    "uplot": "^1.1.2",
     "vue": "2.6.12",
     "vue-template-compiler": "2.6.12",
     "vue-server-renderer": "2.6.12",
