@@ -33,7 +33,7 @@ Open the `TwoWheelTrackingLocalizer.java` file (that you just downloaded) to edi
 ### Ticks Per Rev/Wheel Radius/Gear Ratio
 
 ```java
-/* Lines 33-35 in TwoWheelTrackingLocalizer.java */
+/* Lines 37-39 in TwoWheelTrackingLocalizer.java */
 public static double TICKS_PER_REV = 0;
 public static double WHEEL_RADIUS = 2; // in
 public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
@@ -48,7 +48,7 @@ public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) s
 ### Parallel/Perpendicular X/Y
 
 ```java
-/* Lines 33-35 in TwoWheelTrackingLocalizer.java */
+/* Lines 41-45 in TwoWheelTrackingLocalizer.java */
 public static double PARALLEL_X = 0; // X is the forward and back direction
 public static double PARALLEL_Y = 0; // Y is the strafe direction
 
@@ -65,41 +65,20 @@ Put in the X/Y coordinates of your perpendicular and parallel wheels. Remember t
 
 ### Encoder Directions
 
-Make sure to reverse the encoder directions when appropriate. There are two ways to do so.
+Make sure to reverse the encoder directions when appropriate.
 
-Either:
+E.g.
 
-1.  Set the motor direction that the encoder is connected to, to `REVERSE`
+```java{7-9}
+/* Lines 60-63~ in TwoWheelTrackingLocalizer.java */
+parallelEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "parallelEncoder"));
+perpendicularEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "perpendicularEncoder"));
 
-    ```java
-    parallelEncoder.setDirection(DcMotorSimple.Direction.REVERSE);
-    ```
+// TODO: reverse any encoders using Encoder.setDirection(Encoder.Direction.REVERSE)
 
-However, this also reverses the direction of the motor if one is attached to the same port. So if you would prefer not to do that...
-
-2. Negate the motor position and velocity in your `TwoWheelTrackingLocalizer.java`
-
-```java{9,18}
-// Notice the * -1
-// Make sure it's applied to both getWheelVelocities() and getWheelPositions()
-
-@NonNull
-@Override
-public List<Double> getWheelPositions() {
-    return Arrays.asList(
-            encoderTicksToInches(parallelEncoder.getCurrentPosition()),
-            encoderTicksToInches(perpendicularEncoder.getCurrentPosition()) * -1,
-    );
-}
-
-@NonNull
-@Override
-public List<Double> getWheelVelocities() {
-    return Arrays.asList(
-            encoderTicksToInches(parallelEncoder.getVelocity()),
-            encoderTicksToInches(perpendicularEncoder.getVelocity()) * -1
-    );
-}
+// If you need to reverse the perpendicular encoder:
+// Vice-versa for the other encoder
+perpendicularEncoder.setDirection(Encoder.Direction.REVERSE);
 ```
 
 ### Troubleshoot Encoder Directions
@@ -112,12 +91,34 @@ public List<Double> getWheelVelocities() {
 
   - Parallel encoder is reversed
 
+::: danger
+If you are using the Rev Through Bore encoders, please read the following section
+:::
+
+If your encoder velocity exceeds 32767 counts per second, it will cause an integer overflow when calling `getVelocity()`. This is because the Rev Hub firmware sends the velocity data using 16 bit signed integers rather than 32 bit. Due to the Rev Through Bore encoders' absurdly high CPR, this happens at around 4 rounds per second. Or only 25 inches per second with 2 inch diameter wheels.
+
+Change the `getRawVelocity()` functions to `getCorrectedVelocity()` in the `getWheelVelocities()` function to fix this integer overflow:
+
+```java{8-9}
+/* Lines 86-95 in TwoWheelLocalizer.java */
+public List<Double> getWheelVelocities() {
+    // TODO: If your encoder velocity can exceed 32767 counts / second (such as the REV Through Bore and other
+    //  competing magnetic encoders), change Encoder.getRawVelocity() to Encoder.getCorrectedVelocity() to enable a
+    //  compensation method
+
+    return Arrays.asList(
+            encoderTicksToInches((int) parallelEncoder.getCorrectedVelocity()),
+            encoderTicksToInches((int) perpendicularEncoder.getCorrectedVelocity())
+    );
+}
+```
+
 ### Hardware ID's
 
 ```java
-/* Lines 56-57 in TwoWheelTrackingLocalizer.java */
-parallelEncoder = hardwareMap.dcMotor.get("parallelEncoder");
-perpendicularEncoder = hardwareMap.dcMotor.get("perpendicularEncoder");
+/* Lines 60-61 in TwoWheelTrackingLocalizer.java */
+parallelEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "parallelEncoder"));
+perpendicularEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "perpendicularEncoder"));
 ```
 
 Ensure that these ID's match up with your Rev Hub config ID's.
@@ -162,7 +163,7 @@ Open up the `StandardTrackingWheelLocalizer.java` file.
 ### Ticks Per Rev/Wheel Radius/Gear Ratio
 
 ```java
-/* Lines 29-30 in StandardTrackingWheelLocalizer.java */
+/* Lines 30-32 in StandardTrackingWheelLocalizer.java */
 public static double TICKS_PER_REV = 0;
 public static double WHEEL_RADIUS = 2; // in
 public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
@@ -177,7 +178,7 @@ public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) s
 ### Lateral Distance/Forward Offset
 
 ```java
-/* Lines 33-34 in StandardTrackingWheelLocalizer.java */
+/* Lines 34-35 in StandardTrackingWheelLocalizer.java */
 public static double LATERAL_DISTANCE = 10; // in; distance between the left and right wheels
 public static double FORWARD_OFFSET = 4; // in; offset of the lateral wheel
 ```
@@ -193,44 +194,22 @@ public static double FORWARD_OFFSET = 4; // in; offset of the lateral wheel
 
 ### Encoder Directions
 
-Make sure to reverse the encoder directions when appropriate. There are two ways to do so.
+Make sure to reverse the encoder directions when appropriate.
 
-Either:
+E.g.
 
-1.  Set the motor direction that the encoder is connected to, to `REVERSE`
+```java{8-10}
+/* Lines 46-63~ in StandardTrackingWheelLocalizer.java */
+leftEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "leftEncoder"));
+rightEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "rightEncoder"));
+frontEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "frontEncoder"));
 
-    ```java
-    parallelEncoder.setDirection(DcMotorSimple.Direction.REVERSE);
-    ```
+// TODO: reverse any encoders using Encoder.setDirection(Encoder.Direction.REVERSE)
 
-However, this also reverses the direction of the motor if one is attached to the same port. So if you would prefer not to do that...
-
-2. Negate the motor position and velocity in `StandardTrackingWheelLocalizer.java`
-
-   ```java{10,20}
-   // Notice the * -1
-   // Make sure it's applied to both getWheelVelocities() and getWheelPositions()
-
-   @NonNull
-   @Override
-   public List<Double> getWheelPositions() {
-       return Arrays.asList(
-               encoderTicksToInches(leftEncoder.getCurrentPosition()),
-               encoderTicksToInches(rightEncoder.getCurrentPosition()),
-               encoderTicksToInches(frontEncoder.getCurrentPosition()) * -1
-       );
-   }
-
-   @NonNull
-   @Override
-   public List<Double> getWheelVelocities() {
-       return Arrays.asList(
-               encoderTicksToInches(leftEncoder.getVelocity()),
-               encoderTicksToInches(rightEncoder.getVelocity()),
-               encoderTicksToInches(frontEncoder.getVelocity()) * -1
-       );
-   }
-   ```
+// If you need to reverse the middle encoder:
+// Vice-versa for the other encoders
+frontEncoder.setDirection(Encoder.Direction.REVERSE);
+```
 
 ### Troubleshoot Encoder Directions
 
@@ -245,6 +224,29 @@ However, this also reverses the direction of the motor if one is attached to the
 - Your bot goes straight and strafes properly on the graph but turns the opposite way
 
   - Your left and right encoders are swapped
+
+::: danger
+If you are using the Rev Through Bore encoders, please read the following section
+:::
+
+If your encoder velocity exceeds 32767 counts per second, it will cause an integer overflow when calling `getVelocity()`. This is because the Rev Hub firmware sends the velocity data using 16 bit signed integers rather than 32 bit. Due to the Rev Through Bore encoders' absurdly high CPR, this happens at around 4 rounds per second. Or only 25 inches per second with 2 inch diameter wheels.
+
+Change the `getRawVelocity()` functions to `getCorrectedVelocity()` in the `getWheelVelocities()` function to fix this integer overflow:
+
+```java{8-10}
+/* Lines 69-79 in StandardWheelLocalizer.java */
+public List<Double> getWheelVelocities() {
+    // TODO: If your encoder velocity can exceed 32767 counts / second (such as the REV Through Bore and other
+    //  competing magnetic encoders), change Encoder.getRawVelocity() to Encoder.getCorrectedVelocity() to enable a
+    //  compensation method
+
+    return Arrays.asList(
+            encoderTicksToInches((int) leftEncoder.getCorrectedVelocity()) * X_MULTIPLIER,
+            encoderTicksToInches((int) rightEncoder.getCorrectedVelocity()) * X_MULTIPLIER,
+            encoderTicksToInches((int) frontEncoder.getCorrectedVelocity()) * X_MULTIPLIER
+    );
+}
+```
 
 ### Set Localizer in SampleMecanumDrive
 
@@ -279,7 +281,7 @@ This isn't quite necessary for everyone. You may choose to skip over this sectio
 2. Declare two variables, `X_MULTIPLIER` and `Y_MULTIPLIER`, in your class:
 
 ```java
-/* Lines 42-43 in TwoWheelTrackingLocalizer.java */
+/* Lines 46-47 in TwoWheelTrackingLocalizer.java */
 public static double X_MULTIPLIER = 1; // Multiplier in the X direction
 public static double Y_MULTIPLIER = 1; // Multiplier in the Y direction
 ```
@@ -289,7 +291,7 @@ A finished example of where these go may be found [here](https://gist.github.com
 3. Add these mulitpliers to the `getWheelPositions()` function like so:
 
 ```java{5,6}
-/* Lines 71-76 in TwoWheelTrackingLocalizer.java */
+/* Lines 78-83 in TwoWheelTrackingLocalizer.java */
 @Override
 public List<Double> getWheelPositions() {
     return Arrays.asList(
@@ -345,7 +347,7 @@ This isn't quite necessary for everyone. You may choose to skip over this sectio
 2. Declare two variables, `X_MULTIPLIER` and `Y_MULTIPLIER`, in your class:
 
 ```java
-/* Lines 36-37 in StandardTrackingWheelLocalizer.java */
+/* Lines 37-38 in StandardTrackingWheelLocalizer.java */
 public static double X_MULTIPLIER = 1; // Multiplier in the X direction
 public static double Y_MULTIPLIER = 1; // Multiplier in the Y direction
 ```
@@ -355,7 +357,7 @@ A finished example of where these go may be found [here](https://gist.github.com
 3. Add these mulitpliers to the `getWheelPositions()` function like so:
 
 ```java{5,6,7}
-/* Lines 58-65 in StandardTrackingWheelLocalizer.java */
+/* Lines 61-68 in StandardTrackingWheelLocalizer.java */
 @Override
 public List<Double> getWheelPositions() {
     return Arrays.asList(
