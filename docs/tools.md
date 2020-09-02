@@ -45,7 +45,7 @@ MeepMeep's cool features:
 - Customizable gui
   - Can change field image, color schemes, etc.
   - Drag and drop trajectory builder (in development)
-  - Supports dark mode!!
+  - Dark mode color schemes!!
 - Runs in Android Studio. Co-located with your existing season code
 - Sane field coordinates
 
