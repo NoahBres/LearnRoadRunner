@@ -154,6 +154,8 @@ setLocalizer(new TwoWheelTrackingLocalizer(hardwareMap));
 
 You have set the localizer!
 
+<div class="h-16"></div>
+
 ## Three-Wheel Odometry
 
 If you opt for the three wheel configuration, you will be using the two parallel wheels as the source for your heading.
@@ -267,6 +269,8 @@ setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
 
 You have set the localizer!
 
+<div class="h-16"></div>
+
 ## Tuning - Two-Wheel
 
 Tuning your dead wheels is one of the most important steps along the entire tuning process. This is not constrained to Road Runner. Any time you choose to use Dead Wheels, whether it be in Road Runner, FTCLib, or your own home brew path following, your localization should be as accurate as possible.
@@ -332,6 +336,8 @@ We're going to double check that everything is hunky-dory with your localization
 3. Drive the bot around with your controller. You should see the bot being drawn on the graph in Dashboard. Make sure the drawn bot matches the movements of the actual bot.
 
 4. Check the troubleshooting section below if you encounter any issues.
+
+<div class="h-16"></div>
 
 ## Tuning - Three-Wheel
 
