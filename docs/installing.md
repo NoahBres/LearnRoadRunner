@@ -1,6 +1,10 @@
 # Installing
 
-There are two methods to installing the Road Runner library. [Method #1](#method-1-downloading-the-quickstart), the simpler option, is to simply download [the quickstart repo](https://github.com/acmerobotics/road-runner-quickstart). The quickstart repo is an empty FTC season repo. It includes everything you'll need to get Road Runner up and running. However, this does not work if you already have an existing codebase. [Method #2](#method-2-installing-rr-on-your-project) will go through installing Road Runner via gradle and copying over the necessary files from the quickstart repo into your existing team project.
+There are two methods to installing the Road Runner library.
+
+[Method #1](#method-1-downloading-the-quickstart), the simpler option, is to simply download [the quickstart repo](https://github.com/acmerobotics/road-runner-quickstart). The quickstart repo is an empty FTC season repo along with the preinstalled dependencies and tuning opmodes to get Road Runner up and running. It includes everything you'll need to get Road Runner up and running. However, this does not work if you already have an existing codebase.
+
+[Method #2](#method-2-installing-rr-on-your-project) will go through installing Road Runner via gradle and copying over the necessary files from the quickstart repo into your existing team project.
 
 Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Control Hub Firmware. Directions can be found [below](#upgrading-firmware).
 
@@ -17,7 +21,7 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 
 ## Method 2: Installing RR on Your Project
 
-1. We are are going to assume you have the same file structure as the standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/SkyStone).
+1. We are are going to assume you have the same file structure as the standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/SkyStone). Please use the latest FTC SDK. Sections of this installation instruction have been removed as they are no longer needed in the newest SDK. Thus, these installation instructions will not work for versions below the 5.5 SDK.
 2. Look for the `TeamCode/build.release.gradle` file. Specifically the one in the `TeamCode` folder.
 
 <!-- prettier-ignore -->
@@ -41,62 +45,33 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 └── <span class="file">settings.gradle</span>
 :::
 
-3. In `TeamCode/build.release.gradle`, add the following two dependencies: `implementation 'com.acmerobotics.roadrunner:core:0.5.1'` and `implementation 'com.acmerobotics.dashboard:dashboard:0.3.8'`
+3. In `TeamCode/build.release.gradle`, add the following three dependencies:
 
-```groovy{10,11}
+   - `implementation 'org.apache.commons:commons-math3:3.6.1'`
+   - `implementation 'com.acmerobotics.roadrunner:core:0.5.1'`
+   - `implementation 'com.acmerobotics.dashboard:dashboard:0.3.9'`
+
+```groovy{11-14}
+/* TeamCode/build.release.gradle */
 dependencies {
     implementation project(':FtcRobotController')
-    implementation (name: 'RobotCore-release', ext: 'aar')
-    implementation (name: 'Hardware-release', ext: 'aar')
-    implementation (name: 'FtcCommon-release', ext: 'aar')
-    implementation (name: 'WirelessP2p-release', ext: 'aar')
-    implementation (name: 'tfod-release', ext: 'aar')
-    implementation (name: 'tensorflow-lite-0.0.0-nightly', ext: 'aar')
+    implementation 'org.firstinspires.ftc:RobotCore:5.5'
+    implementation 'org.firstinspires.ftc:Hardware:5.5'
+    implementation 'org.firstinspires.ftc:FtcCommon:5.5'
+    implementation (name: 'WirelessP2p-release', ext:'aar')
+    implementation (name: 'tfod-release', ext:'aar')
+    implementation (name: 'tensorflow-lite-0.0.0-nightly', ext:'aar')
+
+    implementation 'org.apache.commons:commons-math3:3.6.1'
 
     implementation 'com.acmerobotics.roadrunner:core:0.5.1'
-    implementation 'com.acmerobotics.dashboard:dashboard:0.3.8'
+    implementation 'com.acmerobotics.dashboard:dashboard:0.3.9'
 }
 ```
-
-4. Then, locate the `build.common.gradle` file in the root folder.
-
-<!-- prettier-ignore -->
-::: vue
-<span class="folder">ftc_app</span>
-├── <span class="folder">.github</span>
-├── <span class="folder">FtcRobotController</span>
-├── <span class="folder">TeamCode</span>
-├── <span class="folder">doc</span>
-├── <span class="folder">gradle/wrapper</span>
-├── <span class="folder">libs</span>
-├── <span class="file">.gitignore</span>
-├── <span class="file">README.md</span>
-├── <span class="file">`build.common.gradle` _(**This one**)_</span>
-├── <span class="file">build.gradle</span>
-├── <span class="file">gradelw</span>
-├── <span class="file">gradlew.bat</span>
-└── <span class="file">settings.gradle</span>
-:::
-
-5. In the file, locate the line containing `minSdkVersion`. This should be around line `42`. If the number is lower than 23, replace it with 23. Like so:
-
-```groovy{4}
-defaultConfig {
-  signingConfig signingConfigs.debug
-  applicationId 'com.qualcomm.ftcrobotcontroller'
-  minSdkVersion 23
-  targetSdkVersion 28
-  ...
-}
-```
-
-This is to enable multidexing. With the inclusion of all these libraries, the app may exceed the 64k method limit. Android versions above API level 21 have multidexing on by default. As the ZTE speeds (which require an API level lower than 21) are no longer legal in FTC, we can increase the sdk minimum version. You can read more about the multidexing issue [here](https://developer.android.com/studio/build/multidex).
 
 6. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive` and `util` folder into a location in your project, preferably just your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
 
-7. Once all the files are copied into your project, it is likely that most of the files will have a lot of errors relating to imports. This is because most of the classes are expecting to find certain classes at certain locations when they import them. However, they are now in a different location and the previous class paths are no longer valid. Unfortunately, you must manually go over each file and resolve the imports yourself by providing the correct package name/ import path for each incorrect one.
-
-8. THEN, you must edit your `FtcRobotControllerActivity.java` file to work with ftc-dashboard. Directions can be found [here](https://acmerobotics.github.io/ftc-dashboard/gettingstarted). Or just copy the `FtcRobotControllerActivity.java` file from the quickstart repo [here](https://github.com/acmerobotics/road-runner-quickstart/blob/master/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java) and paste it into your project.
+7. Finally, you must edit your `FtcRobotControllerActivity.java` file to work with ftc-dashboard. Directions can be found [here](https://acmerobotics.github.io/ftc-dashboard/gettingstarted). Or just copy the `FtcRobotControllerActivity.java` file from the quickstart repo [here](https://github.com/acmerobotics/road-runner-quickstart/blob/master/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java) and paste it into your project. Replace the `FtcRobotControllerActivity.java` file located in <span class="break-words">`YourSkystoneProject/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java`</span> with the file you downloaded from that GitHub link.
 
 ## Upgrading Firmware
 
