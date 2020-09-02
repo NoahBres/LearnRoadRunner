@@ -76,6 +76,10 @@ Decently tuned feedforward controller courtesy of Deetz from Team 14320:
 
 You may notice the asymmetry in the acceleration. Unfortunately, perfect velocity control is not yet achievable with a stock motor control model due to this asymmetry. Notice that the acceleration does not track well when decelerating. We suspect that this is due to weird Rev Hub's unique motor controller. For more details, or if you have a solution to this problem, please hit up the [FTC Discord](https://discord.gg/first-tech-challenge).
 
+::: tip
+The voltage that the Rev Hub outputs will decrease as the battery level drops. Because of this, feedforward isn't guaranteed to be consistent throughout multiple matches. At this moment, Road Runner does not have explicit pose velocity closed loop control. There is a slight workaround to this. The translational PID controller's `kD` term is essentially equivalent to the `kP` term of a pose velocity PID controller. If you notice motion profile performance degradation along multiple matches, add a `kD` term to the translational PID (which you will tune in the [follower PID page](/follower-pid-tuning)). Further questions or don't quite understand this concept? Hit up the [FTC Discord](https://discord.gg/first-tech-challenge) and shoot a question in the programming channel!
+:::
+
 ## Feedforward Tuning Simulator
 
 <ClientOnly>
@@ -85,3 +89,7 @@ You may notice the asymmetry in the acceleration. Unfortunately, perfect velocit
 Play around with the gains to see how each one affects the graph! Try and tune this simple example. This graph is very similar to what you will be doing while actually tuning the bot so having an understanding of how the process will go will be beneficial.
 
 Tip: Press enter in the text input for your new gain to take effect (just like FTC-Dashboard!).
+
+::: warning
+This is a very very rudimentary "simulator." It is only meant to give you a basic high level understanding of how the gains affect the behavior of the graph. It is in no way trying to accurately simulate the Rev Hub's motor controller as that presents its own problems. This sim is based on a simple DC Motor model with arbitrary constants. The sim will not behave exactly like how your actual tuning will go but it is meant to give you a decent intuition of how it works. Also, I am very aware of the bugs it has. That's what the "reset" button is for :P
+:::

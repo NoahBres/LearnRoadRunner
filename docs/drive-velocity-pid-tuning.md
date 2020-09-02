@@ -78,6 +78,10 @@ Play around with the gains to see how each one affects the graph! Try and tune t
 
 Tip: Press enter in the text input for your new gain to take effect (just like FTC-Dashboard!).
 
+::: warning
+This is a very very rudimentary "simulator." It is only meant to give you a basic high level understanding of how the gains affect the behavior of the graph. It is in no way trying to accurately simulate the Rev Hub's motor controller as that presents its own problems. This sim is based on a simple DC Motor model with arbitrary constants. The sim will not behave exactly like how your actual tuning will go but it is meant to give you a decent intuition of how it works. Also, I am very aware of the bugs it has. That's what the "reset" button is for :P
+:::
+
 ::: tip
 Here are two good videos explaining what each gain in a PID controller does if you are interested. Highly recommend watching these as an intuitive understanding of each gain will make tuning much easier.
 
