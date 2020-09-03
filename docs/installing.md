@@ -40,7 +40,7 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 ├── <span class="file">README.md</span>
 ├── <span class="file">build.common.gradle</span>
 ├── <span class="file">build.gradle</span>
-├── <span class="file">gradelw</span>
+├── <span class="file">gradlew</span>
 ├── <span class="file">gradlew.bat</span>
 └── <span class="file">settings.gradle</span>
 :::
