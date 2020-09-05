@@ -107,8 +107,8 @@ public List<Double> getWheelVelocities() {
     //  compensation method
 
     return Arrays.asList(
-            encoderTicksToInches((int) parallelEncoder.getCorrectedVelocity()),
-            encoderTicksToInches((int) perpendicularEncoder.getCorrectedVelocity())
+            encoderTicksToInches(parallelEncoder.getCorrectedVelocity()),
+            encoderTicksToInches(perpendicularEncoder.getCorrectedVelocity())
     );
 }
 ```
@@ -243,9 +243,9 @@ public List<Double> getWheelVelocities() {
     //  compensation method
 
     return Arrays.asList(
-            encoderTicksToInches((int) leftEncoder.getCorrectedVelocity()) * X_MULTIPLIER,
-            encoderTicksToInches((int) rightEncoder.getCorrectedVelocity()) * X_MULTIPLIER,
-            encoderTicksToInches((int) frontEncoder.getCorrectedVelocity()) * X_MULTIPLIER
+            encoderTicksToInches(leftEncoder.getCorrectedVelocity()) * X_MULTIPLIER,
+            encoderTicksToInches(rightEncoder.getCorrectedVelocity()) * X_MULTIPLIER,
+            encoderTicksToInches(frontEncoder.getCorrectedVelocity()) * Y_MULTIPLIER
     );
 }
 ```
