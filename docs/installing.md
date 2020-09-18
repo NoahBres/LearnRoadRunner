@@ -48,8 +48,8 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 3. In `TeamCode/build.release.gradle`, add the following three dependencies:
 
    - `implementation 'org.apache.commons:commons-math3:3.6.1'`
-   - `implementation 'com.acmerobotics.roadrunner:core:0.5.1'`
-   - `implementation 'com.acmerobotics.dashboard:dashboard:0.3.9'`
+   - `implementation 'com.acmerobotics.roadrunner:core:0.5.2'`
+   - `implementation 'com.acmerobotics.dashboard:dashboard:0.3.10'`
 
 ```groovy{11-14}
 /* TeamCode/build.release.gradle */
@@ -64,8 +64,8 @@ dependencies {
 
     implementation 'org.apache.commons:commons-math3:3.6.1'
 
-    implementation 'com.acmerobotics.roadrunner:core:0.5.1'
-    implementation 'com.acmerobotics.dashboard:dashboard:0.3.9'
+    implementation 'com.acmerobotics.roadrunner:core:0.5.2'
+    implementation 'com.acmerobotics.dashboard:dashboard:0.3.10'
 }
 ```
 
