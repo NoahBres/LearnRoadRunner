@@ -98,7 +98,7 @@ public class MyTeleopOpmode extends LinearOpMode {
         StandardTrackingWheelLocalizer myLocalizer = new StandardTrackingWheelLocalizer(hardwareMap);
 
         // Set your initial pose to x: 10, y: 10, facing 90 degrees
-        myLocalizer.setPoseEstimate(new Pose2d(10, 10, Math.toRadian(90)));
+        myLocalizer.setPoseEstimate(new Pose2d(10, 10, Math.toRadians(90)));
 
         waitForStart();
 
@@ -136,7 +136,7 @@ public class MyTeleopOpmode extends LinearOpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         // Set your initial pose to x: 10, y: 10, facing 90 degrees
-        drive.setPoseEstimate(new Pose2d(10, 10, Math.toRadian(90)));
+        drive.setPoseEstimate(new Pose2d(10, 10, Math.toRadians(90)));
 
         waitForStart();
 
