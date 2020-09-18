@@ -408,7 +408,7 @@ Unfortunately, I can no longer recommend the automated tuning opmode. The origin
 
 4. Ensure that the field drawing is showing. If not, switch to field in the dropdown on the top right.
 
-5. Stick a piece of tape or mark some spot with a sharpie on your both and on the ground directly below that spot. Line these two up.
+5. Stick a piece of tape or mark some spot with a sharpie on your bot and on the ground directly below that spot. Line these two up.
 
 6. Spin your bot 10 rotations using the controller. Do not move the bot. Only spin it in place with the right joystick.
 
