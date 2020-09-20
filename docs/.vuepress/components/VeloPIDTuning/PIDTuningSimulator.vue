@@ -143,8 +143,6 @@ export default Vue.extend({
 
       lastState: GraphState.Accel as GraphState,
       currentState: GraphState.Accel as GraphState,
-
-      animationFrameId: null,
     };
   },
 
@@ -203,6 +201,13 @@ export default Vue.extend({
       },
     };
 
+    // Set up loop
+
+    this.controller.setBounds(-1, 1);
+    this.startTime = performance.now();
+
+    this.loop();
+
     // Setup plot
     this.plot = new uPlot(
       opts,
@@ -223,19 +228,10 @@ export default Vue.extend({
     });
 
     this.resizeObserver.observe(this.$refs.canvas);
-
-    this.controller.setBounds(-1, 1);
-    this.startTime = performance.now();
-
-    // Setup animation
-    this.animationFrameId = window.requestAnimationFrame(this.loop);
   },
 
   beforeDestroy() {
     this.resizeObserver.disconnect();
-
-    window.cancelAnimationFrame(this.animationFrameId);
-    this.animationFrameId = null;
   },
 
   methods: {
@@ -318,11 +314,10 @@ export default Vue.extend({
         this.graphData[2].shift();
       }
 
-      this.plot.setData(this.graphData);
+      if (this.plot != null) this.plot.setData(this.graphData);
 
       this.lastLoopTime = currentTime;
 
-      // requestAnimationFrame(this.loop);
       setTimeout(this.loop, 1000 / 24 + Math.random() * 50);
     },
 

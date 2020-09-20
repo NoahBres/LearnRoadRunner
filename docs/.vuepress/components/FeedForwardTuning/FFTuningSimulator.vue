@@ -128,8 +128,6 @@ export default Vue.extend({
 
       lastState: GraphState.Accel as GraphState,
       currentState: GraphState.Accel as GraphState,
-
-      animationFrameId: null,
     };
   },
 
@@ -188,6 +186,12 @@ export default Vue.extend({
       },
     };
 
+    // Run loop before initializing plot so
+    // y series isn't empty
+    this.startTime = performance.now();
+
+    this.loop();
+
     // Setup plot
     this.plot = new uPlot(
       opts,
@@ -208,18 +212,10 @@ export default Vue.extend({
     });
 
     this.resizeObserver.observe(this.$refs.canvas);
-
-    this.startTime = performance.now();
-
-    // Setup animation
-    this.animationFrameId = window.requestAnimationFrame(this.loop);
   },
 
   beforeDestroy() {
     this.resizeObserver.disconnect();
-
-    window.cancelAnimationFrame(this.animationFrameId);
-    this.animationFrameId = null;
   },
 
   methods: {
@@ -299,7 +295,7 @@ export default Vue.extend({
         this.graphData[2].shift();
       }
 
-      this.plot.setData(this.graphData);
+      if (this.plot != null) this.plot.setData(this.graphData);
 
       this.lastLoopTime = currentTime;
       this.lastVelocityReading = this.currentVelocity;
