@@ -60,7 +60,10 @@
       @request-height="requestHeight"
     />
 
-    <div class="flex justify-between px-8 py-4 bg-gray-200">
+    <div
+      class="flex justify-between px-8 py-4 bg-gray-200 overflow-hidden box-border"
+      style="min-height: 74px;"
+    >
       <button
         class="back-button flex items-center"
         :class="{ 'translate-y-16': !backButtonShowing }"
@@ -81,6 +84,7 @@
       <button
         class="next-button"
         :class="{ 'translate-x-40': !nextButtonShowing }"
+        style="min-height: 42px;"
         @click="handleNextClick"
       >
         Next
