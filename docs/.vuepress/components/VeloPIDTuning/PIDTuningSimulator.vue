@@ -201,8 +201,8 @@ export default Vue.extend({
       },
     };
 
-    // Set up loop
-
+    // Run loop before initializing plot so
+    // y series isn't empty
     this.controller.setBounds(-1, 1);
     this.startTime = performance.now();
 
