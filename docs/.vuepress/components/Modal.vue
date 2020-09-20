@@ -12,9 +12,7 @@
         v-if="isOpen"
         class="z-40 pointer-events-none flex justify-center items-center fixed top-0 right-0 bottom-0 left-0"
       >
-        <div
-          class="bg-white pointer-events-auto p-0 rounded overflow-hidden overflow-x-scroll"
-        >
+        <div class="bg-white pointer-events-auto p-0 rounded overflow-hidden">
           <slot />
         </div>
       </div>
