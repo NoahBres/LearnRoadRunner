@@ -37,16 +37,16 @@ public void init() {
     .lineTo(new Vector2d())
     .addDisplacementMarker(() -> drive.followTrajectoryAsync(trajectory2))
     // Basically just tells RR to follow the next trajectory at the end of this one
-    .build()
+    .build();
 
   trajectory2 = drive.trajectoryBuilder(trajectory1.end())
     .lineTo(new Vector2d())
     .addDisplacementMarker(() -> drive.followTrajectoryAsync(trajectory3))
-    .build()
+    .build();
 
   trajectory3 = drive.trajectoryBuilder(trajectory2.end())
     .lineTo(new Vector2d())
-    .build()
+    .build();
 
   // Be sure to set the drive to follow the first trajectory in init
   drive.followTrajectoryAsync(trajectory1);
@@ -110,9 +110,9 @@ public class MyTeleopOpmode extends LinearOpMode {
             // Retrieve your pose
             Pose2d myPose = myLocalizer.getPoseEstimate();
 
-            telemetry.addData("x", myPose.getX())
-            telemetry.addData("y", myPose.getY())
-            telemetry.addData("heading", myPose.getHeading())
+            telemetry.addData("x", myPose.getX());
+            telemetry.addData("y", myPose.getY());
+            telemetry.addData("heading", myPose.getHeading());
 
             // Insert whatever teleop code you're using
         }
@@ -148,9 +148,9 @@ public class MyTeleopOpmode extends LinearOpMode {
             // Retrieve your pose
             Pose2d myPose = drive.getPoseEstimate();
 
-            telemetry.addData("x", myPose.getX())
-            telemetry.addData("y", myPose.getY())
-            telemetry.addData("heading", myPose.getHeading())
+            telemetry.addData("x", myPose.getX());
+            telemetry.addData("y", myPose.getY());
+            telemetry.addData("heading", myPose.getHeading());
 
             // Insert whatever teleop code you're using
         }
