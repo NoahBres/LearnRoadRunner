@@ -79,7 +79,7 @@ export default Vue.extend({
     };
   },
   mounted() {
-    this.$emit("request-width", "785px");
+    this.$emit("request-width", "755px");
     this.$emit("request-height", "690px");
   },
   computed: {

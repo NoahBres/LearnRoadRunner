@@ -12,7 +12,7 @@ const BaseSelection = Vue.extend({
         width: "0",
         height: "0",
       } as Dimensions,
-      sizeMd: {
+      sizeLg: {
         width: "0",
         height: "0",
       } as Dimensions,
@@ -28,9 +28,9 @@ const BaseSelection = Vue.extend({
   },
   methods: {
     emitSize() {
-      if (document.body.clientWidth > 768) {
-        this.$emit("request-width", this.sizeMd.width);
-        this.$emit("request-height", this.sizeMd.height);
+      if (document.body.clientWidth > 1024) {
+        this.$emit("request-width", this.sizeLg.width);
+        this.$emit("request-height", this.sizeLg.height);
       } else {
         this.$emit("request-width", this.sizeBase.width);
         this.$emit("request-height", this.sizeBase.height);

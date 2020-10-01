@@ -1,14 +1,17 @@
 <template>
-  <div class="relative">
+  <div class="relative overflow-hidden">
     <div
-      class="flex flex-col justify-center px-8 py-4 pb-0 h-full"
+      class="flex flex-col justify-center px-8 py-4 pb-0"
       ref="mainGrid"
-      :style="{ width: gridWidth }"
+      :style="{ width: currentGridWidth }"
     >
       <h2 class="border-none text-center">
         What type of motors are you using?
       </h2>
-      <div class="grid grid-cols-3 gap-4">
+      <div
+        class="grid lg:grid-cols-3 grid-cols-2 gap-4 overflow-y-auto overflow-x-hidden"
+        :style="{ height: currentGridHeight }"
+      >
         <div
           v-for="motorGroup in motorGroupList"
           :key="motorGroup.name"
@@ -30,7 +33,7 @@
           >
             <img
               :src="$withBase(motorGroup.src)"
-              class="w-24 h-24 object-cover"
+              class="lg:w-24 lg:h-24 w-16 h-16 object-cover"
             />
             <h4>{{ motorGroup.name }}</h4>
           </label>
@@ -55,7 +58,7 @@
               <svg
                 fill="currentColor"
                 viewBox="0 0 20 20"
-                class="w-24 h-24 text-pink-600"
+                class="lg:w-24 lg:h-24 w-16 h-16 text-pink-600"
               >
                 <path
                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
@@ -71,15 +74,21 @@
     </div>
     <div
       class="box-border absolute top-0 bottom-0 mt-24 pr-2 transition-opacity duration-150 ease-out"
-      :class="{ 'opacity-0': !showDerivates }"
+      :class="{
+        'opacity-0': !showDerivates,
+        'pointer-events-none': !showDerivates,
+      }"
       style="width: 314px;"
-      :style="{ left: gridWidthPadding }"
+      :style="{ left: currentGridPadding }"
     >
       <h3 class="text-center mr-1">Which specific motor?</h3>
-      <table class="table-auto bg-gray-200 mr-3 rounded" style="height: 30.4em">
+      <table
+        class="table-auto bg-gray-200 mr-3 rounded"
+        :style="{ height: currentTableHeight }"
+      >
         <thead>
           <th class="border-none text-left">Ratio</th>
-          <th class="border-none text-left">Name</th>
+          <th class="border-none text-center">Name</th>
           <th class="border-none text-right">RPM</th>
         </thead>
         <tbody>
@@ -150,19 +159,49 @@ export default Vue.extend({
       selectedMotor: "",
       radioVModel: "",
 
-      gridWidth: "572px",
-      gridWidthPadding: "636px",
+      normalWidthBase: "451px",
+      expandedWidthBase: "750px",
 
-      normalWidth: "635px",
-      expandedWidth: "950px",
+      heightBase: "700px",
+
+      gridWidthBase: "390px",
+      gridWidthPaddingBase: "436px",
+
+      gridHeightBase: "495px",
+
+      tableHeightBase: "28em",
+
+      normalWidthLg: "635px",
+      expandedWidthLg: "950px",
+
+      heightLg: "778px",
+
+      gridWidthLg: "572px",
+      gridWidthPaddingLg: "636px",
+
+      gridHeightLg: "596px",
+
+      tableHeightLg: "30.4em",
+
+      currentGridWidth: "",
+      currentGridPadding: "",
+
+      currentGridHeight: "",
+
+      currentTableHeight: "",
+
+      isDerivatesExpanded: false,
     };
   },
   mounted() {
-    this.$emit("request-width", this.normalWidth);
-    this.$emit("request-height", "778px");
-
     // Temporary until it can sync states
     this.$emit("input", "");
+
+    window.addEventListener("resize", this.onResize, false);
+    this.onResize();
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
   },
   computed: {
     showDerivates() {
@@ -185,8 +224,11 @@ export default Vue.extend({
         this.selectedMotorGroup = null;
         this.currentSelectedMotorGroup = null;
         this.selectedMotor = "CUSTOM";
-        this.$emit("request-width", this.normalWidth);
+
         this.$emit("input", this.selectedMotor);
+
+        this.isDerivatesExpanded = false;
+        this.onResize();
       } else {
         const selectedMotorGroup = MotorGroup.find(
           (motorGroup) => motorGroup.key == selectedId
@@ -194,10 +236,13 @@ export default Vue.extend({
         this.selectedMotorGroup = selectedMotorGroup;
         const hasDerivatives = selectedMotorGroup.derivatives.length > 1;
         if (hasDerivatives) {
-          this.$emit("request-width", this.expandedWidth);
+          this.isDerivatesExpanded = true;
+          this.onResize();
         } else {
           this.setMotor(`motor-${selectedMotorGroup.derivatives[0].key}`);
-          this.$emit("request-width", this.normalWidth);
+
+          this.isDerivatesExpanded = false;
+          this.onResize();
         }
       }
     },
@@ -212,6 +257,35 @@ export default Vue.extend({
     },
     checkMotorKey(motor: Motor) {
       return this.selectedMotor !== "" && this.selectedMotor === motor.key;
+    },
+    onResize() {
+      if (document.body.clientWidth >= 1024) {
+        if (this.isDerivatesExpanded) {
+          this.$emit("request-width", this.expandedWidthLg);
+          this.currentGridPadding = this.gridWidthPaddingLg;
+        } else {
+          this.$emit("request-width", this.normalWidthLg);
+        }
+
+        this.currentGridWidth = this.gridWidthLg;
+        this.currentGridHeight = this.gridHeightLg;
+        this.currentTableHeight = this.tableHeightLg;
+
+        this.$emit("request-height", this.heightLg);
+      } else {
+        if (this.isDerivatesExpanded) {
+          this.$emit("request-width", this.expandedWidthBase);
+          this.currentGridPadding = this.gridWidthPaddingBase;
+        } else {
+          this.$emit("request-width", this.normalWidthBase);
+        }
+
+        this.currentGridWidth = this.gridWidthBase;
+        this.currentGridHeight = this.gridHeightBase;
+        this.currentTableHeight = this.tableHeightBase;
+
+        this.$emit("request-height", this.heightBase);
+      }
     },
   },
 });

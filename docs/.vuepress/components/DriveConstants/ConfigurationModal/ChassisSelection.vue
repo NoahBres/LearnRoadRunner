@@ -110,7 +110,7 @@ export default Vue.extend({
         width: "750px",
         height: "690px",
       } as Dimensions,
-      sizeMd: {
+      sizeLg: {
         width: "844px",
         height: "690px",
       } as Dimensions,
