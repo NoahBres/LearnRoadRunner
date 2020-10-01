@@ -80,6 +80,12 @@ You may notice the asymmetry in the acceleration. Unfortunately, perfect velocit
 The voltage that the Rev Hub outputs will decrease as the battery level drops. Because of this, feedforward isn't guaranteed to be consistent throughout multiple matches. At this moment, Road Runner does not have explicit pose velocity closed loop control. There is a slight workaround to this. The translational PID controller's `kD` term is essentially equivalent to the `kP` term of a pose velocity PID controller. If you notice motion profile performance degradation along multiple matches, add a `kD` term to the translational PID (which you will tune in the [follower PID page](/follower-pid-tuning)). Further questions or don't quite understand this concept? Hit up the [FTC Discord](https://discord.gg/first-tech-challenge) and shoot a question in the programming channel!
 :::
 
+## Troubleshooting
+
+1. The StraightTest or DriveVelocityPID opmode keeps overshooting and tweaking variables in `DriveConstants.java` just doesn't change anything:
+
+   - Try lowering the max velocity in `BASE_CONSTRAINTS`. Set it to a really low value at first to confirm that this is the problem.
+
 ## Feedforward Tuning Simulator
 
 <ClientOnly>

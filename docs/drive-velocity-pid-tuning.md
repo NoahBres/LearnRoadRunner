@@ -63,13 +63,14 @@ On a tangential note, you shouldn't need to use `kI`.
 If you feel the need to add `kI`, you should be increasing `kV`.
 :::
 
-## Common Errors
+## Troubleshooting
 
-1. One of the velocity lines are going the opposite way and not following `targetVelocity`.
+1. One of the velocity lines are going the opposite way and not following `targetVelocity`:
 
    - The polarity to the motors are reversed. The encoder is not reading the same direction as the motor is actually turning. Switch the black and red cable on your motor. Or, multiply the encoder readings in your `SampleMecanumDrive` by -1.
 
-2. Uncommon error: StraightTest/DriveVelocityPID simply keeps overshooting and tweaking variables in `DriveConstants.java` just doesn't change anything. It has been found that lowering the max velocity in `BASE_CONSTRAINTS` does fix this issue. Quite odd but 🤷‍♂️.
+2. The StraightTest or DriveVelocityPID opmode keeps overshooting and tweaking variables in `DriveConstants.java` just doesn't change anything:
+   - Try lowering the max velocity in `BASE_CONSTRAINTS`. Set it to a really low value at first to confirm that this is the problem.
 
 ## PID Tuning Simulator
 
