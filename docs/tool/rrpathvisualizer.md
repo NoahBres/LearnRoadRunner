@@ -28,6 +28,12 @@ Keep in mind that RRPathVisualizer is written in Kotlin. It should be easy to un
    - If so, go to the File > Project Structure
    - Find the "Project SDK" setting. Select the latest JDK version installed. Intellij should come bundled with JDK 14
 4. To make your paths, open the `TrajectoryGen.kt` file
-5. Find `builder1`. That is the example `TrajectoryBuilder` provided
-6. Just use the builder as you would normally
-7. You can add more trajectories by calling `list.add(trajectory)`
+5. Ensure that the `driveConstraints` values matches the `DriveConstraints` you have in your own Road Runner setup on your bot
+6. Ensure that the `trackWidth` value matches the `TRACK_WIDTH` value in your `DriveConstants.java` file. This ensures more accurate trajectory length estimates
+7. Find `builder1`. The `builder1` object is the example `TrajectoryBuilder` provided. You are free to add more builders for more trajectories
+8. Just use the builder as you would normally create trajectories
+9. You can add more trajectories by calling `list.add(trajectory)`
+
+## Note:
+
+On your actual bot, each trajectory will have a 0.5s timeout after the bot is done following it. This is to allow for any correction with the translational and heading PID if your bot strays off the path. This timeout is cut short if your bot is able to reach the end of the trajectory without correction. Thus, each trajectory may have up to 0.5s added on to it. This extra time is not reflected in RRPathVisualizer's trajectory time estimate. Just be aware of this timeout when creating your trajectories. You are able to change the duration of this correction timeout in the quickstart. If you'd like to do so, change the last parameter, the one with the 0.5 value, where `follower` is set to `HolonomicPIDVAFollower` in `SampleMecanumDrive.java`.
