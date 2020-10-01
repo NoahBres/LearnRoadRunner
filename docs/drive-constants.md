@@ -13,8 +13,13 @@ Here is the drive constants file you will be editing.
 If you haven't copied the file over to your own project yet, please do so!
 
 Try out the configurator to have your constants class auto configured!
+
+<p class="md:hidden block">
+(The configurator is not available on mobile. Check it out on a desktop!)
+</p>
 :::
 
+<div class="md:block hidden">
 <ModalWrapper>
   <template v-slot:button="buttonSlotProps">
     <button class="action-button block m-auto" @click="buttonSlotProps.openModal">Configure Me!</button>
@@ -25,6 +30,7 @@ Try out the configurator to have your constants class auto configured!
     </Modal>
   </template>
 </ModalWrapper>
+</div>
 
 If you want to quickly get a constants file up and running, I recommend clicking the configurator button above to automatically generate your drive constants file. We will be going through what each constant means one by one below.
 
