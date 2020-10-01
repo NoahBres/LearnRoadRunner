@@ -16,6 +16,7 @@
       />
       <label
         class="strafer-v1-chassis outline-btn mr-3 outline-yellow"
+        style="max-width: 320px"
         for="choice-chassis-strafer-v1"
       >
         <img
@@ -24,9 +25,46 @@
           "
           class="w-32 h-32 object-cover"
         />
-        <h3>goBILDA Strafer Chassis</h3>
+        <h3>
+          goBILDA Strafer Chassis v1
+          <span class="block text-xs text-gray-500 mt-2">
+            2:1 bevel gears and 13.7:1 motors
+          </span>
+        </h3>
       </label>
 
+      <input
+        type="radio"
+        id="choice-chassis-strafer-v2"
+        name="chassis"
+        value="strafer-v2"
+        class="hidden"
+        :chassisChoice="chassisChoice"
+        @input="$emit('input', $event.target.value)"
+        :checked="chassisChoice == 'strafer-v2'"
+      />
+      <label
+        class="strafer-v2-chassis outline-btn mr-3 outline-orange"
+        style="max-width: 320px"
+        for="choice-chassis-strafer-v2"
+      >
+        <img
+          :src="
+            $withBase('./assets/drive-constants/strafer-chassis-quarter.jpg')
+          "
+          class="w-32 h-32 object-cover"
+        />
+        <h3>
+          goBILDA Strafer Chassis v2
+          <span class="block text-xs text-gray-500 mt-2">
+            1:1 miter gears and 19.2:1 motors
+            <br />
+            Released in August 2020
+          </span>
+        </h3>
+      </label>
+    </div>
+    <div class="flex flex-row justify-center mt-3">
       <input
         type="radio"
         id="choice-chassis-custom"
@@ -61,12 +99,22 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
+import BaseSelection, { Dimensions } from "./BaseSelection";
 
 export default Vue.extend({
   props: ["chassisChoice"],
-  mounted() {
-    this.$emit("request-width", "844px");
-    this.$emit("request-height", "500px");
+  extends: BaseSelection,
+  data() {
+    return {
+      sizeBase: {
+        width: "750px",
+        height: "690px",
+      } as Dimensions,
+      sizeMd: {
+        width: "844px",
+        height: "690px",
+      } as Dimensions,
+    };
   },
 });
 </script>
@@ -81,6 +129,13 @@ export default Vue.extend({
 
 #choice-chassis-strafer-v1[type="radio"]:checked + label
   outline-color theme("colors.yellow.500")
+  outline-style auto
+
+.strafer-v2-chassis:hover
+  @apply border-orange-500
+
+#choice-chassis-strafer-v2[type="radio"]:checked + label
+  outline-color theme("colors.orange.500")
   outline-style auto
 
 .custom-dt:hover

@@ -41,6 +41,27 @@ const StraferV1Constants: ConstantProperties = {
   maxAccel: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI,
 };
 
+const StraferV2Constants: ConstantProperties = {
+  ticksPerRev: 537.6,
+  maxRPM: 312,
+
+  runUsingEncoder: true,
+
+  wheelRadius: 1.9685,
+  gearRatio: 1,
+
+  trackWidth: 15,
+
+  recommendedVelo: (312 / 60) * 1.9685 * 2 * Math.PI * 0.8,
+  recommendedAccel: (312 / 60) * 1.9685 * 2 * Math.PI * 0.8,
+
+  limitedVelo: (312 / 60) * 1.9685 * 2 * Math.PI * 0.8,
+  limitedAccel: (312 / 60) * 1.9685 * 2 * Math.PI * 0.8,
+
+  maxVelo: (312 / 60) * 1.9685 * 2 * Math.PI,
+  maxAccel: (312 / 60) * 1.9685 * 2 * Math.PI,
+};
+
 function generateText(filledProperties: ConstantProperties): string {
   return `package org.firstinspires.ftc.teamcode.drive;
 
@@ -186,6 +207,8 @@ public class DriveConstants {
 export function generateFile(properties: ConfigurationState): string {
   if (properties.chassisSelected == ChassisEnum.STRAFER_V1_CHASSIS)
     return generateText(StraferV1Constants);
+  else if (properties.chassisSelected == ChassisEnum.STRAFER_V2_CHASSIS)
+    return generateText(StraferV2Constants);
 
   const buildConstants: ConstantProperties = {
     ticksPerRev: 0,

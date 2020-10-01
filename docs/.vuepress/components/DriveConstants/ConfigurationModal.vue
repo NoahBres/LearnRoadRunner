@@ -66,7 +66,9 @@
     >
       <button
         class="back-button flex items-center"
-        :class="{ 'translate-y-16': !backButtonShowing }"
+        :class="{
+          'translate-y-16': !backButtonShowing,
+        }"
         @click="handleBackClick"
       >
         <svg
@@ -167,6 +169,13 @@ export default Vue.extend({
             value: {
               ...this.context.currentConfigurationState,
               chassisSelected: ChassisEnum.STRAFER_V1_CHASSIS,
+            },
+          });
+        } else if (this.chassisChoice === "strafer-v2") {
+          this.configurationModalService.send("SELECTED_CHASSIS", {
+            value: {
+              ...this.context.currentConfigurationState,
+              chassisSelected: ChassisEnum.STRAFER_V2_CHASSIS,
             },
           });
         } else if (this.chassisChoice === "custom") {
