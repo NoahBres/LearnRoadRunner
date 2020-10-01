@@ -19,7 +19,7 @@ Once you've got your velocity controller tuned, you should run a quick straight 
 ## Tuning Lateral Multiplier
 
 ::: tip
-This isn't absolutely necessary. However, due to the nature of mecanum kinematics, a mecanum drive does exhibit less torque while strafing. Thus, the motion profiling may require some slight compensation. If you skip this step, the translational PID will most likely pick up any discrepancy and you may not notice it at all. However, if you do see some undershooting while strafing, you will be interested in applying a lateral multiplier.
+This isn't absolutely necessary. However, due to the nature of mecanum kinematics, a mecanum drive does exhibit less torque while strafing. Thus, the feedforward may require some slight compensation. If you skip this step, the translational PID will most likely pick up any discrepancy and you may not notice it at all. However, if you do see some undershooting while strafing, you will be interested in applying a lateral multiplier.
 
 See [this paper](https://www.chiefdelphi.com/t/paper-mecanum-and-omni-kinematic-and-force-analysis/106153) for more details on the strafing inefficiency.
 :::
