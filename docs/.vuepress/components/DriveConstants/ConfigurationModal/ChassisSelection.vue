@@ -59,7 +59,7 @@
           <span class="block text-xs text-gray-500 mt-2">
             1:1 miter gears and 19.2:1 motors
             <br />
-            Released in August 2020
+            Released in September 2020
           </span>
         </h3>
       </label>
