@@ -335,7 +335,9 @@ We're going to double check that everything is hunky-dory with your localization
 
 3. Drive the bot around with your controller. You should see the bot being drawn on the graph in Dashboard. Make sure the drawn bot matches the movements of the actual bot.
 
-4. Check the troubleshooting section below if you encounter any issues.
+4. The x coordinates on your bot should be increasing as you move forward. The y coordinates should be increasing as you strafe left. See the [coordinate system page](/trajectories.html#coordinate-system) for further details on why this is.
+
+5. Check the troubleshooting section below if you encounter any issues.
 
 <div class="h-16"></div>
 
@@ -430,7 +432,9 @@ We're going to double check that everything is hunky-dory with your localization
 
 3. Drive the bot around with your controller. You should see the bot being drawn on the graph in Dashboard. Make sure the drawn bot matches the movements of the actual bot.
 
-4. Check the troubleshooting section below if you encounter any issues.
+4. The x coordinates on your bot should be increasing as you move forward. The y coordinates should be increasing as you strafe left. See the [coordinate system page](/trajectories.html#coordinate-system) for further details on why this is.
+
+5. Check the troubleshooting section below if you encounter any issues.
 
 ### Deleting the IMU
 
@@ -473,4 +477,11 @@ public double getRawExternalHeading() {
   - One of your parallel encoders are reversed
 
 - Your bot goes straight and strafes properly on the graph but turns the opposite way
+
   - Your left and right encoders are swapped
+
+- The localization loses accuracy over a time/distance
+  - First, try driving your bot around slowly. Attempt to minimize acceleration.
+    - Does the localization remain accurate? If not, go back and double check your other properties. Check if heading is accurate. Check if the distance traveled during strafe and forward movements are accurate.
+  - If the localization is fairly accurate at slow speeds but loses accuracy at high speeds, you are experiencing a hardware related problem.
+  - The most likely issue is that your dead wheels do not have enough traction. Increase the spring force on your dead wheels.
