@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center px-8 py-4 pb-0 h-full">
-    <h2 class="border-none mt-0 mb-10 text-center">
+    <h2 class="border-none mt-0 xl:mb-10 mb-0 text-center">
       Track Width Estimate
       <h4 class="block text-gray-500 m-0 text-2xl">(inches)</h4>
     </h2>
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-row justify-center items-center mt-8">
+    <div class="flex flex-row justify-center items-center xl:mt-8 mt-0">
       <button
         class="number-button minus-button mr-4"
         @click="decrement"
@@ -55,12 +55,12 @@
         :class="{ 'dont-click': trackWidth >= maxWidthIn }"
       />
     </div>
-    <div class="mt-6">
-      <p class="text-gray-800 max-w-3xl">
+    <div class="xl:mt-6 mt-0">
+      <p class="text-gray-800 max-w-3xl xl:mb-4 mb-0">
         *Track width = distance from the center of one wheel to the center of
         its parallel wheel
       </p>
-      <p class="text-gray-800 max-w-3xl mt-2 mb-8">
+      <p class="text-gray-800 max-w-3xl xl:mt-2 mt-0 xl:mb-8 mb-0">
         **Track width need only be an estimate. It will be empirically tuned
         later.
       </p>
@@ -69,18 +69,25 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
+import BaseSelection, { Dimensions } from "./BaseSelection";
 
 export default Vue.extend({
+  extends: BaseSelection,
   data() {
     return {
+      sizeBase: {
+        width: "755px",
+        height: "570px",
+      } as Dimensions,
+      sizeLg: {
+        width: "755px",
+        height: "690px",
+      } as Dimensions,
+
       trackWidth: 15,
       maxWidthIn: 18,
       clipVisualTrackWidth: 12,
     };
-  },
-  mounted() {
-    this.$emit("request-width", "755px");
-    this.$emit("request-height", "690px");
   },
   computed: {
     clippedWidth() {
@@ -208,13 +215,17 @@ input[type=number]
   -moz-appearance textfield
 
 .number-input
-  @apply text-center text-2xl
-  @apply py-4 w-24
+  @apply text-center text-lg
+  @apply py-2 w-20
   @apply appearance-none
   @apply border border-transparent border-2
   @apply rounded-md
   @apply bg-gray-300
   @apply transition-colors duration-150
+
+  @media (min-width: 1280px)
+    @apply text-2xl
+    @apply py-4 w-24
 
 .number-input:focus
   @apply border-red-500 outline-none ease-in

@@ -28,7 +28,7 @@ const BaseSelection = Vue.extend({
   },
   methods: {
     emitSize() {
-      if (document.body.clientWidth > 1024) {
+      if (document.body.clientWidth > 1281) {
         this.$emit("request-width", this.sizeLg.width);
         this.$emit("request-height", this.sizeLg.height);
       } else {

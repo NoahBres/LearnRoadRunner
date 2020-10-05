@@ -162,14 +162,14 @@ export default Vue.extend({
       normalWidthBase: "451px",
       expandedWidthBase: "750px",
 
-      heightBase: "700px",
+      heightBase: "570px",
 
       gridWidthBase: "390px",
       gridWidthPaddingBase: "436px",
 
-      gridHeightBase: "495px",
+      gridHeightBase: "365px",
 
-      tableHeightBase: "28em",
+      tableHeightBase: "20.5em",
 
       normalWidthLg: "635px",
       expandedWidthLg: "950px",

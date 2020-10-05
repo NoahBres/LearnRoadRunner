@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center px-8 py-4 pb-0 h-full">
-    <h2 class="border-none mt-0 mb-10 text-center">
+    <h2 class="border-none mt-0 xl:mb-10 mb-0 text-center">
       Are you using an off-the-shelf drive train?
     </h2>
     <div class="flex flex-row justify-center">
@@ -23,9 +23,9 @@
           :src="
             $withBase('./assets/drive-constants/strafer-chassis-quarter.jpg')
           "
-          class="w-32 h-32 object-cover"
+          class="xl:w-32 w-24 xl:h-32 h-24 object-cover"
         />
-        <h3>
+        <h3 class="lg:text-2xl text-xl">
           goBILDA Strafer Chassis v1
           <span class="block text-xs text-gray-500 mt-2">
             2:1 bevel gears and 13.7:1 motors
@@ -52,9 +52,9 @@
           :src="
             $withBase('./assets/drive-constants/strafer-chassis-quarter.jpg')
           "
-          class="w-32 h-32 object-cover"
+          class="xl:w-32 w-24 xl:h-32 h-24 object-cover"
         />
-        <h3>
+        <h3 class="lg:text-2xl text-xl">
           goBILDA Strafer Chassis v2
           <span class="block text-xs text-gray-500 mt-2">
             1:1 miter gears and 19.2:1 motors
@@ -79,11 +79,11 @@
         class="custom-dt outline-btn ml-3 outline-green"
         for="choice-chassis-custom"
       >
-        <div class="w-32 h-32 flex justify-center items-center">
+        <div class="xl:w-32 w-24 xl:h-32 h-24 flex justify-center items-center">
           <svg
             fill="currentColor"
             viewBox="0 0 20 20"
-            class="w-24 h-24 text-green-700"
+            class="lg:w-24 w-20 lg:h-24 h-20 text-green-700"
           >
             <path
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
@@ -92,7 +92,7 @@
             ></path>
           </svg>
         </div>
-        <h3>I'm using my own!</h3>
+        <h3 class="lg:text-2xl text-xl">I'm using my own!</h3>
       </label>
     </div>
   </div>
@@ -108,7 +108,7 @@ export default Vue.extend({
     return {
       sizeBase: {
         width: "750px",
-        height: "690px",
+        height: "560px",
       } as Dimensions,
       sizeLg: {
         width: "844px",

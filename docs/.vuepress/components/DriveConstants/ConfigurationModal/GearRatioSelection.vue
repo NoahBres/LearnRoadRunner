@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center items-center px-8 py-4 pb-0 h-full">
-    <h2 class="border-none mt-0 mb-10 text-center">
+    <h2 class="border-none mt-0 xl:mb-10 mb-0 text-center">
       Gear Ratio
       <h4 class="block text-gray-500 m-0 text-2xl">(output : input)</h4>
     </h2>
@@ -41,7 +41,9 @@
         min="0"
         @change="$emit('input', ratio)"
       />
-      <span class="text-3xl px-4 mb-2 font-semibold ">:</span>
+      <span class="xl:text-3xl text-2xl px-4 xl:mb-2 mb-1 font-semibold">
+        :
+      </span>
       <input
         class="number-input"
         v-model.number="input"
@@ -50,11 +52,11 @@
         @change="$emit('input', ratio)"
       />
     </div>
-    <div class="mt-6">
+    <div class="xl:mt-6 mt-0">
       <p class="text-gray-800 max-w-3xl">
         *Output = Wheel Speed. Input = Motor Speed.
       </p>
-      <p class="text-gray-800 max-w-3xl mt-2 mb-8">
+      <p class="text-gray-800 max-w-3xl xl:mt-2 mt-0 mb-8">
         **This this at 1:1 if you have a direct drive.
       </p>
     </div>
@@ -62,17 +64,24 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
+import BaseSelection, { Dimensions } from "./BaseSelection";
 
 export default Vue.extend({
+  extends: BaseSelection,
   data() {
     return {
+      sizeBase: {
+        width: "650px",
+        height: "570px",
+      } as Dimensions,
+      sizeLg: {
+        width: "650px",
+        height: "660px",
+      } as Dimensions,
+
       input: 1,
       output: 1,
     };
-  },
-  mounted() {
-    this.$emit("request-width", "650px");
-    this.$emit("request-height", "660px");
   },
   computed: {
     ratio() {
@@ -92,13 +101,18 @@ export default Vue.extend({
 </script>
 <style lang="stylus" scoped>
 .number-input
-  @apply text-center text-2xl
-  @apply py-4 w-24
+  @apply text-center text-lg
+  @apply py-2 w-20
   @apply appearance-none
   @apply border border-transparent border-2
   @apply rounded-md
   @apply bg-gray-300
   @apply transition-colors duration-150
+
+  @media (min-width: 1280px)
+    @apply text-2xl
+    @apply py-4 w-24
+
 
 .number-input:focus
   @apply border-red-500 outline-none ease-in
