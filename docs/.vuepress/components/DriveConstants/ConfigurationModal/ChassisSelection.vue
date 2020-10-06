@@ -20,9 +20,7 @@
         for="choice-chassis-strafer-v1"
       >
         <img
-          :src="
-            $withBase('./assets/drive-constants/strafer-chassis-quarter.jpg')
-          "
+          :src="$withBase('./assets/drive-constants/strafer-v1-quarter.jpg')"
           class="xl:w-32 w-24 xl:h-32 h-24 object-cover"
         />
         <h3 class="lg:text-2xl text-xl">
@@ -49,9 +47,7 @@
         for="choice-chassis-strafer-v2"
       >
         <img
-          :src="
-            $withBase('./assets/drive-constants/strafer-chassis-quarter.jpg')
-          "
+          :src="$withBase('./assets/drive-constants/strafer-v2-quarter.jpg')"
           class="xl:w-32 w-24 xl:h-32 h-24 object-cover"
         />
         <h3 class="lg:text-2xl text-xl">
