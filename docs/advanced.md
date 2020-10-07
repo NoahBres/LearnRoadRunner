@@ -223,7 +223,7 @@ This will be used in the next sample.
 
 **WARNING: THIS IS A DEMONSTRATION OF ROAD RUNNER'S CAPABILITIES. I DO NOT RECOMMEND DOING THIS IN GAME**
 
-This [sample opmode](https://github.com/NoahBres/road-runner-quickstart/blob/advanced-examples/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/advanced/TeleOpAugmentedDriving.java) demonstrates how one can augment driver control by following Road Runner
+This [sample opmode](https://github.com/NoahBres/road-runner-quickstart/blob/advanced-examples/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/advanced/TeleOpAugmentedDriving.java) demonstrates how one can augment driver control by following
 arbitrary Road Runner trajectories at any time during teleop. This really isn't recommended at
 all. This is not what Trajectories are meant for. A path follower is more suited for this
 scenario. This sample primarily serves as a demo showcasing Road Runner's capabilities. However, it is a cool demo and demonstrates how one can combine the "Finite State Machine" sample along with the "Interrupting a Live Trajectory" sample to create complex behaviors.
