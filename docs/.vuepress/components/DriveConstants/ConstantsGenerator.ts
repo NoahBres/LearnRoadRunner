@@ -47,19 +47,19 @@ const StraferV2Constants: ConstantProperties = {
 
   runUsingEncoder: true,
 
-  wheelRadius: 1.9685,
+  wheelRadius: 1.88976,
   gearRatio: 1,
 
   trackWidth: 14.8,
 
-  recommendedVelo: (312 / 60) * 1.9685 * 2 * Math.PI * 0.8,
-  recommendedAccel: (312 / 60) * 1.9685 * 2 * Math.PI * 0.8,
+  recommendedVelo: (312 / 60) * 1.88976 * 2 * Math.PI * 0.8,
+  recommendedAccel: (312 / 60) * 1.88976 * 2 * Math.PI * 0.8,
 
-  limitedVelo: (312 / 60) * 1.9685 * 2 * Math.PI * 0.8,
-  limitedAccel: (312 / 60) * 1.9685 * 2 * Math.PI * 0.8,
+  limitedVelo: (312 / 60) * 1.88976 * 2 * Math.PI * 0.8,
+  limitedAccel: (312 / 60) * 1.88976 * 2 * Math.PI * 0.8,
 
-  maxVelo: (312 / 60) * 1.9685 * 2 * Math.PI,
-  maxAccel: (312 / 60) * 1.9685 * 2 * Math.PI,
+  maxVelo: (312 / 60) * 1.88976 * 2 * Math.PI,
+  maxAccel: (312 / 60) * 1.88976 * 2 * Math.PI,
 };
 
 function generateText(filledProperties: ConstantProperties): string {
