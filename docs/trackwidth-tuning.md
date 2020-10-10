@@ -10,12 +10,13 @@ Your localizer's heading measurements should be accurate prior to tuning this. I
 :::
 
 ::: tip
-A long clarification because this can get slightly confusion.
-Just to clarify, there are two types of track width that you may see. Track width is the center-to-center distance from two parallel wheels.
+This is a fairly verbose clarification of the term track width as its use different contexts can be confusing.
+
+Track width is simply the center-to-center distance from two parallel wheels. However, there are two types of track width that you may see.
 
 The track width in your `DriveConstants.java` refers to the track width of the drive train.
-The track used in any context involving odometry is the center-to-center distance of the two parallel wheels. This only applies to three-wheel odometry. The track width for three-wheel odometry refers to the same thing as `lateralDistance`.
-Thus, any references to track width on this page will refer to the drive train track width.
+However in the context of dead wheel odometry, track width is the center-to-center distance of the two parallel wheels. This only applies to three-wheel odometry. The track width for three-wheel odometry refers to the same thing as `lateralDistance`.
+We are not touching the localizer at the moment, thus any references to track width on this page will refer to the drive train track width (located in `DriveConstants.java`).
 
 The track width for the **drive train** is used for the forward kinematics for feedforward following.
 
@@ -28,13 +29,14 @@ You should have already tuned localization. Right now, you will be tuning the dr
 2. Your bot should turn 180 degrees 5 times.
 3. Don't touch the bot during the tuning process.
 4. At the end of the tuning, the RC's telemetry should print an "effective track width".
-5. If this number sounds reasonable (close to the actual physical track width), stick this number in your `DriveConstants.java` file under `TRACK_WIDTH`.
+5. If this number sounds reasonable (close to the actual physical track width, might be a few inches off), stick this number in your `DriveConstants.java` file under `TRACK_WIDTH`.
+   - If you have FTC Dashboard open, you can change the track width in the variable configuration sidebar (on the right) to test your values. You may need to run the tuner a few times so this makes it a lot easier as you don't have to change the constants file and re-compile/re-upload the app to test values.
 6. The bot should be turning close to 180 degrees every time once tuned.
 7. If you bot runs into the following issues, you will have to tune manually:
    - It does not turn 180 degrees each time, even with tuning
    - The effective track width given does not print something reasonable (most likely a low number like 3)
-     - This most likely caused by failing to put an initial estimate in the drive constants file. It's all good if you didn't.
-8. To tune the track width manually, simply keep raising the track width yourself until it turns 180 degrees. If it overshoots, lower the track width.
+     - This is generally caused by failing to put an initial estimate in the drive constants file and leaving the track width at 1.
+8. To tune the track width manually, simply keep adjusting the track width yourself until it turns 180 degrees. If the the bot turns less than 180 degrees, raise the trackwidth. If the bot turns more than 180 degrees, lower the trackwidth.
 
 <figure align="center">
     <img class="rounded-lg" src="./assets/drive-constants/wes-bot-edit-half.jpg" alt="Track width is the distance from the center of one wheel to the center of its parallel wheel">
