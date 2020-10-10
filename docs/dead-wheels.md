@@ -464,19 +464,19 @@ public double getRawExternalHeading() {
 
 ## Troubleshooting
 
-- Bot strafes the opposite direction
+- Bot on the dashboard field strafes the opposite direction as the actual bot
 
   - Reverse the direction of the perpendicular encoder
 
-- Bot doesn't spin in place properly
+- Bot on the dashboard field doesn't spin in place properly
 
   - This is due to an offset center of rotation due to an incorrect perpendicular wheel placement. Tuning the position of your perpendicular wheel is a pain. It's fine to let this be a little inaccurate as an offset center of rotation will not affect the tracking accuracy. It will only introduce a little offset to your localization.
 
-- Bot on the graph spins while the actual bot is going straight
+- Bot on the dashboard field spins while the actual bot is going straight
 
   - One of your parallel encoders are reversed
 
-- Your bot goes straight and strafes properly on the graph but turns the opposite way
+- Your bot on the dashboard field goes straight and strafes properly but turns the opposite way as the actual bot
 
   - Your left and right encoders are swapped
 
