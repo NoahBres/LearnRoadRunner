@@ -11,7 +11,15 @@ This section should be skipped because you have chosen the option to use drive e
     <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
 </figure>
 
-Tuning the feedforward controller for accurate following is necessary for for accurate path following. Poor tuning of the feedforward controller will result in errors later along the line. Although the Road Runner quickstart comes with both an automatic tuner and a manual tuner, many find that the automatic tuner does not provide optimal results. The automatic tuner isn't able to properly calculate `kA`. However, you are free to try and run it and use the gains it produces. However, I would recommend manually tuning those results afterwards.
+Tuning the feedforward controller for accurate following is necessary for for accurate path following. Poor tuning of the feedforward controller will result in errors later along the line. Although the Road Runner quickstart comes with both an automatic tuner and a manual tuner, many find that the automatic tuner does not provide optimal results. The automatic tuner isn't able to properly calculate `kA`. However, you are free to try and run it and use the gains it produces. I would recommend manually tuning those results afterwards.
+
+::: tip
+You can press X (on the Xbox and Logitech gamepads, square on the PS4 dualshock) to pause the tuning process and enter driver control.
+
+Press A (on the Xbox and Logitech gamepads, X on the PS4 dualshock) to cede control back to the tuner.
+
+If your bot drifts off path, simply enter driver control and drive your bot back to the initial position.
+:::
 
 ## Tuning
 
@@ -28,41 +36,39 @@ Your page should look something like this:
       <img src="./assets/feedforward-tuning/example-dashboard-half.jpg" alt="Image depicting FTC Dashboard in the browser">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
-    <figcaption class="mt-2 text-sm text-gray-600 text-center">Example dashboard</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600 text-center">Example dashboard<br>(slightly outdated screenshot, yours may not look exactly the same)</figcaption>
 </figure>
 
 4. Run the opmode. The graph will not show up until you have started it.
 
 If the graph doesn't show up, and instead shows a number of checkboxes, that's okay. Click the `targetVelocity` and `poseVelocity` checkbox.
 
-6. Look for the `DriveConstants` in the right sidebar. Open the dropdown. Then look for `BASE_CONSTRAINTS`. Open that dropdown. You'll see the options specified in the `DriveConstants` file.
+6. Look for the `DriveConstants` in the right sidebar. Open the dropdown. You are looking for the `kA`, `kV`, and `kStatic` variables.
 
-7. Ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`.
+7. In the `ManualFeedforwardTuner` dropdown, ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`.
 
-8. Ensure that the `kV`, `kA`, and `kStatic` options are there. You will be tuning these variables.
+8. At this point, once you have run the opmode, the bot should be moving back and forth along the distance specified in the opmode file. The goal is for the `poseVelocity` line to match the `targetVelocity` line.
 
-9. At this point, once you have run the opmode, the bot should be moving back and forth along the distance specified in the opmode file. The goal is for the `poseVelocity` line to match the `targetVelocity` line.
+9. **Recommended tuning process**:
 
-10. **Recommended tuning process**:
+   1. `kV` should initially be set to `1 / max velocity`. The `poseVelocity` line should be touching the top of the `targetVelocity` plateau. If not, increase `kV`.
+   2. Increase `kA`to try and get the slope of the `poseVelocity` line to match `targetVelocity`.
+   3. Here is a reference to visualize what these gains should be doing.
 
-    1. `kV` should initially be set to `1 / max velocity`. The `poseVelocity` line should be touching the top of the `targetVelocity` plateau. If not, increase `kV`.
-    2. Increase `kA`to try and get the slope of the `poseVelocity` line to match `targetVelocity`.
-    3. Here is a reference to visualize what these gains should be doing.
+      <figure align="center">
+        <div class="relative">
+          <img src="./assets/feedforward-tuning/dawgma-tuning-guide.jpg" alt="Image depicting tips for feed forward tuning using various graphed examples">
+          <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
+        </div>
+        <figcaption class="mt-2 text-sm text-gray-600 text-center">Tuning Tips</figcaption>
+      </figure>
 
-       <figure align="center">
-         <div class="relative">
-           <img src="./assets/feedforward-tuning/dawgma-tuning-guide.jpg" alt="Image depicting tips for feed forward tuning using various graphed examples">
-           <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
-         </div>
-         <figcaption class="mt-2 text-sm text-gray-600 text-center">Tuning Tips</figcaption>
-       </figure>
+      These tips come from FRC Team 1712's [Adaptive Pure Pursuit paper](https://www.chiefdelphi.com/t/paper-implementation-of-the-adaptive-pure-pursuit-controller/166552)
 
-       These tips come from FRC Team 1712's [Adaptive Pure Pursuit paper](https://www.chiefdelphi.com/t/paper-implementation-of-the-adaptive-pure-pursuit-controller/166552)
-
-    4. That should be it! An example of a decently tuned feedforward controller can be found below.
-    5. **Any adjustments in dashboard need to be copied over to the `DriveConstants.java` file under the equivalent variable name. Dashboard adjustments are temporary and will reset once you restart the opmode.**
-    6. Check the tuning simultor to see how each gain affects the behavior.
-    7. **Note:** The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it. The FTC Motor Controller is a little odd and you will have a slight bump on deceleration that will be impossible to get rid of.
+   4. That should be it! An example of a decently tuned feedforward controller can be found below.
+   5. **Any adjustments in dashboard need to be copied over to the `DriveConstants.java` file under the equivalent variable name. Dashboard adjustments are temporary and will reset once you restart the opmode.**
+   6. Check the tuning simultor to see how each gain affects the behavior.
+   7. **Note:** The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it. In addition to that, the Rev Hub's internal motor controller is a little odd and you will have a slight bump on deceleration that will be impossible to get rid of.
 
 Decently tuned feedforward controller courtesy of Deetz from Team 14320:
 

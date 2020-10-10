@@ -13,13 +13,23 @@ This section should be skipped because you have chosen the option not to use dri
 
 Tuning the Velocity PID can be one of the more frustrating parts of Road Runner. This is required for accurate path following. However, intuition on how a PID controller works and what to do will help alleviate that frustration and hopefully make this a smooth process.
 
+::: tip
+You can press X (on the Xbox and Logitech gamepads, square on the PS4 dualshock) to pause the tuning process and enter driver control.
+
+Press A (on the Xbox and Logitech gamepads, X on the PS4 dualshock) to cede control back to the tuner.
+
+If your bot drifts off path, simply enter driver control and drive your bot back to the initial position.
+:::
+
 ## Tuning
 
-1. The first step is to run the `DriveVelocityPIDTuner` opmode via the RC.
+1. The default `DISTANCE` the bot travels is 72 inches. Therefore, ensure you have at least that specified distance's worth of clearance (plus another foot, ideally). You may adjust the `DISTANCE` value in the dashboard variable configuration sidebar or directly in the file itself if you do not have enough space. Although the bot is supposed to travel in a straight line, it will slowly drift to one side. This can be caused by a number of reasons from uneven weight distribution to the velocity PID simply being untuned. You need not worry about this as enabling the heading PID later will fix this during actual path following. I recommend clearing a space 2-3 field mats wide to help address the drift. If you have a path that is only 1 mat wide, it will keep falling off the edge and you need to keep resetting its position.
 
-2. Then, connect to the RC phone's wifi network. The password to the network is located in the `Program and Manage` menu.
+2. The first step is to run the `DriveVelocityPIDTuner` opmode via the RC.
 
-3. Navigate to `192.168.49.1:8080/dash` with a phone RC or `192.168.43.1:8080/dash` with a Control Hub.
+3. Then, connect to the RC phone's wifi network. The password to the network is located in the `Program and Manage` menu.
+
+4. Navigate to `192.168.49.1:8080/dash` with a phone RC or `192.168.43.1:8080/dash` with a Control Hub.
 
 Your page should look something like this:
 
@@ -28,28 +38,29 @@ Your page should look something like this:
       <img src="./assets/drive-velocity-pid-tuning/example-dashboard-half.jpg" alt="Image depicting FTC Dashboard in the browser">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
-    <figcaption class="mt-2 text-sm text-gray-600 text-center">Example dashboard</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600 text-center">Example dashboard<br>(slightly outdated screenshot, yours may not look exactly the same)</figcaption>
 </figure>
 
-4. Run the opmode. The graph and its options will not show up until you have started it.
+4. Run the opmode. The graph will not show up until you have started it.
+   - Remeber to turn off the 30 second autonomous timer!
 
 If the graph doesn't show up, and instead shows a number of checkboxes, that's okay. Click the `targetVelocity` and `velocity0` checkbox. Ignore the others. This will make tuning easier.
 
-5. Look for the `DriveVelocityPIDTuner` in the right sidebar. Open the dropdown. Then look for `VELO_PID`. Open that dropdown. You'll see the options: `DISTANCE`, `kD`, `kI`, and `kP`. You will be tuning these variables.
+5. Look for the `DriveConstants` in the right sidebar. Open the dropdown. Then look for `MOTOR_VELO_PID`. Open that dropdown. You'll see the options: `kD`, `kI`, `kP`, and `kV`. You will be tuning these variables.
 
-6. Ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`. There should be a decently straight/flat portion in the graph.
+6. In the `DriveVelocityPIDTuner` dropdown, ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`. There should be a decently straight/flat portion in the graph, as shown in the sample dashboard above.
 
 7. At this point, once you have run the opmode, the bot should be moving back and forth along the distance specified in the opmode file. The goal of the tuning process is to match `velocity0` to the `targetVelocity` line. Edit the values in the text boxes and press enter. They will live update and you should see the effects take place on the bot.
 
 8. **Recommended tuning process**:
-   1. Set all the values, `kP`, `kD`, and `kI` to 0. Keep `kV` as is.
-   2. Increase `kV` a little so it gets closer to `targetVelocity`. We have found that increasing `kV` until it reaches the plateau isn't as optimal. Increasing `kV` so that your wheel velocity rests halfway between your original velocity and `targetVelocity` produces great results.
-   3. Slowly increase `kP` to try and get the line to match the target.
+   1. Set all the PID gains (`kP`, `kD`, and `kI`) to 0. Keep `kV` as is.
+   2. Increase `kV` a little so it gets closer to `targetVelocity`. We have found that increasing `kV` until it reaches the plateau isn't as optimal. Increasing `kV` so that your wheel velocity rests halfway between your original velocity and `targetVelocity` produces decent results.
+   3. Slowly increase `kP` to try and get the line to match the target. If you are increasing `kP` such that the velocity reaches the top of the target but the acceleration portions (the non-flat sections at an angle) don't, you should reduce `kV`.
    4. Increase `kD` to try and dampen the oscillations. Increasing `kD` too far will simply increase oscillations.
    5. Increase `kP` once again. Repeat the `kP` and `kD` increase until your graph starts to match the target velocity.
    6. You should not touch `kI`. `kI` tends to cause many problems and its use is technically incorrect.
-   7. **Note:** The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it. In addition to that, the FTC Motor Controller is a little odd and you will have a slight bump on deceleration that will be impossible to get rid of.
-   8. The official Road Runner docs recommend that you should "prioritize eliminating phase lag even at the cost of some extra oscillations." However, I personally feel that it is better to try and minimize oscillations, especially towards the zero velocity. I found that eliminating phase lag, especially at high speeds, would cause very jittery motion, most likely due to the Rev Hub's odd motor control. Hit us up in the [FTC Discord](https://discord.gg/first-tech-challenge) if you are interested in further technical details. My personal advice would be to minimize oscillations and allow for the translational PID to fix any phase lag discrepancies.
+   7. **Note:** The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it. In addition to that, the Rev Hub's internal motor controller is a little odd and you will have a slight bump on deceleration that will be impossible to get rid of.
+   8. The official Road Runner docs recommend that you should "prioritize eliminating phase lag even at the cost of some extra oscillations." However, I personally feel that it is better to try and minimize oscillations, especially towards the zero velocity (middle of the graph). I found that eliminating phase lag, especially at high speeds, would cause very jittery motion, most likely due to the Rev Hub's odd motor control. Hit us up in the [FTC Discord](https://discord.gg/first-tech-challenge) if you are interested in further technical details. My personal advice would be to try your best to minimize phase lag but if it causes your robot to visibly jitter, loosen up on the tuning and allow for the translational PID to fix any phase lag discrepancies.
    9. **Any adjustments in dashboard need to be copied over to the `DriveConstants.java` file under the equivalent variable name. Dashboard adjustments are temporary and will reset once you restart the opmode. Remember this!! It is very frustrating to get decent tunings and forgetting to save them in `DriveConstants.java`!**
    10. Check the tuning simulator to see how each gain affects the behavior.
 
@@ -87,7 +98,11 @@ This is a very very rudimentary "simulator." It is only meant to give you a basi
 :::
 
 ::: tip
-Here are two good videos explaining what each gain in a PID controller does if you are interested. Highly recommend watching these as an intuitive understanding of each gain will make tuning much easier.
+Here are a few good videos on the topic of PID controllers. Highly recommend watching these as an intuitive understanding of the PID controller and the behavior of each gain will make tuning much easier.
+
+The first video is very good in my opinion. You can skip the initial 3-4 minutes but the latter portion of the video goes over the behavior of each gain. The second video also does the same.
+
+[https://www.youtube.com/watch?v=XfAt6hNV8XM](https://www.youtube.com/watch?v=XfAt6hNV8XM)
 
 [https://www.youtube.com/watch?v=6OH-wOsVVjg](https://www.youtube.com/watch?v=6OH-wOsVVjg)
 
@@ -101,4 +116,4 @@ This article is also pretty neat:
 
 # TODO
 
-make a video explaining the basics on this and embed
+make a live tuning video guide
