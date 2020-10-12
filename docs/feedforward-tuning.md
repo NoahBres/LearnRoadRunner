@@ -41,7 +41,7 @@ Your page should look something like this:
 
 4. Run the opmode. The graph will not show up until you have started it.
 
-If the graph doesn't show up, and instead shows a number of checkboxes, that's okay. Click the `targetVelocity` and `poseVelocity` checkbox.
+Make sure to click the graph button _after_ you run the program. If the graph still doesn't show up, and instead shows a number of checkboxes, that's okay. Click the `targetVelocity` and `poseVelocity` checkbox.
 
 6. Look for the `DriveConstants` in the right sidebar. Open the dropdown. You are looking for the `kA`, `kV`, and `kStatic` variables.
 

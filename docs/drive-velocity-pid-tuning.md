@@ -44,7 +44,7 @@ Your page should look something like this:
 4. Run the opmode. The graph will not show up until you have started it.
    - Remeber to turn off the 30 second autonomous timer!
 
-If the graph doesn't show up, and instead shows a number of checkboxes, that's okay. Click the `targetVelocity` and `velocity0` checkbox. Ignore the others. This will make tuning easier.
+Make sure to click the graph button _after_ you run the program. If the graph doesn't show up, and instead shows a number of checkboxes, that's okay. Click the `targetVelocity` and `velocity0` checkbox. Ignore the others. This will make tuning easier.
 
 5. Look for the `DriveConstants` in the right sidebar. Open the dropdown. Then look for `MOTOR_VELO_PID`. Open that dropdown. You'll see the options: `kD`, `kI`, `kP`, and `kV`. You will be tuning these variables.
 
