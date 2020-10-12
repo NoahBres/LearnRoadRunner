@@ -236,11 +236,11 @@ public void runOpMode() {
 
   drive.setPoseEstimate(startPose);
 
-  TrajectoryBuilder traj1 = drive.trajectoryBuilder(startPose)
+  Trajectory traj1 = drive.trajectoryBuilder(startPose)
       .splineTo(new Pose2d(20, 9, Math.toRadians(45)))
       .build();
 
-  TrajectoryBuilder traj2 = drive.trajectoryBuilder(traj1.end())
+  Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
       .splineTo(new Pose2d(20, 9, Math.toRadians(45)))
       .build();
 
