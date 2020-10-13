@@ -271,7 +271,7 @@ Offset takes in any arbitray number used to offset that scale for fine tuning.
 ### Displacement Markers - Lambda Parameter
 
 ```java
-addDisplacementMarker(pathTime -> pathTime * 0.3, () -> {
+addDisplacementMarker(pathLength -> pathLength * 0.3, () -> {
   // Runs 30% into the path
 })
 ```
