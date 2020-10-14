@@ -72,7 +72,7 @@ public class MyTeleopOpmode extends LinearOpMode {
         waitForStart();
 
         while(opModeIsActive()) {
-            // Make sure to call myLocalizer.update() on *every* loop
+            // Make sure to call drive.update() on *every* loop
             // Increasing loop time by utilizing bulk reads and minimizing writes will increase your odometry accuracy
             drive.update();
 
@@ -145,7 +145,7 @@ public void init() {
   drive.followTrajectoryAsync(trajectory);
 }
 
-public void update() {
+public void loop() {
   // Call drive.update() and this will handle all the path following logic
   drive.update();
 
