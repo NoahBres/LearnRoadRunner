@@ -7,7 +7,7 @@ module.exports = {
   ],
   experimental: {
     uniformColorPalette: true,
-    applyComplexClasses: true
+    applyComplexClasses: true,
   },
   theme: {
     extend: {
@@ -15,15 +15,11 @@ module.exports = {
         "85": "0.85",
       },
       screens: {
-        tablet: "640px",
-        // => @media (min-width: 640px) { ... }
-
-        laptop: "1024px",
-        // => @media (min-width: 1024px) { ... }
-
-        desktop: "1285px",
-        // => @media (min-width: 1280px) { ... }
-      },
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1285px',
+      }
     },
   },
   variants: {},
