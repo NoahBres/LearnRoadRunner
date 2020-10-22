@@ -67,7 +67,7 @@
       <button
         class="back-button flex items-center"
         :class="{
-          'translate-y-16': !backButtonShowing,
+          'translate-me': !backButtonShowing,
         }"
         @click="handleBackClick"
       >
@@ -85,7 +85,7 @@
       </button>
       <button
         class="next-button"
-        :class="{ 'translate-x-40': !nextButtonShowing }"
+        :class="{ 'translate-me': !nextButtonShowing }"
         style="min-height: 42px;"
         @click="handleNextClick"
       >
@@ -334,7 +334,7 @@ export default Vue.extend({
 
   transition transform 150ms cubic-bezier(0.41, 1.3, 0.71, 1.03), border-color 100ms ease-out
 
-  &.translate-y-16
+  &.translate-me
     @apply translate-y-16
 
 .back-button:hover
@@ -353,7 +353,7 @@ export default Vue.extend({
   // transition transform 150ms cubic-bezier(.67, -0.6, 0, 1.71)
 
   // Required because the class doesn't have enough specificity on its own
-  &.translate-x-40
+  &.translate-me
     @apply translate-x-40
 
 .next-button:hover
