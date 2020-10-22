@@ -14,7 +14,7 @@ export default Vue.extend({
 <style lang="stylus" scoped>
 .skipme
   display inline-block
-  background $yellow500
+  background theme("colors.yellow.300")
 
   font-size 0.6em
 
