@@ -45,23 +45,23 @@ interface Wheel {
 const wheelTypes: Wheel[] = [
   {
     name: "100mm Mecanum",
-    img: "./assets/drive-constants/gobilda-mecanum-quarter.jpg",
+    img: "./assets/drive-constants/gobilda-mecanum-eighth.jpg",
     radius: 1.9685,
   },
   {
     name: "4in Mecanum",
-    img: "./assets/drive-constants/vex-mecanum-quarter.jpg",
+    img: "./assets/drive-constants/vex-mecanum-eighth.jpg",
     radius: 2,
   },
   {
     name: "75mm Mecanum",
-    img: "./assets/drive-constants/rev-mecanum-half.png",
+    img: "./assets/drive-constants/rev-mecanum-quarter.jpg",
     radius: 1.4763,
   },
   {
-    name: "90mm Omni",
-    img: "./assets/drive-constants/rev-90-omni-quarter.png",
-    radius: 1.7716,
+    name: "96mm Mecanum",
+    img: "./assets/drive-constants/gobilda-mecanum-v2-eighth.jpg",
+    radius: 1.8898,
   },
 ];
 
