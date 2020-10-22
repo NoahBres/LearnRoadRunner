@@ -5,6 +5,10 @@ module.exports = {
     "./docs/.vuepress/**/*.vue",
     "./docs/.vuepress/**/**/*.vue",
   ],
+  experimental: {
+    uniformColorPalette: true,
+    applyComplexClasses: true
+  },
   theme: {
     extend: {
       opacity: {
