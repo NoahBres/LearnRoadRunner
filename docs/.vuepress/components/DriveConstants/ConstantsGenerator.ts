@@ -41,7 +41,7 @@ const StraferV1Constants: ConstantProperties = {
   maxAccel: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI,
 };
 
-const StraferV2Constants: ConstantProperties = {
+const StraferV3Constants: ConstantProperties = {
   ticksPerRev: 537.6,
   maxRPM: 312,
 
@@ -207,8 +207,8 @@ public class DriveConstants {
 export function generateFile(properties: ConfigurationState): string {
   if (properties.chassisSelected == ChassisEnum.STRAFER_V1_CHASSIS)
     return generateText(StraferV1Constants);
-  else if (properties.chassisSelected == ChassisEnum.STRAFER_V2_CHASSIS)
-    return generateText(StraferV2Constants);
+  else if (properties.chassisSelected == ChassisEnum.STRAFER_V3_CHASSIS)
+    return generateText(StraferV3Constants);
 
   const buildConstants: ConstantProperties = {
     ticksPerRev: 0,

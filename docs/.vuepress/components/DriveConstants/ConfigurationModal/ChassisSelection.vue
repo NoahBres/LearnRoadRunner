@@ -26,34 +26,34 @@
         <h3 class="lg:text-2xl text-xl">
           goBILDA Strafer Chassis v1
           <span class="block text-xs text-gray-500 mt-2">
-            2:1 bevel gears and 13.7:1 motors
+            2:1 bevel gears, 13.7:1 motors, 100mm wheels
           </span>
         </h3>
       </label>
 
       <input
         type="radio"
-        id="choice-chassis-strafer-v2"
+        id="choice-chassis-strafer-v3"
         name="chassis"
-        value="strafer-v2"
+        value="strafer-v3"
         class="hidden"
         :chassisChoice="chassisChoice"
         @input="$emit('input', $event.target.value)"
-        :checked="chassisChoice == 'strafer-v2'"
+        :checked="chassisChoice == 'strafer-v3'"
       />
       <label
-        class="strafer-v2-chassis outline-btn mr-3 outline-orange"
+        class="strafer-v3-chassis outline-btn mr-3 outline-orange"
         style="max-width: 320px"
-        for="choice-chassis-strafer-v2"
+        for="choice-chassis-strafer-v3"
       >
         <img
-          :src="$withBase('./assets/drive-constants/strafer-v2-quarter.jpg')"
+          :src="$withBase('./assets/drive-constants/strafer-v3-quarter.jpg')"
           class="xl:w-32 w-24 xl:h-32 h-24 object-cover"
         />
         <h3 class="lg:text-2xl text-xl">
-          goBILDA Strafer Chassis v2
+          goBILDA Strafer Chassis v3
           <span class="block text-xs text-gray-500 mt-2">
-            1:1 miter gears and 19.2:1 motors
+            1:1 miter gears, 19.2:1 motors, 96mm wheels
             <br />
             Released in October 2020
           </span>
@@ -127,10 +127,10 @@ export default Vue.extend({
   outline-color theme("colors.yellow.500")
   outline-style auto
 
-.strafer-v2-chassis:hover
+.strafer-v3-chassis:hover
   @apply border-orange-500
 
-#choice-chassis-strafer-v2[type="radio"]:checked + label
+#choice-chassis-strafer-v3[type="radio"]:checked + label
   outline-color theme("colors.orange.500")
   outline-style auto
 

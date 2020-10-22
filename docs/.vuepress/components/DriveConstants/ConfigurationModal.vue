@@ -171,11 +171,11 @@ export default Vue.extend({
               chassisSelected: ChassisEnum.STRAFER_V1_CHASSIS,
             },
           });
-        } else if (this.chassisChoice === "strafer-v2") {
+        } else if (this.chassisChoice === "strafer-v3") {
           this.configurationModalService.send("SELECTED_CHASSIS", {
             value: {
               ...this.context.currentConfigurationState,
-              chassisSelected: ChassisEnum.STRAFER_V2_CHASSIS,
+              chassisSelected: ChassisEnum.STRAFER_V3_CHASSIS,
             },
           });
         } else if (this.chassisChoice === "custom") {
