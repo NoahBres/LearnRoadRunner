@@ -31,11 +31,11 @@ const StraferV1Constants: ConstantProperties = {
 
   trackWidth: 15.8,
 
-  recommendedVelo: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI * 0.8,
-  recommendedAccel: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI * 0.8,
+  recommendedVelo: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI * 0.85,
+  recommendedAccel: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI * 0.85,
 
-  limitedVelo: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI * 0.8,
-  limitedAccel: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI * 0.8,
+  limitedVelo: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI * 0.85,
+  limitedAccel: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI * 0.85,
 
   maxVelo: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI,
   maxAccel: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI,
@@ -52,11 +52,11 @@ const StraferV3Constants: ConstantProperties = {
 
   trackWidth: 14.8,
 
-  recommendedVelo: (312 / 60) * 1.88976 * 2 * Math.PI * 0.8,
-  recommendedAccel: (312 / 60) * 1.88976 * 2 * Math.PI * 0.8,
+  recommendedVelo: (312 / 60) * 1.88976 * 2 * Math.PI * 0.85,
+  recommendedAccel: (312 / 60) * 1.88976 * 2 * Math.PI * 0.85,
 
-  limitedVelo: (312 / 60) * 1.88976 * 2 * Math.PI * 0.8,
-  limitedAccel: (312 / 60) * 1.88976 * 2 * Math.PI * 0.8,
+  limitedVelo: (312 / 60) * 1.88976 * 2 * Math.PI * 0.85,
+  limitedAccel: (312 / 60) * 1.88976 * 2 * Math.PI * 0.85,
 
   maxVelo: (312 / 60) * 1.88976 * 2 * Math.PI,
   maxAccel: (312 / 60) * 1.88976 * 2 * Math.PI,
@@ -66,8 +66,8 @@ function generateText(filledProperties: ConstantProperties): string {
   return `package org.firstinspires.ftc.teamcode.drive;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 /*
  * Constants shared between multiple drive types.
@@ -92,13 +92,17 @@ public class DriveConstants {
     public static final double MAX_RPM = ${filledProperties.maxRPM};
 
     /*
-     * Set the first flag appropriately. If using the built-in motor velocity PID, update
-     * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner.
+     * Set RUN_USING_ENCODER to true to enable built-in hub velocity control using drive encoders.
+     * Set this flag to false if drive encoders are not present and an alternative localization
+     * method is in use (e.g., tracking wheels).
+     *
+     * If using the built-in motor velocity PID, update MOTOR_VELO_PID with the tuned coefficients
+     * from DriveVelocityPIDTuner.
      */
     public static final boolean RUN_USING_ENCODER = ${
       filledProperties.runUsingEncoder
     };
-    public static final PIDCoefficients MOTOR_VELO_PID = null;
+    public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(0, 0, 0, getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV));
 
     /*
      * These are physical constants that can be determined from your robot (including the track
@@ -135,10 +139,10 @@ public class DriveConstants {
     /*
      * Note from LearnRoadRunner.com:
      * The velocity and acceleration constraints were calculated based on the following equation:
-     * ((MAX_RPM / 60) * GEAR_RATIO * WHEEL_RADIUS * 2 * Math.PI) * 0.8
+     * ((MAX_RPM / 60) * GEAR_RATIO * WHEEL_RADIUS * 2 * Math.PI) * 0.85
      * Resulting in ${filledProperties.recommendedVelo} in/s.
-     * This is only 80% of the theoretical maximum velocity of the bot, following the recommendation above.
-     * This is capped at 80% because there are a number of variables that will prevent your bot from actually
+     * This is only 85% of the theoretical maximum velocity of the bot, following the recommendation above.
+     * This is capped at 85% because there are a number of variables that will prevent your bot from actually
      * reaching this maximum velocity: voltage dropping over the game, bot weight, general mechanical inefficiences, etc.
      * However, you can push this higher yourself if you'd like. Perhaps raise it to 90-95% of the theoretically 
      * max velocity. The theoreticaly maximum velocity is ${
@@ -159,7 +163,7 @@ public class DriveConstants {
          ? `*
      * WARNING: LearnRoadRunner.com's constant generator has capped the calculated recommended velocity at 90in/s.
      * This message is showing because your gear ratio/motor RPM/etc. configuration, results in a recommended
-     * velocity (80% of max velocity) exceeding 90in/s.
+     * velocity (85% of max velocity) exceeding 90in/s.
      * (Your recommended velocity was ${filledProperties.recommendedVelo}in/s)
      * This is simply insanely fast for an FTC bot and chances are your bot cannot properly reach these speeds.
      * 
@@ -197,9 +201,9 @@ public class DriveConstants {
         return rpm * GEAR_RATIO * 2 * Math.PI * WHEEL_RADIUS / 60.0;
     }
 
-    public static double getMotorVelocityF() {
-        // see https://docs.google.com/document/d/1tyWrXDfMidwYyP_5H4mZyVgaEswhOC35gvdmP-V-5hA/edit#heading=h.61g9ixenznbx
-        return 32767 * 60.0 / (MAX_RPM * TICKS_PER_REV);
+    public static double getMotorVelocityF(double ticksPerSecond) {
+      // see https://docs.google.com/document/d/1tyWrXDfMidwYyP_5H4mZyVgaEswhOC35gvdmP-V-5hA/edit#heading=h.61g9ixenznbx
+      return 32767 / ticksPerSecond;
     }
 }`;
 }
@@ -251,14 +255,14 @@ export function generateFile(properties: ConfigurationState): string {
     buildConstants.wheelRadius *
     2 *
     Math.PI *
-    0.8;
+    0.85;
   buildConstants.recommendedAccel =
     (buildConstants.maxRPM / 60) *
     buildConstants.gearRatio *
     buildConstants.wheelRadius *
     2 *
     Math.PI *
-    0.8;
+    0.85;
 
   buildConstants.maxVelo =
     (buildConstants.maxRPM / 60) *
