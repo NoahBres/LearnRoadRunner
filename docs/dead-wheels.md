@@ -81,16 +81,6 @@ perpendicularEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "perpendicul
 perpendicularEncoder.setDirection(Encoder.Direction.REVERSE);
 ```
 
-### Troubleshoot Encoder Directions
-
-- Bot on the graph spins while the actual bot is going straight
-
-  - Your perpendicular encoder is reversed
-
-- Bot on the graph strafes the opposite way
-
-  - Parallel encoder is reversed
-
 ::: danger
 If you are using the Rev Through Bore encoders, please read the following section
 :::
@@ -126,7 +116,7 @@ Ensure that these ID's match up with your Rev Hub config ID's.
 ### IMU
 
 ```java
-/* Lines 111-114 in SampleMecanumDrive.java */
+/* Lines 122-125 in SampleMecanumDrive.java */
 imu = hardwareMap.get(BNO055IMU.class, "imu");
 BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
@@ -139,12 +129,12 @@ Ensure that the IMU is initialitzed in the `SampleMecanumDrive.java` class. You 
 
 After you've configured your localizer, go back to the `SampleMecanumDrive.java` file.
 
-Look at about line 145. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
+Look at about line 157. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
 
 Under this comment, add the following line:
 
 ```java{6}
-/* About line 145 in SampleMecanumDrive.java */
+/* About line 157 in SampleMecanumDrive.java */
 
 // TODO: if desired, use setLocalizer() to change the localization method
 // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
@@ -213,20 +203,6 @@ frontEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "frontEncoder"));
 frontEncoder.setDirection(Encoder.Direction.REVERSE);
 ```
 
-### Troubleshoot Encoder Directions
-
-- Bot on the graph spins while the actual bot is going straight
-
-  - One of your parallel encoders is reversed
-
-- Bot on the graph strafes the opposite way
-
-  - Your middle encoder is reversed
-
-- Your bot goes straight and strafes properly on the graph but turns the opposite way
-
-  - Your left and right encoders are swapped
-
 ::: danger
 If you are using the Rev Through Bore encoders, please read the following section
 :::
@@ -254,12 +230,12 @@ public List<Double> getWheelVelocities() {
 
 After you've configured your localizer, go back to the `SampleMecanumDrive.java` file.
 
-Look at about line 145. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
+Look at about line 157. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
 
 Under this comment, add the following line:
 
 ```java{6}
-/* About line 145 in SampleMecanumDrive.java */
+/* About line 157 in SampleMecanumDrive.java */
 
 // TODO: if desired, use setLocalizer() to change the localization method
 // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
@@ -273,7 +249,7 @@ You have set the localizer!
 
 ## Tuning - Two-Wheel
 
-Tuning your dead wheels is one of the most important steps along the entire tuning process. This is not constrained to Road Runner. Any time you choose to use Dead Wheels, whether it be in Road Runner, FTCLib, or your own home brew path following, your localization should be as accurate as possible.
+Tuning your dead wheels is one of the most important steps along the entire tuning process. This is not constrained to Road Runner. Any time you choose to use dead wheels, whether it be in Road Runner, FTCLib, or your own home brew path following, your localization should be as accurate as possible.
 
 ### Adjusting the wheel radius
 
@@ -343,7 +319,7 @@ We're going to double check that everything is hunky-dory with your localization
 
 ## Tuning - Three-Wheel
 
-Tuning your dead wheels is one of the most important steps along the entire tuning process. This is not constrained to Road Runner. Any time you choose to use Dead Wheels, whether it be in Road Runner, FTCLib, or your own home brew path following, your localization should be as accurate as possible.
+Tuning your dead wheels is one of the most important steps along the entire tuning process. This is not constrained to Road Runner. Any time you choose to use dead wheels, whether it be in Road Runner, FTCLib, or your own home brew path following, your localization should be as accurate as possible.
 
 ### Adjusting the wheel radius
 
