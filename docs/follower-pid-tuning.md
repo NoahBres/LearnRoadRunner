@@ -7,7 +7,12 @@
 
 This is the last tuning step. Here, you will tune the closed loop feedback controller. This should improve your path following dramatically.
 
-The official Road Runner guide recommends that you run the `FollowerPIDTuner` opmode to tune the follower PID's. However, I personally prefer to first tune it with a simple opmode that goes back and forth. You will follow the same tuning process, regardless. I prefer the back and forth opmode because it is really simple to see your errors accumulate. The `FollowerPIDTuner` will go in a large square. Thus if your heading is off, your entire square is destroyed and you have to keep resetting the bot. It's quite arduous. I would recommend using the `BackAndForth` opmode and then further fine tuning with `FollowerPIDTuner`.
+There are two alternative opmodes for this process, `BackAndForth` or `FollowerPIDTuner`.
+
+It is recommended to run the `BackAndForth` opmode to get a set of coarse PID gains and then run the same process using `FollowerPIDTuner` for further fine tuning.
+The `BackAndForth` opmode simply travels in a straight line back and forth. It is easy to see major errors in translation and heading PID accumulate here.
+
+The `FollowerPIDTuner` will follow a large square. If your heading is off, your entire square is destroyed and you have to keep resetting the bot. It's quite arduous. Use the `BackAndForth` opmode for initial tunings and then further fine tuning with `FollowerPIDTuner`.
 
 1. Run the `BackAndForth` opdmode via the RC.
 
