@@ -23,13 +23,20 @@ If your bot drifts off path, simply enter driver control and drive your bot back
 
 ## Tuning
 
-1. The default `DISTANCE` the bot travels is 72 inches. Therefore, ensure you have at least that specified distance's worth of clearance (plus another foot, ideally). You may adjust the `DISTANCE` value in the dashboard variable configuration sidebar or directly in the file itself if you do not have enough space. Although the bot is supposed to travel in a straight line, it will slowly drift to one side. This can be caused by a number of reasons from uneven weight distribution to the velocity PID simply being untuned. You need not worry about this as enabling the heading PID later will fix this during actual path following. I recommend clearing a space 2-3 field mats wide to help address the drift. If you have a path that is only 1 mat wide, it will keep falling off the edge and you need to keep resetting its position.
+1. Before you begin tuning, start the RC phone and open up Dashboard. Connect to the RC phone's wifi network. The password to the network is located in the `Program and Manage` menu.
 
-2. The first step is to run the `DriveVelocityPIDTuner` opmode via the RC.
+2. In your browser, navigate to `192.168.49.1:8080/dash` with a phone RC or `192.168.43.1:8080/dash` with a Control Hub.
 
-3. Then, connect to the RC phone's wifi network. The password to the network is located in the `Program and Manage` menu.
+3. Before you begin tuning the velocity PID opmode, we're going to run a quick tuner that gives us the empirical kF value and maximum velocity the bot can travel. Select the `MaxVelocityTuner`.
 
-4. Navigate to `192.168.49.1:8080/dash` with a phone RC or `192.168.43.1:8080/dash` with a Control Hub.
+   - The `MaxVelocityTuner` will run at max speed for the specified `RUNTIME`. By default, the bot will run **full speed** for 2 seconds. **Ensure that you have enough room cleared for this!** You may adjust `RUNTIME` through the code or through Dashboard.
+
+4. Run `MaxVelocityTuner`. After it has completed its sequence, it will print a "Max Velocity" value and a "Voltage Compensated kF" value. "Max Velocity" is the maximum velocity your bot can travel while under load and at the battery level this opmode is ran at. You can use this value in your `maxVelo` drive constraints. Take note of the "Voltage Compensated kF" value.
+
+5. In Dashboard, look for the `DriveConstants` dropdown on the right. Open that. Look for the `MOTOR_VELO_PID` dropdown. Open that. You should be presented with `p`, `i`, `d`, and `f` fields. Fill the `f` field in with the "Voltage Compensated kF" value from earlier.
+
+6. Now, start up the `DriveVelocityPIDTuner` opmode. The bot will travel travel back and forth in a straight(ish) line over and over.
+   - The default `DISTANCE` the bot travels is 72 inches. Therefore, ensure you have at least that specified distance's worth of clearance (plus another foot, ideally). You may adjust the `DISTANCE` value in the dashboard variable configuration sidebar or directly in the file itself if you do not have enough space. Although the bot is supposed to travel in a straight line, it will slowly drift to one side. This can be caused by a number of reasons from uneven weight distribution to the velocity PID simply being untuned. You need not worry about this as enabling the heading PID later will fix this during actual path following. I recommend clearing a space 2-3 field mats wide to help address the drift. If you have a path that is only 1 mat wide, it will keep falling off the edge and you need to keep resetting its position.
 
 Your page should look something like this:
 
@@ -42,36 +49,36 @@ Your page should look something like this:
 </figure>
 
 4. Run the opmode. The graph will not show up until you have started it.
+
    - Remeber to turn off the 30 second autonomous timer!
+   - Make sure to click the graph button _after_ you run the program. If the graph doesn't show up, and instead shows a number of checkboxes, make sure you have clicked the `targetVelocity` and `velocity0` checkbox. Ignore the others. This will make tuning easier.
 
-Make sure to click the graph button _after_ you run the program. If the graph doesn't show up, and instead shows a number of checkboxes, that's okay. Click the `targetVelocity` and `velocity0` checkbox. Ignore the others. This will make tuning easier.
+5. In the `DriveVelocityPIDTuner` dropdown, ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`. There should be a decently straight/flat portion in the graph, as shown in the sample dashboard above.
 
-5. Look for the `DriveConstants` in the right sidebar. Open the dropdown. Then look for `MOTOR_VELO_PID`. Open that dropdown. You'll see the options: `kD`, `kI`, `kP`, and `kV`. You will be tuning these variables.
-
-6. In the `DriveVelocityPIDTuner` dropdown, ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`. There should be a decently straight/flat portion in the graph, as shown in the sample dashboard above.
+6. Direct your attention back to the `MOTOR_VELO_PID` dropdown in the right sidebar from earlier. You will be tuning the PIDF gains found there.
 
 7. At this point, once you have run the opmode, the bot should be moving back and forth along the distance specified in the opmode file. The goal of the tuning process is to match `velocity0` to the `targetVelocity` line. Edit the values in the text boxes and press enter. They will live update and you should see the effects take place on the bot.
 
 8. **Recommended tuning process**:
-   1. Set all the PID gains (`kP`, `kD`, and `kI`) to 0. Keep `kV` as is.
-   2. Increase `kV` a little so it gets closer to `targetVelocity`. We have found that increasing `kV` until it reaches the plateau isn't as optimal. Increasing `kV` so that your wheel velocity rests halfway between your original velocity and `targetVelocity` produces decent results.
-   3. Slowly increase `kP` to try and get the line to match the target. If you are increasing `kP` such that the velocity reaches the top of the target but the acceleration portions (the non-flat sections at an angle) don't, you should reduce `kV`.
-   4. Increase `kD` to try and dampen the oscillations. Increasing `kD` too far will simply increase oscillations.
-   5. Increase `kP` once again. Repeat the `kP` and `kD` increase until your graph starts to match the target velocity.
-   6. You should not touch `kI`. `kI` tends to cause many problems and its use is technically incorrect.
-   7. **Note:** The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it. In addition to that, the Rev Hub's internal motor controller is a little odd and you will have a slight bump on deceleration that will be impossible to get rid of.
-   8. The official Road Runner docs recommend that you should "prioritize eliminating phase lag even at the cost of some extra oscillations." However, I personally feel that it is better to try and minimize oscillations, especially towards the zero velocity (middle of the graph). I found that eliminating phase lag, especially at high speeds, would cause very jittery motion, most likely due to the Rev Hub's odd motor control. Hit us up in the [FTC Discord](https://discord.gg/first-tech-challenge) if you are interested in further technical details. My personal advice would be to try your best to minimize phase lag but if it causes your robot to visibly jitter, loosen up on the tuning and allow for the translational PID to fix any phase lag discrepancies.
+   1. Set all the PID gains to zero. `f` should be set to the value we got earlier from `MaxVelocityTuner`.
+   2. At this point, the `velocity0` line should be reaching to the top of the plateau. If it's overshooting (too high), lower the `kF` value. If our measured velocity does not reach the setpoint (`targetVelocity`), increase `kF`. However, the default `kF` value should be good enough.
+   3. At this point, the top of your `velocity0` graph and the top of the `targetVelocity` graph should match. However, there should be a lot of "phase lag," where the accelerating/decelerating portions (the up/down slopes) lag behind the `targetVelocity`. Your graph is essentially out of phase. We will be raising the `p` value to try and minimize this phase lag.
+   4. Slowly increase `p` to try and get the slopes to match the target.
+   5. Increase `d` to try and dampen any oscillations. Increasing `d` too far will simply increase oscillations. You should really only need minor `d` adjustments.
+   6. It is important to realize that raising `p` will only get you so far in reducing the phase lag. There will be a certain point where you can keep raising it and nothing really improves. You will just end up increasing oscillations and only marginally reducing the phase lag. This is due to the lack of `kA` adjustment in the REV Hub's internal motor controller. You must also realize that there will be a large bump on the deceleration portions of the graph. You cannot fix this. This is due to some quirks in the REV Hub's motor controller. Realizing the limitations of the internal PIDF controller is very important in keeping your sanity. There will be a constant small amount of phase lag no matter what you do and that's okay. Do not try and tune to perfection.
+   7. You should not touch the `i` gain. The `i` gain tends to cause many problems and its use is technically incorrect. See the tip below.
+   8. **Side Note:** The official Road Runner docs recommend that you should "prioritize eliminating phase lag even at the cost of some extra oscillations." However, I personally feel that it is better to try and minimize oscillations, especially towards the zero velocity (middle of the graph). I found that eliminating phase lag, especially at high speeds, would cause very jittery motion, most likely due to the Rev Hub's odd motor control. Hit us up in the [FTC Discord](https://discord.gg/first-tech-challenge) if you are interested in further technical details. My personal advice would be to try your best to minimize phase lag but if it causes your robot to visibly jitter, loosen up on the tuning and allow for the translational PID to fix any phase lag discrepancies.
    9. **Any adjustments in dashboard need to be copied over to the `DriveConstants.java` file under the equivalent variable name. Dashboard adjustments are temporary and will reset once you restart the opmode. Remember this!! It is very frustrating to get decent tunings and forgetting to save them in `DriveConstants.java`!**
    10. Check the tuning simulator to see how each gain affects the behavior.
 
 ::: tip
 _"Velocity PID Controllers typically don't need `kD`"_ (Veness, Tyler. _Control Engineering in FRC_. pg. 17). However, it seems to be beneficial for FTC bots due to some feedforward and motor controller weirdness.
 
-On a tangential note, you shouldn't need to use `kI`.
+On a tangential note, you shouldn't need to use `i`.
 
 > "Adding an integral gain to the controller is an incorrect way to eliminate steady-state error. A better approach would be to tune it with an integrator added to the plant, but this requires a model. Since we are doing output-based rather than model-based control, our only option is to add an integrator to the controller."
 
-If you feel the need to add `kI`, you should be increasing `kV`.
+If you feel the need to add `i`, you should be increasing `f`.
 :::
 
 ## Troubleshooting
