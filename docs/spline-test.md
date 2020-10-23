@@ -7,7 +7,8 @@
 
 1. Once your `TRANSLATION` and `HEADING` PID's are tuned, you should run the spline test to make sure everything is in order.
 2. Open dashboard to make sure that it's following correctly. The bot should follow an S-shaped path and Dashboard should follow the path properly.
-3. If something goes wrong, try and go back to diagnose the problem. Hit up the [FTC Discord](https://discord.gg/first-tech-challenge) if you're stuck.
+3. If your spline following seems to demonstrate slight oscillations, your p gain in either your velocity PID or your translational/heading PID is too high. You may want to go back to try and isolate this behavior.
+4. If something goes wrong, try and go back to diagnose the problem. Hit up the [FTC Discord](https://discord.gg/first-tech-challenge) if you're stuck.
 
 <ClientOnly>
   <div class="flex items-center justify-center">
