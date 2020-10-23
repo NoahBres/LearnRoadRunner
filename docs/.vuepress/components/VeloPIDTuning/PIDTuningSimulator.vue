@@ -39,11 +39,11 @@
         />
       </div>
       <div class="flex flex-col items-center">
-        <label :for="`kv-input-${uuid}`" class="mb-1 ml-1">kV</label>
+        <label :for="`kf-input-${uuid}`" class="mb-1 ml-1">kF</label>
         <input
-          :id="`kV-input-${uuid}`"
-          v-model.number="kV"
-          @change="setV"
+          :id="`kf-input-${uuid}`"
+          v-model.number="kF"
+          @change="setF"
           class="box-border text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
@@ -126,7 +126,7 @@ export default Vue.extend({
       kP: 0,
       kI: 0,
       kD: 0,
-      kV: 0.01,
+      kF: 0.01,
 
       arbitraryScalingKp: 1 / 400,
       arbitraryScalingKi: 1 / 1000,
@@ -138,7 +138,7 @@ export default Vue.extend({
 
       // fake motor model??
       modelKV: 0.0153,
-      modelKA: 0.002,
+      modelKA: 0.001,
       modelKStatic: 0.0021,
 
       lastState: GraphState.Accel as GraphState,
@@ -294,15 +294,20 @@ export default Vue.extend({
       this.currentVelocity +=
         ((-this.modelKV / this.modelKA) * this.currentVelocity +
           (1 / this.modelKA) * this.setVoltage) *
-        timeDelta;
+          timeDelta || 0;
 
-      this.currentVelocity = Math.min(this.currentVelocity, this.maxVel * 1.3);
+      this.currentVelocity = Math.max(
+        Math.min(this.currentVelocity, this.maxVel * 1.3),
+        -this.maxVel * 1.3
+      );
 
       // Actual controller stuff
 
-      this.setVoltage =
-        this.controller.update(this.targetVelocity - this.currentVelocity) +
-        this.kV * this.targetVelocity;
+      // this.setVoltage =
+      //   this.controller.update(this.targetVelocity - this.currentVelocity) +
+      //   this.kV * this.targetVelocity;
+
+      this.setVoltage = this.kF * this.targetVelocity;
 
       this.graphData[2].push(this.currentVelocity);
 
@@ -331,8 +336,8 @@ export default Vue.extend({
     setD() {
       this.controller.kD = this.kD * this.arbitraryScalingKd;
     },
-    setV() {
-      this.controller.kV = this.kV;
+    setF() {
+      this.controller.kF = this.kF;
     },
     reset() {
       this.graphData[0] = [];
