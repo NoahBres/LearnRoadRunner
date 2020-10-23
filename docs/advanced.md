@@ -159,6 +159,14 @@ drive.setWeightedDrivePower(
 
 A full sample can be found [here](https://github.com/NoahBres/road-runner-quickstart/blob/advanced-examples/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/advanced/TeleOpFieldCentric.java).
 
+### Align To Point
+
+This is a really cool demo that doesn't necessarily depend on Road Runner's core functionality (motion profiling, etc.) but it does make heavy use of Road Runner utilities. It would be fairly trivial to port this to one's own code without any Road Runner dependencies.
+
+The demo allows a driver to enter a "align to point" mode which switches into field centric mode and then the opmode takes over heading control and independently controls heading to align the bot to a specified point.
+
+Check out the opmode [here](https://github.com/NoahBres/road-runner-quickstart/blob/advanced-examples/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/advanced/TeleOpAlignWithPoint.java).
+
 ## Async Following
 
 The default `followTrajectory()` functions in the quickstart are synchronous. This means that the code will halt at that function and will not move on to the next line until the entire trajectory is finished. The default synchronous method works well in a Linear Opmode.
