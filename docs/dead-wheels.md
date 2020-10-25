@@ -81,16 +81,6 @@ perpendicularEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "perpendicul
 perpendicularEncoder.setDirection(Encoder.Direction.REVERSE);
 ```
 
-### Troubleshoot Encoder Directions
-
-- Bot on the graph spins while the actual bot is going straight
-
-  - Your perpendicular encoder is reversed
-
-- Bot on the graph strafes the opposite way
-
-  - Parallel encoder is reversed
-
 ::: danger
 If you are using the Rev Through Bore encoders, please read the following section
 :::
@@ -126,7 +116,7 @@ Ensure that these ID's match up with your Rev Hub config ID's.
 ### IMU
 
 ```java
-/* Lines 111-114 in SampleMecanumDrive.java */
+/* Lines 122-125 in SampleMecanumDrive.java */
 imu = hardwareMap.get(BNO055IMU.class, "imu");
 BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
@@ -139,12 +129,12 @@ Ensure that the IMU is initialitzed in the `SampleMecanumDrive.java` class. You 
 
 After you've configured your localizer, go back to the `SampleMecanumDrive.java` file.
 
-Look at about line 145. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
+Look at about line 157. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
 
 Under this comment, add the following line:
 
 ```java{6}
-/* About line 145 in SampleMecanumDrive.java */
+/* About line 157 in SampleMecanumDrive.java */
 
 // TODO: if desired, use setLocalizer() to change the localization method
 // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
@@ -213,20 +203,6 @@ frontEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "frontEncoder"));
 frontEncoder.setDirection(Encoder.Direction.REVERSE);
 ```
 
-### Troubleshoot Encoder Directions
-
-- Bot on the graph spins while the actual bot is going straight
-
-  - One of your parallel encoders is reversed
-
-- Bot on the graph strafes the opposite way
-
-  - Your middle encoder is reversed
-
-- Your bot goes straight and strafes properly on the graph but turns the opposite way
-
-  - Your left and right encoders are swapped
-
 ::: danger
 If you are using the Rev Through Bore encoders, please read the following section
 :::
@@ -254,12 +230,12 @@ public List<Double> getWheelVelocities() {
 
 After you've configured your localizer, go back to the `SampleMecanumDrive.java` file.
 
-Look at about line 145. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
+Look at about line 157. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
 
 Under this comment, add the following line:
 
 ```java{6}
-/* About line 145 in SampleMecanumDrive.java */
+/* About line 157 in SampleMecanumDrive.java */
 
 // TODO: if desired, use setLocalizer() to change the localization method
 // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
@@ -273,7 +249,7 @@ You have set the localizer!
 
 ## Tuning - Two-Wheel
 
-Tuning your dead wheels is one of the most important steps along the entire tuning process. This is not constrained to Road Runner. Any time you choose to use Dead Wheels, whether it be in Road Runner, FTCLib, or your own home brew path following, your localization should be as accurate as possible.
+Tuning your dead wheels is one of the most important steps along the entire tuning process. This is not constrained to Road Runner. Any time you choose to use dead wheels, whether it be in Road Runner, FTCLib, or your own home brew path following, your localization should be as accurate as possible.
 
 ### Adjusting the wheel radius
 
@@ -343,7 +319,7 @@ We're going to double check that everything is hunky-dory with your localization
 
 ## Tuning - Three-Wheel
 
-Tuning your dead wheels is one of the most important steps along the entire tuning process. This is not constrained to Road Runner. Any time you choose to use Dead Wheels, whether it be in Road Runner, FTCLib, or your own home brew path following, your localization should be as accurate as possible.
+Tuning your dead wheels is one of the most important steps along the entire tuning process. This is not constrained to Road Runner. Any time you choose to use dead wheels, whether it be in Road Runner, FTCLib, or your own home brew path following, your localization should be as accurate as possible.
 
 ### Adjusting the wheel radius
 
@@ -400,27 +376,39 @@ Remember that the X multiplier is on the left/right because x faces forward for 
 
 It is very important to tune lateral distance properly. This determines the heading in your localization and you will find that errors in your heading will quickly compound and absolutely destroy your localization.
 
-Unfortunately, I can no longer recommend the automated tuning opmode. The original automated lateral distance tuner spun the bot around 10 times while measuring the angle from the IMU and localizer and calculating the effective lateral distance. However, multiple people have reported that the BNO055 IMU built into the Rev Hub does not provide accurate results and seems to be off by around 20 degrees by the end of these 10 turns. Therefore, I can no longer recommend using the IMU as a source of ground truth. We will have to manually tune the lateral distance.
+1. Make sure that the `LATERAL_DISTANCE` value in `StandardTrackingWheelLocalizer.java` is set to the physical measured value. This need only be an estimated value as you will be tuning it anyways.
 
-1. The first step is to run the `LocalizationTest` opmode via the RC.
+2. Make a mark on the bot (with a piece of tape or sharpie or however you wish) and make a similar mark right below the indicator on the bot. This will be your reference point to ensure you've turned exactly 360°. The bot should start and end with these marks lined up.
 
-2. Then, connect to the RC phone's wifi network. The password to the network is located in the `Program and Manage` menu.
+   - Rather than marking something on the bot, I personally lined up the straight edge of my chassis with the seam on my mats. This only applies if you have an adequate straight edge on your bot.
 
-3. Navigate to `192.168.49.1:8080/dash` with a phone RC or `192.168.43.1:8080/dash` with a Control Hub.
+3. Run the `TrackingWheelLateralDistanceTuner` opmode.
 
-4. Ensure that the field drawing is showing. If not, switch to field in the dropdown on the top right.
+4. Although not entirely necessary, having the bot's pose being drawn in dashbooard does help identify discrepancies in the `LATERAL_DISTANCE` value. To access the dashboard, connect your computer to the RC's WiFi network. In your browser, navigate to `192.168.49.1:8080/dash` if you're using the RC phone or `192.168.43.1:8080/dash` if you are using the Control Hub. Ensure the field is showing (select the field view in top right of the page).
 
-5. Stick a piece of tape or mark some spot with a sharpie on your bot and on the ground directly below that spot. Line these two up.
+5. Press play to begin the tuning routine.
 
-6. Spin your bot 10 rotations using the controller. Do not move the bot. Only spin it in place with the right joystick.
+6. Use the right joystick on gamepad 1 to turn the bot **counterclockwise**.
 
-7. Watch the bot on the field as you do this. Make sure the heading doesn't lag behind or zoom ahead. The bot drawn in Dashboard and the real bot should be lined up. If the lateral distance is incorrect the bot in Dashboard will turn slower than your actual bot when lateral distance is too large or turn faster than your bot when lateral distance is too small.
+7. Spin the bot 10 times, **counterclockwise**. Make sure to keep track of these turns.
 
-8. On the last turn, slow down and make sure that the mark you made line up with each other to ensure that the turns is exactly 3600 degrees.
+8. Once the bot has finished spinning 10 times, press `A` on the gamepad to finish the routine. The indicators on the bot and on the ground you created earlier should be lined up.
 
-9. If the heading on the drawn field lags behind, slowly decrease the lateral distance. Or vice-versa.
+9. Your effective `LATERAL_DISTANCE` will be printed. Stick this value into your `StandardTrackingWheelLocalizer.java` class.
 
-10. Unfortunately, this is quite cumbersome but heading accuracy is quite important and this problem is not confined to Road Runner.
+10. If this value is incorrect, run the routine again while adjusting the `LATERAL_DISTANCE` value yourself. Read the heading output and follow the advice stated in the note below to manually nudge the values yourself.
+
+::: tip
+It helps to pay attention to how the pose on the field is drawn in dashboard. A blue circle with a line from the circumference to the center should be present, representing the bot. The line indicates forward.
+
+If your `LATERAL_DISTANCE` value is tuned currently, the pose drawn in dashboard should keep track with the pose of your actual bot.
+
+- If the drawn bot turns _slower_ than the actual bot, the `LATERAL_DISTANCE` should be _decreased_.
+
+- If the drawn bot turns _faster_ than the actual bot, the `LATERAL_DISTANCE` should be _increased_.
+
+If your drawn bot oscillates around a point in dashboard, don't worry. This is because the position of the perpendicular wheel isn't perfectly set and causes a discrepancy in the effective center of rotation. You can ignore this effect. The center of rotation will be offset slightly but your heading will still be fine. This does not affect your overall tracking precision. The heading should still line up.
+:::
 
 ### Double Checking
 

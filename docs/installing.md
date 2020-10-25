@@ -17,11 +17,11 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 
 3. Unzip/extract the folder into your directory of choice
 4. Open up the folder in Android studio.
-5. Voila! You now have everything you need to get Road Runner up and going.
+5. Voilà! You now have everything you need to get Road Runner up and going.
 
 ## Method 2: Installing RR on Your Project
 
-1. We are are going to assume you have the same file structure as the standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/SkyStone). Please use the latest FTC SDK. Sections of this installation instruction have been removed as they are no longer needed in the newest SDK. Thus, these installation instructions will not work for versions below the 5.5 SDK.
+1. We are are going to assume you have the same file structure as the standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController). Please use the latest FTC SDK. Sections of this installation instruction have been removed as they are no longer needed in the newest SDK. Thus, these installation instructions will not work for versions below the 6.0 SDK.
 2. Look for the `TeamCode/build.release.gradle` file. Specifically the one in the `TeamCode` folder.
 
 <!-- prettier-ignore -->
@@ -51,14 +51,13 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
    - `implementation 'com.acmerobotics.roadrunner:core:0.5.2'`
    - `implementation 'com.acmerobotics.dashboard:dashboard:0.3.10'`
 
-```groovy{11-14}
+```groovy{10-13}
 /* TeamCode/build.release.gradle */
 dependencies {
     implementation project(':FtcRobotController')
-    implementation 'org.firstinspires.ftc:RobotCore:5.5'
-    implementation 'org.firstinspires.ftc:Hardware:5.5'
-    implementation 'org.firstinspires.ftc:FtcCommon:5.5'
-    implementation (name: 'WirelessP2p-release', ext:'aar')
+    implementation 'org.firstinspires.ftc:RobotCore:6.0.1'
+    implementation 'org.firstinspires.ftc:Hardware:6.0.1'
+    implementation 'org.firstinspires.ftc:FtcCommon:6.0.1'
     implementation (name: 'tfod-release', ext:'aar')
     implementation (name: 'tensorflow-lite-0.0.0-nightly', ext:'aar')
 
@@ -71,7 +70,7 @@ dependencies {
 
 6. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive` and `util` folder into a location in your project, preferably just your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
 
-7. Finally, you must edit your `FtcRobotControllerActivity.java` file to work with ftc-dashboard. Directions can be found [here](https://acmerobotics.github.io/ftc-dashboard/gettingstarted). Or just copy the `FtcRobotControllerActivity.java` file from the quickstart repo [here](https://github.com/acmerobotics/road-runner-quickstart/blob/master/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java) and paste it into your project. Replace the `FtcRobotControllerActivity.java` file located in <span class="break-words">`YourSkystoneProject/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java`</span> with the file you downloaded from that GitHub link.
+7. Finally, you must edit your `FtcRobotControllerActivity.java` file to work with ftc-dashboard. Directions can be found [here](https://acmerobotics.github.io/ftc-dashboard/gettingstarted). Or just copy the `FtcRobotControllerActivity.java` file from the quickstart repo [here](https://github.com/acmerobotics/road-runner-quickstart/blob/master/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java) and paste it into your project. Replace the `FtcRobotControllerActivity.java` file located in <span class="break-words">`YourFTCProject/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java`</span> with the file you downloaded from that GitHub link.
 
 ## Upgrading Firmware
 

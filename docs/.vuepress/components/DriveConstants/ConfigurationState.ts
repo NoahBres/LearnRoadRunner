@@ -2,7 +2,7 @@ import { Motor, MotorGroupItem } from "./MotorData";
 
 enum ChassisEnum {
   STRAFER_V1_CHASSIS = "STRAFER_V1_CHASSIS",
-  STRAFER_V2_CHASSIS = "STRAFER_V2_CHASSIS",
+  STRAFER_V3_CHASSIS = "STRAFER_V3_CHASSIS",
   CUSTOM = "CUSTOM",
 }
 

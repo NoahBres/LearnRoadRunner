@@ -131,6 +131,42 @@ There are a few caveats with this method. The most obvious one being that your d
 
 Another downside is that this sample only sends the pose to `PoseStorage` at the end of the opmode. If your bot is pushed or the opmode crashes (just the opmode, not the whole app. so you're still able to start teleop), then the opmode never sends the pose to `PoseStorage`. To fix this issue, you may want to send your pose estimate to `PoseStorage` on every update. This requires asynchronous following. See the example below, or [Finite State Machine Following](#finite-state-machine-following) for a full opmode sample.
 
+### Field Centric Drive
+
+Implementing field centric drive on top of the standard drive code is quite simple. You simply take your desired vector and rotate it by the bot's current heading. Here's a quick example:
+
+```java
+// Read pose
+Pose2d poseEstimate = drive.getPoseEstimate();
+
+// Create a vector from the gamepad x/y inputs
+// Then, rotate that vector by the inverse of that heading
+Vector2d input = new Vector2d(
+        -gamepad1.left_stick_y,
+        -gamepad1.left_stick_x
+).rotated(-poseEstimate.getHeading());
+
+// Pass in the rotated input + right stick value for rotation
+// Rotation is not part of the rotated input thus must be passed in separately
+drive.setWeightedDrivePower(
+        new Pose2d(
+                input.getX(),
+                input.getY(),
+                -gamepad1.right_stick_x
+        )
+);
+```
+
+A full sample can be found [here](https://github.com/NoahBres/road-runner-quickstart/blob/advanced-examples/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/advanced/TeleOpFieldCentric.java).
+
+### Align To Point
+
+This is a really cool demo that doesn't necessarily depend on Road Runner's core functionality (motion profiling, etc.) but it does make heavy use of Road Runner utilities. It would be fairly trivial to port this to one's own code without any Road Runner dependencies.
+
+The demo allows a driver to enter a "align to point" mode which switches into field centric mode and then the opmode takes over heading control and independently controls heading to align the bot to a specified point.
+
+Check out the opmode [here](https://github.com/NoahBres/road-runner-quickstart/blob/advanced-examples/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/advanced/TeleOpAlignWithPoint.java).
+
 ## Async Following
 
 The default `followTrajectory()` functions in the quickstart are synchronous. This means that the code will halt at that function and will not move on to the next line until the entire trajectory is finished. The default synchronous method works well in a Linear Opmode.

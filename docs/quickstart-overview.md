@@ -30,16 +30,22 @@ The tuning process will differ depending on which form of control you use.
 
 <Ayude />
 
+### TL;DR
+
+- If you have only drive encoders, no dead wheels -> you're going to tune velocity PID
+- If you have only dead wheels, no drive encoders -> you're going to tune feedforward
+- If you have both, tune both. However, only feedforward with dead wheels is required as your translational/heading PID should pick up for any discrepancy. If you're striving for the utmost accuracy and have enough encoder slots, knock yourself out and tune both
+
 ## Drive Constants
 
-The drive constants file will include everything regarding the physical characteristics of the bot. This includes motor's max RPM, wheel radius, etc. Most errors in the process manifest themselves in this stage. For example, if your robot is traveling half the distance specified, this is most likely a problem in your drive constants.
+The drive constants file will include everything regarding the physical characteristics of the bot. This includes motor's max RPM, wheel radius, etc. Most egregious errors in the process manifest themselves in this stage. For example, if your robot is traveling half the distance specified, this is most likely a problem in your drive constants.
 
 Further details on how to use this will be provided in the [drive constants page](/drive-constants).
 
 ## Dead Wheels
 
 If your bot has dead wheels, they should be configured after editing your drive constants. If not, ignore this stage. Don't know what dead wheels are? Check out [the example in the FAQ](/#what-are-dead-wheels-odometry).
-Tuning of the dead wheels should be performed in the localization test. Proper tuning of the dead wheels is very important for accurate localization and following.
+Tuning of the dead wheels should be performed in the following localization test. Proper tuning of the dead wheels is very important for accurate localization and following.
 
 Your configuration will depend on whether you have two or three dead wheels. Don't know the difference? Check [the FAQ](/#what-is-the-difference-between-two-and-three-wheel-odometry).
 
@@ -48,7 +54,7 @@ Further details on how to use this will be provided in the [dead wheels page](/d
 ## Localization Test\*
 
 ::: warning
-This first Localization Test should be used to test your dead wheel localization. You should skip this localization step if you have chosen not to use dead wheels.
+This first Localization Test should be used to test/tune your dead wheel localization. You should skip this localization step if you have chosen not to use dead wheels.
 :::
 
 Running the localization test and driving the robot around the field will allow you to find any discrepancies with your bot's localization. Dead wheel localization should be tuned after configuring your dead wheels. Accuracy of the path following will be dramatically affected by the localization accuracy.
@@ -65,7 +71,9 @@ This section should be skipped because you have chosen the option not to use dri
 :::
 </HideAyudeWrapper>
 
-The `DriveVelocityPIDTuner` opmode is used to tune the Rev Hub's built in motor velocity PIDs (the `RUN_USING_ENCODER` mode). It is imperative that you tune the coefficients of the PID. This will ensure optimal, consistent behavior. These PIDs should be tuned after any large modifications to the bot affecting weight. Run this opmode and adjust the PID gains. You can adjust the PID gains to get your desired behavior. The official Road Runner docs recommend that you should "prioritize eliminating phase lag even at the cost of some extra oscillations." However, I personally feel that it is better to try and minimize oscillations, especially towards the zero velocity. I found that eliminating phase lag, especially at high speeds, would cause very jittery motion, most likely due to the Rev Hub's odd motor control. Hit us up in the [FTC Discord](https://discord.gg/first-tech-challenge) if you are interested in further technical details. My personal advice would be to minimize oscillations and allow for the translational PID to fix any phase lag discrepancies.
+The `DriveVelocityPIDTuner` opmode is used to tune the Rev Hub's built in motor velocity controller (the `RUN_USING_ENCODER` mode). It is imperative your PIDF coefficients be tuned for optimal, consistent behavior. These PIDF coefficients should be tuned after any large modifications to the bot affecting weight.
+
+Go through the velocity PIDF tuning process (detailed in the [drive velocity pid tuning page](/drive-velocity-pid-tuning)). You can adjust the PIDF gains to get your desired behavior. The official Road Runner docs recommend that you should "prioritize eliminating phase lag even at the cost of some extra oscillations." However, I personally feel that it is better to try and minimize oscillations, especially towards the zero velocity. I found that eliminating phase lag, especially at high speeds, would cause very jittery motion, most likely due to the Rev Hub's odd motor control. Hit us up in the [FTC Discord](https://discord.gg/first-tech-challenge) if you are interested in further technical details. My personal advice would be to minimize oscillations and allow for the translational PID to fix any phase lag discrepancies.
 
 Further details on how to use this will be provided in the [drive velocity pid tuning page](/drive-velocity-pid-tuning).
 
@@ -93,7 +101,7 @@ Further details on how to use this will be provided in the [feedforward tuning p
 
 Straight test is used to determine how effective your feedfoward/velocity PID tuning turned out. Run the `StraightTest` opmode a few times. If the bot consistently reaches the same measurement a few times within an inch or two, these tunings were successful. It does not need to hit the _exact_ spot each time as you will later enable closed loop feedback using localization.
 
-If your `StraightTest` distance if consistent but off, scale the drive wheel radius to reach this distance. Then, add a strafe into the `StraightTest` to tune the `lateralMultiplier`.
+If you are utilizing only drive encoders without dead wheels, you will be tuning your drive encoder localization in this step.
 
 Further details on how to use this will be provided in the [straight test tuning page](/straight-test).
 
@@ -119,7 +127,7 @@ This second LocalizationTest should be used to test your drive encoder localizat
 :::
 </HideAyudeWrapper>
 
-Running the localization test and driving the robot around the field will allow you to find any discrepancies with your bot's localization. Drive encoder localization should be tuned after tuning everything else. Accuracy of the path following will be dramatically affected by the localization accuracy.
+Running the localization test and driving the robot around the field will allow you to find any discrepancies with your bot's localization. Drive encoder localization should be tuned in the previous steps. Accuracy of the path following will be dramatically affected by the localization accuracy.
 
 The second localization test will be used to test the accuracy of the drive encoder kinematics. Skip this step if you tuned your localization for dead wheels earlier.
 
@@ -127,7 +135,7 @@ Further details on how to use this will be provided in the [localization test pa
 
 ## FollowerPIDTuner
 
-You will tune two PID's in this step, the heading PID and the translational (x/y) PID. This enables closed-loop feedback control to ensure accurate path following. The `FollowerPIDTuner` opmode will have your bot follow a square path, allowing you to simultaneously tune the heading and translational PID. However, I personally recommend tuning the heading and translational PID while running the bot back and forth in a straight line. This alleviates the frustration of having to reset your bot after it drifts off the square path and hits a wall. The back and forth tuning opmode can be found in [my custom quickstart fork](https://github.com/NoahBres/road-runner-quickstart/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/BackAndForth.java) After it works well enough in this case, then run `FollowerPIDTuner` for additional fine tuning.
+You will tune two PID's in this step, the heading PID and the translational (x/y) PID. This enables closed-loop feedback control to ensure accurate path following. Run the `BackAndForth` opmode to get a rough tuning of both the heading and translational PID. Then, further fine tune using the `FollowerPIDTuner` opmode.
 
 Further details on how to use this will be provided in the [follower pid tuning page](/follower-pid-tuning).
 

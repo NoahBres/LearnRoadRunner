@@ -308,14 +308,14 @@ const MotorGroup: MotorGroupItem[] = [
   {
     name: "REV Core Hex",
     key: "rev-core-hex",
-    src: "./assets/drive-constants/core-hex-quarter.jpg",
+    src: "./assets/drive-constants/core-hex-eighth.jpg",
     color: "orange",
     derivatives: [MotorList[MotorModel.REV_CORE_HEX]],
   },
   {
     name: "REV HD Hex",
     key: "rev-hd-hex",
-    src: "./assets/drive-constants/rev-hd-quarter.jpg",
+    src: "./assets/drive-constants/rev-hd-eighth.jpg",
     color: "orange",
     derivatives: [
       MotorList[MotorModel.REV_HD_HEX_PLANETARY_20],
@@ -326,14 +326,14 @@ const MotorGroup: MotorGroupItem[] = [
   {
     name: "Bare Motor",
     key: "am-neverest-bare",
-    src: "./assets/drive-constants/neverest-bare-half.jpg",
+    src: "./assets/drive-constants/neverest-bare-quarter.jpg",
     color: "red",
     derivatives: [MotorList[MotorModel.AM_NEVEREST_BARE]],
   },
   {
     name: "NeveRest Classic",
     key: "am-neverest-classic",
-    src: "./assets/drive-constants/neverest-classic-half.jpg",
+    src: "./assets/drive-constants/neverest-classic-quarter.jpg",
     color: "red",
     derivatives: [
       MotorList[MotorModel.AM_NEVEREST_CLASSIC_40],
@@ -343,7 +343,7 @@ const MotorGroup: MotorGroupItem[] = [
   {
     name: "NeveRest Orbital",
     key: "am-neverest-orbital",
-    src: "./assets/drive-constants/neverest-orbital-half.jpg",
+    src: "./assets/drive-constants/neverest-orbital-quarter.jpg",
     color: "red",
     derivatives: [
       MotorList[MotorModel.AM_NEVEREST_ORBITAL_3_7],
@@ -360,7 +360,7 @@ const MotorGroup: MotorGroupItem[] = [
   {
     name: "Tetrix TorqueNADO",
     key: "tetrix-torquenado",
-    src: "./assets/drive-constants/torquenado-quarter.jpg",
+    src: "./assets/drive-constants/torquenado-eighth.jpg",
     color: "blue",
     derivatives: [
       MotorList[MotorModel.TETRIX_TORQUENADO_20],
@@ -371,7 +371,7 @@ const MotorGroup: MotorGroupItem[] = [
   {
     name: "goBILDA 5201 Series",
     key: "gobilda-5201",
-    src: "./assets/drive-constants/gobilda-5201-quarter.jpg",
+    src: "./assets/drive-constants/gobilda-5201-eighth.jpg",
     color: "yellow",
     derivatives: [
       MotorList[MotorModel.GOBILDA_5201_26],
@@ -381,7 +381,7 @@ const MotorGroup: MotorGroupItem[] = [
   {
     name: "goBILDA 5202 Series",
     key: "gobilda-5202",
-    src: "./assets/drive-constants/gobilda-5202-quarter.jpg",
+    src: "./assets/drive-constants/gobilda-5202-eighth.jpg",
     color: "yellow",
     derivatives: [
       MotorList[MotorModel.GOBILDA_5202_3_7],

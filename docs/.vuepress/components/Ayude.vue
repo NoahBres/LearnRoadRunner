@@ -63,10 +63,10 @@ export default Vue.extend({
     color $textColor
 
   &.active.yep
-    background-color $green400
+    background-color theme("colors.green.400")
 
   &.active.nope
-    background-color $yellow400
+    background-color theme("colors.yellow.300")
 
 input
   position absolute
@@ -122,12 +122,12 @@ input
     background linear-gradient(rgba(#000, 0.07),rgba(#fff, 0.1)), #d0d0d0
     box-shadow 0 0.08em 0.15em -0.1em rgba(#000,.5) inset,
       0 0.05em 0.08em -0.01em rgba(#fff,.7),
-      0 0 0 0 $green500 inset
+      0 0 0 0 theme("colors.green.400") inset
 
 input:checked + .switch::before
   box-shadow: 0 0.08em 0.15em -0.1em rgba(#000,.5) inset,
     0 0.05em 0.08em -0.01em rgba(#fff,.7),
-    3em 0 0 0 $green500 inset
+    3em 0 0 0 theme("colors.green.400") inset
 
 input:checked + .switch::after
   left 3em
