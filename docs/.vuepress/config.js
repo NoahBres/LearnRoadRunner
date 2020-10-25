@@ -23,13 +23,13 @@ module.exports = {
     ['meta', { property: "og:type", content: "article" }],
     ['meta', { property: "og:title", content: "Learn Road Runner" }],
     ['meta', { property: "og:description", content: "Level up your auto. Road Runner made easy." }],
-    ['meta', { property: "og:image", content: "/assets/baby/baby-rr-150ppi.png" }],
+    ['meta', { property: "og:image", content: "https://www.learnroadrunner.com/assets/baby/baby-rr-150ppi.png" }],
 
     // Twitter card
     ['meta', { property: "twitter:card", content: "summary" }],
     ['meta', { property: "twitter:title", content: "Vue.js" }],
     ['meta', { property: "twitter:description", content: "FTC's Road Runner library made easy" }],
-    ['meta', { property: "twitter:image", content: "/assets/baby/baby-rr-150ppi.png"}]
+    ['meta', { property: "twitter:image", content: "https://www.learnroadrunner.com/assets/baby/baby-rr-150ppi.png"}]
   ],
   themeConfig: {
     logo: '/assets/baby/baby-rr.svg',
