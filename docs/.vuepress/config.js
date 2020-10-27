@@ -22,7 +22,7 @@ module.exports = {
     // Open Graph tags
     ['meta', { property: "og:type", content: "article" }],
     ['meta', { property: "og:title", content: "Learn Road Runner" }],
-    ['meta', { property: "og:description", content: "Level up your auto. Road Runner made easy." }],
+    ['meta', { property: "og:description", content: "Level up your auto.\nRoad Runner made easy." }],
     ['meta', { property: "og:image", content: "https://www.learnroadrunner.com/assets/baby/baby-rr-150ppi.png" }],
 
     // Twitter card
