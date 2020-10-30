@@ -283,7 +283,7 @@ export default Vue.extend({
         this.kV * this.targetVelocity +
         this.kA *
           ((this.currentVelocity - this.lastVelocityReading) / timeDelta) +
-        this.kS;
+        this.kS * (this.kS == 0 ? 1 : this.kS / Math.abs(this.kS));
 
       this.graphData[2].push(this.currentVelocity);
 
