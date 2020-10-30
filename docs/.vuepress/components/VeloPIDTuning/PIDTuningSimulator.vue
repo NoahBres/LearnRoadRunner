@@ -128,7 +128,7 @@ export default Vue.extend({
       kD: 0,
       kF: 0.01,
 
-      arbitraryScalingKp: 1 / 400,
+      arbitraryScalingKp: 1 / 1600,
       arbitraryScalingKi: 1 / 1000,
       arbitraryScalingKd: 1 / 1000000,
 
@@ -303,11 +303,9 @@ export default Vue.extend({
 
       // Actual controller stuff
 
-      // this.setVoltage =
-      //   this.controller.update(this.targetVelocity - this.currentVelocity) +
-      //   this.kV * this.targetVelocity;
-
-      this.setVoltage = this.kF * this.targetVelocity;
+      this.setVoltage =
+        this.controller.update(this.targetVelocity - this.currentVelocity) +
+        this.kF * this.targetVelocity;
 
       this.graphData[2].push(this.currentVelocity);
 
@@ -337,7 +335,7 @@ export default Vue.extend({
       this.controller.kD = this.kD * this.arbitraryScalingKd;
     },
     setF() {
-      this.controller.kF = this.kF;
+      this.controller.kF = Math.min(this.kF, 0.014);
     },
     reset() {
       this.graphData[0] = [];
