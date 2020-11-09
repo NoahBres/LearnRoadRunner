@@ -50,7 +50,7 @@ const StraferV3Constants: ConstantProperties = {
   wheelRadius: 1.88976,
   gearRatio: 1,
 
-  trackWidth: 14.8,
+  trackWidth: 16.34,
 
   recommendedVelo: (312 / 60) * 1.88976 * 2 * Math.PI * 0.85,
   recommendedAccel: (312 / 60) * 1.88976 * 2 * Math.PI * 0.85,
