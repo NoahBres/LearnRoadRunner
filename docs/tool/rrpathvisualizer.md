@@ -37,3 +37,11 @@ Keep in mind that RRPathVisualizer is written in Kotlin. It should be easy to un
 ## Note:
 
 On your actual bot, each trajectory will have a 0.5s timeout after the bot is done following it. This is to allow for any correction with the translational and heading PID if your bot strays off the path. This timeout is cut short if your bot is able to reach the end of the trajectory without correction. Thus, each trajectory may have up to 0.5s added on to it. This extra time is not reflected in RRPathVisualizer's trajectory time estimate. Just be aware of this timeout when creating your trajectories. You are able to change the duration of this correction timeout in the quickstart. If you'd like to do so, change the last parameter, the one with the 0.5 value, where `follower` is set to `HolonomicPIDVAFollower` in `SampleMecanumDrive.java`.
+
+## Resources
+
+Video from Bots in Black, team 16633, explaining installation, basic troubleshooting, and basic usage of RRPathVisualizer:
+
+<div class="flex justify-center">
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/70mOwbp6ANs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
