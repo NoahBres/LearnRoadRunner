@@ -34,7 +34,8 @@ The tuning process will differ depending on which form of control you use.
 
 - If you have only drive encoders, no dead wheels -> you're going to tune velocity PID
 - If you have only dead wheels, no drive encoders -> you're going to tune feedforward
-- If you have both, tune both. However, only feedforward with dead wheels is required as your translational/heading PID should pick up for any discrepancy. If you're striving for the utmost accuracy and have enough encoder slots, knock yourself out and tune both
+- If you have both, dead wheels and drive encoders -> you're going to tune velocity PID
+  - Technically the most accurate setup. However in practice, your accuracy will probably not differ much from the dead wheel-no drive encoder setup as the pose PIDs will generally ensure accurate following.
 
 ## Drive Constants
 
