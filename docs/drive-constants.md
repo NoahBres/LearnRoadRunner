@@ -145,11 +145,11 @@ public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
 
 The parameters Drive Constraints take are:
 
-<code class="inline-block">DriveConstraints(<span class="bg-red-400 text-gray-800 rounded" style="padding: 0.15rem 0.4rem;">maxVelo</span>, <span class="bg-teal-400 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">maxAccel</span>, <span class="bg-green-400 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">maxJerk</span>, <span class="bg-orange-400 text-gray-800 rounded" style="padding: 0.15rem 0.4rem;">maxAngVelo</span>, <span class="bg-purple-400 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">maxAngAccel</span>, <span class="bg-yellow-300 text-gray-800 rounded" style="padding: 0.15rem 0.4rem;">maxAngJerk</span>)</code>
+<code class="inline-block">DriveConstraints(<span class="bg-red-400 text-gray-800 rounded" style="padding: 0.15rem 0.4rem;">maxVel</span>, <span class="bg-teal-400 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">maxAccel</span>, <span class="bg-green-400 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">maxJerk</span>, <span class="bg-orange-400 text-gray-800 rounded" style="padding: 0.15rem 0.4rem;">maxAngVelo</span>, <span class="bg-purple-400 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">maxAngAccel</span>, <span class="bg-yellow-300 text-gray-800 rounded" style="padding: 0.15rem 0.4rem;">maxAngJerk</span>)</code>
 
 <div class="w-1 h-4"></div>
 
-<span class="bg-red-400 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">maxVelo</span> defines the maximum velocity that the robot can go. This is the fastest speed that the robot can ramp up to. The default value is `30in/s`. You can calculate the theoretical maximum velocity for your bot using the following equation:
+<span class="bg-red-400 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">maxVel</span> defines the maximum velocity that the robot can go. This is the fastest speed that the robot can ramp up to. The default value is `30in/s`. You can calculate the theoretical maximum velocity for your bot using the following equation:
 
 <figure align="center" class="py-10">
   <img src="./assets/drive-constants/max-vel-latex-half.png" alt="max velocity = (max rpm / 60) * gear ratio * wheel radius * 2 * pi">

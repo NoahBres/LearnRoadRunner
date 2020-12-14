@@ -16,7 +16,7 @@ interface ConstantProperties {
   limitedVelo: number;
   limitedAccel: number;
 
-  maxVelo: number;
+  maxVel: number;
   maxAccel: number;
 }
 
@@ -37,7 +37,7 @@ const StraferV1Constants: ConstantProperties = {
   limitedVelo: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI * 0.85,
   limitedAccel: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI * 0.85,
 
-  maxVelo: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI,
+  maxVel: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI,
   maxAccel: (435 / 60) * 0.5 * 1.9685 * 2 * Math.PI,
 };
 
@@ -58,7 +58,7 @@ const StraferV3Constants: ConstantProperties = {
   limitedVelo: (312 / 60) * 1.88976 * 2 * Math.PI * 0.85,
   limitedAccel: (312 / 60) * 1.88976 * 2 * Math.PI * 0.85,
 
-  maxVelo: (312 / 60) * 1.88976 * 2 * Math.PI,
+  maxVel: (312 / 60) * 1.88976 * 2 * Math.PI,
   maxAccel: (312 / 60) * 1.88976 * 2 * Math.PI,
 };
 
@@ -146,7 +146,7 @@ public class DriveConstants {
      * reaching this maximum velocity: voltage dropping over the game, bot weight, general mechanical inefficiencies, etc.
      * However, you can push this higher yourself if you'd like. Perhaps raise it to 90-95% of the theoretically 
      * max velocity. The theoretically maximum velocity is ${
-       filledProperties.maxVelo
+       filledProperties.maxVel
      } in/s.
      * Just make sure that your bot can actually reach this maximum velocity. Path following will be detrimentally
      * affected if it is aiming for a velocity not actually possible.
@@ -231,7 +231,7 @@ export function generateFile(properties: ConfigurationState): string {
     limitedVelo: 0,
     limitedAccel: 0,
 
-    maxVelo: 0,
+    maxVel: 0,
     maxAccel: 0,
   };
 
@@ -264,7 +264,7 @@ export function generateFile(properties: ConfigurationState): string {
     Math.PI *
     0.85;
 
-  buildConstants.maxVelo =
+  buildConstants.maxVel =
     (buildConstants.maxRPM / 60) *
     buildConstants.gearRatio *
     buildConstants.wheelRadius *

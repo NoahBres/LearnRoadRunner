@@ -31,7 +31,7 @@ If your bot drifts off path, simply enter driver control and drive your bot back
 
    - The `MaxVelocityTuner` will run at max speed for the specified `RUNTIME`. By default, the bot will run **full speed** for 2 seconds. **Ensure that you have enough room cleared for this!** You may adjust `RUNTIME` through the code or through Dashboard.
 
-4. Run `MaxVelocityTuner`. After it has completed its sequence, it will print a "Max Velocity" value and a "Voltage Compensated kF" value. "Max Velocity" is the maximum velocity your bot can travel while under load and at the battery level this opmode is ran at. You can use this value in your `maxVelo` drive constraints. Take note of the "Voltage Compensated kF" value.
+4. Run `MaxVelocityTuner`. After it has completed its sequence, it will print a "Max Velocity" value and a "Voltage Compensated kF" value. "Max Velocity" is the maximum velocity your bot can travel while under load and at the battery level this opmode is ran at. You can use this value in your `maxVel` drive constraints. Take note of the "Voltage Compensated kF" value.
 
 5. In Dashboard, look for the `DriveConstants` dropdown on the right. Open that. Look for the `MOTOR_VELO_PID` dropdown. Open that. You should be presented with `p`, `i`, `d`, and `f` fields. Fill the `f` field in with the "Voltage Compensated kF" value from earlier.
 
