@@ -21,7 +21,7 @@ interface ConstantProperties {
 }
 
 const StraferV1Constants: ConstantProperties = {
-  ticksPerRev: 386.3,
+  ticksPerRev: 383.6,
   maxRPM: 435,
 
   runUsingEncoder: true,
