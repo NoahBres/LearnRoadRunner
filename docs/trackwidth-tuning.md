@@ -10,17 +10,17 @@ Your localizer's heading measurements should be accurate prior to tuning this. I
 :::
 
 ::: tip
-This is a fairly verbose clarification of the term track width as its use different contexts can be confusing.
+This is a fairly verbose clarification of the term track width as its use in different contexts can be confusing.
 
 Track width is simply the center-to-center distance from two parallel wheels. However, there are two types of track width that you may see.
 
 The track width in your `DriveConstants.java` refers to the track width of the drive train.
-However in the context of dead wheel odometry, track width is the center-to-center distance of the two parallel wheels. This only applies to three-wheel odometry. The track width for three-wheel odometry refers to the same thing as `lateralDistance`.
+However in the context of dead wheel odometry, track width is the center-to-center distance of the two parallel wheels. This only applies to three-wheel odometry. The track width for three-wheel odometry refers to the same thing as `LATERAL_DISTANCE`.
 We are not touching the localizer at the moment, thus any references to track width on this page will refer to the drive train track width (located in `DriveConstants.java`).
 
 The track width for the **drive train** is used for the forward kinematics for feedforward following.
 
-The track width for **three-wheel odometry** (aka `lateralDistance`) is used for localization.
+The track width for **three-wheel odometry** (aka `LATERAL_DISTANCE`) is used for localization.
 
 You should have already tuned localization. Right now, you will be tuning the drive train.
 :::

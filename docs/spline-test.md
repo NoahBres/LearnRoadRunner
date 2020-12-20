@@ -16,6 +16,17 @@
   </div>
 </ClientOnly>
 
+## Diagnostic Tips
+
+- Open up dashboard as your bot follows a path
+  - Watch the x/y/heading error. Determine if the error is caused by the localizer or the base path follower.
+- Turn off the translational/heading PID
+  - Set the coefficients in translational/heading PID to zero
+  - If your following is okay after turning off translational/heading PID, then the problem lies in the localizer
+    - Run `LocalizationTest` and try to fix your localizer (most likely `StandardTrackingWheelLocalizer` if you're having issues as it's quite a fickle one)
+  - If your following is not okay even after turning off the translationa/heading PID, then the error lies in the drive train motor directions or the drive constants
+- Work backwards and start turning things off to isolate the problem. Starting from scratch and working on each component, step by step, may lead to a faster solution
+
 ## Hiding the tuning opmodes
 
 The Road Runner quickstart comes with many tuning opmodes. They can clutter up the RC's opmode list quite a bit, especially when you start adding many of your own opmodes. If you are finished with your tuning process, you can hide these opmodes using the `@Disabled` annotation on your opmodes.

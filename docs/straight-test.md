@@ -20,6 +20,7 @@ Once you've got your velocity controller tuned, you should run a quick straight 
 4. Run the `StraightTest` opmode like 2 or 3 times to ensure that the distance traveled is consistent within 1-3% of your specified `DISTANCE`. If not, your velocity controller requires further tuning. It does not need to hit the _exact_ spot each time as you will later enable closed loop feedback using localization.
 
    - Your bot may drift a little to one side. Just ignore this for now. This will be corrected once the heading and translation PIDs are enabled in later steps.
+   - If your bot is consistent but travels the wrong distance, you may need to scale the `TICKS_PER_REV` and `WHEEL_RADIUS` to properly scale the distance.
 
 5. If everything works great, move on to the next step!
 
@@ -81,3 +82,9 @@ Check your `DriveConstants.java` file. Something went wrong in here. One of thes
 - `GEAR_RATIO` - if this is 1:1 dont worry about it. Make sure your ratio is output:input instead of reversed
 
 If you still can't figure out the problem, just scale the `WHEEL_RADIUS` to adjust the distance.
+
+### Does your bot strafe the wrong direction?
+
+Your top and bottom motors are reversed. Ensure that your bot's motors follow the directions specified in goBILDA's wheel direction chart.
+
+![goBILDA mecanum wheel direction chart](./assets/drive-constants/gobilda-mecanum-chart.png)

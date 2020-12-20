@@ -35,6 +35,7 @@ If your bot drifts off path, simply enter driver control and drive your bot back
 
    - "Max Velocity" is the maximum velocity your bot can travel while under load and at the battery level this opmode is ran at. You can use this value as your `MAX_VEL` in `DriveConstants`. It is recommended to set your `MAX_VEL` value to 90-95% of the number you just got, just to leave some leeway.
    - Take note of the `Voltage Comepnsated kF` value
+   - If your `MaxVelocityTuner` spins in a circle, you have not reversed the motors on your drive train properly. Follow the directions [here](/drive-constants.html#samplemecanumdrive-motor-direction).
 
 5. In Dashboard, look for the `DriveConstants` dropdown on the right. Press it and it should open a drop down. Then, look for the `MOTOR_VELO_PID` dropdown. Press that to open it. You should be presented with `p`, `i`, `d`, and `f` fields. Fill the `f` field in with the "Voltage Compensated kF" value from earlier.
 

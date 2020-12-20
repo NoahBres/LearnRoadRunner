@@ -190,4 +190,4 @@ rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
 ```
 
-![test](./assets/drive-constants/gobilda-mecanum-chart.png)
+![goBILDA mecanum wheel direction chart](./assets/drive-constants/gobilda-mecanum-chart.png)
