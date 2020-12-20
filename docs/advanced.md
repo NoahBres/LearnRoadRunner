@@ -263,7 +263,7 @@ The answer is a bit tedious in Road Runner version `0.5.3`. Essentially just pas
 // Example:
 
 drive.trajectoryBuilder(startPose, false)
-  .splineTo(new Vector2d(30, 30), 0,                  // This spline is limited to 15 in/s
+  .splineTo(new Vector2d(30, 30), 0,                  // This spline is limited to 15 in/s and will be slower
     new MinVelocityConstraint(Arrays.asList(
       new AngularVelocityConstraint(DriveConstants.MAX_ANG_VEL),
       new MecanumVelocityConstraint(15, DriveConstants.TRACK_WIDTH)
@@ -274,7 +274,7 @@ drive.trajectoryBuilder(startPose, false)
   .build()
 ```
 
-Every `TrajectoryBuilder` function offers a velocity and acceleration constraints override. If you're looking to change the other constraints and limit acceleration or angular velocity, etc., then simply change the constraints as you please. However, you will most likely only be touching the `MAX_VEL` constraint.
+Every `TrajectoryBuilder` function offers a velocity and acceleration constraints override. If you're looking to change the other constraints and limit acceleration or angular velocity, etc., then simply change the constraints as you please. However, you will most likely only be touching the `MAX_VEL` constraint for speed limiting. We are not going to go over why the constraints are composed like so. I would recommend DMing Ryan Brott, the author of Road Runner, or reading the release notes on GitHub to fully understand what's happening. Just know that this is how constraints work and which specific part to edit for velocity limiting.
 
 ## Gain Scheduling
 
