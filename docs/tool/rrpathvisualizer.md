@@ -33,6 +33,7 @@ Keep in mind that RRPathVisualizer is written in Kotlin. It should be easy to un
 7. Find `builder1`. The `builder1` object is the example `TrajectoryBuilder` provided. You are free to add more builders for more trajectories
 8. Just use the builder as you would normally create trajectories
 9. You can add more trajectories by calling `list.add(trajectory)`
+10. **NOTE:** RRPathViz cannot simulate point turns.
 
 ## Note:
 
