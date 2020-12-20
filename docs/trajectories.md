@@ -325,6 +325,45 @@ Trajectory trajectory = drive.trajectoryBuilder(new Pose2d(), Math.toRadians(90)
 
 The code above will tell your bot to follow the entire path at a 90 degree angle.
 
+## Trajectories After Turns
+
+If you use a tool like RRPathVisualizer, you may realize that sprinkling turns between trajectories can break the path following.
+
+Take the following example:
+
+```java
+Trajectory traj1 = drive.trajectoryBuilder(startPose, false)
+  .forward(10)
+  .build();
+
+Trajectory traj2 = drive.trajectoryBuilder(traj1.end(), false)
+  .strafeLeft(10);
+  .build();
+
+drive.followTrajectory(traj1);
+drive.turn(Math.toRadians(90));
+drive.followTrajectory(traj2);
+```
+
+You will realize that `traj2` uses `traj1.end()` as its start pose. However, we have a `drive.turn()` call in between the two trajectories. So `traj2` doesn't actually start in the correct orientation because of the turn. It is completely fine when using relative movements like `forward()` and `strafeLeft()`. However, using absolute movements like `splineTo()` and `lineTo()` will break, especially if you have the follower PID's turned on. How do we go about fixing this? Just add the appropriate rotation to each trajectory start like so:
+
+```java{6}
+Trajectory traj1 = drive.trajectoryBuilder(startPose, false)
+  .forward(10)
+  .build();
+
+// We just add a 90 degree heading rotation to traj1.end()
+Trajectory traj2 = drive.trajectoryBuilder(traj1.end().plus(new Pose2d(0, 0, Math.toRadians(90))), false)
+  .strafeLeft(10);
+  .build();
+
+drive.followTrajectory(traj1);
+drive.turn(Math.toRadians(90));
+drive.followTrajectory(traj2);
+```
+
+Notice that we took the `traj1.end()` pose and simply added a new pose with x: 0, y: 0, and a 90 degree heading to simulate the turn. Just ensure that the heading in the added pose matches the turn preceding that trajectory and that x and y are left at zero.
+
 ## Coordinate System
 
 We're going to clarify the FTC coordinate system just because the official Road Runner GUI and David's RRPathVisualizer use a rotated field and it may be confusing.
@@ -348,3 +387,7 @@ The Y axis extends through the origin and runs _perpendicular_ to the Red Allian
 Notice how the field is rotated 90 degrees relative to if we were looking at it from the audience's point of view. This is because the frame of reference is defined by the Red Alliance Station. Be mindful of this as Road Runner's official GUI and RRPathVisualizer both opt for the "proper" orientation of the field. Thus, in their maps, Y increase to the left and X increases up.
 
 Specifications for the official FTC coordinate system can be found [here](https://github.com/ftctechnh/ftc_app/files/989938/FTC_FieldCoordinateSystemDefinition.pdf)
+
+```
+
+```
