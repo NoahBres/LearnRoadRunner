@@ -239,7 +239,42 @@ This [sample opmode](https://github.com/NoahBres/road-runner-quickstart/blob/adv
 
 ## Overloading Constraints
 
-**TODO: Come back and write this**
+Say you want to go slower for just a portion of your trajectory. Perhaps you want some fine control of an intake procedure and wish to slow down the path following. How would we go about that?
+
+The answer is a bit tedious in Road Runner version `0.5.3`. Essentially just paste the following after any trajectory builder function:
+
+```java{2-6,11-15}
+.splineTo(new Vector2d(30, 30), Math.toRadians(90),
+  new MinVelocityConstraint(Arrays.asList(
+      new AngularVelocityConstraint(DriveConstants.MAX_ANG_VEL),
+      new MecanumVelocityConstraint(your_desired_maximum_velocity, DriveConstants.TRACK_WIDTH)
+    )
+  ), new ProfileAccelerationConstraint(DriveConstants.MAX_ACCEL));
+
+// You can do the same with any TrajectoryBuilder function. Simply paste the above snippet in the parameter
+
+.lineTo(new Vector2d(30, 30),
+    new MinVelocityConstraint(Arrays.asList(
+      new AngularVelocityConstraint(DriveConstants.MAX_ANG_VEL),
+      new MecanumVelocityConstraint(your_desired_maximum_velocity, DriveConstants.TRACK_WIDTH)
+    )
+  ), new ProfileAccelerationConstraint(DriveConstants.MAX_ACCEL));
+
+// Example:
+
+drive.trajectoryBuilder(startPose, false)
+  .splineTo(new Vector2d(30, 30), 0,                  // This spline is limited to 15 in/s
+    new MinVelocityConstraint(Arrays.asList(
+      new AngularVelocityConstraint(DriveConstants.MAX_ANG_VEL),
+      new MecanumVelocityConstraint(15, DriveConstants.TRACK_WIDTH)
+    )
+  ), new ProfileAccelerationConstraint(DriveConstants.MAX_ACCEL));
+
+  .splineTo(new Vector2d(40, 40), Math.toRadians(-90)) // This spline will be normal speed
+  .build()
+```
+
+Every `TrajectoryBuilder` function offers a velocity and acceleration constraints override. If you're looking to change the other constraints and limit acceleration or angular velocity, etc., then simply change the constraints as you please. However, you will most likely only be touching the `MAX_VEL` constraint.
 
 ## Gain Scheduling
 
