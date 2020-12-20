@@ -66,7 +66,6 @@ function generateText(filledProperties: ConstantProperties): string {
   return `package org.firstinspires.ftc.teamcode.drive;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 /*
@@ -102,7 +101,8 @@ public class DriveConstants {
     public static final boolean RUN_USING_ENCODER = ${
       filledProperties.runUsingEncoder
     };
-    public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(0, 0, 0, getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV));
+    public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(0, 0, 0,
+      getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV));
 
     /*
      * These are physical constants that can be determined from your robot (including the track
@@ -132,9 +132,8 @@ public class DriveConstants {
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
      * the constraints should never exceed ~80% of the robot's actual capabilities. While Road
      * Runner is designed to enable faster autonomous motion, it is a good idea for testing to start
-     * small and gradually increase them later after everything is working. The velocity and
-     * acceleration values are required, and the jerk values are optional (setting a jerk of 0.0
-     * forces acceleration-limited profiling). All distance units are inches.
+     * small and gradually increase them later after everything is working. All distance units are
+     * inches.
      */
     /*
      * Note from LearnRoadRunner.com:
@@ -153,11 +152,12 @@ public class DriveConstants {
      * 
      * The maximum acceleration is somewhat arbitrary and it is recommended that you tweak this yourself based on
      * actual testing. Just set it at a reasonable value and keep increasing until your path following starts
-     * to degrade. As of now, it simply mirrors the velocity results in ${
+     * to degrade. As of now, it simply mirrors the velocity, resulting in ${
        filledProperties.recommendedAccel
      } in/s/s
      *
-     * Maximum Angular Velocity is calculated as: maximum velocity / (trackWidth / 2) * (180 / Math.PI)
+     * Maximum Angular Velocity is calculated as: maximum velocity / (trackWidth / 2) * (180 / Math.PI) but capped at 360°.
+     * You are free to raise this on your own if you would like. It is best determined through experimentation.
      ${
        filledProperties.limitedVelo < filledProperties.recommendedVelo
          ? `*
@@ -176,21 +176,18 @@ public class DriveConstants {
          : ""
      }
      */
-    public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
-            ${filledProperties.limitedVelo}, ${
-    filledProperties.limitedAccel
-  }, 0.0,
-            Math.toRadians(${Math.min(
-              (filledProperties.limitedVelo /
-                (filledProperties.trackWidth / 2)) *
-                (180 / Math.PI),
-              360
-            )}), Math.toRadians(${Math.min(
-    (filledProperties.limitedVelo / (filledProperties.trackWidth / 2)) *
-      (180 / Math.PI),
-    360
-  )}), 0.0
-    );
+    public static double MAX_VEL = ${filledProperties.limitedVelo};
+    public static double MAX_ACCEL = ${filledProperties.limitedAccel};
+    public static double MAX_ANG_VEL = Math.toRadians(${Math.min(
+      (filledProperties.limitedVelo / (filledProperties.trackWidth / 2)) *
+        (180 / Math.PI),
+      360
+    )});
+    public static double MAX_ANG_ACCEL = Math.toRadians(${Math.min(
+      (filledProperties.limitedVelo / (filledProperties.trackWidth / 2)) *
+        (180 / Math.PI),
+      360
+    )});
 
 
     public static double encoderTicksToInches(double ticks) {
