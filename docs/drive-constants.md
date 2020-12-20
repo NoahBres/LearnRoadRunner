@@ -42,7 +42,7 @@ If you want to quickly get a constants file up and running, I recommend clicking
 ## Ticks Per Rev & Max RPM
 
 ```java
-/* Lines 24-25 in DriveConstants.java */
+/* Lines 23-24 in DriveConstants.java */
 public static final double TICKS_PER_REV = 1;
 public static final double MAX_RPM = 1;
 ```
@@ -73,9 +73,10 @@ public static final double MAX_RPM = 1;
 ## Run Using Encoder & Motor Velo PID
 
 ```java
-/* Lines 35-36 in DriveConstants.java */
+/* Lines 34-36 in DriveConstants.java */
 public static final boolean RUN_USING_ENCODER = true;
-public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(0, 0, 0, getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV));
+public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(0, 0, 0,
+        getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV));
 ```
 
 **`RUN_USING_ENCODER`** indicates whether or not you want to utilize the `RUN_USING_ENCODER` [RunMode](https://gm0.org/en/stable/docs/software/using-the-sdk.html#dc-motor) built into the FTC SDK. This makes use of the onboard velocity PID, allowing you to control the motor via velocity rather than "power" (voltage). Setting this value to true will automatically set all the motors to use this velocity controlled mode. `RUN_USING_ENCODER` can only be utilized if you are using drive train encoders. Set this value to `false` if you are not using drive encoders.
@@ -84,7 +85,7 @@ public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(0, 0, 0, ge
 
 <HideAyudeWrapper :skipIfDriveEncoders="true">
 ::: warning
-Earlier you indicated that you are not utilizing drive encoders. Set `RUN_USING_ENCODER` to `false`.
+Earlier (in the [High Level Overview](/quickstart-overview.html#are-you-using-drive-encoders)), you indicated that you are not utilizing drive encoders. Set `RUN_USING_ENCODER` to `false`.
 :::
 </HideAyudeWrapper>
 
@@ -99,7 +100,7 @@ public static double TRACK_WIDTH = 1; // in
 
 **`WHEEL_RADIUS`** is the radius of the wheels on your drive train. Make sure this is the radius, not diameter.
 
-**`GEAR_RATIO`** is the ratio of the output (wheel) speed to input (motor) speed. If you are using direct drive—no gears/belts—`GEAR_RATIO` should be `1`. A gear ratio more than 1 will indicate that your wheel spins faster than your motor. A gear ratio less than one will indicate that your wheel spins slower than your motor. For example, the goBILDA strafer kit includes a set of 1:2 bevel gears, reducing your output speed by half. So your gear ratio will be `1/2` or `0.5`.
+**`GEAR_RATIO`** is the ratio of the output (wheel) speed to input (motor) speed. If you are using direct drive—no gears/belts—`GEAR_RATIO` should be `1`. A gear ratio more than 1 will indicate that your wheel spins faster than your motor. A gear ratio less than one will indicate that your wheel spins slower than your motor. For example, the 2019 v1 goBILDA strafer kit includes a set of 1:2 bevel gears, reducing your output speed by half. So your gear ratio will be `1/2` or `0.5`.
 
 **`TRACK_WIDTH`** is the distance from the center of one wheel to the center of its parallel wheel. This number only need be an estimate. You will empirically tune this later.
 
@@ -136,20 +137,16 @@ Earlier you indicated that you are using drive encoders. You will not be touchin
 ## Base Constraints
 
 ```java
-/* Lines 68-71 in DriveConstants.java */
-public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
-  30.0, 30.0, 0.0,
-  Math.toRadians(180.0), Math.toRadians(180.0), 0.0
-);
+/* Lines 67-70 in DriveConstants.java */
+public static double MAX_VEL = 30;
+public static double MAX_ACCEL = 30;
+public static double MAX_ANG_VEL = Math.toRadians(180);
+public static double MAX_ANG_ACCEL = Math.toRadians(180);
 ```
-
-The parameters Drive Constraints take are:
-
-<code class="inline-block">DriveConstraints(<span class="bg-red-400 text-gray-800 rounded" style="padding: 0.15rem 0.4rem;">maxVel</span>, <span class="bg-teal-400 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">maxAccel</span>, <span class="bg-green-400 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">maxJerk</span>, <span class="bg-orange-400 text-gray-800 rounded" style="padding: 0.15rem 0.4rem;">maxAngVelo</span>, <span class="bg-purple-400 text-gray-900 rounded" style="padding: 0.15rem 0.4rem;">maxAngAccel</span>, <span class="bg-yellow-300 text-gray-800 rounded" style="padding: 0.15rem 0.4rem;">maxAngJerk</span>)</code>
 
 <div class="w-1 h-4"></div>
 
-<span class="bg-red-400 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">maxVel</span> defines the maximum velocity that the robot can go. This is the fastest speed that the robot can ramp up to. The default value is `30in/s`. You can calculate the theoretical maximum velocity for your bot using the following equation:
+<span class="bg-red-400 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">**MAX_VEL**</span> defines the maximum velocity that the robot can go. This is the fastest speed that the robot can ramp up to. The default value is `30in/s`. You can calculate the theoretical maximum velocity for your bot using the following equation:
 
 <figure align="center" class="py-10">
   <img src="./assets/drive-constants/max-vel-latex-half.png" alt="max velocity = (max rpm / 60) * gear ratio * wheel radius * 2 * pi">
@@ -158,24 +155,20 @@ The parameters Drive Constraints take are:
 
 It is recommended that you keep your maximum velocity constraint not exceed 80% of the motors' max velocity. Your bot will most likely not be able to follow at 100% of the theoretical velocity due to a number of reasons: voltage dropping as your battery dies, weight, etc. You may push this limit closer to 100% but your trajectory following will suffer if your bot is not able to reach the given velocity.
 
-The maximum velocity can be empirically defined using the `MaxVelocityTuner` opmode.
+The maximum velocity can be empirically defined using the `MaxVelocityTuner` opmode. It is still recommended that you set your `MAX_VEL` to 90-95% of the value that `MaxVelocityTuner` outputs.
 
-<span class="bg-teal-400 text-gray-900 rounded" style="padding: 0.25rem 0.5rem;">maxAccel</span> defines the maximum acceleration that the robot will undergo. This is the speed at which the velocity ramps up. The default value is `30in/s^2`. The recommendation is to just initially keep this value the same number as your max velocity value, although this is quite arbitrary. The only way to find your max acceleration is through experimentation. Keep raising the max acceleration until your path following starts to suffer. Do this after tuning just to make things easier. You may need to retune your PID values if you change this.
+<span class="bg-yellow-300 text-gray-900 rounded" style="padding: 0.25rem 0.5rem;">**MAX_ACCEL**</span> defines the maximum acceleration that the robot will undergo. This is the speed at which the velocity ramps up. The default value is `30in/s^2`. The recommendation is to just initially keep this value the same number as your max velocity value, although this is quite arbitrary. The only way to find your max acceleration is through experimentation. Keep raising the max acceleration until your path following starts to suffer. Do this after tuning just to make things easier. You may need to retune your PID values if you change this.
 
-<span class="bg-green-400 text-gray-900 rounded" style="padding: 0.25rem 0.5rem;">maxJerk</span> defines the maximum jerk that the robot can undergo. [Jerk](<https://www.wikiwand.com/en/Jerk_(physics)>) is the derivative of acceleration. Leave this at zero unless you know what you're doing.
+<span class="bg-purple-400 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">**MAX_ANG_VEL**</span> defines the maximum angular velocity that the robot can go. This is the fastest speed that the robot can turn. The default value is `180°/s`. You can calculate the maximum angular velocity by dividing the maximum tangential velocity (max velo) by your track width. However, you should probably just leave this as is or determine the value through experimentation. Theoretical maximum angular acceleration doesn't match up well with the measured value.
 
-<span class="bg-orange-400 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">maxAngVelo</span> defines the maximum angular velocity that the robot can go. This is the fastest speed that the robot can turn. The default value is `180°/s`. You can calculate the maximum angular velocity by dividing the maximum tangential velocity (max velo) by your track width. However, you should probably just leave this as is.
-
-<span class="bg-purple-400 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">maxAngAccel</span> defines the maximum angular acceleration that the robot can undergo. This is the fastest that the robot's angular velocity can ramp up. The default value is `180°/s^2`. This can only be found through tuning. However, it is a bit difficult to empirically determine this so just leave this as is.
-
-<span class="bg-yellow-300 text-gray-900 rounded" style="padding: 0.25rem 0.5rem;">maxAngJerk</span> defines the maximum angular jerk that the robot can undergo. [Jerk](<https://www.wikiwand.com/en/Jerk_(physics)>) is the derivative of acceleration. Leave this at zero unless you know what you're doing.
+<span class="bg-orange-400 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">**MAX_ANG_ACCEL**</span> defines the maximum angular acceleration that the robot can undergo. This is the fastest that the robot's angular velocity can ramp up. The default value is `180°/s^2`. This can only be found through tuning. However, it is a bit difficult to empirically determine this so just leave this as is.
 
 ## SampleMecanumDrive - Hardware ID's
 
 Open your `SampleMecanumDrive.java` file.
 
 ```java
-/* Lines 131-134 in SampleMecanumDrive.java */
+/* Lines 143-147 in SampleMecanumDrive.java */
 leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
 leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
 rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
@@ -186,13 +179,15 @@ Ensure that these motor ID's match up with your Rev Hub config ID's.
 
 ## SampleMecanumDrive - Motor Direction
 
-Then, look at line 154. There should be a comment stating "`// TODO: reverse any motors using DcMotor.setDirection()`".
-Under that comment, you will reverse the directions of the motors on one side of your bot. If your bot spins in circles during straight test, come back here to fix it. If your bot drives the opposite way, come back here to fix this.
+Then, look at line 166. There should be a comment stating "`// TODO: reverse any motors using DcMotor.setDirection()`".
+Under that comment, you will reverse the directions of the motors on one side of your bot. If your bot spins in circles during straight test, come back here to fix it. If your bot drives the opposite way, come back here to fix this. If your bot strafes the opposite direction, come back here to fix this. Refer to the goBILDA mecanum wheel direction chart below if you require help debugging your issue.
 
 ```java
-/* About line 154-156 in SampleMecanumDrive.java */
+/* About line 166-168 in SampleMecanumDrive.java */
 
 // TODO: reverse any motors using DcMotor.setDirection()
-leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
+rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
 ```
+
+![test](./assets/drive-constants/gobilda-mecanum-chart.png)
