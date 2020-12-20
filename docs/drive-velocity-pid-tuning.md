@@ -31,12 +31,15 @@ If your bot drifts off path, simply enter driver control and drive your bot back
 
    - The `MaxVelocityTuner` will run at max speed for the specified `RUNTIME`. By default, the bot will run **full speed** for 2 seconds. **Ensure that you have enough room cleared for this!** You may adjust `RUNTIME` through the code or through Dashboard.
 
-4. Run `MaxVelocityTuner`. After it has completed its sequence, it will print a "Max Velocity" value and a "Voltage Compensated kF" value. "Max Velocity" is the maximum velocity your bot can travel while under load and at the battery level this opmode is ran at. You can use this value in your `maxVel` drive constraints. Take note of the "Voltage Compensated kF" value.
+4. Run `MaxVelocityTuner`. After it has completed its sequence, it will print a "Max Velocity" value and a "Voltage Compensated kF" value.
 
-5. In Dashboard, look for the `DriveConstants` dropdown on the right. Open that. Look for the `MOTOR_VELO_PID` dropdown. Open that. You should be presented with `p`, `i`, `d`, and `f` fields. Fill the `f` field in with the "Voltage Compensated kF" value from earlier.
+   - "Max Velocity" is the maximum velocity your bot can travel while under load and at the battery level this opmode is ran at. You can use this value as your `MAX_VEL` in `DriveConstants`. It is recommended to set your `MAX_VEL` value to 90-95% of the number you just got, just to leave some leeway.
+   - Take note of the `Voltage Comepnsated kF` value
+
+5. In Dashboard, look for the `DriveConstants` dropdown on the right. Press it and it should open a drop down. Then, look for the `MOTOR_VELO_PID` dropdown. Press that to open it. You should be presented with `p`, `i`, `d`, and `f` fields. Fill the `f` field in with the "Voltage Compensated kF" value from earlier.
 
 6. Now, start up the `DriveVelocityPIDTuner` opmode. The bot will travel travel back and forth in a straight(ish) line over and over.
-   - The default `DISTANCE` the bot travels is 72 inches. Therefore, ensure you have at least that specified distance's worth of clearance (plus another foot, ideally). You may adjust the `DISTANCE` value in the dashboard variable configuration sidebar or directly in the file itself if you do not have enough space. Although the bot is supposed to travel in a straight line, it will slowly drift to one side. This can be caused by a number of reasons from uneven weight distribution to the velocity PID simply being untuned. You need not worry about this as enabling the heading PID later will fix this during actual path following. I recommend clearing a space 2-3 field mats wide to help address the drift. If you have a path that is only 1 mat wide, it will keep falling off the edge and you need to keep resetting its position.
+   - The default `DISTANCE` the bot travels is 72 inches. Therefore, ensure you have at least that specified distance's worth of clearance (plus another foot, ideally). You may adjust the `DISTANCE` value in the dashboard variable configuration sidebar or directly in the file itself if you do not have enough space. Although the bot is supposed to travel in a straight line, it will slowly drift to one side. This can be caused by a number of reasons from uneven weight distribution to the velocity PID simply being untuned. You need not worry about this as enabling the heading PID later will fix this during actual path following. I recommend clearing a space 2-3 field mats wide to help address the drift. If you have a path that is only 1 mat wide, it will keep falling off the edge and you need to keep resetting its position. If this happens, follow the tip at the top of the page and manually reset position via driver override.
 
 Your page should look something like this:
 
@@ -45,15 +48,15 @@ Your page should look something like this:
       <img src="./assets/drive-velocity-pid-tuning/example-dashboard-half.jpg" alt="Image depicting FTC Dashboard in the browser">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
-    <figcaption class="mt-2 text-sm text-gray-600 text-center">Example dashboard<br>(slightly outdated screenshot, yours may not look exactly the same)</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600 text-center">Example dashboard<br>(Ignore the graph content. This is just a sample of the page layout)</figcaption>
 </figure>
 
 4. Run the opmode. The graph will not show up until you have started it.
 
    - Remeber to turn off the 30 second autonomous timer!
-   - Make sure to click the graph button _after_ you run the program. If the graph doesn't show up, and instead shows a number of checkboxes, make sure you have clicked the `targetVelocity` and `velocity0` checkbox. Ignore the others. This will make tuning easier.
+   - Make sure to click the graph button _after_ you run the program. If the graph doesn't show up and instead shows a number of checkboxes, make sure you have clicked the `targetVelocity` and `velocity0` checkbox. Ignore the others. This will make tuning easier.
 
-5. In the `DriveVelocityPIDTuner` dropdown, ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`. There should be a decently straight/flat portion in the graph, as shown in the sample dashboard above.
+5. In the `DriveVelocityPIDTuner` dropdown, ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`. There should be a decently straight/flat portion in the graph, as shown in the sample dashboard above. This is so we can tune the behavior during the coasting phase as well.
 
 6. Direct your attention back to the `MOTOR_VELO_PID` dropdown in the right sidebar from earlier. You will be tuning the PIDF gains found there.
 
@@ -88,7 +91,7 @@ If you feel the need to add `i`, you should be increasing `f`.
    - The polarity to the motors are reversed. The encoder is not reading the same direction as the motor is actually turning. Switch the black and red cable on your motor. Or, multiply the encoder readings in your `SampleMecanumDrive` by -1.
 
 2. The StraightTest or DriveVelocityPID opmode keeps overshooting and tweaking variables in `DriveConstants.java` just doesn't change anything:
-   - Try lowering the max velocity in `BASE_CONSTRAINTS`. Set it to a really low value at first to confirm that this is the problem.
+   - Try lowering the `MAX_VEL` in `DriveConstants.java`. Set it to a really low value at first to confirm that this is the problem.
 
 ## PID Tuning Simulator
 
@@ -101,7 +104,7 @@ Play around with the gains to see how each one affects the graph! Try and tune t
 Tip: Press enter in the text input for your new gain to take effect (just like FTC-Dashboard!).
 
 ::: warning
-This is a very very rudimentary "simulator." It is only meant to give you a basic high level understanding of how the gains affect the behavior of the graph. It is in no way trying to accurately simulate the Rev Hub's motor controller as that presents its own problems. This sim is based on a simple DC Motor model with arbitrary constants. The sim will not behave exactly like how your actual tuning will go but it is meant to give you a decent intuition of how it works. Also, I am very aware of the bugs it has. That's what the "reset" button is for :P
+This is a very very rudimentary "simulator." It is only meant to give you a basic high level understanding of how the gains affect the behavior of the graph. It is in no way trying to accurately simulate the Rev Hub's motor controller as that presents its own problems. This sim is based on a simple DC Motor model with arbitrary constants. The sim will not behave exactly like how your actual tuning will go but it is meant to give you a decent intuition of how it works. It's much easier than actual tuning as the kF value is very effective in the sim. Much less so on an actual bot due to the Rev Hub motor controller weirdness. Also, I am very aware of the bugs it has. That's what the "reset" button is for :P
 :::
 
 ::: tip
