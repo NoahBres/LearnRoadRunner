@@ -36,20 +36,20 @@ Your page should look something like this:
       <img src="./assets/feedforward-tuning/example-dashboard-half.jpg" alt="Image depicting FTC Dashboard in the browser">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
-    <figcaption class="mt-2 text-sm text-gray-600 text-center">Example dashboard<br>(slightly outdated screenshot, yours may not look exactly the same)</figcaption>
+    <figcaption class="mt-2 text-sm text-gray-600 text-center">Example dashboard<br>(Ignore the graph content. This is just a sample of the page layout)</figcaption>
 </figure>
 
 4. Run the opmode. The graph will not show up until you have started it.
 
-Make sure to click the graph button _after_ you run the program. If the graph still doesn't show up, and instead shows a number of checkboxes, that's okay. Click the `targetVelocity` and `poseVelocity` checkbox.
+   - Make sure to click the graph button _after_ you run the program. If the graph still doesn't show up, and instead shows a number of checkboxes, that's okay. Click the `targetVelocity` and `poseVelocity` checkbox.
 
-6. Look for the `DriveConstants` in the right sidebar. Open the dropdown. You are looking for the `kA`, `kV`, and `kStatic` variables.
+5. In Dashboard, look for the `DriveConstants` dropdown on the right. Press it and it should open a drop down. Then, look for the `kA`, `kV`, and `kStatic` variables. You will be tuning these in a second.
 
-7. In the `ManualFeedforwardTuner` dropdown, ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`.
+6. In the `ManualFeedforwardTuner` dropdown, ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`.
 
-8. At this point, once you have run the opmode, the bot should be moving back and forth along the distance specified in the opmode file. The goal is for the `poseVelocity` line to match the `targetVelocity` line.
+7. At this point, once you have run the opmode, the bot should be moving back and forth along the distance specified in the opmode file. The goal is for the `poseVelocity` line to match the `targetVelocity` line.
 
-9. **Recommended tuning process**:
+8. **Recommended tuning process**:
 
    1. `kV` should initially be set to `1 / max velocity`. The `poseVelocity` line should be touching the top of the `targetVelocity` plateau. If not, increase `kV`.
    2. Increase `kA`to try and get the slope of the `poseVelocity` line to match `targetVelocity`.
@@ -90,7 +90,7 @@ The voltage that the Rev Hub outputs will decrease as the battery level drops. B
 
 1. The StraightTest or DriveVelocityPID opmode keeps overshooting and tweaking variables in `DriveConstants.java` just doesn't change anything:
 
-   - Try lowering the max velocity in `BASE_CONSTRAINTS`. Set it to a really low value at first to confirm that this is the problem.
+   - Try lowering the `MAX_VEL` in `DriveConstants.java`. Set it to a really low value at first to confirm that this is the problem.
 
 ## Feedforward Tuning Simulator
 
