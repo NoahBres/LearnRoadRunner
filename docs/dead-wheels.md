@@ -177,7 +177,7 @@ public static double FORWARD_OFFSET = 4; // in; offset of the lateral wheel
 
 **`LATERAL_DISTANCE`** is the distance from the left and right wheels.
 
-**`FORWARD_OFFSET`** is the distance from the lateral wheel to the middle wheel. The `FORWARD_OFFSET` is positive when in front of the wheels and negative when behind the wheels (closer to the back).
+**`FORWARD_OFFSET`** is the distance from the center of rotation to the middle wheel. The `FORWARD_OFFSET` is positive when in front of the wheels and negative when behind the wheels (closer to the back).
 
 <figure align="center">
     <img class="rounded-lg" src="./assets/dead-wheels/andrew-bot-forward-offset-quarter.jpg" alt="Bottom view of the bot. The Y direction increase left to right. The X directions increases up.">
