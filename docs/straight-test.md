@@ -60,7 +60,7 @@ If you are using drive encoder localization (no dead wheels), you will need to t
 - Run the `StrafeTest` opmode. The opmode will print the x and y distance traveled once finished.
 - Your bot may drift forward or back quite a bit. This will be fixed later once translational and heading PID is enabled.
 - Measure how far your bot travels during the `StrafeTest` (with a tape measure). Then compare the measured value with the telemetry's `finalY` value.
-- If the reported `finalY` value does not match up with the measured distance, set the `LATERAL_DISTANCE` variable `SampleMecanumDrive.java` (or in the variable sidebar for testing) to `measured distance / reported y value`.
+- If the reported `finalY` value does not match up with the measured distance, set the `LATERAL_MULTIPLIER` variable in `SampleMecanumDrive.java` (or in the variable sidebar for testing) to `measured distance / reported y value`.
 - You may want to do this more than once to fine tune the localization. Even a 1% increase in accuracy makes a difference.
 
 ## Troubleshooting
