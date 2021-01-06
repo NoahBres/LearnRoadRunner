@@ -387,7 +387,3 @@ The Y axis extends through the origin and runs _perpendicular_ to the Red Allian
 Notice how the field is rotated 90 degrees relative to if we were looking at it from the audience's point of view. This is because the frame of reference is defined by the Red Alliance Station. Be mindful of this as Road Runner's official GUI and RRPathVisualizer both opt for the "proper" orientation of the field. Thus, in their maps, Y increase to the left and X increases up.
 
 Specifications for the official FTC coordinate system can be found [here](https://github.com/ftctechnh/ftc_app/files/989938/FTC_FieldCoordinateSystemDefinition.pdf)
-
-```
-
-```

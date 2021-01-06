@@ -102,6 +102,20 @@ public static double TRACK_WIDTH = 1; // in
 
 **`GEAR_RATIO`** is the ratio of the output (wheel) speed to input (motor) speed. If you are using direct drive—no gears/belts—`GEAR_RATIO` should be `1`. A gear ratio more than 1 will indicate that your wheel spins faster than your motor. A gear ratio less than one will indicate that your wheel spins slower than your motor. For example, the 2019 v1 goBILDA strafer kit includes a set of 1:2 bevel gears, reducing your output speed by half. So your gear ratio will be `1/2` or `0.5`.
 
+::: warning
+If you choose to set your gear ratio to a fraction, ensure that you use decimal values.
+
+```java
+// Don't do this
+public static double GEAR_RATIO = 2 / 3;
+
+// Do this
+public static double GEAR_RATIO = 2.0 / 3.0;
+```
+
+This is due to the fact that the first case is actually an integer division. It results in an integer value of 0 then casts to a 0.0 double.
+:::
+
 **`TRACK_WIDTH`** is the distance from the center of one wheel to the center of its parallel wheel. This number only need be an estimate. You will empirically tune this later.
 
 <figure align="center">
