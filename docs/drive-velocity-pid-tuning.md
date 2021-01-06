@@ -87,11 +87,15 @@ If you feel the need to add `i`, you should be increasing `f`.
 
 ## Troubleshooting
 
+1. Your `MaxVelocityTuner` is going backwards
+
+   - Ensure that your wheel are reversed correctly. Check [the goBILDA mecanum chart](/drive-constants.html#samplemecanumdrive-motor-direction) to use as a reference while debugging
+
 1. One of the velocity lines are going the opposite way and not following `targetVelocity`:
 
    - The polarity to the motors are reversed. The encoder is not reading the same direction as the motor is actually turning. Switch the black and red cable on your motor. Or, multiply the encoder readings in your `SampleMecanumDrive` by -1.
 
-2. The StraightTest or DriveVelocityPID opmode keeps overshooting and tweaking variables in `DriveConstants.java` just doesn't change anything:
+1. The StraightTest or DriveVelocityPID opmode keeps overshooting and tweaking variables in `DriveConstants.java` just doesn't change anything:
    - Try lowering the `MAX_VEL` in `DriveConstants.java`. Set it to a really low value at first to confirm that this is the problem.
 
 ## PID Tuning Simulator
