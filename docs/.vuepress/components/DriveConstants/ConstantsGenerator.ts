@@ -179,12 +179,12 @@ public class DriveConstants {
     public static double MAX_VEL = ${filledProperties.limitedVelo};
     public static double MAX_ACCEL = ${filledProperties.limitedAccel};
     public static double MAX_ANG_VEL = Math.toRadians(${Math.min(
-      (filledProperties.limitedVelo / (filledProperties.trackWidth / 2)) *
+      (filledProperties.limitedVelo / (filledProperties.trackWidth / 2) / 2) *
         (180 / Math.PI),
       360
     )});
     public static double MAX_ANG_ACCEL = Math.toRadians(${Math.min(
-      (filledProperties.limitedVelo / (filledProperties.trackWidth / 2)) *
+      (filledProperties.limitedVelo / (filledProperties.trackWidth / 2) / 2) *
         (180 / Math.PI),
       360
     )});
