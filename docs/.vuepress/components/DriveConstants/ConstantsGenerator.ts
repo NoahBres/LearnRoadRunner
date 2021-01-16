@@ -184,7 +184,7 @@ public class DriveConstants {
       360
     )});
     public static double MAX_ANG_ACCEL = Math.toRadians(${Math.min(
-      (filledProperties.limitedVelo / filledProperties.trackWidth *
+      (filledProperties.limitedVelo / filledProperties.trackWidth) *
         (180 / Math.PI),
       360
     )});
