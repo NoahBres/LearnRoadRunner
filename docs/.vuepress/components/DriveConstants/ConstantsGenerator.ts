@@ -156,7 +156,7 @@ public class DriveConstants {
        filledProperties.recommendedAccel
      } in/s/s
      *
-     * Maximum Angular Velocity is calculated as: maximum velocity / (trackWidth / 2) * (180 / Math.PI) but capped at 360°/s.
+     * Maximum Angular Velocity is calculated as: maximum velocity / trackWidth * (180 / Math.PI) but capped at 360°/s.
      * You are free to raise this on your own if you would like. It is best determined through experimentation.
      ${
        filledProperties.limitedVelo < filledProperties.recommendedVelo
@@ -179,12 +179,12 @@ public class DriveConstants {
     public static double MAX_VEL = ${filledProperties.limitedVelo};
     public static double MAX_ACCEL = ${filledProperties.limitedAccel};
     public static double MAX_ANG_VEL = Math.toRadians(${Math.min(
-      (filledProperties.limitedVelo / (filledProperties.trackWidth / 2) / 2) *
+      (filledProperties.limitedVelo / filledProperties.trackWidth) *
         (180 / Math.PI),
       360
     )});
     public static double MAX_ANG_ACCEL = Math.toRadians(${Math.min(
-      (filledProperties.limitedVelo / (filledProperties.trackWidth / 2) / 2) *
+      (filledProperties.limitedVelo / filledProperties.trackWidth *
         (180 / Math.PI),
       360
     )});
