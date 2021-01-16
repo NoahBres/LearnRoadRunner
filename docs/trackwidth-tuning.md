@@ -25,19 +25,21 @@ The track width for **three-wheel odometry** (aka `LATERAL_DISTANCE`) is used fo
 You should have already tuned localization. Right now, you will be tuning the drive train.
 :::
 
-1. Run the `TrackWidthTuner` opmode via the RC.
-2. Your bot should turn 180 degrees 5 times.
-3. Don't touch the bot during the tuning process.
-4. At the end of the tuning, the RC's telemetry should print an "effective track width".
-5. If this number sounds reasonable (close to the actual physical track width, might be a few inches off), stick this number in your `DriveConstants.java` file under `TRACK_WIDTH`.
+1. Before you begin tuning the track width tuner, we're going to run a quick tuner that gives us the empirical max angular velocity value the bot is able to sustain. The track width tuner will not work properly if angular velocity is too high.
+2. Run the `MaxAngularVelocityTuner` opmode. It will spin in a circle at maximum speed for the specified number of seconds. After it has completed its sequence, it will print a "Max Angular Velocity" value. Set the `MAX_ANG_VEL` field in your `DriveConstants.java` file to this value.
+3. Run the `TrackWidthTuner` opmode.
+4. Your bot should turn 180 degrees 5 times.
+5. Don't touch the bot during the tuning process.
+6. At the end of the tuning, the RC's telemetry should print an "effective track width".
+7. If this number sounds reasonable (close to the actual physical track width, might be a few inches off), stick this number in your `DriveConstants.java` file under `TRACK_WIDTH`.
    - If you have FTC Dashboard open, you can change the track width in the variable configuration sidebar (on the right) to test your values. You may need to run the tuner a few times so this makes it a lot easier as you don't have to change the constants file and re-compile/re-upload the app to test values.
-6. The bot should be turning close to 180 degrees every time once tuned.
-7. If you bot runs into the following issues, you will have to tune manually:
+8. The bot should be turning close to 180 degrees every time once tuned.
+9. If you bot runs into the following issues, you will have to tune manually:
    - It does not turn 180 degrees each time, even with tuning
    - The effective track width given does not print something reasonable (most likely a low number like 3)
      - This is generally caused by failing to put an initial estimate in the drive constants file and leaving the track width at 1.
-8. To tune the track width manually, simply keep adjusting the track width yourself until it turns 180 degrees. If the the bot turns less than 180 degrees, raise the trackwidth. If the bot turns more than 180 degrees, lower the trackwidth.
-9. **NOTE:** The track width tuning doesn't need to be _exact_. Once you are within a degree or two (or even three!), it's okay to move on. This initial step uses a feedforward motion profile with no feedback-based correction. Once you enable the heading PID in the follower PID step, your turn steps should rotate to the exact desired angle.
+10. To tune the track width manually, simply keep adjusting the track width yourself until it turns 180 degrees. If the the bot turns less than 180 degrees, raise the trackwidth. If the bot turns more than 180 degrees, lower the trackwidth.
+11. **NOTE:** The track width tuning doesn't need to be _exact_. Once you are within a degree or two (or even three!), it's okay to move on. This initial step uses a feedforward motion profile with no feedback-based correction. Once you enable the heading PID in the follower PID step, your turn steps should rotate to the exact desired angle.
 
 <figure align="center">
     <img class="rounded-lg" src="./assets/drive-constants/wes-bot-edit-half.jpg" alt="Track width is the distance from the center of one wheel to the center of its parallel wheel">
