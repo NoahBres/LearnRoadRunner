@@ -129,6 +129,10 @@ This article is also pretty neat:
 
 :::
 
-# TODO
+# Temporary Informal Video
 
-make a live tuning video guide
+Temporary informal video while the polished, edited videos are in production. Quality is atrocious but hopefully it helps :)
+
+<div class="flex justify-center">
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/2UkeLsQuCOw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>

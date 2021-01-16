@@ -37,3 +37,11 @@ The `FollowerPIDTuner` will follow a large square. If your heading is off, your 
 11. You should be done! Go on to the `SplineTest` to ensure that your following is accurate.
 
 12. **Note:** Earlier I mentioned that you should not need to use `kI` or `kD` for your follower PID's. Those are just basic guidelines. `kD` actually indirectly functions as a P Controller on pose velocity. Therefore, setting `kD` to a non-zero value (1 or something) or something, _IF you are using feedforward instead of velocity pid_, may help keep your pose velocity constant across battery voltages.
+
+# Temporary Informal Video
+
+Temporary informal video while the polished, edited videos are in production. Quality is atrocious but hopefully it helps :)
+
+<div class="flex justify-center">
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/e6k_gP2YCmc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
