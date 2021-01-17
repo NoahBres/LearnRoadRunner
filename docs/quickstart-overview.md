@@ -32,6 +32,10 @@ The tuning process will differ depending on which form of control you use.
 
 ### TL;DR
 
+It is now my personal recommendation to use feedforward control whether or not you have dead wheels or drive encoders. I have found the feedfowrard control to be much faster in tuning and a lot easier to manage in general. Relying on the internal PID for velocity control can prove to be quite frustrating. It is quite the fickle controller sometimes. If you find it to actually work for you, then feel free to do so. However, many will find that feedforward control (even if you have drive encoders) is a lot easier to tune and manage. If you do find that you have odd oscillation issues, especially once you start incorporating the follower PID, it is recommended that you switch to feedforward control.
+
+**Outdated recommendation for posterity:**
+
 - If you have only drive encoders, no dead wheels -> you're going to tune velocity PID
 - If you have only dead wheels, no drive encoders -> you're going to tune feedforward
 - If you have both, dead wheels and drive encoders -> you're going to tune velocity PID
