@@ -1,5 +1,17 @@
 # Drive Velocity PID Tuning
 
+## DO NOT USE DRIVE VELOCITY PID TUNING
+
+## ITS TERRIBLE
+
+## EVERYTHING IS TERRIBLE
+
+## CONSULT THE FTC DISCORD AS TO WHY THIS IS HERE
+
+## IT MAY TAKE A BIT OF TIME FOR RR TO REFLECT THESE NEWFOUND OPINIONS
+
+## USE FEEDFORWARD INSTEAD
+
 <HideAyudeWrapper :skipIfDriveEncoders="true">
 ::: warning
 This section should be skipped because you have chosen the option not to use drive encoders.
