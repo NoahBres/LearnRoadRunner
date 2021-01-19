@@ -392,7 +392,7 @@ It is very important to tune lateral distance properly. This determines the head
 
 7. Spin the bot 10 times, **counterclockwise**. Make sure to keep track of these turns.
 
-8. Once the bot has finished spinning 10 times, press `A` on the gamepad to finish the routine. The indicators on the bot and on the ground you created earlier should be lined up.
+8. Once the bot has finished spinning 10 times, press `Y` on the gamepad to finish the routine. The indicators on the bot and on the ground you created earlier should be lined up.
 
 9. Your effective `LATERAL_DISTANCE` will be printed. Stick this value into your `StandardTrackingWheelLocalizer.java` class.
 
