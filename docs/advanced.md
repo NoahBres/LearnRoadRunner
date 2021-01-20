@@ -243,34 +243,48 @@ Say you want to go slower for just a portion of your trajectory. Perhaps you wan
 
 The answer is a bit tedious in Road Runner version `0.5.3`. Essentially just paste the following after any trajectory builder function:
 
-```java{2-6,11-15}
-.splineTo(new Vector2d(30, 30), Math.toRadians(90),
-  new MinVelocityConstraint(Arrays.asList(
+```java{2-9,16-22,31-37}
+.splineTo(
+  new Vector2d(30, 30), Math.toRadians(90),
+  new MinVelocityConstraint(
+    Arrays.asList(
       new AngularVelocityConstraint(DriveConstants.MAX_ANG_VEL),
       new MecanumVelocityConstraint(your_desired_maximum_velocity, DriveConstants.TRACK_WIDTH)
     )
-  ), new ProfileAccelerationConstraint(DriveConstants.MAX_ACCEL));
+  ),
+  new ProfileAccelerationConstraint(DriveConstants.MAX_ACCEL)
+)
 
 // You can do the same with any TrajectoryBuilder function. Simply paste the above snippet in the parameter
 
-.lineTo(new Vector2d(30, 30),
-    new MinVelocityConstraint(Arrays.asList(
-      new AngularVelocityConstraint(DriveConstants.MAX_ANG_VEL),
-      new MecanumVelocityConstraint(your_desired_maximum_velocity, DriveConstants.TRACK_WIDTH)
-    )
-  ), new ProfileAccelerationConstraint(DriveConstants.MAX_ACCEL));
+.lineTo(
+    new Vector2d(30, 30),
+    new MinVelocityConstraint(
+      Arrays.asList(
+        new AngularVelocityConstraint(DriveConstants.MAX_ANG_VEL),
+        new MecanumVelocityConstraint(your_desired_maximum_velocity, DriveConstants.TRACK_WIDTH)
+      )
+    ),
+    new ProfileAccelerationConstraint(DriveConstants.MAX_ACCEL)
+  )
 
 // Example:
 
 drive.trajectoryBuilder(startPose, false)
-  .splineTo(new Vector2d(30, 30), 0,                  // This spline is limited to 15 in/s and will be slower
-    new MinVelocityConstraint(Arrays.asList(
-      new AngularVelocityConstraint(DriveConstants.MAX_ANG_VEL),
-      new MecanumVelocityConstraint(15, DriveConstants.TRACK_WIDTH)
-    )
-  ), new ProfileAccelerationConstraint(DriveConstants.MAX_ACCEL));
+  // This spline is limited to 15 in/s and will be slower
+  .splineTo(
+    new Vector2d(30, 30), 0,
+    new MinVelocityConstraint(
+      Arrays.asList(
+        new AngularVelocityConstraint(DriveConstants.MAX_ANG_VEL),
+        new MecanumVelocityConstraint(15, DriveConstants.TRACK_WIDTH)
+      )
+    ),
+    new ProfileAccelerationConstraint(DriveConstants.MAX_ACCEL)
+  )
 
-  .splineTo(new Vector2d(40, 40), Math.toRadians(-90)) // This spline will be normal speed
+  // This spline will be normal speed
+  .splineTo(new Vector2d(40, 40), Math.toRadians(-90))
   .build()
 ```
 
