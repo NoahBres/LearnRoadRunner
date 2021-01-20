@@ -268,15 +268,29 @@ public static double Y_MULTIPLIER = 1; // Multiplier in the Y direction
 
 A finished example of where these go may be found [here](https://gist.github.com/NoahBres/02e83f8317f34d7b627170c2031b2ebf).
 
-3. Add these mulitpliers to the `getWheelPositions()` function like so:
+3. Add these mulitpliers to the `getWheelPositions()` and `getWheelVelocities()` functions like so:
 
-```java{5,6}
-/* Lines 78-83 in TwoWheelTrackingLocalizer.java */
+```java{6,7,19,20}
+/* Lines 77-97 in TwoWheelTrackingLocalizer.java */
+@NonNull
 @Override
 public List<Double> getWheelPositions() {
     return Arrays.asList(
             encoderTicksToInches(parallelEncoder.getCurrentPosition()) * X_MULTIPLIER,
             encoderTicksToInches(perpendicularEncoder.getCurrentPosition()) * Y_MULTIPLIER
+    );
+}
+
+@NonNull
+@Override
+public List<Double> getWheelVelocities() {
+    // TODO: If your encoder velocity can exceed 32767 counts / second (such as the REV Through Bore and other
+    //  competing magnetic encoders), change Encoder.getRawVelocity() to Encoder.getCorrectedVelocity() to enable a
+    //  compensation method
+
+    return Arrays.asList(
+            encoderTicksToInches(parallelEncoder.getRawVelocity()) * X_MULTIPLIER,
+            encoderTicksToInches(perpendicularEncoder.getRawVelocity()) * Y_MULTIPLIER
     );
 }
 ```
@@ -340,14 +354,29 @@ A finished example of where these go may be found [here](https://gist.github.com
 
 3. Add these mulitpliers to the `getWheelPositions()` function like so:
 
-```java{5,6,7}
-/* Lines 61-68 in StandardTrackingWheelLocalizer.java */
+```java{6-8,20-22}
+/* Lines 57-79 in StandardTrackingWheelLocalizer.java */
+@NonNull
 @Override
 public List<Double> getWheelPositions() {
     return Arrays.asList(
             encoderTicksToInches(leftEncoder.getCurrentPosition()) * X_MULTIPLIER,
             encoderTicksToInches(rightEncoder.getCurrentPosition()) * X_MULTIPLIER,
             encoderTicksToInches(frontEncoder.getCurrentPosition()) * Y_MULTIPLIER
+    );
+}
+
+@NonNull
+@Override
+public List<Double> getWheelVelocities() {
+    // TODO: If your encoder velocity can exceed 32767 counts / second (such as the REV Through Bore and other
+    //  competing magnetic encoders), change Encoder.getRawVelocity() to Encoder.getCorrectedVelocity() to enable a
+    //  compensation method
+
+    return Arrays.asList(
+            encoderTicksToInches(leftEncoder.getRawVelocity()) * X_MULTIPLIER,
+            encoderTicksToInches(rightEncoder.getRawVelocity()) * X_MULTIPLIER,
+            encoderTicksToInches(frontEncoder.getRawVelocity()) * Y_MULTIPLIER
     );
 }
 ```
@@ -440,7 +469,7 @@ parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
 imu.initialize(parameters);
 ```
 
-Just for safety reasons, replace the `getRawExternalHeading()` function return with zero:
+Just for safety reasons, replace the `getRawExternalHeading()` function return with zero (or just remove the function altogether):
 
 ```java{4}
 /* Lines 393-396 in SampleMecanumDrive.java */
