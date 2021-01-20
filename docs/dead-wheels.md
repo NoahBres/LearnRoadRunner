@@ -352,7 +352,7 @@ public static double Y_MULTIPLIER = 1; // Multiplier in the Y direction
 
 A finished example of where these go may be found [here](https://gist.github.com/NoahBres/9b9710eaa9f9fd23efa30a16de0f610e).
 
-3. Add these mulitpliers to the `getWheelPositions()` function like so:
+3. Add these mulitpliers to the `getWheelPositions()` and `getWheelVelocities()` functions like so:
 
 ```java{6-8,20-22}
 /* Lines 57-79 in StandardTrackingWheelLocalizer.java */
