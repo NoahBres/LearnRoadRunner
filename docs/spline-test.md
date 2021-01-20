@@ -27,6 +27,8 @@
   - If your following is not okay even after turning off the translationa/heading PID, then the error lies in the drive train motor directions or the drive constants
 - Work backwards and start turning things off to isolate the problem. Starting from scratch and working on each component, step by step, may lead to a faster solution
 - You can turn off the pose history limit (you'll notice that the pose history, blue line, will start clearing itself on the dashboard field to keep everything clean) by setting `POSE_HISTORY_LIMIT` in `SampleMecanumDrive` to -1. This will stop the blue line from slowly clearing itself and may assist in debugging.
+- Lower your velocity and acceleration constraints in `DriveConstants.java`. These constraints are meant to characterize your drive train. Specifying velocities and acceleration values that are higher than what your bot is actually able to achieve will result in motion profiles that are impossible to follow and ruin path following.
+  - If you are having serious problems with your following, lower your maximum velocity and acceleration dramatically (just cut it in half) and set your angular velocity/acceleration to something low such as 60 degrees per second.
 
 ## Hiding the tuning opmodes
 
