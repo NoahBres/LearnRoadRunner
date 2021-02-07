@@ -26,7 +26,7 @@ Tangentially related but the use of Pure Pursuit really isn't recommended for mo
 
 Although in the FTC community dead wheels and odometry are often used synonymously, they are very different things. Odometry refers to the use of sensors to determine a robot's position. Dead wheels (sometimes referred to as odometry wheels or odometry pods) are unpowered omni wheels not connected to any motor. These wheels have rotary encoders to track distance traveled. This data is fed through a kinematic equation and integrated to calculate the relative position of the robot on the field. The advantage of using dead wheels over drive wheel odometry is that dead wheels experience very little slip compared to mecanum wheels. This improves the accuracy signifcantly when using a mecanum drive, especially in instances of high acceleration. Dead wheels are not necessary for a differential drive (tank drive) due to the little slip experienced (this is actually anecdotal data. I cannnot back this statement with anything objective).
 
-**TL;DR** Dead wheels allow accurate positional tracking of mecanum drives at high speeds and accelerations. Check out [gm0's section on odometry](https://gm0.org/en/latest/docs/robot-design/odometry.html) for more detailed information!
+**TL;DR** Dead wheels allow accurate positional tracking of mecanum drives at high speeds and accelerations. Check out [gm0's section on odometry](https://gm0.org/en/latest/docs/robot-design/dead-wheels.html) for more detailed information!
 
 <figure align="center">
     <img src="./assets/home/dead-wheel-example-small.jpg" class="rounded-lg" alt="Underside of a bot with dead wheels highlighted">
