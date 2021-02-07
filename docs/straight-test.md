@@ -17,10 +17,17 @@ Once you've got your velocity controller tuned, you should run a quick straight 
    - You can change this distance in Dashboard or through the opmode directly
      - If you'd like to change it in Dashboard, find the `StraightTest` dropdown in the variable configuration sidebar on the right. Change the `DISTANCE` value.
      - If you'd like to change it directly in the opmode, open the `StraightTest.java` file and change the `DISTANCE` variable on line 17.
-4. Run the `StraightTest` opmode like 2 or 3 times to ensure that the distance traveled is consistent within 1-3% of your specified `DISTANCE`. If not, your velocity controller requires further tuning. It does not need to hit the _exact_ spot each time as you will later enable closed loop feedback using localization.
+4. Run the `StraightTest` opmode like 2 or 3 times to ensure that the distance traveled is consistent within 1-3% of your specified `DISTANCE`. If not, your velocity controller requires further tuning. It does not need to hit the _exact_ spot each time as you will later enable closed loop feedback using localization. We're looking for consistency in this step.
 
    - Your bot may drift a little to one side. Just ignore this for now. This will be corrected once the heading and translation PIDs are enabled in later steps.
-   - If your bot is consistent but travels the wrong distance, you may need to scale the `TICKS_PER_REV` and `WHEEL_RADIUS` to properly scale the distance.
+
+::: danger
+
+**IF YOU ARE USING FEEDFORWARD INSTEAD OF DRIVE VELOCITY PID**
+
+There is a good chance that your bot will overshoot your specified distance by around 10-15%. This issue is exacerbated the faster your drive train. This is due to the REV Hub motor controller's poor deceleration control. You are free to ignore this problem at this step. Tuning the translational PID during the FollowerPID tuning phase will hopefully correct for this issue. `kD` will act as a P-controller for velocity thus curtail this issue somewhat. `kP` will hopefully further ameliorate this issue. However, if the translational PID does not entirely correct for this overshoot and causes oscillations towards the endpoints, it may be auspicious to reduce `kV` so that your bot does not overshoot. See the footnote at the bottom of the page for further information on this.
+
+:::
 
 5. If everything works great, move on to the next step!
 
@@ -81,10 +88,14 @@ Check your `DriveConstants.java` file. Something went wrong in here. One of thes
 
 - `GEAR_RATIO` - if this is 1:1 dont worry about it. Make sure your ratio is output:input instead of reversed
 
-If you still can't figure out the problem, just scale the `WHEEL_RADIUS` to adjust the distance.
-
 ### Does your bot strafe the wrong direction?
 
-Your top and bottom motors are reversed. Ensure that your bot's motors follow the directions specified in goBILDA's wheel direction chart.
+Your top and bottom motors are reversed. Ensure that your bot's motors follow the directions specified in goBILDA's wheel direction chart. Problems with strafing or turning direction are originated in a broken motor configuration (your motors aren't plugged into the specificed port, etc).
 
 ![goBILDA mecanum wheel direction chart](./assets/drive-constants/gobilda-mecanum-chart.png)
+
+::: tip
+
+On reducing `kV` to reduce overshoot: This will be detrimental to the extent of which your bot is able to accurately follow the specified motion profiles. However, we may excuse this imprecision through the justification that endpoint following accuracy is more relevant than the accuracy of following during the rest of the path. We are hoping that the closed loop feedback will fix any issues during the rest of the following. Reducing `kV` to offset this overshoot will affect the rest of the motion profile accuracy, especially the coasting phase. However, chances are with the fast ratios that this issue tends to be prevalent in, you're not actually spending a significant amount of time coasting. Thus the acceleration/deceleration phases are more important. So reducing `kV` should be fine.
+
+:::
