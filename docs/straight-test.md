@@ -94,6 +94,12 @@ Your top and bottom motors are reversed. Ensure that your bot's motors follow th
 
 ![goBILDA mecanum wheel direction chart](./assets/drive-constants/gobilda-mecanum-chart.png)
 
+Refer to the [Motor Direction Debugger opmode](https://github.com/acmerobotics/road-runner-quickstart/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/MotorDirectionDebugger.java) if you are struggling to debug your motor config. The Motor Direction Debugger allows you to run your motors one by one. Remove the `@Disabled` lin on line `41` and follow the directions in the opmode comments. Use this to diagnose your motor config problem and fix appropriately.
+
+### Constant ~10% Overshoot
+
+As mentioned prior, the REV Hub's motor controller has issues decelerating properly. This makes it impossible to properly tune the feedforward on the deceleration phases (when the velocity moves toward zero). This causes an overshoot every time. If you seem to be exhibiting a 10% overshoot, that is to be expected from the poor deceleration. **Simply ignore it and move forward**. The follower PIDs will take care of the issue. Ensure that you set `kD` to a non-zero value in the follower PID tuning steps.
+
 ::: tip
 
 On reducing `kV` to reduce overshoot: This will be detrimental to the extent of which your bot is able to accurately follow the specified motion profiles. However, we may excuse this imprecision through the justification that endpoint following accuracy is more relevant than the accuracy of following during the rest of the path. We are hoping that the closed loop feedback will fix any issues during the rest of the following. Reducing `kV` to offset this overshoot will affect the rest of the motion profile accuracy, especially the coasting phase. However, chances are with the fast ratios that this issue tends to be prevalent in, you're not actually spending a significant amount of time coasting. Thus the acceleration/deceleration phases are more important. So reducing `kV` should be fine.

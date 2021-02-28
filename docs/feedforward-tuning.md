@@ -83,14 +83,30 @@ Decently tuned feedforward controller courtesy of Deetz from Team 14320:
 You may notice the asymmetry in the acceleration. Unfortunately, perfect velocity control is not yet achievable with a stock motor control model due to this asymmetry. Notice that the acceleration does not track well when decelerating. We suspect that this is due to weird Rev Hub's unique motor controller. For more details, or if you have a solution to this problem, please hit up the [FTC Discord](https://discord.gg/first-tech-challenge).
 
 ::: tip
-The voltage that the Rev Hub outputs will decrease as the battery level drops. Because of this, feedforward isn't guaranteed to be consistent throughout multiple matches. At this moment, Road Runner does not have explicit pose velocity closed loop control. There is a slight workaround to this. The translational PID controller's `kD` term is essentially equivalent to the `kP` term of a pose velocity PID controller. If you notice motion profile performance degradation along multiple matches, add a `kD` term to the translational PID (which you will tune in the [follower PID page](/follower-pid-tuning)). Further questions or don't quite understand this concept? Hit up the [FTC Discord](https://discord.gg/first-tech-challenge) and shoot a question in the programming channel!
+The voltage that the REV Hub outputs will decrease as the battery level drops. Because of this, feedforward isn't guaranteed to be consistent throughout multiple matches. At this moment, Road Runner does not have explicit pose velocity closed loop control. There is a slight workaround to this. The translational PID controller's `kD` term is essentially equivalent to the `kP` term of a pose velocity PID controller. If you notice motion profile performance degradation along multiple matches, add a `kD` term to the translational PID (which you will tune in the [follower PID page](/follower-pid-tuning)). Further questions or don't quite understand this concept? Hit up the [FTC Discord](https://discord.gg/first-tech-challenge) and shoot a question in the programming channel!
+:::
+
+::: warning
+As mentioned prior, the REV Hub's motor controller has issues decelerating properly. This makes it impossible to properly tune the feedforward on the deceleration phases (when the velocity moves toward zero). This causes an overshoot every time. If you seem to be exhibiting a 10% overshoot, that is to be expected from the poor deceleration. **Simply ignore it and move forward**. The follower PIDs will take care of the issue. Ensure that you set `kD` to a non-zero value in the follower PID tuning steps.
 :::
 
 ## Troubleshooting
 
-1. The StraightTest or DriveVelocityPID opmode keeps overshooting and tweaking variables in `DriveConstants.java` just doesn't change anything:
+1. Your `MaxVelocityTuner` is going backwards
+
+   - Ensure that your wheel are reversed correctly. Check [the goBILDA mecanum chart](/drive-constants.html#samplemecanumdrive-motor-direction) to use as a reference while debugging
+
+2. The pose velocity line is going the opposite way and not following `targetVelocity`:
+
+   - Your localization is bonked. Run `LocalizationTest` and ensure that the reported pose matches the bot's actual pose. Ensure that the `getWheelVelocities` function in your localizer (either in `SampleMecanumDrive` or the dead wheel localizers) match the signs in your `getWheelPositions` function.
+
+3. The StraightTest or ManualFeedforwardTuning opmode keeps overshooting and tweaking variables in `DriveConstants.java` just doesn't change anything:
 
    - Try lowering the `MAX_VEL` in `DriveConstants.java`. Set it to a really low value at first to confirm that this is the problem.
+
+4. Miscellaneous motor direction problems:
+   - See [reversing motor directions](drive-constants.html#samplemecanumdrive-motor-direction)
+   - Refer to the [Motor Direction Debugger opmode](https://github.com/acmerobotics/road-runner-quickstart/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/MotorDirectionDebugger.java) if you are struggling to debug your motor config. The Motor Direction Debugger allows you to run your motors one by one. Remove the `@Disabled` lin on line `41` and follow the directions in the opmode comments. Use this to diagnose your motor config problem and fix appropriately.
 
 ## Feedforward Tuning Simulator
 
