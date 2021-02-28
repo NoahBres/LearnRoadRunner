@@ -290,6 +290,12 @@ drive.trajectoryBuilder(startPose, false)
 
 Every `TrajectoryBuilder` function offers a velocity and acceleration constraints override. If you're looking to change the other constraints and limit acceleration or angular velocity, etc., then simply change the constraints as you please. However, you will most likely only be touching the `MAX_VEL` constraint for speed limiting. We are not going to go over why the constraints are composed like so. I would recommend DMing Ryan Brott, the author of Road Runner, or reading the release notes on GitHub to fully understand what's happening. Just know that this is how constraints work and which specific part to edit for velocity limiting.
 
+It is much cleaner if you simply declare new static variable constraints in your DriveConstants named `MAX_LOWER_VEL`/`MAX_LOWER_ACCEL` and reading from there rather than having to initialize it inline every time like proposed above.
+
+## Admissible Error and Timeout
+
+Motion profiles, thus Road Runner trajectories, are fundamentally time based. This means that Road Runner will decide when it finishes following the path based on an internal timer. If your following isn't perfect, we cannot ensure that a time based exit condition is sufficient. Road Runner's default follower however adds an admissible error and timeout condition by default. This means that once the motion profile is exhausted, Road Runner will provide an additional `x` seconds or wait until an "admissible error" is met, to finish the following for the trajectory. During this time, the follower PIDs are the only controllers acting upon the bot. By default, the follower provides a `0.5` second timeout and an admissible error pose of `0.5in` in the x/y direction and `5 deg` of heading. This means that the trajectory allows for half an inch of position error and 5 degrees of heading error by default. If you wish to increase accuracy, try increasing both the timeout and the admissible error pose. These can be found in `SampleMecanumDrive` where [follower is initialized](https://github.com/acmerobotics/road-runner-quickstart/blob/72200c7b0ab983a4e610977b46151c5d54b55b9c/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/SampleMecanumDrive.java#L121). The second to last parameter is admissible error and the last parameter is the timeout.
+
 ## Gain Scheduling
 
 **TODO: Come back and write this**
