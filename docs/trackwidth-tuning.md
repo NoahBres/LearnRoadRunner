@@ -37,9 +37,15 @@ You should have already tuned localization. Right now, you will be tuning the dr
 9. If you bot runs into the following issues, you will have to tune manually:
    - It does not turn 180 degrees each time, even with tuning
    - The effective track width given does not print something reasonable (most likely a low number like 3)
-     - This is generally caused by failing to put an initial estimate in the drive constants file and leaving the track width at 1.
+     - This is generally caused by failing to put an initial estimate in the drive constants file and leaving the track width at `1`. However, the `TrackWidthTuner` seems to just run into ✨ issues ✨ sometimes. Manually tuning is completely fine and takes only a few minutes.
 10. To tune the track width manually, simply keep adjusting the track width yourself until it turns 180 degrees. If the the bot turns less than 180 degrees, raise the trackwidth. If the bot turns more than 180 degrees, lower the trackwidth.
 11. **NOTE:** The track width tuning doesn't need to be _exact_. Once you are within a degree or two (or even three!), it's okay to move on. This initial step uses a feedforward motion profile with no feedback-based correction. Once you enable the heading PID in the follower PID step, your turn steps should rotate to the exact desired angle.
+
+::: tip
+
+If you are having problems with the track width tuner, try reducing the `MAX_ANG_VEL` in your `DriveConstants.java` file. A track width that is unreasonable high will result in turning issues.
+
+:::
 
 <figure align="center">
     <img class="rounded-lg" src="./assets/drive-constants/wes-bot-edit-half.jpg" alt="Track width is the distance from the center of one wheel to the center of its parallel wheel">
