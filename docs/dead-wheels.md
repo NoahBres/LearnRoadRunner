@@ -125,6 +125,36 @@ imu.initialize(parameters);
 
 Ensure that the IMU is initialitzed in the `SampleMecanumDrive.java` class. You shouldn't need to change anything if you downloaded the quickstart and are using the Rev Hub IMU. This section should be changed if you are using your own external gyro.
 
+### IMU Velocity Axis
+
+In your `SampleMecanumDrive.java` file, scroll to the very bottom to find the `getExternalHeadingVelocity` function. Ensure that the function returns the axis that your IMU rotates about for your configuration. Consult the ASCII diagram provided in the file for a visual on which axis you should choose. If your REV Hub is mounted flat, the bot will rotate about the Z axis. If it is on its side with the motor ports facing up or down, the robot will rotate about the Y axis. If the servo ports are facing up or down, the bot will rotate about the x axis.
+
+```java{22}
+/* About lines 399-419 in SampleMecanumDrive.java */
+@Override
+public Double getExternalHeadingVelocity() {
+    // TODO: This must be changed to match your configuration
+    //                           | Z axis
+    //                           |
+    //     (Motor Port Side)     |   / X axis
+    //                       ____|__/____
+    //          Y axis     / *   | /    /|   (IO Side)
+    //          _________ /______|/    //      I2C
+    //                   /___________ //     Digital
+    //                  |____________|/      Analog
+    //
+    //                 (Servo Port Side)
+    //
+    // The positive x axis points toward the USB port(s)
+    //
+    // Adjust the axis rotation rate as necessary
+    // Rotate about the z axis is the default assuming your REV Hub/Control Hub is laying
+    // flat on a surface
+
+    return (double) imu.getAngularVelocity().zRotationRate;
+}
+```
+
 ### Set Localizer in SampleMecanumDrive
 
 After you've configured your localizer, go back to the `SampleMecanumDrive.java` file.

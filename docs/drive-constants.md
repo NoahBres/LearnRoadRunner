@@ -191,6 +191,36 @@ rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
 
 Ensure that these motor ID's match up with your Rev Hub config ID's.
 
+### SampleMecanumDrive - IMU Velocity
+
+**_If you are using drive encoder localization_** (not dead wheels), in your `SampleMecanumDrive.java` file, scroll to the very bottom to find the `getExternalHeadingVelocity` function. Ensure that the function returns the axis that your IMU rotates about for your configuration. Consult the ASCII diagram provided in the file for a visual on which axis you should choose. If your REV Hub is mounted flat, the bot will rotate about the Z axis. If it is on its side with the motor ports facing up or down, the robot will rotate about the Y axis. If the servo ports are facing up or down, the bot will rotate about the x axis.
+
+```java{22}
+/* About lines 399-419 in SampleMecanumDrive.java */
+@Override
+public Double getExternalHeadingVelocity() {
+    // TODO: This must be changed to match your configuration
+    //                           | Z axis
+    //                           |
+    //     (Motor Port Side)     |   / X axis
+    //                       ____|__/____
+    //          Y axis     / *   | /    /|   (IO Side)
+    //          _________ /______|/    //      I2C
+    //                   /___________ //     Digital
+    //                  |____________|/      Analog
+    //
+    //                 (Servo Port Side)
+    //
+    // The positive x axis points toward the USB port(s)
+    //
+    // Adjust the axis rotation rate as necessary
+    // Rotate about the z axis is the default assuming your REV Hub/Control Hub is laying
+    // flat on a surface
+
+    return (double) imu.getAngularVelocity().zRotationRate;
+}
+```
+
 ## SampleMecanumDrive - Motor Direction
 
 Then, look at line 166. There should be a comment stating "`// TODO: reverse any motors using DcMotor.setDirection()`".
@@ -203,5 +233,7 @@ Under that comment, you will reverse the directions of the motors on one side of
 rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
 ```
+
+Refer to the [Motor Direction Debugger opmode](https://github.com/acmerobotics/road-runner-quickstart/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/MotorDirectionDebugger.java) if you are struggling to debug your motor config. The Motor Direction Debugger allows you to run your motors one by one. Remove the `@Disabled` lin on line `41` and follow the directions in the opmode comments. Use this to diagnose your motor config problem and fix appropriately.
 
 ![goBILDA mecanum wheel direction chart](./assets/drive-constants/gobilda-mecanum-chart.png)
