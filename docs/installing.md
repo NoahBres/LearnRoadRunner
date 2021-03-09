@@ -45,55 +45,54 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 └── <span class="file">settings.gradle</span>
 :::
 
-3. In `TeamCode/build.release.gradle`, add the following three dependencies:
+3. In `TeamCode/build.gradle`, add the following dependencies:
 
    - `implementation 'org.apache.commons:commons-math3:3.6.1'`
    - `implementation 'com.acmerobotics.roadrunner:core:0.5.3'`
-   - `implementation 'com.acmerobotics.dashboard:dashboard:0.3.10'`
 
-```groovy{10-13}
-/* TeamCode/build.release.gradle */
+```groovy{9-11}
+/* TeamCode/build.gradle */
+apply from: '../build.common.gradle'
+apply from: '../build.dependencies.gradle'
+
 dependencies {
     implementation project(':FtcRobotController')
-    implementation 'org.firstinspires.ftc:RobotCore:6.1.1'
-    implementation 'org.firstinspires.ftc:Hardware:6.1.1'
-    implementation 'org.firstinspires.ftc:FtcCommon:6.1.1'
-    implementation (name: 'tfod-release', ext:'aar')
-    implementation (name: 'tensorflow-lite-0.0.0-nightly', ext:'aar')
+    annotationProcessor files('lib/OpModeAnnotationProcessor.jar')
 
     implementation 'org.apache.commons:commons-math3:3.6.1'
 
     implementation 'com.acmerobotics.roadrunner:core:0.5.3'
-    implementation 'com.acmerobotics.dashboard:dashboard:0.3.10'
 }
 ```
 
-4. Now, in `FtcRobotController/build.release.gradle`, add the dashboard dependency:
+4. Now, in `build.dependencies.gradle`, add the dashboard dependency:
 
-   - `implementation 'com.acmerobotics.dashboard:dashboard:0.3.10'`
+   - `implementation 'com.acmerobotics.dashboard:dashboard:0.4.1'`
 
-```groovy{12}
-/* FtcRobotController/build.release.gradle */
+```groovy{14}
+/* build.dependencies.gradle */
 dependencies {
-    implementation 'org.firstinspires.ftc:Inspection:6.1.1'
-    implementation 'org.firstinspires.ftc:Blocks:6.1.1'
-    implementation 'org.firstinspires.ftc:RobotCore:6.1.1'
-    implementation 'org.firstinspires.ftc:RobotServer:6.1.1'
-    implementation 'org.firstinspires.ftc:OnBotJava:6.1.1'
-    implementation 'org.firstinspires.ftc:Hardware:6.1.1'
-    implementation 'org.firstinspires.ftc:FtcCommon:6.1.1'
+    implementation 'org.firstinspires.ftc:Inspection:6.2.1'
+    implementation 'org.firstinspires.ftc:Blocks:6.2.1'
+    implementation 'org.firstinspires.ftc:RobotCore:6.2.1'
+    implementation 'org.firstinspires.ftc:RobotServer:6.2.1'
+    implementation 'org.firstinspires.ftc:OnBotJava:6.2.1'
+    implementation 'org.firstinspires.ftc:Hardware:6.2.1'
+    implementation 'org.firstinspires.ftc:FtcCommon:6.2.1'
+    implementation 'org.firstinspires.ftc:tfod:1.0.2'
+    implementation 'org.tensorflow:tensorflow-lite:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
-    implementation 'com.acmerobotics.dashboard:dashboard:0.3.10'
+    implementation 'com.acmerobotics.dashboard:dashboard:0.4.1'
 }
 ```
 
 If you're using OpenRC, check out [Dashboard's specific instructions for it](https://acmerobotics.github.io/ftc-dashboard/gettingstarted)
 
-5. Look for the `FtcRobotController/build.common.gradle` file. Find `JavaVersion.VERSION_1_7` and replace it with `JavaVersion.VERSION_1_8`:
+5. Look for the `FtcRobotController/build.gradle` file. Find `JavaVersion.VERSION_1_7` and replace it with `JavaVersion.VERSION_1_8`:
 
 ```groovy{3-4}
-/* FtcRobotController/build.common.gradle lines 94-97 */
+/* FtcRobotController/build.gradle lines 18-21 */
 compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
@@ -102,7 +101,7 @@ compileOptions {
 
 6. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive` and `util` folder into a location in your project, preferably just your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
 
-7. Finally, you must edit your `FtcRobotControllerActivity.java` file to work with ftc-dashboard. Directions can be found [here](https://acmerobotics.github.io/ftc-dashboard/gettingstarted). Or just copy the `FtcRobotControllerActivity.java` file from the quickstart repo [here](https://github.com/acmerobotics/road-runner-quickstart/blob/master/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java) and paste it into your project. Replace the `FtcRobotControllerActivity.java` file located in <span class="break-words">`YourFTCProject/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java`</span> with the file you downloaded from that GitHub link.
+7. Finally, you must edit your `FtcRobotControllerActivity.java` file to work with ftc-dashboard. Directions can be found [here](https://acmerobotics.github.io/ftc-dashboard/gettingstarted).<br><br>Or (preferably) just copy the `FtcRobotControllerActivity.java` file from the quickstart repo [here](https://github.com/acmerobotics/road-runner-quickstart/blob/master/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java) and paste it into your project. Replace the `FtcRobotControllerActivity.java` file located in <span class="break-words">`YourFTCProject/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java`</span> with the file you downloaded from that GitHub link.
 
 ## Upgrading Firmware
 
