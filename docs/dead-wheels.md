@@ -169,7 +169,7 @@ Under this comment, add the following line:
 // TODO: if desired, use setLocalizer() to change the localization method
 // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
 
-setLocalizer(new TwoWheelTrackingLocalizer(hardwareMap));
+setLocalizer(new TwoWheelTrackingLocalizer(hardwareMap, this));
 ```
 
 You have set the localizer!
