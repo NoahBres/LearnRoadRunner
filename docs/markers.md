@@ -483,7 +483,7 @@ addTemporalMarker(scale: Double, offset: Double, callback: MarkerCallback)
 
 Temporal markers are able to take a scale and offset.
 Scale takes in a number from 0 to 1. This is the percentage of time in the entire path.
-Offset takes in any arbitray number used to offset that scale for fine tuning.
+Offset takes in any arbitrary number used to offset that scale for fine tuning.
 
 <code-group>
 <code-block title="Java" active>
