@@ -8,6 +8,14 @@ module.exports = {
     ],
     ["meta", { charset: "utf-8" }],
 
+    ["link", { rel: "icon", href: "/assets/baby-rr.svg" }],
+    ["link", { rel: "manifest", href: "/manifest.json" }],
+    ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
+    [
+      "meta",
+      { name: "apple-mobile-web-app-status-bar-style", content: "1a56db" },
+    ],
+
     // App icons
     [
       "link",
@@ -35,17 +43,16 @@ module.exports = {
         href: "/assets/favicons/favicon-16x16.png",
       },
     ],
-    ["link", { rel: "manifest", href: "/assets/favicons/site.webmanifest" }],
     [
       "link",
       {
         rel: "mask-icon",
         href: "/assets/favicons/safari-pinned-tab.svg",
-        color: "#3a0839",
+        color: "#1a56db",
       },
     ],
     ["link", { rel: "shortcut icon", href: "/assets/favicons/favicon.ico" }],
-    ["meta", { name: "msapplication-TileColor", content: "#3a0839" }],
+    ["meta", { name: "msapplication-TileColor", content: "#1a56db" }],
     [
       "meta",
       {
@@ -53,7 +60,7 @@ module.exports = {
         content: "/assets/favicons/browserconfig.xml",
       },
     ],
-    ["meta", { name: "theme-color", content: "#1e429f" }],
+    ["meta", { name: "theme-color", content: "#1a56db" }],
 
     // Open Graph tags
     ["meta", { property: "og:type", content: "article" }],
@@ -144,6 +151,13 @@ module.exports = {
             target: "es6",
           },
         },
+      },
+    ],
+    [
+      "@vuepress/pwa",
+      {
+        serviceWorker: true,
+        updatePopup: true,
       },
     ],
   ],
