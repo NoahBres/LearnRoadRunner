@@ -2,9 +2,9 @@
 
 Road Runner is a motion planning library, written for the [FTC robotics competition](https://www.firstinspires.org/robotics/ftc). Designed primarily for autonomous robotic movement, it allows for complex path following and generation while maintaining control of velocity and acceleration. This enables bots to have more accurate and advanced path following capabilities.
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/home/8393-half-compressed.mp4" width="360px" :controls="false"/>
-    <span class="text-center text-sm text-gray-600">Team 8393 performs an advanced spline path in their autonomous mode<br>(Ochoa Finals - 2018/19 Rover Ruckus)</span>
+    <span class="text-sm text-center text-gray-600">Team 8393 performs an advanced spline path in their autonomous mode<br>(Ochoa Finals - 2018/19 Rover Ruckus)</span>
 </div>
 
 <ActionLink url="/before-you-start" margin="2em">Get Started →</ActionLink>
@@ -30,7 +30,7 @@ Although in the FTC community dead wheels and odometry are often used synonymous
 
 <figure align="center">
     <img src="./assets/home/dead-wheel-example-small.jpg" class="rounded-lg" alt="Underside of a bot with dead wheels highlighted">
-    <figcaption class="mt-2 text-sm text-gray-600 text-center">An example of dead wheels</figcaption>
+    <figcaption class="mt-2 text-sm text-center text-gray-600">An example of dead wheels</figcaption>
 </figure>
 
 ### What is the difference between two and three wheel odometry?
@@ -41,7 +41,7 @@ As explained above, the standard dead wheel configuration involves the use of mu
 
 So you ask yourself, **why would I choose the three wheel configuration?** "That's another module that I have to make and increases cost by ~30%!" At the time of writing, the three-wheel configuration is the most accurate option. This is because the Rev Expansion/Control Hub utilizes a slow I2C implementation which results in about 7ms per I2C call. The BNO055 IMU onboard the Rev Expansion/Control Hub communicates via I2C. This will contribute a signficant amount of delay to your loop times which reduces integration accuracy (the 7ms is in addition to the 3ms call for all dead wheels assuming bulk reads, so 10ms). To calculate the heading with a two-wheel configuration, it must call on this slow IMU for heading. A three-wheel configuration calculates heading via the two parallel wheels, which eliminates the 7ms I2C call. Since all three of your dead wheels can be read in 3ms (assuming bulk reads and that all your encoders are on one Rev Expansion/Control Hub), the loop time is greatly reduced. This has been seen to improve accuracy and reduce drift significantly. The upcoming Control Hubs, which perform the I/O at a 3x faster rate than the Expansion Hub, may reduce this difference between the two set-ups.
 
-_Note: Some teams, such as 8802 Negative Resistance, have utilized the two-wheel configuration with great sucess._
+_Note: Some teams, such as 8802 Negative Resistance, have utilized the two-wheel configuration with great success._
 
 ### How do I make dead wheels?
 
