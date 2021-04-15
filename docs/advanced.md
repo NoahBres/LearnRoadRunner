@@ -294,7 +294,23 @@ It is much cleaner if you simply declare new static variable constraints in your
 
 ## Admissible Error and Timeout
 
-Motion profiles, thus Road Runner trajectories, are fundamentally time based. This means that Road Runner will decide when it finishes following the path based on an internal timer. If your following isn't perfect (it will not be), we cannot ensure that a time based exit condition is sufficient. Road Runner's default follower, however, adds an admissible error and timeout condition by default. This means that once the motion profile is exhausted, Road Runner will provide an additional `x` seconds or wait until an "admissible error" is met, to finish the following for the trajectory. During this time, the follower PIDs are the only controllers acting upon the bot. By default, the follower provides a `0.5` second timeout and an admissible error pose of `0.5in` in the x/y direction and `5 deg` of heading. This means that the trajectory allows for half an inch of position error and 5 degrees of heading error by default. If you wish to increase accuracy, try increasing the timeout and decreasing the admissible error pose. These can be found in `SampleMecanumDrive` where [follower is initialized](https://github.com/acmerobotics/road-runner-quickstart/blob/72200c7b0ab983a4e610977b46151c5d54b55b9c/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/SampleMecanumDrive.java#L121). The second to last parameter is admissible error and the last parameter is the timeout.
+Motion profiles, thus Road Runner trajectories, are fundamentally time based. This means that Road Runner will decide when it finishes following the path based on an internal timer. If your following isn't perfect (it will not be), we cannot ensure that a time based exit condition is sufficient.
+
+However, Road Runner's default follower, adds an admissible error and timeout condition by default. This means that once the motion profile is exhausted, Road Runner will provide an additional `x` seconds or wait until an "admissible error" is met, to finish the following for the trajectory. During this time, the follower PIDs are the only controllers acting upon the bot.
+
+By default, the follower provides a `0.5` second timeout and an admissible error pose of `0.5in` in the x/y direction and `5 deg` of heading. This means that the trajectory allows for half an inch of position error and 5 degrees of heading error by default. If you wish to increase accuracy, try increasing the timeout and decreasing the admissible error pose. These can be found in `SampleMecanumDrive` where [follower is initialized](https://github.com/acmerobotics/road-runner-quickstart/blob/72200c7b0ab983a4e610977b46151c5d54b55b9c/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/SampleMecanumDrive.java#L121). The second to last parameter is admissible error and the last parameter is the timeout.
+
+```java
+/* Lines 120-121 in SampleMecanumDrive.java */
+follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID,
+    new Pose2d(0.5, 0.5, Math.toRadians(5.0)), 0.5);
+//   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   ^^^
+//            Admissible Error Pose          Timeout (seconds)
+```
+
+<div class="flex justify-center w-full py-10 align-center">
+  <img src="/assets/advanced/termination-flow.svg" width="500px" class="p-12 border border-blue-200 rounded-md" style="box-shadow: inset 0 2px 9px 0px rgb(0 0 0 / 6%)">
+</div>
 
 ## Gain Scheduling
 
