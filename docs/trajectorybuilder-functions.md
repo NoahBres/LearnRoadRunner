@@ -2,7 +2,7 @@
 
 ## `.forward(distance: Double)`
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/trajectorybuilder-functions/forward.mp4" width="400px" :controls="false"/>
 </div>
 
@@ -18,7 +18,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ## `.back(distance: Double)`
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/trajectorybuilder-functions/back.mp4" width="400px" :controls="false"/>
 </div>
 
@@ -34,7 +34,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ## `.strafeLeft(distance: Double)`
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/trajectorybuilder-functions/strafe-left.mp4" width="400px" :controls="false"/>
 </div>
 
@@ -50,7 +50,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ## `.strafeRight(distance: Double)`
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/trajectorybuilder-functions/strafe-right.mp4" width="400px" :controls="false"/>
 </div>
 
@@ -66,7 +66,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ## `.strafeTo(endPosition: Vector2d)`
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/trajectorybuilder-functions/line-to.mp4" width="400px" :controls="false"/>
 </div>
 
@@ -84,7 +84,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ## `.lineTo(endPosition: Vector2d)`
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/trajectorybuilder-functions/line-to.mp4" width="400px" :controls="false"/>
 </div>
 
@@ -104,7 +104,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ## `.lineToConstantHeading(endPosition: Vector2d)`
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/trajectorybuilder-functions/line-to.mp4" width="400px" :controls="false"/>
 </div>
 
@@ -124,7 +124,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ## `.lineToLinearHeading(endPose: Pose2d)`
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/trajectorybuilder-functions/line-to-linear-heading.mp4" width="400px" :controls="false"/>
 </div>
 
@@ -141,7 +141,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ## `.lineToSplineHeading(endPose: Pose2d)`
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/trajectorybuilder-functions/line-to-spline-heading.mp4" width="400px" :controls="false"/>
 </div>
 
@@ -158,7 +158,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ## `.splineTo(endPosition: Vector2d, endTangent: Double)`
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/trajectorybuilder-functions/spline-to.mp4" width="400px" :controls="false"/>
 </div>
 
@@ -175,7 +175,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ## `.splineToConstantHeading(endPosition: Vector2d, endTangent: Double)`
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/trajectorybuilder-functions/spline-to-constant-heading.mp4" width="400px" :controls="false"/>
 </div>
 
@@ -194,11 +194,11 @@ new TrajectoryBuilder(new Pose2d())
 
 ## `.splineToLinearHeading(endPose: Pose2d, endTangent: Double)`
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/trajectorybuilder-functions/spline-to-linear-heading.mp4" width="400px" :controls="false"/>
 </div>
 
-```java{11}
+```java{14}
 // Robot moves to the specified coordinates in a spline path
 // while separately linearly interpolating the heading
 //
@@ -207,6 +207,9 @@ new TrajectoryBuilder(new Pose2d())
 //
 // Due to the holonomic nature of mecanum drives, the bot is able
 // to make such a movement while independently controlling heading.
+
+// 🚨  Will cause PathContinuityException's!! 🚨
+// Use splineToSplineHeading() if you are chaining these calls
 
 new TrajectoryBuilder(new Pose2d())
   .splineToLinearHeading(new Pose2d(40, 40, Math.toRadians(90)), Math.toRadians(0))
@@ -217,7 +220,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ## `.splineToSplineHeading(endPose: Pose2d, endTangent: Double)`
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/trajectorybuilder-functions/spline-to-spline-heading.mp4" width="400px" :controls="false"/>
 </div>
 

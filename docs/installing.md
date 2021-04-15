@@ -22,7 +22,7 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 ## Method 2: Installing RR on Your Project
 
 ::: warning
-These installation instructions do not apply to versions below the **6.2** SDK (released in February 18). Please consult the [FTC Discord server](https://discord.gg/first-tech-challenge) or the [FTC subreddit](https://www.reddit.com/r/FTC/) if you are having trouble installing libraries for earlier versions of the SDK.
+These installation instructions do not apply to versions below the **6.2** SDK (released on Feb. 18, 2021). Please consult the [FTC Discord server](https://discord.gg/first-tech-challenge) or the [FTC subreddit](https://www.reddit.com/r/FTC/) if you are having trouble installing libraries for earlier versions of the SDK.
 :::
 
 1. We are are going to assume you have the same file structure as the _latest_ (**6.2** at the time of writing) standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController).
