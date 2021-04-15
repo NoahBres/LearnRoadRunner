@@ -21,31 +21,100 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 
 ## Method 2: Installing RR on Your Project
 
-1. We are are going to assume you have the same file structure as the standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController). Please use the latest FTC SDK. Sections of this installation instruction have been removed as they are no longer needed in the newest SDK. Thus, these installation instructions will not work for versions below the 6.0 SDK.
-2. Look for the `TeamCode/build.release.gradle` file. Specifically the one in the `TeamCode` folder.
+::: warning
+These installation instructions do not apply to versions below the **6.2** SDK (released in February 18). Please consult the [FTC Discord server](https://discord.gg/first-tech-challenge) or the [FTC subreddit](https://www.reddit.com/r/FTC/) if you are having trouble installing libraries for earlier versions of the SDK.
+:::
+
+1. We are are going to assume you have the same file structure as the _latest_ (**6.2** at the time of writing) standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController).
+
+2. Look for the `build.dependencies.gradle` file at the root of your project.
 
 <!-- prettier-ignore -->
 ::: vue
-<span class="folder">ftc_app</span>
+<span class="folder">FtcRobotController</span>
 ├── <span class="folder">.github</span>
 ├── <span class="folder">FtcRobotController</span>
 ├── <span class="folder">TeamCode</span>
-│  ├── <span class="folder">src/main</span>
-│  ├── <span class="file">build.gradle</span>
-│  └── <span class="file">`build.release.gradle` _(**This one**)_</span>
 ├── <span class="folder">doc</span>
 ├── <span class="folder">gradle/wrapper</span>
 ├── <span class="folder">libs</span>
 ├── <span class="file">.gitignore</span>
 ├── <span class="file">README.md</span>
 ├── <span class="file">build.common.gradle</span>
+├── <span class="file">`build.dependencies.gradle` _(**This one**)_</span>
 ├── <span class="file">build.gradle</span>
+├── <span class="file">gradle.properties</span>
 ├── <span class="file">gradlew</span>
 ├── <span class="file">gradlew.bat</span>
 └── <span class="file">settings.gradle</span>
 :::
 
-3. In `TeamCode/build.gradle`, add the following dependencies:
+3.  Add the following snippet at the end of the `repositories` block:
+
+    `maven { url = 'https://maven.brott.dev/' }`
+
+    Then, add the following snippet at the end of your `dependencies` block:
+
+    `implementation 'com.acmerobotics.dashboard:dashboard:0.4.1'`
+
+
+    Your file should look like this:
+
+```groovy{6,24}
+/* build.dependencies.gradle */
+repositories {
+    mavenCentral()
+    google() // Needed for androidx
+    jcenter()  // Needed for tensorflow-lite
+    maven { url = 'https://maven.brott.dev/' }
+    flatDir {
+        dirs rootProject.file('libs')
+    }
+}
+
+dependencies {
+    implementation 'org.firstinspires.ftc:Inspection:6.2.1'
+    implementation 'org.firstinspires.ftc:Blocks:6.2.1'
+    implementation 'org.firstinspires.ftc:RobotCore:6.2.1'
+    implementation 'org.firstinspires.ftc:RobotServer:6.2.1'
+    implementation 'org.firstinspires.ftc:OnBotJava:6.2.1'
+    implementation 'org.firstinspires.ftc:Hardware:6.2.1'
+    implementation 'org.firstinspires.ftc:FtcCommon:6.2.1'
+    implementation 'org.firstinspires.ftc:tfod:1.0.2'
+    implementation 'org.tensorflow:tensorflow-lite:1.10.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+
+    implementation 'com.acmerobotics.dashboard:dashboard:0.4.1'
+}
+```
+
+If you are using [OpenRC](https://github.com/OpenFTC/OpenRC-Turbo), please read the Dashboard specific instructions [here](https://acmerobotics.github.io/ftc-dashboard/gettingstarted)
+
+4. Look for the `TeamCode/build.gradle` file. Specifically the one in the `TeamCode` folder.
+
+<!-- prettier-ignore -->
+::: vue
+<span class="folder">FtcRobotController</span>
+├── <span class="folder">.github</span>
+├── <span class="folder">FtcRobotController</span>
+├── <span class="folder">TeamCode</span>
+│  ├── <span class="folder">src/main</span>
+│  └── <span class="file">`build.gradle` _(**This one**)_</span>
+├── <span class="folder">doc</span>
+├── <span class="folder">gradle/wrapper</span>
+├── <span class="folder">libs</span>
+├── <span class="file">.gitignore</span>
+├── <span class="file">README.md</span>
+├── <span class="file">build.common.gradle</span>
+├── <span class="file">build.dependencies.gradle</span>
+├── <span class="file">build.gradle</span>
+├── <span class="file">gradle.properties</span>
+├── <span class="file">gradlew</span>
+├── <span class="file">gradlew.bat</span>
+└── <span class="file">settings.gradle</span>
+:::
+
+5. In `TeamCode/build.gradle`, add the following dependencies:
 
    - `implementation 'org.apache.commons:commons-math3:3.6.1'`
    - `implementation 'com.acmerobotics.roadrunner:core:0.5.3'`
@@ -65,31 +134,7 @@ dependencies {
 }
 ```
 
-4. Now, in `build.dependencies.gradle`, add the dashboard dependency:
-
-   - `implementation 'com.acmerobotics.dashboard:dashboard:0.4.1'`
-
-```groovy{14}
-/* build.dependencies.gradle */
-dependencies {
-    implementation 'org.firstinspires.ftc:Inspection:6.2.1'
-    implementation 'org.firstinspires.ftc:Blocks:6.2.1'
-    implementation 'org.firstinspires.ftc:RobotCore:6.2.1'
-    implementation 'org.firstinspires.ftc:RobotServer:6.2.1'
-    implementation 'org.firstinspires.ftc:OnBotJava:6.2.1'
-    implementation 'org.firstinspires.ftc:Hardware:6.2.1'
-    implementation 'org.firstinspires.ftc:FtcCommon:6.2.1'
-    implementation 'org.firstinspires.ftc:tfod:1.0.2'
-    implementation 'org.tensorflow:tensorflow-lite:1.10.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-
-    implementation 'com.acmerobotics.dashboard:dashboard:0.4.1'
-}
-```
-
-If you're using OpenRC, check out [Dashboard's specific instructions for it](https://acmerobotics.github.io/ftc-dashboard/gettingstarted)
-
-5. Look for the `FtcRobotController/build.gradle` file. Find `JavaVersion.VERSION_1_7` and replace it with `JavaVersion.VERSION_1_8`:
+7. Look for the `FtcRobotController/build.gradle` file. Find `JavaVersion.VERSION_1_7` and replace it with `JavaVersion.VERSION_1_8`:
 
 ```groovy{3-4}
 /* FtcRobotController/build.gradle lines 18-21 */
@@ -99,16 +144,16 @@ compileOptions {
 }
 ```
 
-6. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive` and `util` folder into a location in your project, preferably just your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
+8. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive` and `util` folder into a location in your project, preferably just your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
 
-7. Finally, you must edit your `FtcRobotControllerActivity.java` file to work with ftc-dashboard. Directions can be found [here](https://acmerobotics.github.io/ftc-dashboard/gettingstarted).<br><br>Or (preferably) just copy the `FtcRobotControllerActivity.java` file from the quickstart repo [here](https://github.com/acmerobotics/road-runner-quickstart/blob/master/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java) and paste it into your project. Replace the `FtcRobotControllerActivity.java` file located in <span class="break-words">`YourFTCProject/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java`</span> with the file you downloaded from that GitHub link.
+9. Finally, you must edit your `FtcRobotControllerActivity.java` file to work with ftc-dashboard. Directions can be found [here](https://acmerobotics.github.io/ftc-dashboard/gettingstarted).<br><br>Or (preferably) just copy the `FtcRobotControllerActivity.java` file from the quickstart repo [here](https://github.com/acmerobotics/road-runner-quickstart/blob/master/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java) and paste it into your project. Replace the `FtcRobotControllerActivity.java` file located in <span class="break-words">`YourFTCProject/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java`</span> with the file you downloaded from that GitHub link.
+
+   It is okay if there are errors in Android Studio. The project will build fine.
 
 ## Upgrading Firmware
 
 It is highly recommended that you upgrade the firmware on your Control Hub or Expansion Hub to the latest version. Firmware version 1.8.2 brings a number of improvements including: DC motor output linearity, improved close-loop controls, improved I2C speeds, and USB recovery for ESD faults. Road Runner's performance directly benefits from these improvements.
 
-Explicit directions to upgrade the Expansion/Control Hub firmware can be found [here](https://github.com/FIRST-Tech-Challenge/SKYSTONE/wiki/Managing-a-Control-Hub#Updating-the-Expansion-Hub-Firmware).
-
-Directions to upgrade the Expansion Hub firmware can be found [here](http://www.revrobotics.com/software/#ExpansionHubFirmware).
+Directions to upgrade the Control/Expansion Hub firmware can be found [in the REV docs](https://docs.revrobotics.com/rev-control-system/managing-the-control-system/updating-firmware).
 
 **That's it!** You're set! The installation process is done. Now go on ahead and start tuning.
