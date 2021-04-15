@@ -2,7 +2,8 @@
   "allowSyntheticDefaultImports": true,
   "compilerOptions": {
     "target": "ES6",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true
   },
   "include": ["**/*", "docs/.vuepress/**/*"],
   "exclude": ["node_modules", "docs/.vuepress/dist"]
