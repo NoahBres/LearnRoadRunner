@@ -14,15 +14,15 @@ If you haven't copied the file over to your own project yet, please do so!
 
 Try out the configurator to have your constants class auto configured!
 
-<p class="md:hidden block">
+<p class="block md:hidden">
 (The configurator is not available on mobile. Check it out on a desktop!)
 </p>
 :::
 
-<div class="md:block hidden">
+<div class="hidden md:block">
 <ModalWrapper>
   <template v-slot:button="buttonSlotProps">
-    <button class="action-button block m-auto" @click="buttonSlotProps.openModal">Configure Me!</button>
+    <button class="block m-auto action-button" @click="buttonSlotProps.openModal">Configure Me!</button>
   </template>
   <template v-slot:modal="modalSlotProps">
     <Modal :isOpen="modalSlotProps.isOpen" :closeModal="modalSlotProps.closeModal">
@@ -36,7 +36,7 @@ If you want to quickly get a constants file up and running, I recommend clicking
 
 <figure align="center">
     <img src="./assets/you-are-here/YouAreHere-DriveConstants-quarter.png" alt="You are on the drive constants step">
-    <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
+    <figcaption class="mt-2 text-center text-gray-600">You are here</figcaption>
 </figure>
 
 ## Ticks Per Rev & Max RPM
@@ -47,7 +47,7 @@ public static final double TICKS_PER_REV = 1;
 public static final double MAX_RPM = 1;
 ```
 
-**`TICKS_PER_REV`** is the number of "ticks" the motors' encoders will count per revolution. You will find the specs of your drive train motors on the manufacturer's site. For goBILDA's 5202 motors, be sure to use the `Encoder Countable Events Per Revolution (Output Shaft)` number listed on each motor's page. For a few of the non-goBILDA motors, a list of revelant specs are listed below because the vendors do not make them obviously accessible on their own sites. Thank you goBILDA for being awesome.
+**`TICKS_PER_REV`** is the number of "ticks" the motors' encoders will count per revolution. You will find the specs of your drive train motors on the manufacturer's site. For goBILDA's 5202/5203/5204 motors, be sure to use the `Encoder Resolution` number listed in the "Specs" section on each motor's spec page. For a few of the non-goBILDA motors, a list of revelant specs are listed below because the vendors do not make them obviously accessible on their own sites. Thank you goBILDA for being awesome.
 
 <div class="flex justify-center">
 
@@ -120,7 +120,7 @@ This is due to the fact that the first case is actually an integer division. It 
 
 <figure align="center">
     <img class="rounded-lg" src="./assets/drive-constants/wes-bot-edit-half.jpg" alt="Track width is the distance from the center of one wheel to the center of the other">
-    <figcaption class="mt-2 text-sm text-gray-600 text-center">3658 Bosons's 2019/20 Skystone Bot</figcaption>
+    <figcaption class="mt-2 text-sm text-center text-gray-600">3658 Bosons's 2019/20 Skystone Bot</figcaption>
 </figure>
 
 ## kV/kA/kStatic
@@ -160,22 +160,22 @@ public static double MAX_ANG_ACCEL = Math.toRadians(180);
 
 <div class="w-1 h-4"></div>
 
-<span class="bg-red-400 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">**MAX_VEL**</span> defines the maximum velocity that the robot can go. This is the fastest speed that the robot can ramp up to. The default value is `30in/s`. You can calculate the theoretical maximum velocity for your bot using the following equation:
+<span class="text-gray-800 bg-red-400 rounded" style="padding: 0.25rem 0.5rem;">**MAX_VEL**</span> defines the maximum velocity that the robot can go. This is the fastest speed that the robot can ramp up to. The default value is `30in/s`. You can calculate the theoretical maximum velocity for your bot using the following equation:
 
 <figure align="center" class="py-10">
   <img src="./assets/drive-constants/max-vel-latex-half.png" alt="max velocity = (max rpm / 60) * gear ratio * wheel radius * 2 * pi">
-  <figcaption class="mt-4 text-sm text-gray-600 text-center">Max Velocity Equation (per second)</figcaption>
+  <figcaption class="mt-4 text-sm text-center text-gray-600">Max Velocity Equation (per second)</figcaption>
 </figure>
 
 It is recommended that you keep your maximum velocity constraint not exceed 80% of the motors' max velocity. Your bot will most likely not be able to follow at 100% of the theoretical velocity due to a number of reasons: voltage dropping as your battery dies, weight, etc. You may push this limit closer to 100% but your trajectory following will suffer if your bot is not able to reach the given velocity.
 
 The maximum velocity can be empirically defined using the `MaxVelocityTuner` opmode. It is still recommended that you set your `MAX_VEL` to 90-95% of the value that `MaxVelocityTuner` outputs.
 
-<span class="bg-yellow-300 text-gray-900 rounded" style="padding: 0.25rem 0.5rem;">**MAX_ACCEL**</span> defines the maximum acceleration that the robot will undergo. This is the speed at which the velocity ramps up. The default value is `30in/s^2`. The recommendation is to just initially keep this value the same number as your max velocity value, although this is quite arbitrary. The only way to find your max acceleration is through experimentation. Keep raising the max acceleration until your path following starts to suffer. Do this after tuning just to make things easier. You may need to retune your PID values if you change this.
+<span class="text-gray-900 bg-yellow-300 rounded" style="padding: 0.25rem 0.5rem;">**MAX_ACCEL**</span> defines the maximum acceleration that the robot will undergo. This is the speed at which the velocity ramps up. The default value is `30in/s^2`. The recommendation is to just initially keep this value the same number as your max velocity value, although this is quite arbitrary. The only way to find your max acceleration is through experimentation. Keep raising the max acceleration until your path following starts to suffer. Do this after tuning just to make things easier. You may need to retune your PID values if you change this.
 
-<span class="bg-purple-400 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">**MAX_ANG_VEL**</span> defines the maximum angular velocity that the robot can go. This is the fastest speed that the robot can turn. The default value is `180°/s`. You can calculate the maximum angular velocity by dividing the maximum tangential velocity (max velo) by your track width. However, you should probably just leave this as is or determine the value through experimentation. Theoretical maximum angular acceleration doesn't match up well with the measured value.
+<span class="text-gray-800 bg-purple-400 rounded" style="padding: 0.25rem 0.5rem;">**MAX_ANG_VEL**</span> defines the maximum angular velocity that the robot can go. This is the fastest speed that the robot can turn. The default value is `180°/s`. You can calculate the maximum angular velocity by dividing the maximum tangential velocity (max velo) by your track width. However, you should probably just leave this as is or determine the value through experimentation. Theoretical maximum angular acceleration doesn't match up well with the measured value.
 
-<span class="bg-orange-400 text-gray-800 rounded" style="padding: 0.25rem 0.5rem;">**MAX_ANG_ACCEL**</span> defines the maximum angular acceleration that the robot can undergo. This is the fastest that the robot's angular velocity can ramp up. The default value is `180°/s^2`. This can only be found through tuning. However, it is a bit difficult to empirically determine this so just leave this as is.
+<span class="text-gray-800 bg-orange-400 rounded" style="padding: 0.25rem 0.5rem;">**MAX_ANG_ACCEL**</span> defines the maximum angular acceleration that the robot can undergo. This is the fastest that the robot's angular velocity can ramp up. The default value is `180°/s^2`. This can only be found through tuning. However, it is a bit difficult to empirically determine this so just leave this as is.
 
 ## SampleMecanumDrive - Hardware ID's
 
