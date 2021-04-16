@@ -241,32 +241,22 @@ This [sample opmode](https://github.com/NoahBres/road-runner-quickstart/blob/adv
 
 Say you want to go slower for just a portion of your trajectory. Perhaps you want some fine control of an intake procedure and wish to slow down the path following. How would we go about that?
 
-The answer is a bit tedious in Road Runner version `0.5.3`. Essentially just paste the following after any trajectory builder function:
+Like so:
 
-```java{2-9,16-22,31-37}
+```java{3-4,11-12,21-22}
 .splineTo(
   new Vector2d(30, 30), Math.toRadians(90),
-  new MinVelocityConstraint(
-    Arrays.asList(
-      new AngularVelocityConstraint(DriveConstants.MAX_ANG_VEL),
-      new MecanumVelocityConstraint(your_desired_maximum_velocity, DriveConstants.TRACK_WIDTH)
-    )
-  ),
-  new ProfileAccelerationConstraint(DriveConstants.MAX_ACCEL)
+  SampleMecanumDrive.getVelocityConstraint(slowerVelocity, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+  SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
 )
 
-// You can do the same with any TrajectoryBuilder function. Simply paste the above snippet in the parameter
+// You can do the same with any TrajectoryBuilder function. Simply paste the above snippet after the standard parameters
 
 .lineTo(
     new Vector2d(30, 30),
-    new MinVelocityConstraint(
-      Arrays.asList(
-        new AngularVelocityConstraint(DriveConstants.MAX_ANG_VEL),
-        new MecanumVelocityConstraint(your_desired_maximum_velocity, DriveConstants.TRACK_WIDTH)
-      )
-    ),
-    new ProfileAccelerationConstraint(DriveConstants.MAX_ACCEL)
-  )
+    SampleMecanumDrive.getVelocityConstraint(slowerVelocity, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+    SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+)
 
 // Example:
 
@@ -274,13 +264,8 @@ drive.trajectoryBuilder(startPose, false)
   // This spline is limited to 15 in/s and will be slower
   .splineTo(
     new Vector2d(30, 30), 0,
-    new MinVelocityConstraint(
-      Arrays.asList(
-        new AngularVelocityConstraint(DriveConstants.MAX_ANG_VEL),
-        new MecanumVelocityConstraint(15, DriveConstants.TRACK_WIDTH)
-      )
-    ),
-    new ProfileAccelerationConstraint(DriveConstants.MAX_ACCEL)
+    SampleMecanumDrive.getVelocityConstraint(15, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+    SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
   )
 
   // This spline will be normal speed
@@ -288,9 +273,9 @@ drive.trajectoryBuilder(startPose, false)
   .build()
 ```
 
-Every `TrajectoryBuilder` function offers a velocity and acceleration constraints override. If you're looking to change the other constraints and limit acceleration or angular velocity, etc., then simply change the constraints as you please. However, you will most likely only be touching the `MAX_VEL` constraint for speed limiting. We are not going to go over why the constraints are composed like so. I would recommend DMing Ryan Brott, the author of Road Runner, or reading the release notes on GitHub to fully understand what's happening. Just know that this is how constraints work and which specific part to edit for velocity limiting.
+_(This sample requires the latest version of the Road Runner Quickstart—after Apr. 15, 2021)_
 
-It is much cleaner if you simply declare new static variable constraints in your DriveConstants named `MAX_LOWER_VEL`/`MAX_LOWER_ACCEL` and reading from there rather than having to initialize it inline every time like proposed above.
+Every `TrajectoryBuilder` function offers a velocity and acceleration constraints override. If you're looking to change the other constraints and limit acceleration or angular velocity, etc., then simply change the constraints as you please. However, you will most likely only be touching the `MAX_VEL` constraint for speed limiting. We are not going to go over why the constraints are composed like so. I would recommend DMing Ryan Brott, the author of Road Runner, or reading the release notes on GitHub to fully understand what's happening. Just know that this is how constraints work and which specific part to edit for velocity limiting.
 
 ## Admissible Error and Timeout
 
