@@ -312,6 +312,20 @@ follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEAD
   <img src="/assets/advanced/termination-flow.svg" width="500px" class="p-12 border border-blue-200 rounded-md" style="box-shadow: inset 0 2px 9px 0px rgb(0 0 0 / 6%)">
 </div>
 
+## 180° Turn Direction
+
+When you turn 180° using the `drive.turn(angle)` function, how do you specify which direction the bot should turn? For every other angle, we can assume that it will turn using the shortest angle. However, a 180° turn is ambiguous. If you want to specify which direction the bot should turn, you add or substract an infinitesimal value from 180°. Like so:
+
+```java
+// Turns counter clockwise
+drive.turn(Math.toRadians(180) + 1e-6);
+
+// Turns clockwise
+drive.turn(Math.toRadians(180) - 1e-6);
+```
+
+This seems quite hacky but it is the blessed method.
+
 ## Gain Scheduling
 
 **TODO: Come back and write this**
