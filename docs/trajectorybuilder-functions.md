@@ -72,10 +72,10 @@ new TrajectoryBuilder(new Pose2d())
 
 ```java{8}
 // Robot moves to the specified coordinates.
-// It keeps the same heading as when you start the move.
+// The robot maintains the heading it starts at throughout the trajectory
 // So, if you start at a 90 degree angle, it will keep that angle the entire path.
 
-// strafeTo() is simply a shorthand forward lineToConstantHeading()
+// strafeTo() is simply a shorthand for lineToConstantHeading()
 
 new TrajectoryBuilder(new Pose2d())
   .strafeTo(new Vector2d(40, 40))
@@ -90,7 +90,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ```java{8}
 // Robot moves to the specified coordinates.
-// It keeps the same heading as when you start the move.
+// The robot maintains the heading it starts at throughout the trajectory
 // So, if you start at a 90 degree angle, it will keep that angle the entire path.
 
 // Functionally the same as strafeTo()
@@ -110,7 +110,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ```java{8}
 // Robot moves to the specified coordinates.
-// It keeps the same heading as when you start the move.
+// The robot maintains the heading it starts at throughout the trajectory
 // So, if you start at a 90 degree angle, it will keep that angle the entire path.
 
 // Functionally the same as strafeTo()/lineTo()
@@ -130,7 +130,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ```java{5}
 // Robot moves to the specified coordinates while linearly
-// interpolating between your current heading and a specified end heading.
+// interpolating between the start heading and a specified end heading.
 
 new TrajectoryBuilder(new Pose2d())
   .lineToLinearHeading(new Pose2d(40, 40, Math.toRadians(90)))
@@ -147,7 +147,7 @@ new TrajectoryBuilder(new Pose2d())
 
 ```java{5}
 // Robot moves to the specified coordinates while spline
-// interpolating between your current heading and a specified end heading.
+// interpolating between the start heading and a specified end heading.
 
 new TrajectoryBuilder(new Pose2d())
   .lineToSplineHeading(new Pose2d(40, 40, Math.toRadians(90)))
@@ -182,7 +182,7 @@ new TrajectoryBuilder(new Pose2d())
 ```java{7}
 // Robot moves to the specified coordinates in a spline path
 // while keeping the heading constant.
-// The heading is kept at the heading at the start of the movement.
+// The robot maintains the heading it starts at throughout the trajectory
 // However, setting the `endTangent` does affect the spline shape.
 
 new TrajectoryBuilder(new Pose2d())
