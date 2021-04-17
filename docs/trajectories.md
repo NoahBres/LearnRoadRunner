@@ -157,11 +157,11 @@ Sadly, your program crashed and you run into a `PathContinuityException` error. 
 Well, you've run into a continuity error. What does this mean? If you harken back to the old days of pre-calculus or algebra 2, you may have covered [discontinuities](https://www.wikiwand.com/en/Classification_of_discontinuities). If you haven't taken either of those classes yet, you will eventually cover them.
 
 <figure align="center">
-    <div class="relative rounded-lg overflow-hidden">
+    <div class="relative overflow-hidden rounded-lg">
       <img src="./assets/trajectory-overview/wikipedia-removable-discontinuity-quarter.png" alt="Image depicting a removable discontinuity">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
-    <figcaption class="mt-2 text-sm text-gray-600 text-center">Removable Discontinuity</figcaption>
+    <figcaption class="mt-2 text-sm text-center text-gray-600">Removable Discontinuity</figcaption>
 </figure>
 
 Road Runner wants a continuous path for motion profiling purposes. This isn't just a Road Runner quirk. Any motion profiling system (FTCLib/WPILib) will want to enforce continuity.
@@ -170,7 +170,7 @@ Motion profiling generates the exact path you need to take. Therefore, all the t
 
 <figure align="center">
     <img src="./assets/trajectory-overview/continuity-error-bot-quarter.jpg" alt="Image depicting a continuity error on a path caused by two right angle paths">
-    <figcaption class="mt-2 text-gray-600 text-center">PathContinuityException Example</figcaption>
+    <figcaption class="mt-2 text-center text-gray-600">PathContinuityException Example</figcaption>
 </figure>
 
 When looking at the path above, your bot _physically cannot_ follow that exact path. Imagine the bot moving along that path in your head. It gets towards the edge the of pink line at full speed and it wants to suddenly strafe right.
@@ -212,7 +212,7 @@ Trajectory traj = drive.trajectoryBuilder(new Pose2d())
 
 <figure align="center">
     <img src="./assets/trajectory-overview/continuity-error-fix-bot-quarter.jpg" alt="Image describing a path preserving continuity through a spline">
-    <figcaption class="mt-2 text-gray-600 text-center">Spline Goodness. CAD provided by Aman of 3916</figcaption>
+    <figcaption class="mt-2 text-center text-gray-600">Spline Goodness. CAD provided by Aman of 3916</figcaption>
 </figure>
 
 ## Set Pose Estimate
@@ -310,7 +310,7 @@ Trajectory trajectory = drive.trajectoryBuilder(new Pose2d(), true)
 
 The `true` boolean in the second parameter indicates that you want the bot to follow the path in reverse.
 
-<div class="flex items-center justify-center flex-col">
+<div class="flex flex-col items-center justify-center">
     <VideoDisplay src="./assets/trajectory-overview/reversed-demo.mp4" width="400px" :controls="false"/>
 </div>
 
@@ -364,6 +364,44 @@ drive.followTrajectory(traj2);
 
 Notice that we took the `traj1.end()` pose and simply added a new pose with x: 0, y: 0, and a 90 degree heading to simulate the turn. Just ensure that the heading in the added pose matches the turn preceding that trajectory and that x and y are left at zero.
 
+## Slowing Down a Trajectory
+
+Say you want to go slower for just a portion of your trajectory. Perhaps you want some fine control of an intake procedure and wish to slow down the path following. How would we go about that?
+
+Like so:
+
+```java{3-4,11-12,21-22}
+.splineTo(
+  new Vector2d(30, 30), Math.toRadians(90),
+  SampleMecanumDrive.getVelocityConstraint(slowerVelocity, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+  SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+)
+
+// You can do the same with any TrajectoryBuilder function. Simply paste the above snippet after the standard parameters
+
+.lineTo(
+    new Vector2d(30, 30),
+    SampleMecanumDrive.getVelocityConstraint(slowerVelocity, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+    SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+)
+
+// Example:
+
+drive.trajectoryBuilder(startPose, false)
+  // This spline is limited to 15 in/s and will be slower
+  .splineTo(
+    new Vector2d(30, 30), 0,
+    SampleMecanumDrive.getVelocityConstraint(15, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+    SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+  )
+
+  // This spline will be normal speed
+  .splineTo(new Vector2d(40, 40), Math.toRadians(-90))
+  .build()
+```
+
+_(This sample requires the latest version of the Road Runner Quickstart—after Apr. 15, 2021)_
+
 ## Coordinate System
 
 We're going to clarify the FTC coordinate system just because the official Road Runner GUI and David's RRPathVisualizer use a rotated field and it may be confusing.
@@ -377,11 +415,11 @@ The X axis extends through the origin and runs _parallel_ with the Red Alliance 
 The Y axis extends through the origin and runs _perpendicular_ to the Red Alliance Station. The axis value increases away from the Red Alliance Station.
 
 <figure align="center">
-    <div class="relative rounded-lg overflow-hidden">
+    <div class="relative overflow-hidden rounded-lg">
       <img src="./assets/trajectory-overview/field-w-axes-half.jpg" alt="Image of the skystone field">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
-    <figcaption class="mt-2 text-sm text-gray-600 text-center">2019/20 Skystone Field</figcaption>
+    <figcaption class="mt-2 text-sm text-center text-gray-600">2019/20 Skystone Field</figcaption>
 </figure>
 
 Notice how the field is rotated 90 degrees relative to if we were looking at it from the audience's point of view. This is because the frame of reference is defined by the Red Alliance Station. Be mindful of this as Road Runner's official GUI and RRPathVisualizer both opt for the "proper" orientation of the field. Thus, in their maps, Y increase to the left and X increases up.

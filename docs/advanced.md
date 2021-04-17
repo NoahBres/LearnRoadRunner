@@ -237,46 +237,6 @@ Finited state machines are a very simple but incredibly powerful pattern that ma
 
 This [sample opmode](https://github.com/NoahBres/road-runner-quickstart/blob/advanced-examples/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/advanced/AsyncFollowingFSM.java), located in the advanced examples branch, demonstrates how one would create a rudimentary FSM to follow multiple trajectories, wait between trajectories, and turn between trajectories, all while updating everything asynchronously. The asynchronous nature of state machines allows one to run multiple state machines in parallel for complex subsystems or simply one's own logic in the background. The example also demonstrates sending the pose to `PoseStorage` on every loop, solving the issue previously described at the end of [Transferring Pose Between Opmodes](#transferring-pose-between-opmodes).
 
-## Slowing Down a Trajectory
-
-Say you want to go slower for just a portion of your trajectory. Perhaps you want some fine control of an intake procedure and wish to slow down the path following. How would we go about that?
-
-Like so:
-
-```java{3-4,11-12,21-22}
-.splineTo(
-  new Vector2d(30, 30), Math.toRadians(90),
-  SampleMecanumDrive.getVelocityConstraint(slowerVelocity, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-  SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
-)
-
-// You can do the same with any TrajectoryBuilder function. Simply paste the above snippet after the standard parameters
-
-.lineTo(
-    new Vector2d(30, 30),
-    SampleMecanumDrive.getVelocityConstraint(slowerVelocity, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-    SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
-)
-
-// Example:
-
-drive.trajectoryBuilder(startPose, false)
-  // This spline is limited to 15 in/s and will be slower
-  .splineTo(
-    new Vector2d(30, 30), 0,
-    SampleMecanumDrive.getVelocityConstraint(15, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-    SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
-  )
-
-  // This spline will be normal speed
-  .splineTo(new Vector2d(40, 40), Math.toRadians(-90))
-  .build()
-```
-
-_(This sample requires the latest version of the Road Runner Quickstart—after Apr. 15, 2021)_
-
-Every `TrajectoryBuilder` function offers a velocity and acceleration constraints override. If you're looking to change the other constraints and limit acceleration or angular velocity, etc., then simply change the constraints as you please. However, you will most likely only be touching the `MAX_VEL` constraint for speed limiting. We are not going to go over why the constraints are composed like so. I would recommend DMing Ryan Brott, the author of Road Runner, or reading the release notes on GitHub to fully understand what's happening. Just know that this is how constraints work and which specific part to edit for velocity limiting.
-
 ## Admissible Error and Timeout
 
 Motion profiles, thus Road Runner trajectories, are fundamentally time based. This means that Road Runner will decide when it finishes following the path based on an internal timer. If your following isn't perfect (it will not be), we cannot ensure that a time based exit condition is sufficient.
