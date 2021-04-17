@@ -237,7 +237,7 @@ Finited state machines are a very simple but incredibly powerful pattern that ma
 
 This [sample opmode](https://github.com/NoahBres/road-runner-quickstart/blob/advanced-examples/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/advanced/AsyncFollowingFSM.java), located in the advanced examples branch, demonstrates how one would create a rudimentary FSM to follow multiple trajectories, wait between trajectories, and turn between trajectories, all while updating everything asynchronously. The asynchronous nature of state machines allows one to run multiple state machines in parallel for complex subsystems or simply one's own logic in the background. The example also demonstrates sending the pose to `PoseStorage` on every loop, solving the issue previously described at the end of [Transferring Pose Between Opmodes](#transferring-pose-between-opmodes).
 
-## Overloading Constraints
+## Slowing Down a Trajectory
 
 Say you want to go slower for just a portion of your trajectory. Perhaps you want some fine control of an intake procedure and wish to slow down the path following. How would we go about that?
 
