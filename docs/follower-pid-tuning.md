@@ -2,7 +2,7 @@
 
 <figure align="center">
     <img src="./assets/you-are-here/YouAreHere-FollowerPIDTuning-quarter.png" alt="You are on the follower pid tuning step">
-    <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
+    <figcaption class="mt-2 text-center text-gray-600">You are here</figcaption>
 </figure>
 
 This is the last tuning step. Here, you will tune the closed loop feedback controller. This should improve your path following dramatically.
@@ -12,7 +12,7 @@ There are two alternative opmodes for this process, `BackAndForth` or `FollowerP
 It is recommended to run the `BackAndForth` opmode to get a set of coarse PID gains and then run the same process using `FollowerPIDTuner` for further fine tuning.
 The `BackAndForth` opmode simply travels in a straight line back and forth. It is easy to see major errors in translation and heading PID accumulate here.
 
-The `FollowerPIDTuner` will follow a large square. If your heading is off, your entire square is destroyed and you have to keep resetting the bot. It's quite arduous. Use the `BackAndForth` opmode for initial tunings and then further fine tuning with `FollowerPIDTuner`.
+The `FollowerPIDTuner` will follow a large square. The bot will turn _counterclockwise_ on each corner. If your heading is off, your entire square is destroyed and you have to keep resetting the bot. It's quite arduous. Use the `BackAndForth` opmode for initial tunings and then continue to further fine tune with `FollowerPIDTuner`.
 
 1. Run the `BackAndForth` opdmode via the RC.
 
@@ -22,7 +22,7 @@ The `FollowerPIDTuner` will follow a large square. If your heading is off, your 
 
 4. Ensure that you have the `Field` view selected in the top right.
 
-5. You should see two lines and two circles being drawn: <span style="background: #4CAF50;" class="px-1 md:px-2 py-1 mb:pb-2 text-black rounded">green</span> for the target position and <span style="background: #3F51B5;" class="px-1 md:px-2 py-1 text-white rounded">blue</span> for your bot's actual position.
+5. You should see two lines and two circles being drawn: <span style="background: #4CAF50;" class="px-1 py-1 text-black rounded md:px-2 mb:pb-2">green</span> for the target position and <span style="background: #3F51B5;" class="px-1 py-1 text-white rounded md:px-2">blue</span> for your bot's actual position.
 
 6. Look for the `SampleMecanumDrive` in the right sidebar. Open that dropdown. You should be seeing two options: `HEADING_PID` and `TRANSLATION_PID`. Both options are located in the `SampleMecanumDrive` file.
 
