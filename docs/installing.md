@@ -133,7 +133,7 @@ dependencies {
 }
 ```
 
-7. Look for the `build.common.gradle` file in the root folder of your project. Find `JavaVersion.VERSION_1_7` and replace it with `JavaVersion.VERSION_1_8`:
+6. Look for the `build.common.gradle` file in the root folder of your project. Find `JavaVersion.VERSION_1_7` and replace it with `JavaVersion.VERSION_1_8`:
 
 ```groovy{3-4}
 /* build.common.gradle lines 109-112 */
@@ -143,9 +143,9 @@ compileOptions {
 }
 ```
 
-8. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive` and `util` folder into a location in your project, preferably just your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
+7. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive` and `util` folder into a location in your project, preferably just your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
 
-9. Finally, you must edit your `FtcRobotControllerActivity.java` file to work with ftc-dashboard. Directions can be found [here](https://acmerobotics.github.io/ftc-dashboard/gettingstarted).<br><br>Or (preferably) just copy the `FtcRobotControllerActivity.java` file from the quickstart repo [here](https://github.com/acmerobotics/road-runner-quickstart/blob/master/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java) and paste it into your project. Replace the `FtcRobotControllerActivity.java` file located in <span class="break-words">`YourFTCProject/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java`</span> with the file you downloaded from that GitHub link.
+8. Finally, you must edit your `FtcRobotControllerActivity.java` file to work with ftc-dashboard. Directions can be found [here](https://acmerobotics.github.io/ftc-dashboard/gettingstarted).<br><br>Or (preferably) just copy the `FtcRobotControllerActivity.java` file from the quickstart repo [here](https://github.com/acmerobotics/road-runner-quickstart/blob/master/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java) and paste it into your project. Replace the `FtcRobotControllerActivity.java` file located in <span class="break-words">`YourFTCProject/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java`</span> with the file you downloaded from that GitHub link.
 
    It is okay if there are errors in Android Studio. The project will build fine.
 
