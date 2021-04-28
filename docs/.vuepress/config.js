@@ -8,7 +8,7 @@ module.exports = {
     ],
     ["meta", { charset: "utf-8" }],
 
-    ["link", { rel: "icon", href: "/assets/baby-rr.svg" }],
+    ["link", { rel: "icon", href: "/assets/baby/baby-rr.svg" }],
     ["link", { rel: "manifest", href: "/manifest.json" }],
     ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
     [
