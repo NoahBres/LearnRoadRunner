@@ -57,7 +57,6 @@ These installation instructions do not apply to versions below the **6.2** SDK (
 
     `implementation 'com.acmerobotics.dashboard:dashboard:0.4.1'`
 
-
     Your file should look like this:
 
 ```groovy{6,24}
@@ -134,10 +133,10 @@ dependencies {
 }
 ```
 
-7. Look for the `FtcRobotController/build.gradle` file. Find `JavaVersion.VERSION_1_7` and replace it with `JavaVersion.VERSION_1_8`:
+7. Look for the `build.common.gradle` file in the root folder of your project. Find `JavaVersion.VERSION_1_7` and replace it with `JavaVersion.VERSION_1_8`:
 
 ```groovy{3-4}
-/* FtcRobotController/build.gradle lines 18-21 */
+/* build.common.gradle lines 109-112 */
 compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
