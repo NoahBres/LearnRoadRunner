@@ -158,6 +158,9 @@ module.exports = {
       {
         serviceWorker: true,
         updatePopup: true,
+        generateSWConfig: {
+          globPatterns: ['**\/*.{js,css,html,png,jpg,jpeg,gif,svg,woff,woff2,eot,ttf,otf,mp4,ico,json}'],
+        },
       },
     ],
   ],
