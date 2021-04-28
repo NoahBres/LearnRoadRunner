@@ -8,7 +8,7 @@ module.exports = {
     ],
     ["meta", { charset: "utf-8" }],
 
-    ["link", { rel: "icon", href: "/assets/baby-rr.svg" }],
+    ["link", { rel: "icon", href: "/assets/baby/baby-rr.svg" }],
     ["link", { rel: "manifest", href: "/manifest.json" }],
     ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
     [
@@ -158,6 +158,9 @@ module.exports = {
       {
         serviceWorker: true,
         updatePopup: true,
+        generateSWConfig: {
+          globPatterns: ['**\/*.{js,css,html,png,jpg,jpeg,gif,svg,woff,woff2,eot,ttf,otf,mp4,ico,json}'],
+        },
       },
     ],
   ],
