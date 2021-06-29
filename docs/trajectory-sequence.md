@@ -1,6 +1,8 @@
 # Trajectory Sequence
 
-As of May 6, 2021, the [Road Runner quickstart](https://github.com/acmerobotics/road-runner-quickstart) includes a utility referred to as "trajectory sequences." Trajectory sequences essentially splice trajectories together, automatically handling [path continuity exceptions](/trajectories.html#path-continuity-exception). In addition to that, it transforms turns and waits into "first-class" (within the quickstart at least) actions. This means you can run your entire auto path in a single trajectory sequence, rather than splitting them into many different trajectories. In addition to that, markers can now be embedded into any of these actions: trajectories, waits, and turns. This allows you to run actions _during_ wait and turn actions without the need for async concurrent code. However, this is only recommended for simple actions. More complex actions should still be handled via methods like [concurrent finite state machines](/advanced.html#async-following). As a bonus, trajectory sequences also allow for more advanced dashboard field drawings!
+As of May 6, 2021, the [Road Runner quickstart](https://github.com/acmerobotics/road-runner-quickstart) includes a utility referred to as "trajectory sequences." Trajectory sequences essentially splice trajectories together, automatically handling [path continuity exceptions](/trajectories.html#path-continuity-exception). In addition to that, it transforms turns and waits into "first-class" actions (within the quickstart at least). This means you can run your entire auto path in a single trajectory sequence, rather than splitting them into many different trajectories. Markers can now be embedded into any of these actions: trajectories, waits, and turns. This allows you to run actions _during_ wait and turn actions without the need for async concurrent code. However, this is only recommended for simple actions. More complex actions should still be handled via methods like [concurrent finite state machines](/advanced.html#async-following). As a bonus, trajectory sequences also allow for more advanced dashboard field drawings!
+
+Here's a contrived example of the improvements that come with trajectory sequences.
 
 **Before** Trajectory Sequence:
 
@@ -117,7 +119,7 @@ while(!trajectoryQueue.isEmpty()) {
 }
 ```
 
-That's it! You've made your own trajectory sequence. What does this lack though? All the cool features! It doesn't have automatic splicing, waits, turns, and you embedded markers inside those actions! Let's check those out.
+That's it! You've made your own trajectory sequence. What does this lack though? All the cool features! It doesn't have automatic splicing, waits, turns, and embedded markers inside those actions! Let's check those out.
 
 <div class="flex justify-center my-8">
    <iframe width="560" height="315" src="https://www.youtube.com/embed/BF_C4szJ4vU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -152,7 +154,7 @@ TrajectorySequence ts = drive.driveTrajectorySequenceBuilder(startPose)
 ```
 
 ::: warning
-Ensure that you are using `waitSeconds()` and not `wait()`. All Java objects have a `wait()` function which causes the current thread to wait until another thread invokes a `notify()` or `notifyAll()` method. See further details in the [Oracle JavaDoc](<https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#wait()>). We don't care for this function but it does show up in intellisense. Make sure you are using `waitSeconds()` function and not `wait()`
+Ensure that you are using `waitSeconds()` and not `wait()`. All Java objects have a `wait()` function which causes the current thread to wait until another thread invokes a `notify()` or `notifyAll()` method. See further details in the [Oracle JavaDoc](<https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#wait()>). We don't care for this function but it does show up in intellisense. Make sure you are using the `waitSeconds()` function instead of `wait()`
 :::
 
 ### SequenceBuilder Specific Markers
@@ -161,11 +163,11 @@ Ensure that you are using `waitSeconds()` and not `wait()`. All Java objects hav
 
 ## `.addTemporalMarker(MarkerCallback)`
 
-The `addTemporalMarker(MarkerCallback)` function without a double parameter does not actually exist in `TrajectoryBuilder`. This is becaues in normal trajectories, the functionality would be identical to `addDisplacementMarker(MarkerCallback)`. However, in `TrajectorySequence`, displacement and duration actually differ. `addTemporalMarker(MarkerCallback)` is preferred over `addDisplacementMarker(MarkerCallback)` to avoid any confusion between displacement and duration. The difference is that turns and waits do not increase displacement while they do add to duration. So, the behavior will differ and if you do not understand this difference as it works internally, it will result in confusion.
+The `addTemporalMarker(MarkerCallback)` function without a double parameter does not actually exist in `TrajectoryBuilder`. This is becaues in normal trajectories, the functionality would be identical to `.addDisplacementMarker(MarkerCallback)`. However, in `TrajectorySequence`, displacement and duration actually differ. `addTemporalMarker(MarkerCallback)` is preferred over `addDisplacementMarker(MarkerCallback)` to avoid any confusion between displacement and duration. The difference is that turns and waits do not increase displacement while they do add to duration. So, the behavior will differ and if you do not understand this difference as it works internally, it will result in confusion. Check out [this video](https://www.youtube.com/watch?v=BF_C4szJ4vU) for a visual explanation of this behavior.
 
 ## `.UNSTABLE_addTemporalMarkerOffset(offset, MarkerCallback)`
 
-This function allows you to set a marker at the current duration plus the offset. This differs from `addTemporalMarker(double, MarkerCallback)` because the double in that function runs `x` seconds relative to the _ENTIRE_ trajectory while `.UNSTABLE_addTemporalMarkerOffset(offset, MarkerCallback)` runs `x` seconds relative to where it was called. The `.UNSTABLE_addTemporalMarkerOffset(offset, MarkerCallback)` with an offset of zero is equivalent in functionality to `.addTemporalMarker(MarkerCallback)`
+This function allows you to set a marker at the current duration plus the offset. This differs from `.addTemporalMarker(double, MarkerCallback)` because the double in that function runs `x` seconds relative to the _ENTIRE_ trajectory while `.UNSTABLE_addTemporalMarkerOffset(offset, MarkerCallback)` runs `x` seconds relative to where it was called. The `.UNSTABLE_addTemporalMarkerOffset(offset, MarkerCallback)` with an offset of zero is equivalent in functionality to `.addTemporalMarker(MarkerCallback)`
 
 ```java{5,14}
 // Example 1
@@ -195,7 +197,7 @@ This method is marked `UNSTABLE` as it is subject to change in any future releas
 
 ## `.UNSTABLE_addDisplacementMarkerOffset(offset, MarkerCallback)`
 
-This function allows you to set a marker at the current displacement plus the offset. This differs from `addDisplacementMarker(double, MarkerCallback)` because the double in that function runs `x` displacement relative to the _ENTIRE_ trajectory while `.UNSTABLE_addDisplacementMarkerOffset(offset, MarkerCallback)` runs `x` displacement relative to where it was called. The `.UNSTABLE_addDisplacementMarkerOffset(offset, MarkerCallback)` with an offset of zero is equivalent in functionality to `.addDisplacementMarker(MarkerCallback)`
+This function allows you to set a marker at the current displacement plus the offset. This differs from `.addDisplacementMarker(double, MarkerCallback)` because the double in that function runs `x` displacement relative to the _ENTIRE_ trajectory while `.UNSTABLE_addDisplacementMarkerOffset(offset, MarkerCallback)` runs `x` displacement relative to where it was called. The `.UNSTABLE_addDisplacementMarkerOffset(offset, MarkerCallback)` with an offset of zero is equivalent in functionality to `.addDisplacementMarker(MarkerCallback)`
 
 ```java{5,14}
 // Example 1
