@@ -119,6 +119,10 @@ while(!trajectoryQueue.isEmpty()) {
 
 That's it! You've made your own trajectory sequence. What does this lack though? All the cool features! It doesn't have automatic splicing, waits, turns, and you embedded markers inside those actions! Let's check those out.
 
+<div class="flex justify-center my-8">
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/BF_C4szJ4vU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
 ## Everything from the TrajectoryBuilder list
 
 `TrajectorySequenceBuilder` mirrors the entire `TrajectoryBuilder` api. Please refer to the [TrajectoryBuilder](/trajectorybuilder-functions.html) function list for further details and visualizations.
