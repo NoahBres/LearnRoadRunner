@@ -2,7 +2,7 @@
 
 <figure align="center">
     <img src="./assets/you-are-here/YouAreHere-SplineTest-quarter.png" alt="You are on the spline test step">
-    <figcaption class="mt-2 text-gray-600 text-center">You are here</figcaption>
+    <figcaption class="mt-2 text-center text-gray-600">You are here</figcaption>
 </figure>
 
 1. Once your `TRANSLATION` and `HEADING` PID's are tuned, you should run the spline test to make sure everything is in order.
@@ -24,7 +24,7 @@
   - Set the coefficients in translational/heading PID to zero
   - If your following is okay after turning off translational/heading PID, then the problem lies in the localizer
     - Run `LocalizationTest` and try to fix your localizer (most likely `StandardTrackingWheelLocalizer` if you're having issues as it's quite a fickle one)
-  - If your following is not okay even after turning off the translationa/heading PID, then the error lies in the drive train motor directions or the drive constants
+  - If your following is not okay even after turning off the translation/heading PID, then the error lies in the drive train motor directions or the drive constants
 - Work backwards and start turning things off to isolate the problem. Starting from scratch and working on each component, step by step, may lead to a faster solution
 - You can turn off the pose history limit (you'll notice that the pose history, blue line, will start clearing itself on the dashboard field to keep everything clean) by setting `POSE_HISTORY_LIMIT` in `SampleMecanumDrive` to -1. This will stop the blue line from slowly clearing itself and may assist in debugging.
 - Lower your velocity and acceleration constraints in `DriveConstants.java`. These constraints are meant to characterize your drive train. Specifying velocities and acceleration values that are higher than what your bot is actually able to achieve will result in motion profiles that are impossible to follow and ruin path following.
