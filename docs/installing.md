@@ -59,7 +59,7 @@ These installation instructions do not apply to versions below the **7.0** SDK (
 
     Your file should look like this:
 
-```groovy{6,24}
+```groovy{6,25}
 /* build.dependencies.gradle */
 repositories {
     mavenCentral()
