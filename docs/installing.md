@@ -22,7 +22,7 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 ## Method 2: Installing RR on Your Project
 
 ::: warning
-These installation instructions do not apply to versions below the **7.0** SDK (released on Sep. 10, 2021). Please consult the [FTC Discord server](https://discord.gg/first-tech-challenge) or the [FTC subreddit](https://www.reddit.com/r/FTC/) if you are having trouble installing libraries for earlier versions of the SDK.
+These installation instructions do not apply to versions below the **7.0** SDK (released on Sep. 20, 2021). Version 7.0 is the minimum legal version of the SDK (at the time of writing). Instructions for earlier versions will not be supported.
 :::
 
 1. We are are going to assume you have the same file structure as the _latest_ (**7.0** at the time of writing) standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController).
@@ -137,14 +137,14 @@ dependencies {
 6. Look for the `build.common.gradle` file in the root folder of your project. Find `JavaVersion.VERSION_1_7` and replace it with `JavaVersion.VERSION_1_8`:
 
 ```groovy{3-4}
-/* build.common.gradle lines 109-112 */
+/* build.common.gradle lines 110-113 */
 compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
 }
 ```
 
-7. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive` and `util` folder into a location in your project, preferably just your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
+7. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive`, `util`, and `trajectorysequence` folder into a location in your project, preferably just your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
 
 ## Upgrading Firmware
 
