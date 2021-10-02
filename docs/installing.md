@@ -2,7 +2,7 @@
 
 There are two methods to installing the Road Runner library.
 
-[Method #1](#method-1-downloading-the-quickstart), the simpler option, is to simply download [the quickstart repo](https://github.com/acmerobotics/road-runner-quickstart). The quickstart repo is an empty FTC season repo along with the preinstalled dependencies and tuning opmodes to get Road Runner up and running. It includes everything you'll need to get Road Runner up and running. However, this does not work if you already have an existing codebase.
+[Method #1](#method-1-downloading-the-quickstart), the simpler option, is to simply download [the quickstart repo](https://github.com/acmerobotics/road-runner-quickstart). The quickstart repo is an empty FTC season repo along with the preinstalled dependencies and tuning opmodes to get Road Runner up and running. However, this does not work if you already have an existing codebase.
 
 [Method #2](#method-2-installing-rr-on-your-project) will go through installing Road Runner via gradle and copying over the necessary files from the quickstart repo into your existing team project.
 
