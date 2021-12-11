@@ -1,6 +1,6 @@
 # Trajectory Sequence
 
-As of May 6, 2021, the [Road Runner quickstart](https://github.com/acmerobotics/road-runner-quickstart) includes a utility referred to as "trajectory sequences." Trajectory sequences essentially splice trajectories together, automatically handling [path continuity exceptions](/trajectories.html#path-continuity-exception). In addition to that, it transforms turns and waits into "first-class" actions (within the quickstart at least). This means you can run your entire auto path in a single trajectory sequence, rather than splitting them into many different trajectories. Markers can now be embedded into any of these actions: trajectories, waits, and turns. This allows you to run actions _during_ wait and turn actions without the need for async concurrent code. However, this is only recommended for simple actions. More complex actions should still be handled via methods like [concurrent finite state machines](/advanced.html#async-following). As a bonus, trajectory sequences also allow for more advanced dashboard field drawings!
+As of May 6, 2021, the [Road Runner quickstart](https://github.com/acmerobotics/road-runner-quickstart) includes a utility referred to as "trajectory sequences." Trajectory sequences essentially splice trajectories together, automatically handling [path continuity exceptions](/trajectories.html#path-continuity-exception). In addition, it transforms turns and waits into "first-class" actions (within the quickstart, at least). This allows you to run your entire auto path in a single trajectory sequence, rather than splitting them into many different trajectories. Markers can now be embedded into any of these actions: trajectories, waits, and turns. This allows you to run actions _during_ wait and turn actions without the need for async, concurrent code. However, this is only recommended for simple actions. More complex actions should still be handled via methods like [concurrent finite state machines](/advanced.html#async-following). As a bonus, trajectory sequences also allow for more advanced dashboard field drawings!
 
 Here's a contrived example of the improvements that come with trajectory sequences.
 
@@ -124,6 +124,8 @@ That's it! You've made your own trajectory sequence. What does this lack though?
 <div class="flex justify-center my-8">
    <iframe width="560" height="315" src="https://www.youtube.com/embed/BF_C4szJ4vU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
+
+Once you're familiar with `TrajectorySequence`, check out [MeepMeep](/tool/meepmeep.html#meepmeep) to build and visualize your trajectories!
 
 ## Everything from the TrajectoryBuilder list
 
