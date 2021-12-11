@@ -26,6 +26,8 @@ Please refer to the installation video provided as the steps aren't inherently o
    <iframe width="560" height="315" src="https://www.youtube.com/embed/vdn1v404go8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
+Please note that the code described in the latter half of the video is no longer valid as of MeepMeep 2.x.x, due to an API change. This API change allows for better handling of multi-bot support.
+
 ## Usage
 
 Please refer to the latter half of the installation video above, as it covers basic usage.
@@ -39,15 +41,13 @@ public class MeepMeepTesting {
     public static void main(String[] args) {
         // Declare a MeepMeep instance
         // With a field size of 800 pixels
-        MeepMeep mm = new MeepMeep(800)
-                // Set field image
-                .setBackground(MeepMeep.Background.FIELD_ULTIMATE_GOAL_DARK)
-                // Set theme
-                .setTheme(new ColorSchemeRedDark())
-                // Background opacity from 0-1
-                .setBackgroundAlpha(1f)
-                // Set constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
+        MeepMeep meepMeep = new MeepMeep(800);
+
+        RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
+                // Required: Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                // Option: Set theme. Default = ColorSchemeRedDark()
+                .setColorScheme(new ColorSchemeRedDark())
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(0, 0, 0))
                                 .forward(30)
@@ -63,12 +63,90 @@ public class MeepMeepTesting {
                                 .splineTo(new Vector2d(10, 15), 0)
                                 .turn(Math.toRadians(90))
                                 .build()
-                )
+                );
+
+        // Set field image
+        meepMeep.setBackground(MeepMeep.Background.FIELD_FREIGHTFRENZY_ADI_DARK)
+                .setDarkMode(true)
+                // Background opacity from 0-1
+                .setBackgroundAlpha(0.95f)
+                .addEntity(myBot)
                 .start();
     }
 }
 ```
 
-:::tip
-All development for the current version of MeepMeep has been deferred in favor of the MeepMeep Web editor. This will enable fancy drag and drop trajectory creation. Respectfully, please hold any feature requests (playback speed adjustment, drag and drop, etc.) until MeepMeep Web has been released.
-:::
+## Adding Multiple Bots
+
+MeepMeepMeep version 2.x introduces a new API and updated entity handling, allowing one to run and coordinate multiple trajectories. Declare a new `RoadRunnerBotEntity` and add it via `MeepMeep#addEntity(Entity)`.
+
+```java
+public class MeepMeepTesting {
+    public static void main(String[] args) {
+        MeepMeep meepMeep = new MeepMeep(800);
+
+        // Declare our first bot
+        RoadRunnerBotEntity myFirstBot = new DefaultBotBuilder(meepMeep)
+                // We set this bot to be blue
+                .setColorScheme(new ColorSchemeBlueDark())
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                .followTrajectorySequence(drive ->
+                        drive.trajectorySequenceBuilder(new Pose2d(0, 0, 0))
+                                .forward(30)
+                                .turn(Math.toRadians(90))
+                                .forward(30)
+                                .turn(Math.toRadians(90))
+                                .forward(30)
+                                .turn(Math.toRadians(90))
+                                .forward(30)
+                                .turn(Math.toRadians(90))
+                                .build()
+                );
+
+        // Declare out second bot
+        RoadRunnerBotEntity mySecondBot = new DefaultBotBuilder(meepMeep)
+                // We set this bot to be red
+                .setColorScheme(new ColorSchemeRedDark())
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                .followTrajectorySequence(drive ->
+                        drive.trajectorySequenceBuilder(new Pose2d(30, 30, Math.toRadians(180)))
+                                .forward(30)
+                                .turn(Math.toRadians(90))
+                                .forward(30)
+                                .turn(Math.toRadians(90))
+                                .forward(30)
+                                .turn(Math.toRadians(90))
+                                .forward(30)
+                                .turn(Math.toRadians(90))
+                                .build()
+                );
+
+        meepMeep.setBackground(MeepMeep.Background.FIELD_FREIGHTFRENZY_ADI_DARK)
+                .setDarkMode(true)
+                .setBackgroundAlpha(0.95f)
+
+                // Add both of our declared bot entities
+                .addEntity(myFirstBot)
+                .addEntity(mySecondBot)
+                .start();
+    }
+}
+```
+
+## Available Field Images
+
+_🚧 TODO 🚧_
+
+See [the GitHub folder for available images](https://github.com/NoahBres/MeepMeep/tree/master/src/main/resources/background) and [the `Background` class for the class names](https://github.com/NoahBres/MeepMeep/blob/72034792df9d3221e73923447ccade94bcb38ca8/src/main/kotlin/com/noahbres/meepmeep/MeepMeep.kt#L434).
+
+## Making Your Own Color Scheme
+
+_🚧 TODO 🚧_
+
+See: [the provided color schemes as an example](https://github.com/NoahBres/MeepMeep/blob/master/src/main/kotlin/com/noahbres/meepmeep/core/colorscheme/scheme/ColorSchemeRedLight.kt).
+
+## Adding Custom Entities
+
+_🚧 TODO: Ask Heno for improved ring entity sample 🚧_
+
+Alternatively, see [here](https://gist.github.com/NoahBres/4136d6617e2870b9e76c5d965f923afd).
