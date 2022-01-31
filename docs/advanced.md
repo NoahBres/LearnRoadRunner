@@ -279,9 +279,12 @@ This seems quite hacky but it is the blessed method.
 
 There may be an instance where you want to arbitrarily break out of a trajectory. The only reason that this should be applicable in is the example below. This behavior requires one to edit the `SampleMecanumDrive` class and implement a function that forces the `mode` into `IDLE`.
 
-This [sample opmode](https://github.com/NoahBres/road-runner-quickstart/blob/advanced-examples/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/advanced/AutoBreakTrajectory.java) along with [this modified `SampleMecanumDrive` class](https://github.com/NoahBres/road-runner-quickstart/blob/advanced-examples/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/advanced/SampleMecanumDriveCancelable.java).
+This [sample opmode](https://github.com/NoahBres/road-runner-quickstart/blob/advanced-examples/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/advanced/AutoBreakTrajectory.java) along with the following modified classes:
 
-The modified `SampleMecanumDrive` class simply implements a `cancelFollowing()` function that forces the internal mode to `IDLE`, arbitrarily stopping following.
+- [`SampleMecanumDriveCancelable`](https://github.com/NoahBres/road-runner-quickstart/blob/advanced-examples/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/advanced/SampleMecanumDriveCancelable.java)
+- [`TrajectorySequenceRunnerCancelable`](https://github.com/NoahBres/road-runner-quickstart/blob/advanced-examples/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/advanced/TrajectorySequenceRunnerCancelable.java)
+
+These modified classes simply implement a `breakFollowing()` function that breaks out of following. Copy these into your project.
 
 This will be used in the next sample.
 
