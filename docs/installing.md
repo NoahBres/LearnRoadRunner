@@ -22,10 +22,10 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 ## Method 2: Installing RR on Your Project
 
 ::: warning
-These installation instructions do not apply to versions below the **7.0** SDK (released on Sep. 20, 2021). Version 7.0 is the minimum legal version of the SDK (at the time of writing). Instructions for earlier versions will not be supported.
+These installation instructions do not apply to versions below the **7.1** SDK (released on Jan. 17, 2022). Version 7.0 is the minimum legal version of the SDK (at the time of writing). Instructions for earlier versions will not be supported.
 :::
 
-1. We are are going to assume you have the same file structure as the _latest_ (**7.0** at the time of writing) standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController).
+1. We are are going to assume you have the same file structure as the _latest_ (**7.1** at the time of writing) standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController).
 
 2. Look for the `build.dependencies.gradle` file at the root of your project.
 
@@ -55,7 +55,7 @@ These installation instructions do not apply to versions below the **7.0** SDK (
 
     Then, add the following snippet at the end of your `dependencies` block:
 
-    `implementation 'com.acmerobotics.dashboard:dashboard:0.4.3'`
+    `implementation 'com.acmerobotics.dashboard:dashboard:0.4.4'`
 
     Your file should look like this:
 
@@ -72,19 +72,19 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.firstinspires.ftc:Inspection:7.0.0'
-    implementation 'org.firstinspires.ftc:Blocks:7.0.0'
-    implementation 'org.firstinspires.ftc:Tfod:7.0.0'
-    implementation 'org.firstinspires.ftc:RobotCore:7.0.0'
-    implementation 'org.firstinspires.ftc:RobotServer:7.0.0'
-    implementation 'org.firstinspires.ftc:OnBotJava:7.0.0'
-    implementation 'org.firstinspires.ftc:Hardware:7.0.0'
-    implementation 'org.firstinspires.ftc:FtcCommon:7.0.0'
+    implementation 'org.firstinspires.ftc:Inspection:7.1.0'
+    implementation 'org.firstinspires.ftc:Blocks:7.1.0'
+    implementation 'org.firstinspires.ftc:Tfod:7.1.0'
+    implementation 'org.firstinspires.ftc:RobotCore:7.1.0'
+    implementation 'org.firstinspires.ftc:RobotServer:7.1.0'
+    implementation 'org.firstinspires.ftc:OnBotJava:7.1.0'
+    implementation 'org.firstinspires.ftc:Hardware:7.1.0'
+    implementation 'org.firstinspires.ftc:FtcCommon:7.1.0'
     implementation 'org.tensorflow:tensorflow-lite-task-vision:0.2.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'org.firstinspires.ftc:gameAssets-FreightFrenzy:1.0.0'
 
-    implementation 'com.acmerobotics.dashboard:dashboard:0.4.3'
+    implementation 'com.acmerobotics.dashboard:dashboard:0.4.4'
 }
 ```
 
@@ -117,7 +117,7 @@ If you are using [OpenRC](https://github.com/OpenFTC/OpenRC-Turbo), please read 
 5. In `TeamCode/build.gradle`, add the following dependencies:
 
    - `implementation 'org.apache.commons:commons-math3:3.6.1'`
-   - `implementation 'com.acmerobotics.roadrunner:core:0.5.4'`
+   - `implementation 'com.acmerobotics.roadrunner:core:0.5.5'`
 
 ```groovy{9-11}
 /* TeamCode/build.gradle */
@@ -130,7 +130,7 @@ dependencies {
 
     implementation 'org.apache.commons:commons-math3:3.6.1'
 
-    implementation 'com.acmerobotics.roadrunner:core:0.5.4'
+    implementation 'com.acmerobotics.roadrunner:core:0.5.5'
 }
 ```
 
