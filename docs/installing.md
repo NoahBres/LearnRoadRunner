@@ -22,10 +22,10 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 ## Method 2: Installing RR on Your Project
 
 ::: warning
-These installation instructions do not apply to versions below the **7.1** SDK (released on Jan. 17, 2022). Version 7.0 is the minimum legal version of the SDK (at the time of writing). Instructions for earlier versions will not be supported.
+These installation instructions do not apply to versions below the **8.0** SDK (released on Sep. 13, 2022). Version 8.0 is the minimum legal version of the SDK (at the time of writing). Instructions for earlier versions will not be supported.
 :::
 
-1. We are are going to assume you have the same file structure as the _latest_ (**7.1** at the time of writing) standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController).
+1. We are are going to assume you have the same file structure as the _latest_ (**8.0** at the time of writing) standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController).
 
 2. Look for the `build.dependencies.gradle` file at the root of your project.
 
@@ -55,7 +55,7 @@ These installation instructions do not apply to versions below the **7.1** SDK (
 
     Then, add the following snippet at the end of your `dependencies` block:
 
-    `implementation 'com.acmerobotics.dashboard:dashboard:0.4.4'`
+    `implementation 'com.acmerobotics.dashboard:dashboard:0.4.5'`
 
     Your file should look like this:
 
@@ -72,19 +72,19 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.firstinspires.ftc:Inspection:7.1.0'
-    implementation 'org.firstinspires.ftc:Blocks:7.1.0'
-    implementation 'org.firstinspires.ftc:Tfod:7.1.0'
-    implementation 'org.firstinspires.ftc:RobotCore:7.1.0'
-    implementation 'org.firstinspires.ftc:RobotServer:7.1.0'
-    implementation 'org.firstinspires.ftc:OnBotJava:7.1.0'
-    implementation 'org.firstinspires.ftc:Hardware:7.1.0'
-    implementation 'org.firstinspires.ftc:FtcCommon:7.1.0'
+    implementation 'org.firstinspires.ftc:Inspection:8.0.0'
+    implementation 'org.firstinspires.ftc:Blocks:8.0.0'
+    implementation 'org.firstinspires.ftc:Tfod:8.0.0'
+    implementation 'org.firstinspires.ftc:RobotCore:8.0.0'
+    implementation 'org.firstinspires.ftc:RobotServer:8.0.0'
+    implementation 'org.firstinspires.ftc:OnBotJava:8.0.0'
+    implementation 'org.firstinspires.ftc:Hardware:8.0.0'
+    implementation 'org.firstinspires.ftc:FtcCommon:8.0.0'
     implementation 'org.tensorflow:tensorflow-lite-task-vision:0.2.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'org.firstinspires.ftc:gameAssets-FreightFrenzy:1.0.0'
 
-    implementation 'com.acmerobotics.dashboard:dashboard:0.4.4'
+    implementation 'com.acmerobotics.dashboard:dashboard:0.4.5'
 }
 ```
 
@@ -134,17 +134,7 @@ dependencies {
 }
 ```
 
-6. Look for the `build.common.gradle` file in the root folder of your project. Find `JavaVersion.VERSION_1_7` and replace it with `JavaVersion.VERSION_1_8`:
-
-```groovy{3-4}
-/* build.common.gradle lines 110-113 */
-compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-}
-```
-
-7. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive`, `util`, and `trajectorysequence` folder into a location in your project, preferably just your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
+6. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive`, `util`, and `trajectorysequence` folder into a location in your project, preferably just your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
 
 ## Upgrading Firmware
 
