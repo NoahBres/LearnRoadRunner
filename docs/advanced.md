@@ -298,3 +298,7 @@ all. This is not what Trajectories are meant for. A path follower is more suited
 scenario. This sample primarily serves as a demo showcasing Road Runner's capabilities. However, it is a cool demo and demonstrates how one can combine the "Finite State Machine" sample along with the "Interrupting a Live Trajectory" sample to create complex behaviors.
 
 Further details on what the demo does can be found in the comments of the opmode.
+
+## OmniWheels ##
+
+OmniWheels arranged with one wheel on each side of a four-sided robot work just like Mecanum wheels arranged in the standard GoBilda manner.  Conceptually, the front of the robot will be halfway between two of the OmniWheels.  When oriented with the corner of the robot to the front, the OmniWheels will correspond with the Mecanum wheels.
