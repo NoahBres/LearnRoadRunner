@@ -88,7 +88,7 @@ As mentioned prior, the REV Hub's motor controller has issues decelerating prope
 
 1. Your `MaxVelocityTuner` is going backwards
 
-   - Ensure that your wheel are reversed correctly. Check [the goBILDA mecanum chart](/drive-constants.html#samplemecanumdrive-motor-direction) to use as a reference while debugging
+   - Ensure that your wheels are reversed correctly. Check [the goBILDA mecanum chart](/drive-constants.html#samplemecanumdrive-motor-direction) to use as a reference while debugging
 
 2. The pose velocity line is going the opposite way and not following `targetVelocity`:
 
