@@ -68,13 +68,11 @@ If you are not using dead wheels, you will perform the localization test later.
 
 Further details on how to use this is included in the [dead wheels page](/dead-wheels).
 
-## DriveVelocityPIDTuner <SkipAyudeBadge :skipIfDriveEncoders="true" />
+## DriveVelocityPIDTuner <SkipAyudeBadge />
 
-<HideAyudeWrapper :skipIfDriveEncoders="true">
 ::: warning
-This section should be skipped because you have chosen the option not to use drive encoders.
+This section should be skipped because it is harder to tune and manage than feedforward control.
 :::
-</HideAyudeWrapper>
 
 The `DriveVelocityPIDTuner` opmode is used to tune the Rev Hub's built in motor velocity controller (the `RUN_USING_ENCODER` mode). It is imperative your PIDF coefficients be tuned for optimal, consistent behavior. These PIDF coefficients should be tuned after any large modifications to the bot affecting weight.
 
@@ -82,13 +80,7 @@ Go through the velocity PIDF tuning process (detailed in the [drive velocity pid
 
 Further details on how to use this will be provided in the [drive velocity pid tuning page](/drive-velocity-pid-tuning).
 
-## DriveFeedforwardTuner <SkipAyudeBadge :skipIfDriveEncoders="false" />
-
-<HideAyudeWrapper :skipIfDriveEncoders="false">
-::: warning
-This section should be skipped because you have chosen the option to use drive encoders.
-:::
-</HideAyudeWrapper>
+## DriveFeedforwardTuner
 
 If you choose to opt for the feedforward method, the feedforward constants should be tuned.
 
