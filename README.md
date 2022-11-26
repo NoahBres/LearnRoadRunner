@@ -2,6 +2,14 @@
 
 An opinionated guide and documentation for Road Runner
 
+## Contributors ❤️
+
+Big thanks to all of LearnRoadRunner's contributors:
+
+<a href="https://github.com/NoahBres/LearnRoadRunner/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=NoahBres/LearnRoadRunner" />
+</a>
+
 ## Notes:
 
 - `package.json` requires a downgrade to `watchpack` because later updates break live reloading.
