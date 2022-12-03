@@ -56,3 +56,22 @@ Check the [RRPathVisualizer page](/tool/rrpathvisualizer) for further details on
 David's RRPathVisualizer and the official Road Runner GUI both utilize a rotated field coordinate system. Their entire field is rotated 90 degrees to match the audience's perspective. Because of this, the Y axis is horizontal and the X axis is vertical. The Y axis increases to the left and the X axis increases vertically. Just to clear any confusion when using both applications.
 
 MeepMeep does not use a rotated field. Although the field is no longer displayed through the audience's perspective, the X and Y axis follow a typical cartesian coordinate map. Please see the [coordinate system specification](/trajectories.html#coordinate-system) for more details.
+
+## RRPathGen
+
+<div class="flex flex-col items-center justify-center">
+    <VideoDisplay src="./assets/tools/rrpathgen-halfres.mp4" width="500px" :controls="false"/>
+    <figcaption class="mt-2 text-center text-gray-600">RRPathGen by 21511</figcaption>
+</div>
+
+RRPathGen is a program that allows teams to quickly generate paths through a GUI. Here are some of its features:
+- Viewing of paths by importing them
+- Modification of paths through either the GUI or changing the values in the text fields
+- Export of paths in the form of Java code
+- Customisation of length and width of the robot
+- Support for different sized screens and resolutions
+- Paths can be flipped to account for the robot starting in different sides of the field
+- Uses same field coordinates as MeepMeep
+- Support for TrajectorySequences coming soon
+
+Check the [RRPathGen page](/tool/rrpathgen) for further details on installation and use.
