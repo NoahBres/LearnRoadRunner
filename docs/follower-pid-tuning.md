@@ -14,7 +14,7 @@ The `BackAndForth` opmode simply travels in a straight line back and forth. It i
 
 The `FollowerPIDTuner` will follow a large square. The bot will turn _counterclockwise_ on each corner. If your heading is off, your entire square is destroyed and you have to keep resetting the bot. It's quite arduous. Use the `BackAndForth` opmode for initial tunings and then continue to further fine tune with `FollowerPIDTuner`.
 
-1. Run the `BackAndForth` opdmode via the RC.
+1. Run the `BackAndForth` opmode via the RC.
 
 2. Then, connect to the RC phone's wifi network. The password to the network is located in the `Program and Manage` menu.
 
