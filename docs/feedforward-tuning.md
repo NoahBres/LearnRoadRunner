@@ -61,7 +61,7 @@ Your page should look something like this:
 
    4. That should be it! An example of a decently tuned feedforward controller can be found below.
    5. **Any adjustments in dashboard need to be copied over to the `DriveConstants.java` file under the equivalent variable name. Dashboard adjustments are temporary and will reset once you restart the opmode.**
-   6. Check the tuning simultor to see how each gain affects the behavior.
+   6. Check the tuning simulator to see how each gain affects the behavior.
    7. **Note:** The graph doesn't need to be perfect. Just "good enough." You can waste an infinite amount of time trying to perfect it. In addition to that, the Rev Hub's internal motor controller is a little odd and you will have a slight bump on deceleration that will be impossible to get rid of.
 
 Decently tuned feedforward controller courtesy of Deetz from Team 14320:
