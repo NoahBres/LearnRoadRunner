@@ -60,7 +60,7 @@ MeepMeep does not use a rotated field. Although the field is no longer displayed
 ## RRPathGen
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/tools/rrpathgen-halfres.mp4" width="500px" :controls="false"/>
+    <VideoDisplay src="./assets/tools/rrpathgen-half.mp4" width="500px" :controls="false"/>
     <figcaption class="mt-2 text-center text-gray-600">RRPathGen by 21511</figcaption>
 </div>
 
