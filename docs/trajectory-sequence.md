@@ -150,7 +150,7 @@ drive.followTrajectorySequence(ts);
 `TrajectorySequenceBuilder` allows for simple wait segments. Not much to it. This is useful for running actions in between trajectories. Markers can be run during wait segments.
 
 ```java
-TrajectorySequence ts = drive.driveTrajectorySequenceBuilder(startPose)
+TrajectorySequence ts = drive.trajectorySequenceBuilder(startPose)
   .waitSeconds(3) // Waits 3 seconds
   .build();
 ```
@@ -212,10 +212,10 @@ drive.trajectorySequenceBuilder(startPose)
     .build();
 
 // Example 2
-// .UNSTABLE_addTemporalMarkerOffset(double, MarkerCallback)
+// .UNSTABLE_addDisplacementMarkerOffset(double, MarkerCallback)
 drive.trajectorySequenceBuilder(startPose)
     .splineTo(new Vector2d(10, 10), 0)
-    .UNSTABLE_addTemporDisplacementOffset(3, () -> {})
+    .UNSTABLE_addDisplacementMarkerOffset(3, () -> {})
     .strafeRight(15)
     .turn(Math.toRadians(90))
     .build();
