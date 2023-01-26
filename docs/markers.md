@@ -1,6 +1,6 @@
 # Marker Guide
 
-Alright so you got trajectories down. But you're in a robot competition and you're here to win! Your bot has to do more than simply drive around. You gotta turn on motors and lift servos and shoot blocks. How do we accomplish that?
+Alright so you got trajectories down. But you're in a robot competition and you're here to win! Your bot has to do more than simply drive around. You gotta turn on motors,use lifts and pick up cones. How do we accomplish that?
 
 Road Runner as a handy little feature called markers. These allow you to run actions along your path.
 
