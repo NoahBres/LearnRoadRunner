@@ -84,7 +84,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'org.firstinspires.ftc:gameAssets-FreightFrenzy:1.0.0'
 
-    implementation 'com.acmerobotics.dashboard:dashboard:0.4.5'
+    implementation 'com.acmerobotics.dashboard:dashboard:0.4.8'
 }
 ```
 
@@ -117,7 +117,7 @@ If you are using [OpenRC](https://github.com/OpenFTC/OpenRC-Turbo), please read 
 5. In `TeamCode/build.gradle`, add the following dependencies:
 
    - `implementation 'org.apache.commons:commons-math3:3.6.1'`
-   - `implementation 'com.acmerobotics.roadrunner:core:0.5.5'`
+   - `implementation 'com.acmerobotics.roadrunner:core:0.5.6'`
 
 ```groovy{9-11}
 /* TeamCode/build.gradle */
@@ -130,7 +130,7 @@ dependencies {
 
     implementation 'org.apache.commons:commons-math3:3.6.1'
 
-    implementation 'com.acmerobotics.roadrunner:core:0.5.5'
+    implementation 'com.acmerobotics.roadrunner:core:0.5.6'
 }
 ```
 
