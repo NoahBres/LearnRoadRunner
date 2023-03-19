@@ -3,7 +3,7 @@
 Road Runner is a motion planning library, written for the [FTC robotics competition](https://www.firstinspires.org/robotics/ftc). Designed primarily for autonomous robotic movement, it allows for complex path following and generation while maintaining control of velocity and acceleration. This enables bots to have more accurate and advanced path following capabilities.
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/home/8393-half-compressed.mp4" width="360px" :controls="false"/>
+    <VideoDisplay src="https://res.cloudinary.com/doxbv70hu/video/upload/v1679193106/learnroadrunner/8393-half-compressed_isz6yd.mp4" width="360px" :controls="false"/>
     <span class="text-sm text-center text-gray-600">Team 8393 performs an advanced spline path in their autonomous mode<br>(Ochoa Finals - 2018/19 Rover Ruckus)</span>
 </div>
 
@@ -29,7 +29,7 @@ Although in the FTC community dead wheels and odometry are often used synonymous
 **TL;DR** Dead wheels allow accurate positional tracking of mecanum drives at high speeds and accelerations. Check out [gm0's section on odometry](https://gm0.org/en/latest/docs/robot-design/dead-wheels.html) for more detailed information!
 
 <figure align="center">
-    <img src="./assets/home/dead-wheel-example-small.jpg" class="rounded-lg" alt="Underside of a bot with dead wheels highlighted">
+    <img src="https://res.cloudinary.com/doxbv70hu/image/upload/v1679193417/learnroadrunner/dead-wheel-example-small_j3qe5t.jpg" class="rounded-lg" alt="Underside of a bot with dead wheels highlighted">
     <figcaption class="mt-2 text-sm text-center text-gray-600">An example of dead wheels</figcaption>
 </figure>
 

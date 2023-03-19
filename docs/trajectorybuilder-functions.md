@@ -3,7 +3,7 @@
 ## `.forward(distance: Double)`
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/trajectorybuilder-functions/forward.mp4" width="400px" :controls="false"/>
+    <VideoDisplay src="https://res.cloudinary.com/doxbv70hu/video/upload/v1679194146/learnroadrunner/trajectorybuilder-functions/forward_rpumvg.mp4" width="400px" :controls="false"/>
 </div>
 
 ```java{4}
@@ -19,7 +19,7 @@ new TrajectoryBuilder(new Pose2d())
 ## `.back(distance: Double)`
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/trajectorybuilder-functions/back.mp4" width="400px" :controls="false"/>
+    <VideoDisplay src="https://res.cloudinary.com/doxbv70hu/video/upload/v1679194163/learnroadrunner/trajectorybuilder-functions/back_rvbqi1.mp4" width="400px" :controls="false"/>
 </div>
 
 ```java{4}
@@ -35,7 +35,7 @@ new TrajectoryBuilder(new Pose2d())
 ## `.strafeLeft(distance: Double)`
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/trajectorybuilder-functions/strafe-left.mp4" width="400px" :controls="false"/>
+    <VideoDisplay src="https://res.cloudinary.com/doxbv70hu/video/upload/v1679194178/learnroadrunner/trajectorybuilder-functions/strafe-left_ngcgg1.mp4" width="400px" :controls="false"/>
 </div>
 
 ```java{4}
@@ -51,7 +51,7 @@ new TrajectoryBuilder(new Pose2d())
 ## `.strafeRight(distance: Double)`
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/trajectorybuilder-functions/strafe-right.mp4" width="400px" :controls="false"/>
+    <VideoDisplay src="https://res.cloudinary.com/doxbv70hu/video/upload/v1679194193/learnroadrunner/trajectorybuilder-functions/strafe-right_zqehlr.mp4" width="400px" :controls="false"/>
 </div>
 
 ```java{4}
@@ -67,7 +67,7 @@ new TrajectoryBuilder(new Pose2d())
 ## `.strafeTo(endPosition: Vector2d)`
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/trajectorybuilder-functions/line-to.mp4" width="400px" :controls="false"/>
+    <VideoDisplay src="./https://res.cloudinary.com/doxbv70hu/video/upload/v1679194215/learnroadrunner/trajectorybuilder-functions/line-to_wdgupa.mp4" width="400px" :controls="false"/>
 </div>
 
 ```java{8}
@@ -85,7 +85,7 @@ new TrajectoryBuilder(new Pose2d())
 ## `.lineTo(endPosition: Vector2d)`
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/trajectorybuilder-functions/line-to.mp4" width="400px" :controls="false"/>
+    <VideoDisplay src="https://res.cloudinary.com/doxbv70hu/video/upload/v1679194215/learnroadrunner/trajectorybuilder-functions/line-to_wdgupa.mp4" width="400px" :controls="false"/>
 </div>
 
 ```java{8}
@@ -105,7 +105,7 @@ new TrajectoryBuilder(new Pose2d())
 ## `.lineToConstantHeading(endPosition: Vector2d)`
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/trajectorybuilder-functions/line-to.mp4" width="400px" :controls="false"/>
+    <VideoDisplay src="https://res.cloudinary.com/doxbv70hu/video/upload/v1679194215/learnroadrunner/trajectorybuilder-functions/line-to_wdgupa.mp4" width="400px" :controls="false"/>
 </div>
 
 ```java{8}
@@ -125,7 +125,7 @@ new TrajectoryBuilder(new Pose2d())
 ## `.lineToLinearHeading(endPose: Pose2d)`
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/trajectorybuilder-functions/line-to-linear-heading.mp4" width="400px" :controls="false"/>
+    <VideoDisplay src="https://res.cloudinary.com/doxbv70hu/video/upload/v1679194256/learnroadrunner/trajectorybuilder-functions/line-to-linear-heading_o6io9v.mp4" width="400px" :controls="false"/>
 </div>
 
 ```java{5}
@@ -142,7 +142,7 @@ new TrajectoryBuilder(new Pose2d())
 ## `.lineToSplineHeading(endPose: Pose2d)`
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/trajectorybuilder-functions/line-to-spline-heading.mp4" width="400px" :controls="false"/>
+    <VideoDisplay src="https://res.cloudinary.com/doxbv70hu/video/upload/v1679194269/learnroadrunner/trajectorybuilder-functions/line-to-spline-heading_mram7k.mp4" width="400px" :controls="false"/>
 </div>
 
 ```java{5}
@@ -159,7 +159,7 @@ new TrajectoryBuilder(new Pose2d())
 ## `.splineTo(endPosition: Vector2d, endTangent: Double)`
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/trajectorybuilder-functions/spline-to.mp4" width="400px" :controls="false"/>
+    <VideoDisplay src="https://res.cloudinary.com/doxbv70hu/video/upload/v1679194286/learnroadrunner/trajectorybuilder-functions/spline-to_bday2l.mp4" width="400px" :controls="false"/>
 </div>
 
 ```java{5}
@@ -176,7 +176,7 @@ new TrajectoryBuilder(new Pose2d())
 ## `.splineToConstantHeading(endPosition: Vector2d, endTangent: Double)`
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/trajectorybuilder-functions/spline-to-constant-heading.mp4" width="400px" :controls="false"/>
+    <VideoDisplay src="https://res.cloudinary.com/doxbv70hu/video/upload/v1679194300/learnroadrunner/trajectorybuilder-functions/spline-to-constant-heading_jetpih.mp4" width="400px" :controls="false"/>
 </div>
 
 ```java{7}
@@ -195,7 +195,7 @@ new TrajectoryBuilder(new Pose2d())
 ## `.splineToLinearHeading(endPose: Pose2d, endTangent: Double)`
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/trajectorybuilder-functions/spline-to-linear-heading.mp4" width="400px" :controls="false"/>
+    <VideoDisplay src="https://res.cloudinary.com/doxbv70hu/video/upload/v1679194317/learnroadrunner/trajectorybuilder-functions/spline-to-linear-heading_la4agl.mp4" width="400px" :controls="false"/>
 </div>
 
 ```java{14}
@@ -221,7 +221,7 @@ new TrajectoryBuilder(new Pose2d())
 ## `.splineToSplineHeading(endPose: Pose2d, endTangent: Double)`
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/trajectorybuilder-functions/spline-to-spline-heading.mp4" width="400px" :controls="false"/>
+    <VideoDisplay src="https://res.cloudinary.com/doxbv70hu/video/upload/v1679194330/learnroadrunner/trajectorybuilder-functions/spline-to-spline-heading_nhhfgt.mp4" width="400px" :controls="false"/>
 </div>
 
 ```java{11}

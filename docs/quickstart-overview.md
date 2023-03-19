@@ -15,7 +15,7 @@ Significant changes to your bot (addition of a heavy mechanism, etc.) will neces
 :::
 
 <figure align="center">
-    <img src="./assets/quickstart-overview/TuningChart-quarter.png">
+    <img src="https://res.cloudinary.com/doxbv70hu/image/upload/v1679193728/learnroadrunner/quickstart-overview/TuningChart-quarter_v9839o.png">
     <figcaption class="mt-2 text-sm text-gray-600 text-center">These are the steps you will be following.</figcaption>
 </figure>
 

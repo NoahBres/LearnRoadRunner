@@ -158,7 +158,7 @@ Well, you've run into a continuity error. What does this mean? If you harken bac
 
 <figure align="center">
     <div class="relative overflow-hidden rounded-lg">
-      <img src="./assets/trajectory-overview/wikipedia-removable-discontinuity-quarter.png" alt="Image depicting a removable discontinuity">
+      <img src="https://res.cloudinary.com/doxbv70hu/image/upload/v1679193782/learnroadrunner/trajectories/wikipedia-removable-discontinuity-quarter_qpbubo.png" alt="Image depicting a removable discontinuity">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
     <figcaption class="mt-2 text-sm text-center text-gray-600">Removable Discontinuity</figcaption>
@@ -169,7 +169,7 @@ When Road Runner throws that `PathContinuityException`, your path is no longer c
 Motion profiling generates the exact path you need to take. Therefore, all the trajectories you create must follow the laws of physics and be continuous.
 
 <figure align="center">
-    <img src="./assets/trajectory-overview/continuity-error-bot-quarter.jpg" alt="Image depicting a continuity error on a path caused by two right angle paths">
+    <img src="https://res.cloudinary.com/doxbv70hu/image/upload/v1679193813/learnroadrunner/trajectories/continuity-error-bot-quarter_iyydij.jpg" alt="Image depicting a continuity error on a path caused by two right angle paths">
     <figcaption class="mt-2 text-center text-gray-600">PathContinuityException Example</figcaption>
 </figure>
 
@@ -211,7 +211,7 @@ Trajectory traj = drive.trajectoryBuilder(new Pose2d())
 ```
 
 <figure align="center">
-    <img src="./assets/trajectory-overview/continuity-error-fix-bot-quarter.jpg" alt="Image describing a path preserving continuity through a spline">
+    <img src="https://res.cloudinary.com/doxbv70hu/image/upload/v1679193834/learnroadrunner/trajectories/continuity-error-fix-bot-quarter_p0bnnc.jpg" alt="Image describing a path preserving continuity through a spline">
     <figcaption class="mt-2 text-center text-gray-600">Spline Goodness. CAD provided by Aman of 3916</figcaption>
 </figure>
 
@@ -311,7 +311,7 @@ Trajectory trajectory = drive.trajectoryBuilder(new Pose2d(), true)
 The `true` boolean in the second parameter indicates that you want the bot to follow the path in reverse.
 
 <div class="flex flex-col items-center justify-center">
-    <VideoDisplay src="./assets/trajectory-overview/reversed-demo.mp4" width="400px" :controls="false"/>
+    <VideoDisplay src="https://res.cloudinary.com/doxbv70hu/video/upload/v1679193905/learnroadrunner/trajectories/reversed-demo_bfmzgt.mp4" width="400px" :controls="false"/>
 </div>
 
 This is actually just a shorthand for passing a heading of 180 degrees into the second parameter.
@@ -416,7 +416,7 @@ The Y axis extends through the origin and runs _perpendicular_ to the Red Allian
 
 <figure align="center">
     <div class="relative overflow-hidden rounded-lg">
-      <img src="./assets/trajectory-overview/field-w-axes-half.jpg" alt="Image of the skystone field">
+      <img src="https://res.cloudinary.com/doxbv70hu/image/upload/v1679193933/learnroadrunner/trajectories/field-w-axes-half_ezzxwp.jpg" alt="Image of the skystone field">
       <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="box-shadow: inset 0 2px 6px 2px rgba(0, 0, 0, 0.06)"></div>
     </div>
     <figcaption class="mt-2 text-sm text-center text-gray-600">2019/20 Skystone Field</figcaption>
