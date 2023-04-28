@@ -6,12 +6,14 @@ If you do choose to use the official GUI, I would recommend using the trajectory
 
 ## Installation
 
-1. Navigate to the [Road Runner releases page on github](https://github.com/acmerobotics/road-runner/releases)
-2. Scroll down to the assets dropdown and find `road-runner-gui-0.5.x.jar`
+1. Navigate to the [Road Runner latest release page on github](https://github.com/acmerobotics/road-runner/releases/latest)
+2. Scroll down to the assets dropdown and find `road-runner-gui-x.x.x.jar`
+3. Click the fiele name to download the .jar.
+4. Run the .jar file you just downloaded in a terminal:
 
-   Or just click this [download link](https://github.com/acmerobotics/road-runner/releases/download/v0.5.1/road-runner-gui-0.5.1.jar)
-
-3. Run the .jar file you just downloaded
+```
+java -jar road-runner-gui-x.x.x.jar
+```
 
 ## Usage
 
