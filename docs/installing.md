@@ -117,6 +117,7 @@ If you are using [OpenRC](https://github.com/OpenFTC/OpenRC-Turbo), please read 
 5. In `TeamCode/build.gradle`, add the following dependencies:
 
    - `implementation 'org.apache.commons:commons-math3:3.6.1'`
+   - `implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.7'`
    - `implementation 'com.acmerobotics.roadrunner:core:0.5.6'`
 
 ```groovy{9-11}
