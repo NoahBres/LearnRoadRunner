@@ -393,28 +393,42 @@ A finished example of where these go may be found [here](https://gist.github.com
 3. Add these mulitpliers to the `getWheelPositions()` and `getWheelVelocities()` functions like so:
 
 ```java{6-8,20-22}
-/* Lines 57-79 in StandardTrackingWheelLocalizer.java */
+/* About Lines 67-103 in StandardTrackingWheelLocalizer.java */
 @NonNull
 @Override
 public List<Double> getWheelPositions() {
+    int leftPos = leftEncoder.getCurrentPosition();
+    int rightPos = rightEncoder.getCurrentPosition();
+    int frontPos = frontEncoder.getCurrentPosition();
+
+    lastEncPositions.clear();
+    lastEncPositions.add(leftPos);
+    lastEncPositions.add(rightPos);
+    lastEncPositions.add(frontPos);
+
     return Arrays.asList(
-            encoderTicksToInches(leftEncoder.getCurrentPosition()) * X_MULTIPLIER,
-            encoderTicksToInches(rightEncoder.getCurrentPosition()) * X_MULTIPLIER,
-            encoderTicksToInches(frontEncoder.getCurrentPosition()) * Y_MULTIPLIER
+            encoderTicksToInches(leftPos) * X_MULTIPLIER,
+            encoderTicksToInches(rightPos) * X_MULTIPLIER,
+            encoderTicksToInches(frontPos) * Y_MULTIPLIER
     );
 }
 
 @NonNull
 @Override
 public List<Double> getWheelVelocities() {
-    // TODO: If your encoder velocity can exceed 32767 counts / second (such as the REV Through Bore and other
-    //  competing magnetic encoders), change Encoder.getRawVelocity() to Encoder.getCorrectedVelocity() to enable a
-    //  compensation method
+    int leftVel = (int) leftEncoder.getCorrectedVelocity();
+    int rightVel = (int) rightEncoder.getCorrectedVelocity();
+    int frontVel = (int) frontEncoder.getCorrectedVelocity();
+
+    lastEncVels.clear();
+    lastEncVels.add(leftVel);
+    lastEncVels.add(rightVel);
+    lastEncVels.add(frontVel);
 
     return Arrays.asList(
-            encoderTicksToInches(leftEncoder.getRawVelocity()) * X_MULTIPLIER,
-            encoderTicksToInches(rightEncoder.getRawVelocity()) * X_MULTIPLIER,
-            encoderTicksToInches(frontEncoder.getRawVelocity()) * Y_MULTIPLIER
+            encoderTicksToInches(leftVel) * X_MULTIPLIER,
+            encoderTicksToInches(rightVel) * X_MULTIPLIER,
+            encoderTicksToInches(frontVel) * Y_MULTIPLIER
     );
 }
 ```
