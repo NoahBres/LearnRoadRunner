@@ -260,12 +260,12 @@ public List<Double> getWheelVelocities() {
 
 After you've configured your localizer, go back to the `SampleMecanumDrive.java` file.
 
-Look at about line 168. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
+Look at about line 131. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
 
 Under this comment, add the following line:
 
 ```java{6}
-/* About line 168 in SampleMecanumDrive.java */
+/* About line 131 in SampleMecanumDrive.java */
 
 // TODO: if desired, use setLocalizer() to change the localization method
 // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
