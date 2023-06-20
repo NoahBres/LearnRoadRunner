@@ -233,29 +233,6 @@ frontEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "frontEncoder"));
 frontEncoder.setDirection(Encoder.Direction.REVERSE);
 ```
 
-::: danger
-If you are using the Rev Through Bore encoders, please read the following section
-:::
-
-If your encoder velocity exceeds 32767 counts per second, it will cause an integer overflow when calling `getVelocity()`. This is because the Rev Hub firmware sends the velocity data using 16 bit signed integers rather than 32 bit. Due to the Rev Through Bore encoders' absurdly high CPR, this happens at around 4 rounds per second. Or only 25 inches per second with 2 inch diameter wheels.
-
-Change the `getRawVelocity()` functions to `getCorrectedVelocity()` in the `getWheelVelocities()` function to fix this integer overflow:
-
-```java{8-10}
-/* Lines 69-79 in StandardWheelLocalizer.java */
-public List<Double> getWheelVelocities() {
-    // TODO: If your encoder velocity can exceed 32767 counts / second (such as the REV Through Bore and other
-    //  competing magnetic encoders), change Encoder.getRawVelocity() to Encoder.getCorrectedVelocity() to enable a
-    //  compensation method
-
-    return Arrays.asList(
-            encoderTicksToInches(leftEncoder.getCorrectedVelocity()) * X_MULTIPLIER,
-            encoderTicksToInches(rightEncoder.getCorrectedVelocity()) * X_MULTIPLIER,
-            encoderTicksToInches(frontEncoder.getCorrectedVelocity()) * Y_MULTIPLIER
-    );
-}
-```
-
 ### Set Localizer in SampleMecanumDrive
 
 After you've configured your localizer, go back to the `SampleMecanumDrive.java` file.
