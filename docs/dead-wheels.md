@@ -252,6 +252,37 @@ setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
 
 You have set the localizer!
 
+### Deleting the IMU
+
+The IMU does not serve a purpose in three wheel odometry. Thus, it would be ideal to get rid of the default initialization in `SampleMecanumDrive`. IMU initialization can add 2-3 seconds to the opmode initialization and it's quite annoying.
+
+Open `SampleMecanumDrive.java` and delete this entire section:
+
+```java
+/* Lines 134-137 in SampleMecanumDrive.java */
+
+// TODO: adjust the names of the following hardware devices to match your configuration
+imu = hardwareMap.get(BNO055IMU.class, "imu");
+BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+imu.initialize(parameters);
+```
+
+Just for safety reasons, replace the returns of `getRawExternalHeading()` and `getExternalHeadingVelocity()` with zero:
+
+```java{4}
+/* Lines 393-396 in SampleMecanumDrive.java */
+@Override
+public double getRawExternalHeading() {
+    return 0;
+}
+
+@Override
+public Double getExternalHeadingVelocity() {
+    return 0.0;
+}
+```
+
 <div class="h-16"></div>
 
 ## Tuning - Two-Wheel
@@ -459,32 +490,6 @@ We're going to double check that everything is hunky-dory with your localization
 4. The x coordinates on your bot should be increasing as you move forward. The y coordinates should be increasing as you strafe left. See the [coordinate system page](/trajectories.html#coordinate-system) for further details on why this is.
 
 5. Check the troubleshooting section below if you encounter any issues.
-
-### Deleting the IMU
-
-The IMU does not serve a purpose in three wheel odometry. Thus, it would be ideal to get rid of the default initialization in `SampleMecanumDrive`. IMU initialization can add 2-3 seconds to the opmode initialization and it's quite annoying.
-
-Open `SampleMecanumDrive.java` and delete this entire section:
-
-```java
-/* Lines 134-137 in SampleMecanumDrive.java */
-
-// TODO: adjust the names of the following hardware devices to match your configuration
-imu = hardwareMap.get(BNO055IMU.class, "imu");
-BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-imu.initialize(parameters);
-```
-
-Just for safety reasons, replace the `getRawExternalHeading()` function return with zero (or just remove the function altogether):
-
-```java{4}
-/* Lines 393-396 in SampleMecanumDrive.java */
-@Override
-public double getRawExternalHeading() {
-    return 0;
-}
-```
 
 ## Troubleshooting
 
