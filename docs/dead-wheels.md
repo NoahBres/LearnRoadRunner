@@ -233,39 +233,16 @@ frontEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "frontEncoder"));
 frontEncoder.setDirection(Encoder.Direction.REVERSE);
 ```
 
-::: danger
-If you are using the Rev Through Bore encoders, please read the following section
-:::
-
-If your encoder velocity exceeds 32767 counts per second, it will cause an integer overflow when calling `getVelocity()`. This is because the Rev Hub firmware sends the velocity data using 16 bit signed integers rather than 32 bit. Due to the Rev Through Bore encoders' absurdly high CPR, this happens at around 4 rounds per second. Or only 25 inches per second with 2 inch diameter wheels.
-
-Change the `getRawVelocity()` functions to `getCorrectedVelocity()` in the `getWheelVelocities()` function to fix this integer overflow:
-
-```java{8-10}
-/* Lines 69-79 in StandardWheelLocalizer.java */
-public List<Double> getWheelVelocities() {
-    // TODO: If your encoder velocity can exceed 32767 counts / second (such as the REV Through Bore and other
-    //  competing magnetic encoders), change Encoder.getRawVelocity() to Encoder.getCorrectedVelocity() to enable a
-    //  compensation method
-
-    return Arrays.asList(
-            encoderTicksToInches(leftEncoder.getCorrectedVelocity()) * X_MULTIPLIER,
-            encoderTicksToInches(rightEncoder.getCorrectedVelocity()) * X_MULTIPLIER,
-            encoderTicksToInches(frontEncoder.getCorrectedVelocity()) * Y_MULTIPLIER
-    );
-}
-```
-
 ### Set Localizer in SampleMecanumDrive
 
 After you've configured your localizer, go back to the `SampleMecanumDrive.java` file.
 
-Look at about line 168. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
+Look at about line 131. You should find a comment stating "`// TODO: if desired, use setLocalizer() to change the localization method`"
 
 Under this comment, add the following line:
 
 ```java{6}
-/* About line 168 in SampleMecanumDrive.java */
+/* About line 131 in SampleMecanumDrive.java */
 
 // TODO: if desired, use setLocalizer() to change the localization method
 // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
@@ -274,6 +251,37 @@ setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
 ```
 
 You have set the localizer!
+
+### Deleting the IMU
+
+The IMU does not serve a purpose in three wheel odometry. Thus, it would be ideal to get rid of the default initialization in `SampleMecanumDrive`. IMU initialization can add 2-3 seconds to the opmode initialization and it's quite annoying.
+
+Open `SampleMecanumDrive.java` and delete this entire section:
+
+```java
+/* Lines 134-137 in SampleMecanumDrive.java */
+
+// TODO: adjust the names of the following hardware devices to match your configuration
+imu = hardwareMap.get(BNO055IMU.class, "imu");
+BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+imu.initialize(parameters);
+```
+
+Just for safety reasons, replace the returns of `getRawExternalHeading()` and `getExternalHeadingVelocity()` with zero:
+
+```java{4}
+/* Lines 393-396 in SampleMecanumDrive.java */
+@Override
+public double getRawExternalHeading() {
+    return 0;
+}
+
+@Override
+public Double getExternalHeadingVelocity() {
+    return 0.0;
+}
+```
 
 <div class="h-16"></div>
 
@@ -385,28 +393,42 @@ A finished example of where these go may be found [here](https://gist.github.com
 3. Add these mulitpliers to the `getWheelPositions()` and `getWheelVelocities()` functions like so:
 
 ```java{6-8,20-22}
-/* Lines 57-79 in StandardTrackingWheelLocalizer.java */
+/* About Lines 67-103 in StandardTrackingWheelLocalizer.java */
 @NonNull
 @Override
 public List<Double> getWheelPositions() {
+    int leftPos = leftEncoder.getCurrentPosition();
+    int rightPos = rightEncoder.getCurrentPosition();
+    int frontPos = frontEncoder.getCurrentPosition();
+
+    lastEncPositions.clear();
+    lastEncPositions.add(leftPos);
+    lastEncPositions.add(rightPos);
+    lastEncPositions.add(frontPos);
+
     return Arrays.asList(
-            encoderTicksToInches(leftEncoder.getCurrentPosition()) * X_MULTIPLIER,
-            encoderTicksToInches(rightEncoder.getCurrentPosition()) * X_MULTIPLIER,
-            encoderTicksToInches(frontEncoder.getCurrentPosition()) * Y_MULTIPLIER
+            encoderTicksToInches(leftPos) * X_MULTIPLIER,
+            encoderTicksToInches(rightPos) * X_MULTIPLIER,
+            encoderTicksToInches(frontPos) * Y_MULTIPLIER
     );
 }
 
 @NonNull
 @Override
 public List<Double> getWheelVelocities() {
-    // TODO: If your encoder velocity can exceed 32767 counts / second (such as the REV Through Bore and other
-    //  competing magnetic encoders), change Encoder.getRawVelocity() to Encoder.getCorrectedVelocity() to enable a
-    //  compensation method
+    int leftVel = (int) leftEncoder.getCorrectedVelocity();
+    int rightVel = (int) rightEncoder.getCorrectedVelocity();
+    int frontVel = (int) frontEncoder.getCorrectedVelocity();
+
+    lastEncVels.clear();
+    lastEncVels.add(leftVel);
+    lastEncVels.add(rightVel);
+    lastEncVels.add(frontVel);
 
     return Arrays.asList(
-            encoderTicksToInches(leftEncoder.getRawVelocity()) * X_MULTIPLIER,
-            encoderTicksToInches(rightEncoder.getRawVelocity()) * X_MULTIPLIER,
-            encoderTicksToInches(frontEncoder.getRawVelocity()) * Y_MULTIPLIER
+            encoderTicksToInches(leftVel) * X_MULTIPLIER,
+            encoderTicksToInches(rightVel) * X_MULTIPLIER,
+            encoderTicksToInches(frontVel) * Y_MULTIPLIER
     );
 }
 ```
@@ -482,32 +504,6 @@ We're going to double check that everything is hunky-dory with your localization
 4. The x coordinates on your bot should be increasing as you move forward. The y coordinates should be increasing as you strafe left. See the [coordinate system page](/trajectories.html#coordinate-system) for further details on why this is.
 
 5. Check the troubleshooting section below if you encounter any issues.
-
-### Deleting the IMU
-
-The IMU does not serve a purpose in three wheel odometry. Thus, it would be ideal to get rid of the default initialization in `SampleMecanumDrive`. IMU initialization can add 2-3 seconds to the opmode initialization and it's quite annoying.
-
-Open `SampleMecanumDrive.java` and delete this entire section:
-
-```java
-/* Lines 134-137 in SampleMecanumDrive.java */
-
-// TODO: adjust the names of the following hardware devices to match your configuration
-imu = hardwareMap.get(BNO055IMU.class, "imu");
-BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-imu.initialize(parameters);
-```
-
-Just for safety reasons, replace the `getRawExternalHeading()` function return with zero (or just remove the function altogether):
-
-```java{4}
-/* Lines 393-396 in SampleMecanumDrive.java */
-@Override
-public double getRawExternalHeading() {
-    return 0;
-}
-```
 
 ## Troubleshooting
 
