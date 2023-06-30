@@ -270,7 +270,7 @@ imu.initialize(parameters);
 
 Just for safety reasons, replace the returns of `getRawExternalHeading()` and `getExternalHeadingVelocity()` with zero:
 
-```java{4}
+```java{4,9}
 /* Lines 393-396 in SampleMecanumDrive.java */
 @Override
 public double getRawExternalHeading() {
@@ -392,7 +392,7 @@ A finished example of where these go may be found [here](https://gist.github.com
 
 3. Add these mulitpliers to the `getWheelPositions()` and `getWheelVelocities()` functions like so:
 
-```java{6-8,20-22}
+```java{15-17,34-36}
 /* About Lines 67-103 in StandardTrackingWheelLocalizer.java */
 @NonNull
 @Override
