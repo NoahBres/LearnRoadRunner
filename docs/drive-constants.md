@@ -42,12 +42,12 @@ If you want to quickly get a constants file up and running, I recommend clicking
 ## Ticks Per Rev & Max RPM
 
 ```java
-/* Lines 23-24 in DriveConstants.java */
+/* About lines 24-25 in DriveConstants.java */
 public static final double TICKS_PER_REV = 1;
 public static final double MAX_RPM = 1;
 ```
 
-**`TICKS_PER_REV`** is the number of "ticks" the motors' encoders will count per revolution. You will find the specs of your drive train motors on the manufacturer's site. For goBILDA's 5202/5203/5204 motors, be sure to use the `Encoder Resolution` number listed in the "Specs" section on each motor's spec page. For a few of the non-goBILDA motors, a list of revelant specs are listed below because the vendors do not make them obviously accessible on their own sites. Thank you goBILDA for being awesome.
+**`TICKS_PER_REV`** is the number of "ticks" the motors' encoders will count per revolution. You will find the specs of your drive train motors on the manufacturer's site. For goBILDA's 5202/5203/5204 motors, be sure to use the `Encoder Resolution` number listed in the "Specs" section on each motor's spec page, [found here](https://www.gobilda.com/yellow-jacket-planetary-gear-motors). For a few of the non-goBILDA motors, a list of relevant specs are listed below because the vendors do not make them obviously accessible on their own sites. Thank you goBILDA for being awesome.
 
 <div class="flex justify-center">
 
@@ -73,7 +73,7 @@ public static final double MAX_RPM = 1;
 ## Run Using Encoder & Motor Velo PID
 
 ```java
-/* Lines 34-36 in DriveConstants.java */
+/* About lines 35-37 in DriveConstants.java */
 public static final boolean RUN_USING_ENCODER = true;
 public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(0, 0, 0,
         getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV));
@@ -92,7 +92,7 @@ Earlier (in the [High Level Overview](/quickstart-overview.html#are-you-using-dr
 ## Wheel Radius/Gear Ratio/TrackWidth
 
 ```java
-/* Lines 46-48 in DriveConstants.java */
+/* About lines 47-49 in DriveConstants.java */
 public static double WHEEL_RADIUS = 2; // in
 public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
 public static double TRACK_WIDTH = 1; // in
@@ -126,7 +126,7 @@ This is due to the fact that the first case is actually an integer division. It 
 ## kV/kA/kStatic
 
 ```java
-/* Lines 56-58 in DriveConstants.java */
+/* About lines 57-59 in DriveConstants.java */
 public static double kV = 1.0 / rpmToVelocity(MAX_RPM);
 public static double kA = 0;
 public static double kStatic = 0;
@@ -140,7 +140,7 @@ These are your feedforward gains used to model your drive motors. These will be 
 
 **`kStatic`** Volts.
 
-Further details on the motor model can be found in [_Controls Engineering in FRC_ by Tyler Veness](https://file.tavsys.net/control/controls-engineering-in-frc.pdf). The effects of these constants will be explained later and is best understood through demonstration.
+Further details on the motor model can be found in [_Controls Engineering in FRC_ by Tyler Veness](https://file.tavsys.net/control/controls-engineering-in-frc.pdf). The effects of these constants will be explained later and are best understood through demonstration.
 
 <HideAyudeWrapper :skipIfDriveEncoders="false">
 ::: warning
@@ -151,7 +151,7 @@ Earlier you indicated that you are using drive encoders. You will not be touchin
 ## Base Constraints
 
 ```java
-/* Lines 67-70 in DriveConstants.java */
+/* About lines 68-71 in DriveConstants.java */
 public static double MAX_VEL = 30;
 public static double MAX_ACCEL = 30;
 public static double MAX_ANG_VEL = Math.toRadians(180);
@@ -182,7 +182,7 @@ The maximum velocity can be empirically defined using the `MaxVelocityTuner` opm
 Open your `SampleMecanumDrive.java` file.
 
 ```java
-/* Lines 143-147 in SampleMecanumDrive.java */
+/* About lines 102-105 in SampleMecanumDrive.java */
 leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
 leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
 rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
@@ -193,31 +193,13 @@ Ensure that these motor ID's match up with your Rev Hub config ID's.
 
 ### SampleMecanumDrive - IMU Velocity
 
-**_If you are using drive encoder localization_** (not dead wheels), in your `SampleMecanumDrive.java` file, scroll to the very bottom to find the `getExternalHeadingVelocity` function. Ensure that the function returns the axis that your IMU rotates about for your configuration. Consult the ASCII diagram provided in the file for a visual on which axis you should choose. If your REV Hub is mounted flat, the bot will rotate about the Z axis. If it is on its side with the motor ports facing up or down, the robot will rotate about the Y axis. If the servo ports are facing up or down, the bot will rotate about the x axis.
+**_If you are using drive encoder localization_** (not dead wheels), in your `SampleMecanumDrive.java` file, scroll to the very bottom to find the `getExternalHeadingVelocity` function. Ensure that the function returns the axis that your IMU rotates about for your configuration. Consult the diagram below for a visual on which axis you should choose. If your REV Hub is mounted flat, the bot will rotate about the Z axis. If it is on its side with the motor ports facing up or down, the robot will rotate about the Y axis. If the servo ports are facing up or down, the bot will rotate about the x axis.
 
-```java{22}
-/* About lines 399-419 in SampleMecanumDrive.java */
+```java
+/* About lines 296-299 in SampleMecanumDrive.java */
 @Override
 public Double getExternalHeadingVelocity() {
-    // TODO: This must be changed to match your configuration
-    //                           | Z axis
-    //                           |
-    //     (Motor Port Side)     |   / X axis
-    //                       ____|__/____
-    //          Y axis     / *   | /    /|   (IO Side)
-    //          _________ /______|/    //      I2C
-    //                   /___________ //     Digital
-    //                  |____________|/      Analog
-    //
-    //                 (Servo Port Side)
-    //
-    // The positive x axis points toward the USB port(s)
-    //
-    // Adjust the axis rotation rate as necessary
-    // Rotate about the z axis is the default assuming your REV Hub/Control Hub is laying
-    // flat on a surface
-
-    return (double) imu.getAngularVelocity().zRotationRate;
+    return (double) imu.getRobotAngularVelocity(AngleUnit.RADIANS).zRotationRate;
 }
 ```
 
@@ -226,14 +208,16 @@ public Double getExternalHeadingVelocity() {
 Then, look at line 166. There should be a comment stating "`// TODO: reverse any motors using DcMotor.setDirection()`".
 Under that comment, you will reverse the directions of the motors on one side of your bot. If your bot spins in circles during straight test, come back here to fix it. If your bot drives the opposite way, come back here to fix this. If your bot strafes the opposite direction, come back here to fix this. If your bot follows splines correctly but mirrored, your drive train right and left side motors are inverted. Refer to the goBILDA mecanum wheel direction chart below if you require help debugging your issue.
 
+![Control Hub Axes Diagram](./assets/drive-constants/control-hub-axes-diagram.png)
+
 ```java
-/* About line 166-168 in SampleMecanumDrive.java */
+/* About lines 125-127 in SampleMecanumDrive.java */
 
 // TODO: reverse any motors using DcMotor.setDirection()
-rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
-rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
+rightFront.setDirection(DcMotorSimple.Direction.REVERSE); // add if needed
+rightRear.setDirection(DcMotorSimple.Direction.REVERSE); // add if needed
 ```
 
-Refer to the [Motor Direction Debugger opmode](https://github.com/acmerobotics/road-runner-quickstart/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/MotorDirectionDebugger.java) if you are struggling to debug your motor config. The Motor Direction Debugger allows you to run your motors one by one. Remove the `@Disabled` lin on line `41` and follow the directions in the opmode comments. Use this to diagnose your motor config problem and fix appropriately.
+Refer to the [Motor Direction Debugger opmode](https://github.com/acmerobotics/road-runner-quickstart/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/MotorDirectionDebugger.java) if you are struggling to debug your motor config. The Motor Direction Debugger allows you to run your motors one by one. Remove the `@Disabled` on line `41` and follow the directions in the opmode comments. Use this to diagnose your motor config problem and fix appropriately.
 
 ![goBILDA mecanum wheel direction chart](./assets/drive-constants/gobilda-mecanum-chart.png)
