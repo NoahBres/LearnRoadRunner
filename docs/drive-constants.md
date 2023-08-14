@@ -195,6 +195,8 @@ Ensure that these motor ID's match up with your Rev Hub config ID's.
 
 **_If you are using drive encoder localization_** (not dead wheels), in your `SampleMecanumDrive.java` file, scroll to the very bottom to find the `getExternalHeadingVelocity` function. Ensure that the function returns the axis that your IMU rotates about for your configuration. Consult the diagram below for a visual on which axis you should choose. If your REV Hub is mounted flat, the bot will rotate about the Z axis. If it is on its side with the motor ports facing up or down, the robot will rotate about the Y axis. If the servo ports are facing up or down, the bot will rotate about the x axis.
 
+![Control Hub Axes Diagram](./assets/drive-constants/control-hub-axes-diagram.png)
+
 ```java
 /* About lines 296-299 in SampleMecanumDrive.java */
 @Override
@@ -207,8 +209,6 @@ public Double getExternalHeadingVelocity() {
 
 Then, look at line 166. There should be a comment stating "`// TODO: reverse any motors using DcMotor.setDirection()`".
 Under that comment, you will reverse the directions of the motors on one side of your bot. If your bot spins in circles during straight test, come back here to fix it. If your bot drives the opposite way, come back here to fix this. If your bot strafes the opposite direction, come back here to fix this. If your bot follows splines correctly but mirrored, your drive train right and left side motors are inverted. Refer to the goBILDA mecanum wheel direction chart below if you require help debugging your issue.
-
-![Control Hub Axes Diagram](./assets/drive-constants/control-hub-axes-diagram.png)
 
 ```java
 /* About lines 125-127 in SampleMecanumDrive.java */
