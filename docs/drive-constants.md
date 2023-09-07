@@ -8,7 +8,7 @@ meta:
 ::: tip
 Here is the drive constants file you will be editing.
 
-[DriveConstants.java](https://github.com/acmerobotics/road-runner-quickstart/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/DriveConstants.java)
+[DriveConstants.java](https://github.com/acmerobotics/road-runner-quickstart/blob/quickstart1/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/DriveConstants.java)
 
 If you haven't copied the file over to your own project yet, please do so!
 
@@ -218,6 +218,6 @@ rightFront.setDirection(DcMotorSimple.Direction.REVERSE); // add if needed
 rightRear.setDirection(DcMotorSimple.Direction.REVERSE); // add if needed
 ```
 
-Refer to the [Motor Direction Debugger opmode](https://github.com/acmerobotics/road-runner-quickstart/blob/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/MotorDirectionDebugger.java) if you are struggling to debug your motor config. The Motor Direction Debugger allows you to run your motors one by one. Remove the `@Disabled` on line `41` and follow the directions in the opmode comments. Use this to diagnose your motor config problem and fix appropriately.
+Refer to the [Motor Direction Debugger opmode](https://github.com/acmerobotics/road-runner-quickstart/blob/quickstart1/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/MotorDirectionDebugger.java) if you are struggling to debug your motor config. The Motor Direction Debugger allows you to run your motors one by one. Remove the `@Disabled` on line `41` and follow the directions in the opmode comments. Use this to diagnose your motor config problem and fix appropriately.
 
 ![goBILDA mecanum wheel direction chart](./assets/drive-constants/gobilda-mecanum-chart.png)
