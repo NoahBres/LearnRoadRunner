@@ -2,7 +2,7 @@
 
 There are two methods to installing the Road Runner library.
 
-[Method #1](#method-1-downloading-the-quickstart), the simpler option, is to simply download [the quickstart repo](https://github.com/acmerobotics/road-runner-quickstart). The quickstart repo is an empty FTC season repo along with the preinstalled dependencies and tuning opmodes to get Road Runner up and running. However, this does not work if you already have an existing codebase.
+[Method #1](#method-1-downloading-the-quickstart), the simpler option, is to simply download [the quickstart repo](https://github.com/acmerobotics/road-runner-quickstart/tree/quickstart1). The quickstart repo is an empty FTC season repo along with the preinstalled dependencies and tuning opmodes to get Road Runner up and running. However, this does not work if you already have an existing codebase.
 
 [Method #2](#method-2-installing-rr-on-your-project) will go through installing Road Runner via gradle and copying over the necessary files from the quickstart repo into your existing team project.
 
@@ -10,7 +10,7 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 
 ## Method 1: Downloading the Quickstart
 
-1. Navigate to [https://github.com/acmerobotics/road-runner-quickstart](https://github.com/acmerobotics/road-runner-quickstart)
+1. Navigate to [https://github.com/acmerobotics/road-runner-quickstart/tree/quickstart1](https://github.com/acmerobotics/road-runner-quickstart/tree/quickstart1)
 2. Click the big green download button
 
 <VideoDisplay src="./assets/installing/github-download-btn.mp4" width="100%"/>
@@ -135,7 +135,7 @@ dependencies {
 }
 ```
 
-6. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive`, `util`, and `trajectorysequence` folder into a location in your project, preferably just your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
+6. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/quickstart1/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive`, `util`, and `trajectorysequence` folder into a location in your project, preferably just your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
 
 ## Upgrading Firmware
 
