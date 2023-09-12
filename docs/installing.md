@@ -55,7 +55,7 @@ These installation instructions do not apply to versions below the **8.0** SDK (
 
     Then, add the following snippet at the end of your `dependencies` block:
 
-    `implementation 'com.acmerobotics.dashboard:dashboard:0.4.5'`
+    `implementation 'com.acmerobotics.dashboard:dashboard:0.4.12'`
 
     Your file should look like this:
 
@@ -84,7 +84,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'org.firstinspires.ftc:gameAssets-FreightFrenzy:1.0.0'
 
-    implementation 'com.acmerobotics.dashboard:dashboard:0.4.8'
+    implementation 'com.acmerobotics.dashboard:dashboard:0.4.12'
 }
 ```
 
