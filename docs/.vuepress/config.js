@@ -131,6 +131,7 @@ module.exports = {
     searchPlaceholder: "Search...",
 
     repo: "NoahBres/LearnRoadRunner",
+    docsDir: "docs",
     repoLabel: "GitHub",
     editLinks: true,
     editLinkText: "Edit this page on Github!",
