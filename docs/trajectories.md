@@ -84,7 +84,7 @@ Trajectory myTrajectory = drive.trajectoryBuilder(new Pose2d())
 ```
 
 This is your main trajectory building interface. We create a `Trajectory` object named `myTrajectory`.
-We do so by callling the `trajectoryBuilder()` function from `drive`. This just automatically passes in our constraints.
+We do so by calling the `trajectoryBuilder()` function from `drive`. This just automatically passes in our constraints.
 
 We pass in a starting pose: `new Pose2d()`. This is the same as doing `new Pose2d(0, 0, 0)`, so creating a pose at x: 0, y: 0, and heading: 0 degrees.
 
