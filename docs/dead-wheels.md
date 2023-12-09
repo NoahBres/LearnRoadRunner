@@ -43,7 +43,7 @@ public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) s
 
 **`WHEEL_RADIUS`** is the radius of the dead wheel. Make sure this is the radius, not diameter.
 
-**`GEAR_RATIO`** is the ratio of the output (wheel) speed to input (encoder) speed. If you are not gearing you encoders, leave this at 1.
+**`GEAR_RATIO`** is the ratio of the output (wheel) speed to input (encoder) speed. If you are not gearing your encoders, leave this at 1.
 
 ### Parallel/Perpendicular X/Y
 
@@ -195,7 +195,7 @@ public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) s
 
 **`WHEEL_RADIUS`** is the radius of the dead wheel. Make sure this is the radius, not diameter.
 
-**`GEAR_RATIO`** is the ratio of the output (wheel) speed to input (encoder) speed. If you are not gearing you encoders, leave this at 1.
+**`GEAR_RATIO`** is the ratio of the output (wheel) speed to input (encoder) speed. If you are not gearing your encoders, leave this at 1.
 
 ### Lateral Distance/Forward Offset
 
