@@ -135,7 +135,27 @@ dependencies {
 }
 ```
 
-6. We now need to copy over all the java files from the `TeamCode` folder located in the online quickstart repo (all the files from [this folder](https://github.com/acmerobotics/road-runner-quickstart/tree/quickstart1/TeamCode/src/main/java/org/firstinspires/ftc/teamcode)). Copy over all the files from both the `drive`, `util`, and `trajectorysequence` folder into a location in your project, preferably just your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
+6. Go to this [repo](https://github.com/acmerobotics/road-runner-quickstart/tree/quickstart1) and download it either using `git clone --single-branch -b quickstart1 https://github.com/acmerobotics/road-runner-quickstart.git` (if you have git installed) or clicking on the green `Code` button and press `Download ZIP`.
+7. Navigate to the `TeamCode` folder, and move the `drive`, `util`, and `trajectorysequence` folders into a location in your project, preferably in your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
+
+::: vue
+<span class="folder">FtcRobotController</span>
+├── <span class="folder">.github</span>
+├── <span class="folder">FtcRobotController</span>
+├── <span class="folder">TeamCode</span>
+├── <span class="folder">doc</span>
+├── <span class="folder">gradle/wrapper</span>
+├── <span class="folder">libs</span>
+├── <span class="file">.gitignore</span>
+├── <span class="file">README.md</span>
+├── <span class="file">build.common.gradle</span>
+├── <span class="file">`build.dependencies.gradle` _(**This one**)_</span>
+├── <span class="file">build.gradle</span>
+├── <span class="file">gradle.properties</span>
+├── <span class="file">gradlew</span>
+├── <span class="file">gradlew.bat</span>
+└── <span class="file">settings.gradle</span>
+:::
 
 ## Upgrading Firmware
 
