@@ -138,17 +138,36 @@ dependencies {
 6. Go to this [repo](https://github.com/acmerobotics/road-runner-quickstart/tree/quickstart1) and download it either using `git clone --single-branch -b quickstart1 https://github.com/acmerobotics/road-runner-quickstart.git` (if you have git installed) or clicking on the green `Code` button and press `Download ZIP`.
 7. Navigate to the `TeamCode` folder, and move the `drive`, `util`, and `trajectorysequence` folders into a location in your project, preferably in your `TeamCode` folder. These classes include all the files and utilities required for tuning and dashboard logging.
 
+<!-- prettier-ignore -->
 ::: vue
 <span class="folder">FtcRobotController</span>
 ├── <span class="folder">.github</span>
 ├── <span class="folder">FtcRobotController</span>
 ├── <span class="folder">TeamCode</span>
+│  ├── <span class="folder">lib</span>
+│  ├── <span class="folder">src/main</span>
+│  │  ├── <span class="folder">java/org/firstinspires/ftc/teamcode</span>
+│  │  │  ├── <span class="folder">`drive` _(**This one**)_</span>
+│  │  │  ├── <span class="folder">`trajectorysequence` _(**This one**)_</span>
+│  │  │  ├── <span class="folder">`util` _(**This one**)_</span>
+│  │  │  └── <span class="folder">readme.md</span>
+│  │  ├── <span class="folder">res</span>
+│  │  └── <span class="file">AndroidManifest.xml</span>
+│  └── <span class="file">build.gradle</span>
 ├── <span class="folder">doc</span>
 ├── <span class="folder">gradle/wrapper</span>
 ├── <span class="folder">libs</span>
 ├── <span class="file">.gitignore</span>
+├── <span class="file">LICENSE</span>
 ├── <span class="file">README.md</span>
 ├── <span class="file">build.common.gradle</span>
+├── <span class="file">build.dependencies.gradle</span>
+├── <span class="file">build.gradle</span>
+├── <span class="file">gradle.properties</span>
+├── <span class="file">gradlew</span>
+├── <span class="file">gradlew.bat</span>
+└── <span class="file">settings.gradle</span>
+
 ├── <span class="file">`build.dependencies.gradle` _(**This one**)_</span>
 ├── <span class="file">build.gradle</span>
 ├── <span class="file">gradle.properties</span>
