@@ -168,7 +168,7 @@ dependencies {
 ├── <span class="file">gradlew.bat</span>
 └── <span class="file">settings.gradle</span>
 
-├── <span class="file">`build.dependencies.gradle` _(**This one**)_</span>
+├── <span class="file">build.dependencies.gradle</span>
 ├── <span class="file">build.gradle</span>
 ├── <span class="file">gradle.properties</span>
 ├── <span class="file">gradlew</span>
