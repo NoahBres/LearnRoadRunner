@@ -207,7 +207,7 @@ public Double getExternalHeadingVelocity() {
 
 ## SampleMecanumDrive - Motor Direction
 
-Then, look at line 166. There should be a comment stating "`// TODO: reverse any motors using DcMotor.setDirection()`".
+Then, look at lines 125-127. There should be a comment stating "`// TODO: reverse any motors using DcMotor.setDirection()`".
 Under that comment, you will reverse the directions of the motors on one side of your bot. If your bot spins in circles during straight test, come back here to fix it. If your bot drives the opposite way, come back here to fix this. If your bot strafes the opposite direction, come back here to fix this. If your bot follows splines correctly but mirrored, your drive train right and left side motors are inverted. Refer to the goBILDA mecanum wheel direction chart below if you require help debugging your issue.
 
 ```java
