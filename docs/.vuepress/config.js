@@ -103,7 +103,8 @@ module.exports = {
   themeConfig: {
     logo: "/assets/baby/baby-rr.svg",
     sidebar: [
-      ["/", "Introduction"],
+      ["/", "Migration"],
+      "/introduction",
       "/before-you-start",
       "/installing",
       "/quickstart-overview",

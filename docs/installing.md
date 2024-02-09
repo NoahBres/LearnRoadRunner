@@ -1,6 +1,9 @@
 # Installing
 
 There are two methods to installing the Road Runner library.
+::: warning
+As Road Runner becomes legacy software, the quickstart might not be up to date with the minimum legal SDK after the 2023-24 season. If you get an error on your driver station saying that the robot controller is obsolete, download the official SDK from FIRST [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController) and use [Method #2](#method-2-installing-rr-on-your-project).
+:::
 
 [Method #1](#method-1-downloading-the-quickstart), the simpler option, is to simply download [the quickstart repo](https://github.com/acmerobotics/road-runner-quickstart/tree/quickstart1). The quickstart repo is an empty FTC season repo along with the preinstalled dependencies and tuning opmodes to get Road Runner up and running. However, this does not work if you already have an existing codebase.
 
@@ -22,7 +25,7 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 ## Method 2: Installing RR on Your Project
 
 ::: warning
-These installation instructions do not apply to versions below the **8.0** SDK (released on Sep. 13, 2022). Version 8.0 is the minimum legal version of the SDK (at the time of writing). Instructions for earlier versions will not be supported.
+These installation instructions are accurate as of SDK 9.0.1. There is no guarantee that they will stay accurate for future SDK releases.
 :::
 
 1. We are are going to assume you have the same file structure as the _latest_ (**8.0** at the time of writing) standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController).

@@ -7,9 +7,7 @@
 import Vue from "vue";
 import IsUsingDriveEncodersComponent from "./IsUsingDriveEncodersComponent";
 
-export default Vue.extend({
-  extends: IsUsingDriveEncodersComponent,
-});
+export default Vue.extend({ });
 </script>
 <style lang="stylus" scoped>
 .skipme
