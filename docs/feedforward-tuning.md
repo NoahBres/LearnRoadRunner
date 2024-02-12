@@ -16,7 +16,9 @@ If your bot drifts off path, simply enter driver control and drive your bot back
 :::
 
 ## Tuning
-
+::: warning
+It is likely that your robot will slowly drift off course throughout the tuning process, this is normal and will be fixed later during heading and translational pid tuning.
+:::
 1. The first step is to run the `ManualFeedforwardTuner` opmode via the RC.
 
 2. Then, connect to the RC phone's wifi network. The password to the network is located in the `Program and Manage` menu.
