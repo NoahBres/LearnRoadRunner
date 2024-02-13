@@ -28,7 +28,7 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 These installation instructions are accurate as of SDK 9.0.1. There is no guarantee that they will stay accurate for future SDK releases.
 :::
 
-1. We are are going to assume you have the same file structure as the _latest_ (**8.0** at the time of writing) standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController).
+1. We are are going to assume you have the same file structure as the _latest_ (**9.0.1** at the time of writing) standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController).
 
 2. Look for the `build.dependencies.gradle` file at the root of your project.
 

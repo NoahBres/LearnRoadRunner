@@ -2,7 +2,7 @@
 
 ::: danger
 
-Relying on the internal PID for velocity control can prove to be quite frustrating. It is quite the fickle controller. If you find it to actually work for you, then feel free to do so. However, many will find that feedforward control (even if you have drive encoders) is a lot easier to tune and manage. If you do find that you have odd oscillation issues, especially once you start incorporating the follower PID, it is recommended that you switch to feedforward control. If you have already tuned your velocity controller and it works fine, then no need to switch.
+Going down the Drive Velocity PID tuning route is **not suggested** as it is a very frustrating  and difficult process. Even if you are using drive encoders, use [feed forward instead](/feedforward-tuning.html).
 
 :::
 

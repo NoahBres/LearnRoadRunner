@@ -21,25 +21,16 @@ Significant changes to your bot (addition of a heavy mechanism, etc.) will neces
 
 **Please follow the guide _in order_, making sure that every step is completed before proceeding to the next.**
 
-## Are You Using Drive Encoders?
+## Why no DriveVelocityPID?
+While historically it was recommended to use DriveVelocityPID if you used drive encoders, the general consensus has switched to the opinion that VelocityPID's minimal accuracy improvements are not worth it over the difficulty to tune the DriveVelocityPID controller.
 
-Before you begin tuning, it is important to understand feedforward vs. PID velocity control and which one you are using. The goal of both of the systems is to reach and mantain a target velocity. The feedforward velocity control is an open loop system that will attempt to create a function translating voltage into velocity using specified drive characteristics. In contrast, the velocity PID is a closed loop system. It allows for live feedback and adjustment of the velocity using the readouts from an encoder. In general, a closed loop system will be most optimal. Thus, if you are able to, turn on `RUN_USING_ENCODERS` on each of your drive train motors to achieve the smoothest behavior. However, if you are using drive encoders with a three-wheel odometry setup (assuming 4x motors on the drive train), this will take up 7 out of your 8 available encoder slots leaving you with a single usable encoder slot for other robot mechanisms. This is not always possible and sacrificing your drive train encoders frees up 4 encoder slots. In this scenario, you would use the feedforward velocity control.
-You should not be depending on feedforward velocity control without dead wheels.
+## Why Feedforward?
+The feedforward velocity control is an open loop system that will attempt to create a function translating voltage into velocity using specified drive characteristics. While it is open loop and thus technically less accurate than VelocityPID, the internal PID is a very fickle controller and has many issues when used for drive control.
 
-The tuning process will differ depending on which form of control you use.
+## Recommendation
+The general recommendation in the community nowadays is to avoid the Velocity PID route, even if you use drive encoders. While the instructions will still remain here, the Velocity PID option is unruly and can be *very* difficult to tune, while feedforward will offer very similar accuracy while being much more simple to tune.
 
 <Ayude />
-
-### TL;DR
-
-It is now my personal recommendation to use feedforward control whether or not you have dead wheels or drive encoders. I have found the feedforward control to be much faster in tuning and a lot easier to manage in general. Relying on the internal PID for velocity control can prove to be quite frustrating. It is quite the fickle controller sometimes. If you find it to actually work for you, then feel free to do so. However, many will find that feedforward control (even if you have drive encoders) is a lot easier to tune and manage. If you do find that you have odd oscillation issues, especially once you start incorporating the follower PID, it is recommended that you switch to feedforward control.
-
-**Outdated recommendation for posterity:**
-
-- If you have only drive encoders, no dead wheels -> you're going to tune velocity PID
-- If you have only dead wheels, no drive encoders -> you're going to tune feedforward
-- If you have both, dead wheels and drive encoders -> you're going to tune velocity PID
-  - Technically the most accurate setup. However in practice, your accuracy will probably not differ much from the dead wheel-no drive encoder setup as the pose PIDs will generally ensure accurate following.
 
 ## Drive Constants
 
@@ -68,18 +59,6 @@ If you are not using dead wheels, you will perform the localization test later.
 
 Further details on how to use this is included in the [dead wheels page](/dead-wheels).
 
-## DriveVelocityPIDTuner <SkipAyudeBadge />
-
-::: warning
-This section should be skipped because it is harder to tune and manage than feedforward control.
-:::
-
-The `DriveVelocityPIDTuner` opmode is used to tune the Rev Hub's built in motor velocity controller (the `RUN_USING_ENCODER` mode). It is imperative your PIDF coefficients be tuned for optimal, consistent behavior. These PIDF coefficients should be tuned after any large modifications to the bot affecting weight.
-
-Go through the velocity PIDF tuning process (detailed in the [drive velocity pid tuning page](/drive-velocity-pid-tuning)). You can adjust the PIDF gains to get your desired behavior. The official Road Runner docs recommend that you should "prioritize eliminating phase lag even at the cost of some extra oscillations." However, I personally feel that it is better to try and minimize oscillations, especially towards the zero velocity. I found that eliminating phase lag, especially at high speeds, would cause very jittery motion, most likely due to the Rev Hub's odd motor control. Hit us up in the [FTC Discord](https://discord.gg/first-tech-challenge) if you are interested in further technical details. My personal advice would be to minimize oscillations and allow for the translational PID to fix any phase lag discrepancies.
-
-Further details on how to use this will be provided in the [drive velocity pid tuning page](/drive-velocity-pid-tuning).
-
 ## DriveFeedforwardTuner
 
 If you choose to opt for the feedforward method, the feedforward constants should be tuned.
@@ -93,6 +72,19 @@ The automatic tuning process is as follows (taken from the official docs):
 The automatic tuner seems to produce really low `kA` values. Thus, I would personally recommend going with the manual tuning route.
 
 Further details on how to use this will be provided in the [feedforward tuning page](/feedforward-tuning).
+
+## DriveVelocityPIDTuner <SkipAyudeBadge />
+
+::: danger
+Do not follow this tuning path. Use FeedForward tuning instead.
+:::
+
+The `DriveVelocityPIDTuner` opmode is used to tune the Rev Hub's built in motor velocity controller (the `RUN_USING_ENCODER` mode). It is imperative your PIDF coefficients be tuned for optimal, consistent behavior. These PIDF coefficients should be tuned after any large modifications to the bot affecting weight.
+
+Go through the velocity PIDF tuning process (detailed in the [drive velocity pid tuning page](/drive-velocity-pid-tuning)). You can adjust the PIDF gains to get your desired behavior. The official Road Runner docs recommend that you should "prioritize eliminating phase lag even at the cost of some extra oscillations." However, I personally feel that it is better to try and minimize oscillations, especially towards the zero velocity. I found that eliminating phase lag, especially at high speeds, would cause very jittery motion, most likely due to the Rev Hub's odd motor control. Hit us up in the [FTC Discord](https://discord.gg/first-tech-challenge) if you are interested in further technical details. My personal advice would be to minimize oscillations and allow for the translational PID to fix any phase lag discrepancies.
+
+Further details on how to use this will be provided in the [drive velocity pid tuning page](/drive-velocity-pid-tuning).
+
 
 ## Straight Test
 
