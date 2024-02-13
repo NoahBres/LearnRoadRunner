@@ -288,7 +288,7 @@ There are a few things to notice here.
 
 ## Trajectories vs Turns
 
-The `SampleMecaunmDrive.java` class provided by the quickstart supports a `turn()` function. However, this `turn()` function is actually not part of the Road Runner core itself. It is simple a turning motion profile generated in the `SampleMecanumDrive.java` class.
+The `SampleMecanumDrive.java` class provided by the quickstart supports a `turn()` function. However, this `turn()` function is actually not part of the Road Runner core itself. It is simple a turning motion profile generated in the `SampleMecanumDrive.java` class.
 Thus, it can not be called in a trajectory. Treat it as a method similar to `followTrajectory()`.
 
 ```java
