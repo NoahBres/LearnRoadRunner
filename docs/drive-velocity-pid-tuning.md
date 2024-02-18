@@ -1,10 +1,13 @@
-# Drive Velocity PID Tuning
+# Archive
+These are archived pages and *should not be used* unless you really know what you are doing.
 
 ::: danger
-
-Going down the Drive Velocity PID tuning route is **not suggested** as it is a very frustrating  and difficult process. Even if you are using drive encoders, use [feed forward instead](/feedforward-tuning.html).
-
+DriveVelocityPID tuning is available only for archival reasons and ***should not be used on your robot***. Use [feedforward control](/feedforward-tuning.html) on your robot instead.
 :::
+## Why is DriveVelocityPID not used?
+DriveVelocityPID uses the internal PID controller in the SDK, meaning that the tuning process is quite fickle. While you technically can achieve good results with this tuning method, using [feedforward](/feedforward-tuning.html) is much easier to tune and will result in the same accuracy. DriveVelocityControl can result in unfixable oscillation, especially once you integrate the heading and follower PIDs, and often takes much longer to tune even when you do not have issues.
+
+## DriveVelocityPID tuning
 
 <HideAyudeWrapper :skipIfDriveEncoders="true">
 ::: warning

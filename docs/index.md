@@ -3,5 +3,4 @@ Road Runner has been updated to an entirely new api, with major changes in the t
 <br />
 Learn Road Runner is still available for now, with everything that a team would need to set up Road Runner 0.5.6. If you wish to use the legacy version of Road Runner, continue on.
 <br />
-<br />
 Learn Road Runner will not remain online forever, but it will always be available on [github](https://github.com/NoahBres/LearnRoadRunner). Instructions for running this site locally are in the readme.

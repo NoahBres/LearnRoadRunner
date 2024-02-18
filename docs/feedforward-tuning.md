@@ -41,7 +41,14 @@ Your page should look something like this:
 
 5. In Dashboard, look for the `DriveConstants` dropdown on the right. Press it and it should open a drop down. Then, look for the `kA`, `kV`, and `kStatic` variables. You will be tuning these in a second.
 
-6. In the `ManualFeedforwardTuner` dropdown, ensure that the `DISTANCE` variable is big enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`.
+::: warning
+This step is important. If you don't have a plateau, your kV is likely wrong and you will experience accuracy issues later. Increase distance until you have a relatively long velocity plateau on your graph.
+:::
+6. In the `ManualFeedforwardTuner` drop down, ensure that the `DISTANCE` variable is large enough so the `targetVelocity` line has a plateau. If it resembles a series of triangles, increase the `DISTANCE`.
+::: tip
+If you do not have enough distance, you can increase your `MAX_ACCEL` in drive constants (if your robot is capable of it) or lower `MAX_VEL` in drive constants. This will affect the speed/acceleration of trajectories, so beware.
+:::
+
 
 7. At this point, once you have run the opmode, the bot should be moving back and forth along the distance specified in the opmode file. The goal is for the `poseVelocity` line to match the `targetVelocity` line.
 

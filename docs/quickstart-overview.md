@@ -21,14 +21,12 @@ Significant changes to your bot (addition of a heavy mechanism, etc.) will neces
 
 **Please follow the guide _in order_, making sure that every step is completed before proceeding to the next.**
 
-## Why no DriveVelocityPID?
-While historically it was recommended to use DriveVelocityPID if you used drive encoders, the general consensus has switched to the opinion that VelocityPID's minimal accuracy improvements are not worth it over the difficulty to tune the DriveVelocityPID controller.
+## What's Feedforward?
+The feedforward velocity control is an open loop system that will attempt to create a function translating voltage into velocity using specified drive characteristics. While this does present the issue of lack of live feedback to the drive process, its counteracted by the translational PID, which corrects for error.
 
-## Why Feedforward?
-The feedforward velocity control is an open loop system that will attempt to create a function translating voltage into velocity using specified drive characteristics. While it is open loop and thus technically less accurate than VelocityPID, the internal PID is a very fickle controller and has many issues when used for drive control.
+## Where is DriveVelocityPID?
+DriveVelocityPID has been Archived as it should not be used. Read why [here.](/drive-velocity-pid-tuning.html#why-is-drivevelocitypid-not-used). Use the Feedforward metod weather or not you have drive encoders or odometry. 
 
-## Recommendation
-The general recommendation in the community nowadays is to avoid the Velocity PID route, even if you use drive encoders. While the instructions will still remain here, the Velocity PID option is unruly and can be *very* difficult to tune, while feedforward will offer very similar accuracy while being much more simple to tune.
 
 <Ayude />
 
