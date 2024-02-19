@@ -13,7 +13,7 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 
 ## Method 1: Downloading the Quickstart
 
-1. Navigate to [https://github.com/acmerobotics/road-runner-quickstart/tree/quickstart1](https://github.com/acmerobotics/road-runner-quickstart/tree/quickstart1)
+1. Navigate to [https://github.com/acmerobotics/road-runner-quickstart/tree/quickstart1](https://github.com/Iris-TheRainbow/RoadRunnerQuickstart15031) (this is a quickstart maintained by Iris_TheRainbow, not acme robotics, but should remain more up to date than the official branch)
 2. Click the big green download button
 
 <VideoDisplay src="./assets/installing/github-download-btn.mp4" width="100%"/>
@@ -25,10 +25,10 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 ## Method 2: Installing RR on Your Project
 
 ::: warning
-These installation instructions are accurate as of SDK 9.0.1. There is no guarantee that they will stay accurate for future SDK releases.
+These installation instructions are accurate as of SDK 9.1. There is no guarantee that they will stay accurate for future SDK releases.
 :::
 
-1. We are are going to assume you have the same file structure as the _latest_ (**9.0.1** at the time of writing) standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController).
+1. We are are going to assume you have the same file structure as the _latest_ (**9.1** at the time of writing) standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController).
 
 2. Look for the `build.dependencies.gradle` file at the root of your project.
 
