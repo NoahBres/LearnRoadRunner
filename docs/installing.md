@@ -19,8 +19,11 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 <VideoDisplay src="./assets/installing/github-download-btn.mp4" width="100%"/>
 
 3. Unzip/extract the folder into your directory of choice
-4. Open up the folder in Android studio.
-5. Voilà! You now have everything you need to get Road Runner up and going.
+4. Open Android Studio. If you have no previous projects open, then choose Import Project. If you do, then go to File > New > Import Project.
+5. Find the folder where you extracted the zip contents and open it to find the project folder. IMPORTANT: Sometimes when you extract zip folders the contents are double-foldered; i.e there is a folder that contains the project folder. If you import the outer folder, your project will not work correctly. Be sure that you choose to import the project folder (This should have an Android icon on it). Both of the folders might have the same/similar names, so pay attention!
+6. Once you have found the project folder (with the Android Icon on it), select it and click "Import".
+7. Wait for the following Gradle Build to finish. If this is the first time you have used Android Studio, then you might have to accept the SDK Licenses. If your Gradle build/sync fails with an error like that, go to Tools > SDK Manager. Find Android 10 (API 29) in the list, and check the box next to it. Then click "OK" and let Android Studio download what it needs. You will have to accept the license that it prompts you with.
+8. Voilà! You now have everything you need to get Road Runner up and going. If you still have farther issues, please ask in the FTC Discord.
 
 ## Method 2: Installing RR on Your Project
 
