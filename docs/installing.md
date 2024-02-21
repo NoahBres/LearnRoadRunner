@@ -13,7 +13,7 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 
 ## Method 1: Downloading the Quickstart
 
-1. Navigate to [https://github.com/acmerobotics/road-runner-quickstart/tree/quickstart1](https://github.com/acmerobotics/road-runner-quickstart/tree/quickstart1)
+1. Navigate to [https://github.com/acmerobotics/road-runner-quickstart/tree/quickstart1](https://github.com/Iris-TheRainbow/RoadRunnerQuickstart15031) (this is a quickstart maintained by Iris_TheRainbow, not acmerobotics, but should remain more up to date than the official quickstart)
 2. Click the big green download button
 
 <VideoDisplay src="./assets/installing/github-download-btn.mp4" width="100%"/>
@@ -25,10 +25,10 @@ Afterwards, it is highly recommended to upgrade your Rev Expansion Hub or Contro
 ## Method 2: Installing RR on Your Project
 
 ::: warning
-These installation instructions are accurate as of SDK 9.0.1. There is no guarantee that they will stay accurate for future SDK releases.
+These installation instructions are accurate as of SDK 9.1. There is no guarantee that they will stay accurate for future SDK releases.
 :::
 
-1. We are are going to assume you have the same file structure as the _latest_ (**8.0** at the time of writing) standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController).
+1. We are are going to assume you have the same file structure as the _latest_ (**9.1** at the time of writing) standard FTC provided project. This can be found [here](https://github.com/FIRST-Tech-Challenge/FtcRobotController).
 
 2. Look for the `build.dependencies.gradle` file at the root of your project.
 
@@ -58,38 +58,10 @@ These installation instructions are accurate as of SDK 9.0.1. There is no guaran
 
     Then, add the following snippet at the end of your `dependencies` block:
 
-    `implementation 'com.acmerobotics.dashboard:dashboard:0.4.12'`
-
-    Your file should look like this:
-
-```groovy{6,25}
-/* build.dependencies.gradle */
-repositories {
-    mavenCentral()
-    google() // Needed for androidx
-    jcenter()  // Needed for tensorflow-lite
-    maven { url = 'https://maven.brott.dev/' }
-    flatDir {
-        dirs rootProject.file('libs')
-    }
-}
-
-dependencies {
-    implementation 'org.firstinspires.ftc:Inspection:8.0.0'
-    implementation 'org.firstinspires.ftc:Blocks:8.0.0'
-    implementation 'org.firstinspires.ftc:Tfod:8.0.0'
-    implementation 'org.firstinspires.ftc:RobotCore:8.0.0'
-    implementation 'org.firstinspires.ftc:RobotServer:8.0.0'
-    implementation 'org.firstinspires.ftc:OnBotJava:8.0.0'
-    implementation 'org.firstinspires.ftc:Hardware:8.0.0'
-    implementation 'org.firstinspires.ftc:FtcCommon:8.0.0'
-    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.2.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'org.firstinspires.ftc:gameAssets-FreightFrenzy:1.0.0'
-
-    implementation 'com.acmerobotics.dashboard:dashboard:0.4.12'
-}
-```
+    `implementation 'com.acmerobotics.dashboard:dashboard:0.4.15'`
+::: warning
+These instructions are up to date as of writing (2/17/2024), and the version number will not always be accurate. Especially once the 2024-2025 FTC season starts, you will have to visit [this website](https://acmerobotics.github.io/ftc-dashboard/gettingstarted) and used the latest version to have an updated field diagram in the field view.
+:::
 
 If you are using [OpenRC](https://github.com/OpenFTC/OpenRC-Turbo), please read the Dashboard specific instructions [here](https://acmerobotics.github.io/ftc-dashboard/gettingstarted)
 

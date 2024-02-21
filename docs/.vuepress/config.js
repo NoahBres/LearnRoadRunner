@@ -110,7 +110,6 @@ module.exports = {
       "/quickstart-overview",
       "/drive-constants",
       "/dead-wheels",
-      "/drive-velocity-pid-tuning",
       "/feedforward-tuning",
       "/straight-test",
       "/trackwidth-tuning",
@@ -125,6 +124,7 @@ module.exports = {
       "/advanced",
       "/tools",
       "/resources",
+      ["/drive-velocity-pid-tuning", "Archived"]
     ],
     displayAllHeaders: true,
     smoothScroll: true,

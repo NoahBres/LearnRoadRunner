@@ -38,9 +38,10 @@ The `FollowerPIDTuner` will follow a large square. The bot will turn _counterclo
 
 12. **Note:** Earlier I mentioned that you should not need to use `kI` or `kD` for your follower PID's. Those are just basic guidelines. `kD` actually indirectly functions as a P Controller on pose velocity. Therefore, setting `kD` to a non-zero value (1 or something), _IF you are using feedforward instead of velocity pid_, may help keep your pose velocity constant across battery voltages. _DO NOT_ set `kD` if you are using drive velocity PID as they will overlap and fight each other.
 
-# Temporary Informal Video
+# Informal Video
 
-Temporary informal video while the polished, edited videos are in production. Quality is atrocious but hopefully it helps :)
+This was originally meant to be temporary, but was never finished, so the quality is atrocious but hopefully it ends up helping :), it should explain well enough.
+
 
 <div class="flex justify-center">
    <iframe width="560" height="315" src="https://www.youtube.com/embed/e6k_gP2YCmc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>

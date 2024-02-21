@@ -34,7 +34,11 @@ Try out the configurator to have your constants class auto configured!
 
 If you want to quickly get a constants file up and running, I recommend clicking the configurator button above to automatically generate your drive constants file. We will be going through what each constant means one by one below.
 
-<figure align="center">
+::: danger
+If you choose to use the automatic configuration, you must add the IMU information into the file yourself, according to [this](/drive-constants.html#samplemecanumdrive-imu-velocity)
+:::
+
+<figure align = "center">
     <img src="./assets/you-are-here/YouAreHere-DriveConstants-quarter.png" alt="You are on the drive constants step">
     <figcaption class="mt-2 text-center text-gray-600">You are here</figcaption>
 </figure>
@@ -80,14 +84,15 @@ public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(0, 0, 0,
 ```
 
 **`RUN_USING_ENCODER`** indicates whether or not you want to utilize the `RUN_USING_ENCODER` [RunMode](https://gm0.org/en/stable/docs/software/using-the-sdk.html#dc-motor) built into the FTC SDK. This makes use of the onboard velocity PID, allowing you to control the motor via velocity rather than "power" (voltage). Setting this value to true will automatically set all the motors to use this velocity controlled mode. `RUN_USING_ENCODER` can only be utilized if you are using drive train encoders. Set this value to `false` if you are not using drive encoders.
+::: warning
+Since you should be using feedforward tunin instead of DeiveVelocityPID, this should stay set to false, even if you are using drive encoders
+:::
 
 **`MOTOR_VELO_PID`** will store the PID values you will use. The default SDK PIDF values are tuned based on the motors free-spinning without any load. The SDK's default values will be too low for a drive train. Thus, the quickstart sets these values at zero and we will tune them later.
-
-<HideAyudeWrapper :skipIfDriveEncoders="true">
 ::: warning
-Earlier (in the [High Level Overview](/quickstart-overview.html#are-you-using-drive-encoders)), you indicated that you are not utilizing drive encoders. Set `RUN_USING_ENCODER` to `false`.
+Once again, the recomended path is feedforward control, so you should not touch these values.
 :::
-</HideAyudeWrapper>
+
 
 ## Wheel Radius/Gear Ratio/TrackWidth
 
@@ -142,11 +147,6 @@ These are your feedforward gains used to model your drive motors. These will be 
 
 Further details on the motor model can be found in [_Controls Engineering in FRC_ by Tyler Veness](https://file.tavsys.net/control/controls-engineering-in-frc.pdf). The effects of these constants will be explained later and are best understood through demonstration.
 
-<HideAyudeWrapper :skipIfDriveEncoders="false">
-::: warning
-Earlier you indicated that you are using drive encoders. You will not be touching this section.
-:::
-</HideAyudeWrapper>
 
 ## Base Constraints
 
@@ -173,6 +173,9 @@ The maximum velocity can be empirically defined using the `MaxVelocityTuner` opm
 
 <span class="text-gray-900 bg-yellow-300 rounded" style="padding: 0.25rem 0.5rem;">**MAX_ACCEL**</span> defines the maximum acceleration that the robot will undergo. This is the speed at which the velocity ramps up. The default value is `30in/s^2`. The recommendation is to just initially keep this value the same number as your max velocity value, although this is quite arbitrary. The only way to find your max acceleration is through experimentation. Keep raising the max acceleration until your path following starts to suffer. Do this after tuning just to make things easier. You may need to retune your PID values if you change this.
 
+::: warning
+There is an included MaxAngularVeloTuner OpMode in Roadrunner 0.5.6, but for some teams it seems to produce extremely low values (like 10 degrees per second) that are not their actual angular velocities. If this happens to you, use the default values or determine them through your own experimentation.
+:::
 <span class="text-gray-800 bg-purple-400 rounded" style="padding: 0.25rem 0.5rem;">**MAX_ANG_VEL**</span> defines the maximum angular velocity that the robot can go. This is the fastest speed that the robot can turn. The default value is `180°/s`. You can calculate the maximum angular velocity by dividing the maximum tangential velocity (max velo) by your track width. However, you should probably just leave this as is or determine the value through experimentation. Theoretical maximum angular acceleration doesn't match up well with the measured value.
 
 <span class="text-gray-800 bg-orange-400 rounded" style="padding: 0.25rem 0.5rem;">**MAX_ANG_ACCEL**</span> defines the maximum angular acceleration that the robot can undergo. This is the fastest that the robot's angular velocity can ramp up. The default value is `180°/s^2`. This can only be found through tuning. However, it is a bit difficult to empirically determine this so just leave this as is.
@@ -191,12 +194,22 @@ rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
 
 Ensure that these motor ID's match up with your Rev Hub config ID's.
 
-### SampleMecanumDrive - IMU Velocity
+### SampleMecanumDrive - IMU Orientation
 
-**_If you are using drive encoder localization_** (not dead wheels), in your `SampleMecanumDrive.java` file, scroll to the very bottom to find the `getExternalHeadingVelocity` function. Ensure that the function returns the axis that your IMU rotates about for your configuration. Consult the diagram below for a visual on which axis you should choose. If your REV Hub is mounted flat, the bot will rotate about the Z axis. If it is on its side with the motor ports facing up or down, the robot will rotate about the Y axis. If the servo ports are facing up or down, the bot will rotate about the x axis.
+**_If you are using drive encoder localization_** (not dead wheels), in your drive constants, scroll to the `RevHubOrientationOnRobot` or add it if it is not there. It should resemble the code below. For further information on hub orientation setp, refer to the [FTC docs for the new Universal IMU interface](https://ftc-docs.firstinspires.org/en/latest/programming_resources/imu/imu.html).
 
-![Control Hub Axes Diagram](./assets/drive-constants/control-hub-axes-diagram.png)
+![Control Hub orientation example](./assets/drive-constants/control-hub-orientation-example.png)
 
+```java
+/* About line 76 in your DriveConstants.java. Add this if not present, and configure it yourself */
+public static RevHubOrientationOnRobot.LogoFacingDirection LOGO_FACING_DIR =
+        RevHubOrientationOnRobot.LogoFacingDirection.UP;
+public static RevHubOrientationOnRobot.UsbFacingDirection USB_FACING_DIR =
+        RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
+```
+
+## SampleMecanumDrive - IMU Velocity
+**_If you are using drive encoder localization or two dead wheels**, in your `SampleMecanumDrive.java` file, scroll to the very bottom to find the `getExternalHeadingVelocity` function. Ensure that the function returns the axis that your IMU rotates about for your configuration. Consult the diagram below for a visual on which axis you should choose. If your REV Hub is mounted flat, the bot will rotate about the Z axis. If it is on its side with the motor ports facing up or down, the robot will rotate about the Y axis. If the servo ports are facing up or down, the bot will rotate about the x axis.
 ```java
 /* About lines 296-299 in SampleMecanumDrive.java */
 @Override
@@ -204,6 +217,8 @@ public Double getExternalHeadingVelocity() {
     return (double) imu.getRobotAngularVelocity(AngleUnit.RADIANS).zRotationRate;
 }
 ```
+![Control Hub Axes Diagram](./assets/drive-constants/control-hub-axes-diagram.png)
+
 
 ## SampleMecanumDrive - Motor Direction
 
