@@ -25,7 +25,7 @@ Significant changes to your bot (addition of a heavy mechanism, etc.) will neces
 The feedforward velocity control is an open loop system that will attempt to create a function translating voltage into velocity using specified drive characteristics. While this does present the issue of lack of live feedback to the drive process, its counteracted by the translational PID, which corrects for error.
 
 ## Where is DriveVelocityPID?
-DriveVelocityPID has been Archived as it should not be used. Read why [here.](/drive-velocity-pid-tuning.html#why-is-drivevelocitypid-not-used). Use the Feedforward metod weather or not you have drive encoders or odometry. 
+DriveVelocityPID has been Archived as it should not be used. Read why [here.](/drive-velocity-pid-tuning.html#why-is-drivevelocitypid-not-used). Use the Feedforward method whether or not you have drive encoders or odometry. 
 
 
 <Ayude />
